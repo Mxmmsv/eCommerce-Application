@@ -1,1 +1,54 @@
-# eCommerce-Application
+# <h1 align="center">🖼️ PosterShop</h1>
+
+
+## Description
+
+**PosterShop** is a single-page e-commerce application for selling designer posters, powered by [Commercetools](https://commercetools.com) and developed as a final project for the RS School online educational platform (course JS/Front-end 2024Q4).
+
+![React](https://img.shields.io/badge/React-20232A?logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-953DD6?logo=vite&logoColor=white)
+
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-white?logo=tailwindcss)
+![Material UI](https://img.shields.io/badge/MUI-007FFF?logo=mui&logoColor=white)
+![Zustand](https://img.shields.io/badge/Zustand-443E38?logo=react&label=Zustand)
+
+![Prettier](https://img.shields.io/badge/Prettier-BD89C0?logo=prettier&logoColor=white)
+![ESLint](https://img.shields.io/badge/ESLint-4B32C3?logo=eslint&logoColor=white)
+![Husky](https://img.shields.io/badge/Husky-000000?logo=github&label=Git%20Hooks)
+
+![SWR](https://img.shields.io/badge/SWR-000000?logo=vercel&label=SWR)
+![Valibot](https://img.shields.io/badge/Valibot-111827?logoColor=white)
+![Vitest](https://img.shields.io/badge/Vitest-white?logo=vitest)
+
+![Netlify](https://img.shields.io/badge/Deployed%20on-Netlify-00C7B7?logo=netlify&logoColor=white)
+
+This application provides the following features:
+
+- Browse poster catalog: View a wide selection of posters available for purchase.
+
+- Filter by category: Easily filter posters by categories to find what you're looking for.
+
+- Add to cart: Add your favorite posters to the cart for checkout.
+
+- Place orders: Complete the order process and make purchases.
+
+- User authentication via SDK: Users can sign in securely using SDK for authentication.
+
+
+## Authors
+[Maxim Moiseev](https://github.com/Mxmmsv), [Ekaterina Dmitrenko](https://github.com/ek-ole) and [Alla Tsaiukova](https://github.com/AlyaEngineer).
+
+
+## Acknowledgments
+Thanks a lot to our mentors @gentoosiast, @lenayork, and @existanz for helping with the project.
+
+Thanks to the [Figma](https://figma.com/community) community for the free and accessible e-commerce website layouts that inspired us during the development of the project.
+
+Thanks to the [RS School](https://rs.school/) for the knowledge and experience we received during the course.
+
+Special thanks to the Commercetools team for providing a well-documented, TypeScript-ready SDK that simplified our e-commerce integration.
+
+
+## License
+This project is licensed under the MIT License - see the LICENSE.md file for details.
