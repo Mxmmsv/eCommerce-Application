@@ -36,6 +36,35 @@ This application provides the following features:
 - User authentication via SDK: Users can sign in securely using SDK for authentication.
 
 
+## Available Scripts
+
+In the project directory, you can run:
+
+```
+$ npm run start
+# Runs the app in development mode.
+Open port 5173 (http://localhost:5173) to view the app in the browser.
+
+$ npm run build
+# Builds the app for production to the `dist/` folder.
+
+$ npm run lint
+# Lints all `.ts` and `.tsx` files using ESLint.
+
+$ npm run format
+# Formats code using Prettier.
+
+$ npm run test
+# Runs unit tests using Vitest.
+
+$ npm run test:watch
+# Runs tests in watch mode.
+```
+---
+
+You can also use `yarn` or `pnpm` instead of `npm`, depending on your package manager.
+
+
 ## Authors
 [Maxim Moiseev](https://github.com/Mxmmsv), [Ekaterina Dmitrenko](https://github.com/ek-ole) and [Alla Tsaiukova](https://github.com/AlyaEngineer).
 
