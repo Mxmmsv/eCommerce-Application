@@ -36,6 +36,30 @@ This application provides the following features:
 - User authentication via SDK: Users can sign in securely using SDK for authentication.
 
 
+## Install and Run the Application
+- Using terminal to go to the directory in which you want to install the application, for example:
+```bash
+$ cd C/Users/yourname/apps
+```
+
+- Clone the repository from GitHub:
+```bash
+$ git clone https://github.com/Mxmmsv/eCommerce-Application.git
+```
+
+- install the dependencies with `npm i`:
+```bash
+$ npm i
+```
+
+- start the local server using `npm run start`:
+```bash
+$ npm run start
+```
+
+The server runs on port `5173`. If it is not possible to run the server using port `5173`, you can use another port by modifying the `vite.config.ts` configuration file.
+
+
 ## Available Scripts
 
 In the project directory, you can run:
