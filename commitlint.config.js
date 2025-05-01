@@ -4,9 +4,9 @@ export default {
     'type-enum': [
       2,
       'always',
-      ['feat', 'fix', 'docs', 'style', 'refactor', 'test', 'chore', 'revert']
+      ['feat', 'fix', 'docs', 'style', 'refactor', 'test', 'chore', 'revert'],
     ],
     'subject-case': [2, 'always', 'sentence-case'],
-    'subject-max-length': [2, 'always', 72]
-  }
+    'subject-max-length': [2, 'always', 72],
+  },
 };
