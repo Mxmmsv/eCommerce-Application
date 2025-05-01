@@ -1,1 +1,3 @@
+echo some error
+exit 1
 npx --no-install commitlint --edit "$1"
