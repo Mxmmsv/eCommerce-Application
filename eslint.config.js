@@ -8,6 +8,7 @@ import jsxA11y from 'eslint-plugin-jsx-a11y';
 import testingLibrary from 'eslint-plugin-testing-library';
 import jestDom from 'eslint-plugin-jest-dom';
 import vitest from '@vitest/eslint-plugin';
+import importPlugin from 'eslint-plugin-import';
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
 
 export default tseslint.config(
@@ -36,6 +37,7 @@ export default tseslint.config(
       'testing-library': testingLibrary,
       'jest-dom': jestDom,
       vitest: vitest,
+      import: importPlugin,
     },
     rules: {
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
@@ -47,6 +49,22 @@ export default tseslint.config(
       '@typescript-eslint/no-inferrable-types': 'error',
       '@typescript-eslint/array-type': 'error',
       '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
+      'import/order': [
+        'error',
+        {
+          groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
+          'newlines-between': 'always',
+          pathGroups: [
+            {
+              pattern: '@/**',
+              group: 'internal',
+            },
+          ],
+          alphabetize: {
+            order: 'asc',
+          },
+        },
+      ],
     },
   },
   {
