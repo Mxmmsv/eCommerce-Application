@@ -42,6 +42,11 @@ export default tseslint.config(
       ...testingLibrary.configs.react.rules,
       ...jestDom.configs.recommended.rules,
       ...vitest.configs.recommended.rules,
+      '@typescript-eslint/consistent-type-exports': 'error',
+      '@typescript-eslint/consistent-type-imports': 'error',
+      '@typescript-eslint/no-inferrable-types': 'error',
+      '@typescript-eslint/array-type': 'error',
+      '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
     },
   },
   {
