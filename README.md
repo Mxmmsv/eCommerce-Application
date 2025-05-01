@@ -5,23 +5,23 @@
 
 **PosterShop** is a single-page e-commerce application for selling designer posters, powered by [Commercetools](https://commercetools.com) and developed as a final project for the RS School online educational platform (course JS/Front-end 2024Q4).
 
-![React](https://img.shields.io/badge/React-20232A?logo=react)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
-![Vite](https://img.shields.io/badge/Vite-953DD6?logo=vite&logoColor=white)
+[![React](https://img.shields.io/badge/React-20232A?logo=react)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-953DD6?logo=vite&logoColor=white)](https://vite.dev/)
 
-![Tailwind CSS](https://img.shields.io/badge/Tailwind-white?logo=tailwindcss)
-![Material UI](https://img.shields.io/badge/MUI-007FFF?logo=mui&logoColor=white)
-![Zustand](https://img.shields.io/badge/Zustand-443E38?logo=react&label=Zustand)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-white?logo=tailwindcss)](https://tailwindcss.com/)
+[![Material UI](https://img.shields.io/badge/MUI-007FFF?logo=mui&logoColor=white)](https://mui.com/material-ui/)
+[![Zustand](https://img.shields.io/badge/Zustand-443E38?logo=react&label=Zustand)](https://zustand-demo.pmnd.rs/)
 
-![Prettier](https://img.shields.io/badge/Prettier-BD89C0?logo=prettier&logoColor=white)
-![ESLint](https://img.shields.io/badge/ESLint-4B32C3?logo=eslint&logoColor=white)
-![Husky](https://img.shields.io/badge/Husky-000000?logo=github&label=Git%20Hooks)
+[![Prettier](https://img.shields.io/badge/Prettier-BD89C0?logo=prettier&logoColor=white)](https://prettier.io/)
+[![ESLint](https://img.shields.io/badge/ESLint-4B32C3?logo=eslint&logoColor=white)](https://eslint.org/)
+[![Husky](https://img.shields.io/badge/Husky-000000?logo=github&label=Git%20Hooks)](https://www.npmjs.com/package/husky)
 
-![SWR](https://img.shields.io/badge/SWR-000000?logo=vercel&label=SWR)
-![Valibot](https://img.shields.io/badge/Valibot-111827?logoColor=white)
-![Vitest](https://img.shields.io/badge/Vitest-white?logo=vitest)
+[![SWR](https://img.shields.io/badge/SWR-000000?logo=vercel&label=SWR)](https://swr.vercel.app/ru)
+[![Valibot](https://img.shields.io/badge/Valibot-111827?logoColor=white)](https://valibot.dev/)
+[![Vitest](https://img.shields.io/badge/Vitest-white?logo=vitest)](https://vitest.dev/)
 
-![Netlify](https://img.shields.io/badge/Deployed%20on-Netlify-00C7B7?logo=netlify&logoColor=white)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/06fffc02-3668-42fb-b60c-8284e8516c98/deploy-status)](https://app.netlify.com/sites/poster-store/deploys)
 
 This application provides the following features:
 
@@ -84,7 +84,6 @@ $ npm run test
 $ npm run test:watch
 # Runs tests in watch mode.
 ```
----
 
 You can also use `yarn` or `pnpm` instead of `npm`, depending on your package manager.
 
