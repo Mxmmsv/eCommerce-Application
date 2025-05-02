@@ -6,4 +6,5 @@ export default {
   printWidth: 100,
   jsxSingleQuote: false,
   bracketSameLine: false,
+  plugins: ['prettier-plugin-tailwindcss'],
 };
