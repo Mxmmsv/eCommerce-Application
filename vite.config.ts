@@ -13,4 +13,12 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  test: {
+    coverage: {
+      provider: 'istanbul',
+      reporter: ['text', 'html'],
+    },
+    environment: 'jsdom',
+    setupFiles: ['./vitest-setup.js'],
+  },
 });
