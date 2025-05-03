@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import path from 'path';
 
 import tailwindcss from '@tailwindcss/vite';
