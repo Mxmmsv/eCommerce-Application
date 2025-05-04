@@ -38,24 +38,28 @@ This application provides the following features:
 
 ## 💻⚙️ Install and Run the Application
 - Using terminal to go to the directory in which you want to install the application, for example:
-```bash
-$ cd C/Users/yourname/apps
-```
+    ```bash
+    $ cd C/Users/yourname/apps
+    ```
 
 - Clone the repository from GitHub:
-```bash
-$ git clone https://github.com/Mxmmsv/eCommerce-Application.git
-```
+    ```bash
+    $ git clone https://github.com/Mxmmsv/eCommerce-Application.git
+    ```
+- Go to the project directory:
+    ```bash
+    $ cd eCommerce-Application
+    ```
 
 - install the dependencies with `npm i`:
-```bash
-$ npm i
-```
+    ```bash
+    $ npm i
+    ```
 
-- start the local server using `npm run start`:
-```bash
-$ npm run start
-```
+- start the local server using `npm run dev`:
+    ```bash
+    $ npm run dev
+    ```
 
 The server runs on port `5173`. If it is not possible to run the server using port `5173`, you can use another port by modifying the `vite.config.ts` configuration file.
 
