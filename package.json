@@ -6,9 +6,13 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "fix": "eslint . --fix && prettier . --write",
+    "format": "prettier . --write",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "preview": "vite preview",
     "prepare": "husky",
+    "typecheck": "tsc --noEmit",
     "test": "vitest",
     "test:ui": "vitest --ui --coverage",
     "test:coverage": "vitest run --coverage"
