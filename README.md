@@ -59,33 +59,57 @@ $ npm run start
 
 The server runs on port `5173`. If it is not possible to run the server using port `5173`, you can use another port by modifying the `vite.config.ts` configuration file.
 
-
-## Available Scripts
-
-In the project directory, you can run:
-
-```
-$ npm run start
-# Runs the app in development mode.
-Open port 5173 (http://localhost:5173) to view the app in the browser.
-
-$ npm run build
-# Builds the app for production to the `dist/` folder.
-
-$ npm run lint
-# Lints all `.ts` and `.tsx` files using ESLint.
-
-$ npm run format
-# Formats code using Prettier.
-
-$ npm run test
-# Runs unit tests using Vitest.
-
-$ npm run test:watch
-# Runs tests in watch mode.
-```
-
 You can also use `yarn` or `pnpm` instead of `npm`, depending on your package manager.
+
+
+## 📜 Available Scripts
+
+In the project directory, you can:
+
+- Run the app in development mode, opening `port 5173` (<http://localhost:5173>) to view the app in the browser:
+    ```bash
+    $ npm run dev
+    ```
+
+- Build the project for production to the `dist/` folder:
+    ```bash
+    $ npm run build
+    ```
+
+- Fix linting and formatting issues, running `ESLint` and `Prettier` simultaneously:
+    ```bash
+    $ npm run fix
+    ```
+
+- Format all the files according to the defined style rules running `Prettier`:
+    ```bash
+    $ npm run format
+    ```
+
+- Lint the codebase using `ESLint`, analyzing code for errors and violations of standards:
+    ```bash
+    $ npm run lint
+    ```
+
+- Automatically fix any linting issues found in the codebase, using `ESLint`:
+    ```bash
+    $ npm run lint:fix
+    ```
+
+- Preview the production build created by the `npm run build` command:
+    ```bash
+    $ npm run preview
+    ```
+
+- Initialize `Husky` hooks for Git pre-commit, pre-push, and other hooks:
+    ```bash
+    $ npm run prepare
+    ```
+
+- Run TypeScript's type-checking to check for type errors without generating any output files:
+    ```bash
+    $ npm run typecheck
+    ```
 
 
 ## Authors
