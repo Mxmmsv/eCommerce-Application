@@ -1,7 +1,7 @@
 # <h1 align="center">🖼️ PosterShop</h1>
 
 
-## Description
+## 📝 Description
 
 **PosterShop** is a single-page e-commerce application for selling designer posters, powered by [Commercetools](https://commercetools.com) and developed as a final project for the RS School online educational platform (course JS/Front-end 2024Q4).
 
@@ -10,14 +10,14 @@
 [![Vite](https://img.shields.io/badge/Vite-953DD6?logo=vite&logoColor=white)](https://vite.dev/)
 
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-white?logo=tailwindcss)](https://tailwindcss.com/)
-[![Material UI](https://img.shields.io/badge/MUI-007FFF?logo=mui&logoColor=white)](https://mui.com/material-ui/)
+[![shadcn/ui](https://img.shields.io/badge/shadcn%2Fui-white?style=flat&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2Ij48bGluZSB4MT0iMjA4IiB5MT0iMTI4IiB4Mj0iMTI4IiB5Mj0iMjA4IiBzdHJva2U9ImJsYWNrIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iMzIiLz48bGluZSB4MT0iMTkyIiB5MT0iNDAiIHgyPSI0MCIgeTI9IjE5MiIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2Utd2lkdGg9IjMyIi8+PC9zdmc+)](https://ui.shadcn.com/)
 [![Zustand](https://img.shields.io/badge/Zustand-443E38?logo=react&label=Zustand)](https://zustand-demo.pmnd.rs/)
 
 [![Prettier](https://img.shields.io/badge/Prettier-BD89C0?logo=prettier&logoColor=white)](https://prettier.io/)
 [![ESLint](https://img.shields.io/badge/ESLint-4B32C3?logo=eslint&logoColor=white)](https://eslint.org/)
 [![Husky](https://img.shields.io/badge/Husky-000000?logo=github&label=Git%20Hooks)](https://www.npmjs.com/package/husky)
 
-[![SWR](https://img.shields.io/badge/SWR-000000?logo=vercel&label=SWR)](https://swr.vercel.app/ru)
+[![SWR](https://img.shields.io/badge/SWR-000000?logo=swr&logoWidth=40&label)](https://swr.vercel.app/ru)
 [![Valibot](https://img.shields.io/badge/Valibot-111827?logoColor=white)](https://valibot.dev/)
 [![Vitest](https://img.shields.io/badge/Vitest-white?logo=vitest)](https://vitest.dev/)
 
@@ -36,7 +36,7 @@ This application provides the following features:
 - User authentication via SDK: Users can sign in securely using SDK for authentication.
 
 
-## Install and Run the Application
+## 💻⚙️ Install and Run the Application
 - Using terminal to go to the directory in which you want to install the application, for example:
 ```bash
 $ cd C/Users/yourname/apps
@@ -112,11 +112,11 @@ In the project directory, you can:
     ```
 
 
-## Authors
+## 👥 Authors
 [Maxim Moiseev](https://github.com/Mxmmsv), [Ekaterina Dmitrenko](https://github.com/ek-ole) and [Alla Tsaiukova](https://github.com/AlyaEngineer).
 
 
-## Acknowledgments
+## 🙏 Acknowledgments
 Thanks a lot to our mentors @gentoosiast, @lenayork, and @existanz for helping with the project.
 
 Thanks to the [Figma](https://figma.com/community) community for the free and accessible e-commerce website layouts that inspired us during the development of the project.
@@ -126,5 +126,5 @@ Thanks to the [RS School](https://rs.school/) for the knowledge and experience w
 Special thanks to the Commercetools team for providing a well-documented, TypeScript-ready SDK that simplified our e-commerce integration.
 
 
-## License
+## 📄🔒 License
 This project is licensed under the MIT License - see the LICENSE.md file for details.
