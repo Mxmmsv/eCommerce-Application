@@ -12,7 +12,7 @@ import importPlugin from 'eslint-plugin-import';
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
 
 export default tseslint.config(
-  { ignores: ['dist'] },
+  { ignores: ['dist', 'coverage'] },
   {
     extends: [
       js.configs.recommended,
@@ -41,9 +41,6 @@ export default tseslint.config(
     },
     rules: {
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
-      ...testingLibrary.configs.react.rules,
-      ...jestDom.configs.recommended.rules,
-      ...vitest.configs.recommended.rules,
       '@typescript-eslint/consistent-type-exports': 'error',
       '@typescript-eslint/consistent-type-imports': 'error',
       '@typescript-eslint/no-inferrable-types': 'error',
@@ -66,6 +63,12 @@ export default tseslint.config(
         },
       ],
     },
+  },
+  {
+    files: ['**/*.test.{ts,tsx}'],
+    ...testingLibrary.configs['flat/react'],
+    ...jestDom.configs['flat/recommended'],
+    ...vitest.configs.recommended,
   },
   {
     settings: {
