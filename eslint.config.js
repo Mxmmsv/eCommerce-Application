@@ -71,6 +71,12 @@ export default tseslint.config(
     ...vitest.configs.recommended,
   },
   {
+    files: ['src/vite-env.d.ts'],
+    rules: {
+      '@typescript-eslint/consistent-type-definitions': 'off',
+    },
+  },
+  {
     settings: {
       react: {
         version: 'detect',
