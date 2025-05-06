@@ -38,7 +38,6 @@ export default tseslint.config(
       'testing-library': testingLibrary,
       'jest-dom': jestDom,
       vitest: vitest,
-      import: importPlugin,
     },
     rules: {
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
