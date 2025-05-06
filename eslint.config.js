@@ -16,6 +16,7 @@ export default tseslint.config(
   {
     extends: [
       js.configs.recommended,
+      importPlugin.flatConfigs.recommended,
       ...tseslint.configs.recommendedTypeChecked,
       reactPlugin.configs.flat.recommended,
       reactPlugin.configs.flat['jsx-runtime'],
@@ -80,6 +81,9 @@ export default tseslint.config(
     settings: {
       react: {
         version: 'detect',
+      },
+      'import/resolver': {
+        typescript: true,
       },
     },
   },
