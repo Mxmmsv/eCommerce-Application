@@ -1,6 +1,4 @@
-
 # <h1 align="center">🖼️ PosterShop</h1>
-
 
 ## 📝 Description
 
@@ -36,92 +34,102 @@ This application provides the following features:
 
 - User authentication via SDK: Users can sign in securely using SDK for authentication.
 
-
 ## 💻⚙️ Install and Run the Application
+
 - Using terminal to go to the directory in which you want to install the application, for example:
-    ```bash
-    $ cd C/Users/yourname/apps
-    ```
+
+  ```bash
+  $ cd C/Users/yourname/apps
+  ```
 
 - Clone the repository from GitHub:
-    ```bash
-    $ git clone https://github.com/Mxmmsv/eCommerce-Application.git
-    ```
+  ```bash
+  $ git clone https://github.com/Mxmmsv/eCommerce-Application.git
+  ```
 - Go to the project directory:
-    ```bash
-    $ cd eCommerce-Application
-    ```
+
+  ```bash
+  $ cd eCommerce-Application
+  ```
 
 - install the dependencies with `npm i`:
-    ```bash
-    $ npm i
-    ```
+
+  ```bash
+  $ npm i
+  ```
 
 - start the local server using `npm run dev`:
-    ```bash
-    $ npm run dev
-    ```
+  ```bash
+  $ npm run dev
+  ```
 
 The server runs on port `5173`. If it is not possible to run the server using port `5173`, you can use another port by modifying the `vite.config.ts` configuration file.
 
 You can also use `yarn` or `pnpm` instead of `npm`, depending on your package manager.
-
 
 ## 📜 Available Scripts
 
 In the project directory, you can:
 
 - Run the app in development mode, opening `port 5173` (<http://localhost:5173>) to view the app in the browser:
-    ```bash
-    $ npm run dev
-    ```
+
+  ```bash
+  $ npm run dev
+  ```
 
 - Build the project for production to the `dist/` folder:
-    ```bash
-    $ npm run build
-    ```
+
+  ```bash
+  $ npm run build
+  ```
 
 - Fix linting and formatting issues, running `ESLint` and `Prettier` simultaneously:
-    ```bash
-    $ npm run fix
-    ```
+
+  ```bash
+  $ npm run fix
+  ```
 
 - Format all the files according to the defined style rules running `Prettier`:
-    ```bash
-    $ npm run format
-    ```
+
+  ```bash
+  $ npm run format
+  ```
 
 - Lint the codebase using `ESLint`, analyzing code for errors and violations of standards:
-    ```bash
-    $ npm run lint
-    ```
+
+  ```bash
+  $ npm run lint
+  ```
 
 - Automatically fix any linting issues found in the codebase, using `ESLint`:
-    ```bash
-    $ npm run lint:fix
-    ```
+
+  ```bash
+  $ npm run lint:fix
+  ```
 
 - Preview the production build created by the `npm run build` command:
-    ```bash
-    $ npm run preview
-    ```
+
+  ```bash
+  $ npm run preview
+  ```
 
 - Initialize `Husky` hooks for Git pre-commit, pre-push, and other hooks:
-    ```bash
-    $ npm run prepare
-    ```
+
+  ```bash
+  $ npm run prepare
+  ```
 
 - Run TypeScript's type-checking to check for type errors without generating any output files:
-    ```bash
-    $ npm run typecheck
-    ```
-
+  ```bash
+  $ npm run typecheck
+  ```
 
 ## 👥 Authors
+
 [Maxim Moiseev](https://github.com/Mxmmsv), [Ekaterina Dmitrenko](https://github.com/ek-ole) and [Alla Tsaiukova](https://github.com/AlyaEngineer).
 
-
 ## 🙏 Acknowledgments
+
 Thanks a lot to our mentors @gentoosiast, @lenayork, and @existanz for helping with the project.
 
 Thanks to the [Figma](https://figma.com/community) community for the free and accessible e-commerce website layouts that inspired us during the development of the project.
@@ -130,6 +138,6 @@ Thanks to the [RS School](https://rs.school/) for the knowledge and experience w
 
 Special thanks to the Commercetools team for providing a well-documented, TypeScript-ready SDK that simplified our e-commerce integration.
 
-
 ## 📄🔒 License
+
 This project is licensed under the MIT License - see the LICENSE.md file for details.
