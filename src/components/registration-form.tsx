@@ -1,22 +1,24 @@
 import { Link } from 'react-router';
 
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 
+import { CloseButton } from './ui/button/close-button';
+
 export function RegistrationForm({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div className={cn('flex flex-col gap-6', className)} {...props}>
-      <Card>
-        <CardHeader>
-          <CardTitle>Create an account</CardTitle>
-          <CardDescription>Enter your details to register</CardDescription>
+      <Card className="relative">
+        <CloseButton className="flex justify-end" />
+        <CardHeader className="flex justify-center">
+          <CardTitle className="text-2xl">Create an account</CardTitle>
         </CardHeader>
         <CardContent>
           <form>
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-5">
               <div className="grid gap-3">
                 <Label htmlFor="firstName">First name</Label>
                 <Input id="firstName" required />
@@ -38,10 +40,9 @@ export function RegistrationForm({ className, ...props }: React.ComponentProps<'
               </Button>
             </div>
             <div className="mt-4 text-center text-sm">
-              Already have an account?{' '}
-              <Link to="/login" className="underline underline-offset-4">
-                Login
-              </Link>
+              <Button variant="outline" className="w-full">
+                <Link to="/login">Already have an account? Sign in</Link>
+              </Button>
             </div>
           </form>
         </CardContent>
