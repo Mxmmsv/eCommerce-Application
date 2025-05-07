@@ -1,9 +1,9 @@
 import { Link } from 'react-router';
 
-import { Button } from '@/components/ui/button/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card/card';
-import { Input } from '@/components/ui/input/input';
-import { Label } from '@/components/ui/label/label';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 
 export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) {
