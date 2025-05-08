@@ -10,6 +10,8 @@ import jestDom from 'eslint-plugin-jest-dom';
 import vitest from '@vitest/eslint-plugin';
 import importPlugin from 'eslint-plugin-import';
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
+import { fileURLToPath } from 'node:url';
+import path from 'path';
 
 export default tseslint.config(
   { ignores: ['dist', 'coverage'] },
@@ -82,7 +84,11 @@ export default tseslint.config(
         version: 'detect',
       },
       'import/resolver': {
-        typescript: true,
+        typescript: {
+          alwaysTryTypes: true,
+          project: path.dirname(fileURLToPath(import.meta.url)),
+        },
+        node: true,
       },
     },
   },
