@@ -6,12 +6,12 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 
-import { CloseButton } from './ui/button/close-button';
+import { CloseButton } from '../../components/ui/button/close-button';
 
 export function RegistrationForm({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div className={cn('flex flex-col gap-6', className)} {...props}>
-      <Card className="relative">
+      <Card className="relative p-12">
         <CloseButton className="flex justify-end" />
         <CardHeader className="flex justify-center">
           <CardTitle className="text-2xl">Create an account</CardTitle>
@@ -35,12 +35,12 @@ export function RegistrationForm({ className, ...props }: React.ComponentProps<'
                 <Label htmlFor="password">Password</Label>
                 <Input id="password" type="password" required />
               </div>
-              <Button type="submit" className="w-full">
+              <Button type="submit" className="w-3xs self-center">
                 Register
               </Button>
             </div>
             <div className="mt-4 text-center text-sm">
-              <Button variant="outline" className="w-full">
+              <Button variant="outline" className="w-3xs">
                 <Link to="/login">Already have an account? Sign in</Link>
               </Button>
             </div>

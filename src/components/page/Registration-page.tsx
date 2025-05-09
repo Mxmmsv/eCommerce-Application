@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 
-import { RegistrationForm } from '../registration-form';
+import { RegistrationForm } from '../../feature/registration/registration-form';
 
 export default function RegistrationPage() {
   return (
