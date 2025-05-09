@@ -29,11 +29,19 @@ const schema = object({
     minLength(1, 'Date is required'),
     custom((value) => {
       if (typeof value !== 'string') return false;
+
       const birthDate = new Date(value);
+      const currentDate = new Date();
       const minDate = new Date();
-      minDate.setFullYear(minDate.getFullYear() - 13);
-      return !isNaN(birthDate.getTime()) && birthDate <= minDate;
-    }, 'You must be at least 13 years old'),
+      minDate.setFullYear(minDate.getFullYear() - 12);
+
+      const isValidDate = !isNaN(birthDate.getTime());
+      const isOldEnough = birthDate <= minDate;
+      const isYearValid =
+        birthDate.getFullYear() >= 1900 && birthDate.getFullYear() <= currentDate.getFullYear();
+
+      return isValidDate && isOldEnough && isYearValid;
+    }, 'Please enter a valid date between 1900 and current year, and you must be at least 13 years old'),
   ),
 });
 
@@ -92,11 +100,8 @@ export function RegistrationForm({ className, ...props }: React.ComponentProps<'
                   id="dateOfBirth"
                   type="date"
                   {...register('dateOfBirth')}
-                  max={
-                    new Date(new Date().setFullYear(new Date().getFullYear() - 13))
-                      .toISOString()
-                      .split('T')[0]
-                  }
+                  max={new Date().toISOString().split('T')[0]}
+                  min="1900-01-01"
                   aria-invalid={!!errors.dateOfBirth}
                 />
                 {errors.dateOfBirth && (
