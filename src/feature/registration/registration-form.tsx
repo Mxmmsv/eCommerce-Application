@@ -1,6 +1,7 @@
-import type { UseFormReturn } from 'react-hook-form';
+import { valibotResolver } from '@hookform/resolvers/valibot';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { object, string, minLength, pipe, email } from 'valibot';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -17,16 +18,21 @@ type FormData = {
   password: string;
 };
 
-type FormMethods = UseFormReturn<FormData>;
+const schema = object({
+  firstName: pipe(string(), minLength(2, 'Minimum 2 characters')),
+  lastName: pipe(string(), minLength(2, 'Minimum 2 characters')),
+  email: pipe(string(''), email('Incorrect email')),
+  password: pipe(string(''), minLength(8, 'Minimum 8 characters')),
+});
 
 export function RegistrationForm({ className, ...props }: React.ComponentProps<'div'>) {
-  const methods: FormMethods = useForm<FormData>();
-
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = methods;
+  } = useForm<FormData>({
+    resolver: valibotResolver(schema),
+  });
 
   const onSubmit = (data: FormData) => {
     try {
@@ -50,7 +56,7 @@ export function RegistrationForm({ className, ...props }: React.ComponentProps<'
                 <Label htmlFor="firstName">First name</Label>
                 <Input
                   id="firstName"
-                  {...register('firstName', { required: 'Обязательное поле' })}
+                  {...register('firstName', { required: 'Required field' })}
                   aria-invalid={!!errors.firstName}
                 />
                 {errors.firstName && (
@@ -59,7 +65,7 @@ export function RegistrationForm({ className, ...props }: React.ComponentProps<'
               </div>
               <div className="grid gap-3">
                 <Label htmlFor="lastName">Last name</Label>
-                <Input id="lastName" {...register('lastName', { required: 'Обязательное поле' })} />
+                <Input id="lastName" {...register('lastName', { required: 'Required field' })} />
                 {errors.lastName && (
                   <p className="text-sm text-red-500">{errors.lastName.message}</p>
                 )}
@@ -71,7 +77,7 @@ export function RegistrationForm({ className, ...props }: React.ComponentProps<'
                   type="email"
                   placeholder="m@example.com"
                   {...register('email', {
-                    required: 'Обязательное поле',
+                    required: 'Required field',
                   })}
                 />
                 {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
@@ -81,7 +87,7 @@ export function RegistrationForm({ className, ...props }: React.ComponentProps<'
                 <Input
                   id="password"
                   type="password"
-                  {...register('password', { required: 'Обязательное поле' })}
+                  {...register('password', { required: 'Required field' })}
                 />
                 {errors.password && (
                   <p className="text-sm text-red-500">{errors.password.message}</p>
