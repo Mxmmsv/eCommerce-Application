@@ -10,12 +10,15 @@ import jestDom from 'eslint-plugin-jest-dom';
 import vitest from '@vitest/eslint-plugin';
 import importPlugin from 'eslint-plugin-import';
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
+import { fileURLToPath } from 'node:url';
+import path from 'path';
 
 export default tseslint.config(
   { ignores: ['dist', 'coverage'] },
   {
     extends: [
       js.configs.recommended,
+      importPlugin.flatConfigs.recommended,
       ...tseslint.configs.recommendedTypeChecked,
       reactPlugin.configs.flat.recommended,
       reactPlugin.configs.flat['jsx-runtime'],
@@ -37,7 +40,6 @@ export default tseslint.config(
       'testing-library': testingLibrary,
       'jest-dom': jestDom,
       vitest: vitest,
-      import: importPlugin,
     },
     rules: {
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
@@ -80,6 +82,13 @@ export default tseslint.config(
     settings: {
       react: {
         version: 'detect',
+      },
+      'import/resolver': {
+        typescript: {
+          alwaysTryTypes: true,
+          project: path.dirname(fileURLToPath(import.meta.url)),
+        },
+        node: true,
       },
     },
   },
