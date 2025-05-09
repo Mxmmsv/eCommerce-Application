@@ -65,7 +65,12 @@ export function RegistrationForm({ className, ...props }: React.ComponentProps<'
               </div>
               <div className="grid gap-3">
                 <Label htmlFor="lastName">Last name</Label>
-                <Input id="lastName" {...register('lastName', { required: 'Required field' })} />
+                <Input
+                  id="lastName"
+                  {...register('lastName', { required: 'Required field' })}
+                  className={errors.email ? 'border-destructive' : ''}
+                  aria-invalid={!!errors.lastName}
+                />
                 {errors.lastName && (
                   <p className="text-sm text-red-500">{errors.lastName.message}</p>
                 )}
@@ -79,6 +84,7 @@ export function RegistrationForm({ className, ...props }: React.ComponentProps<'
                   {...register('email', {
                     required: 'Required field',
                   })}
+                  aria-invalid={!!errors.email}
                 />
                 {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
               </div>
@@ -88,6 +94,7 @@ export function RegistrationForm({ className, ...props }: React.ComponentProps<'
                   id="password"
                   type="password"
                   {...register('password', { required: 'Required field' })}
+                  aria-invalid={!!errors.password}
                 />
                 {errors.password && (
                   <p className="text-sm text-red-500">{errors.password.message}</p>
