@@ -1,4 +1,6 @@
-import { Link } from 'react-router';
+import type { UseFormReturn } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -8,29 +10,30 @@ import { cn } from '@/lib/utils';
 
 import { CloseButton } from '../../components/ui/button/close-button';
 
+type FormData = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+};
+
+type FormMethods = UseFormReturn<FormData>;
+
 export function RegistrationForm({ className, ...props }: React.ComponentProps<'div'>) {
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const methods: FormMethods = useForm<FormData>();
 
-    if (!(e.currentTarget instanceof HTMLFormElement)) {
-      console.log('не является элементом формы');
-      return;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = methods;
+
+  const onSubmit = (data: FormData) => {
+    try {
+      console.log('Данные формы:', data);
+    } catch (error) {
+      console.error('Ошибка:', error);
     }
-
-    const formData = new FormData(e.currentTarget);
-
-    const getStringValue = (field: string) => {
-      const value = formData.get(field);
-      return value instanceof File ? '' : String(value ?? '');
-    };
-
-    const data = {
-      firstName: getStringValue('firstName'),
-      lastName: getStringValue('lastName'),
-      email: getStringValue('email'),
-      password: getStringValue('password'),
-    };
-    console.log('Данные формы:', data);
   };
 
   return (
@@ -41,23 +44,48 @@ export function RegistrationForm({ className, ...props }: React.ComponentProps<'
           <CardTitle className="text-2xl">Create an account</CardTitle>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={(e) => void handleSubmit(onSubmit)(e)}>
             <div className="flex flex-col gap-5">
               <div className="grid gap-3">
                 <Label htmlFor="firstName">First name</Label>
-                <Input id="firstName" name="firstName" required />
+                <Input
+                  id="firstName"
+                  {...register('firstName', { required: 'Обязательное поле' })}
+                  aria-invalid={!!errors.firstName}
+                />
+                {errors.firstName && (
+                  <p className="text-sm text-red-500">{errors.firstName.message}</p>
+                )}
               </div>
               <div className="grid gap-3">
                 <Label htmlFor="lastName">Last name</Label>
-                <Input id="lastName" name="lastName" required />
+                <Input id="lastName" {...register('lastName', { required: 'Обязательное поле' })} />
+                {errors.lastName && (
+                  <p className="text-sm text-red-500">{errors.lastName.message}</p>
+                )}
               </div>
               <div className="grid gap-3">
                 <Label htmlFor="email">Email</Label>
-                <Input id="email" name="email" type="email" placeholder="m@example.com" required />
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="m@example.com"
+                  {...register('email', {
+                    required: 'Обязательное поле',
+                  })}
+                />
+                {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
               </div>
               <div className="grid gap-3">
                 <Label htmlFor="password">Password</Label>
-                <Input id="password" name="password" type="password" required />
+                <Input
+                  id="password"
+                  type="password"
+                  {...register('password', { required: 'Обязательное поле' })}
+                />
+                {errors.password && (
+                  <p className="text-sm text-red-500">{errors.password.message}</p>
+                )}
               </div>
               <Button type="submit" className="w-3xs self-center">
                 Register
