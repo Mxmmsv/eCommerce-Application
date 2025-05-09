@@ -1,7 +1,7 @@
 import { valibotResolver } from '@hookform/resolvers/valibot';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import { object, string, minLength, pipe, email } from 'valibot';
+import { object, string, minLength, pipe, email, custom } from 'valibot';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -24,7 +24,17 @@ const schema = object({
   lastName: pipe(string(), minLength(2, 'Minimum 2 characters')),
   email: pipe(string(''), email('Incorrect email')),
   password: pipe(string(''), minLength(8, 'Minimum 8 characters')),
-  dateOfBirth: pipe(string(), minLength(1, 'Date is required')),
+  dateOfBirth: pipe(
+    string(),
+    minLength(1, 'Date is required'),
+    custom((value) => {
+      if (typeof value !== 'string') return false;
+      const birthDate = new Date(value);
+      const minDate = new Date();
+      minDate.setFullYear(minDate.getFullYear() - 13);
+      return !isNaN(birthDate.getTime()) && birthDate <= minDate;
+    }, 'You must be at least 13 years old'),
+  ),
 });
 
 export function RegistrationForm({ className, ...props }: React.ComponentProps<'div'>) {
@@ -82,6 +92,11 @@ export function RegistrationForm({ className, ...props }: React.ComponentProps<'
                   id="dateOfBirth"
                   type="date"
                   {...register('dateOfBirth')}
+                  max={
+                    new Date(new Date().setFullYear(new Date().getFullYear() - 13))
+                      .toISOString()
+                      .split('T')[0]
+                  }
                   aria-invalid={!!errors.dateOfBirth}
                 />
                 {errors.dateOfBirth && (
