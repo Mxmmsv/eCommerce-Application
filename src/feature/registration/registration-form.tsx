@@ -16,6 +16,7 @@ type FormData = {
   lastName: string;
   email: string;
   password: string;
+  dateOfBirth: string;
 };
 
 const schema = object({
@@ -23,6 +24,7 @@ const schema = object({
   lastName: pipe(string(), minLength(2, 'Minimum 2 characters')),
   email: pipe(string(''), email('Incorrect email')),
   password: pipe(string(''), minLength(8, 'Minimum 8 characters')),
+  dateOfBirth: pipe(string(), minLength(1, 'Date is required')),
 });
 
 export function RegistrationForm({ className, ...props }: React.ComponentProps<'div'>) {
@@ -68,11 +70,22 @@ export function RegistrationForm({ className, ...props }: React.ComponentProps<'
                 <Input
                   id="lastName"
                   {...register('lastName', { required: 'Required field' })}
-                  className={errors.email ? 'border-destructive' : ''}
                   aria-invalid={!!errors.lastName}
                 />
                 {errors.lastName && (
                   <p className="text-sm text-red-500">{errors.lastName.message}</p>
+                )}
+              </div>
+              <div className="grid gap-3">
+                <Label htmlFor="dateOfBirth">Date of Birth</Label>
+                <Input
+                  id="dateOfBirth"
+                  type="date"
+                  {...register('dateOfBirth')}
+                  aria-invalid={!!errors.dateOfBirth}
+                />
+                {errors.dateOfBirth && (
+                  <p className="text-sm text-red-500">{errors.dateOfBirth.message}</p>
                 )}
               </div>
               <div className="grid gap-3">
