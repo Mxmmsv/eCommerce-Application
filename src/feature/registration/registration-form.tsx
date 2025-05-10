@@ -1,7 +1,7 @@
 import { valibotResolver } from '@hookform/resolvers/valibot';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import { object, string, minLength, pipe, email, custom } from 'valibot';
+import { object, string, minLength, pipe, email, custom, regex } from 'valibot';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -17,6 +17,9 @@ type FormData = {
   email: string;
   password: string;
   dateOfBirth: string;
+  country: string;
+  city: string;
+  street: string;
 };
 
 const schema = object({
@@ -48,6 +51,13 @@ const schema = object({
       return birthDate <= minDate;
     }, 'You must be at least 12 years old'),
   ),
+  country: pipe(string(), minLength(1, 'Country is required')),
+  city: pipe(
+    string(),
+    minLength(1, 'City is required'),
+    regex(/^[a-zA-Zа-яА-Я\s]+$/, 'City should contain only letters'),
+  ),
+  street: pipe(string(), minLength(1, 'Street is required')),
 });
 
 export function RegistrationForm({ className, ...props }: React.ComponentProps<'div'>) {
@@ -112,7 +122,28 @@ export function RegistrationForm({ className, ...props }: React.ComponentProps<'
                   <p className="text-sm text-red-500">{errors.dateOfBirth.message}</p>
                 )}
               </div>
+
+              <h3 className="text-l mt-6 font-medium">Address Information</h3>
+
               <div className="grid gap-3">
+                <Label htmlFor="country">Country</Label>
+                <Input id="country" {...register('country')} aria-invalid={!!errors.country} />
+                {errors.country && <p className="text-sm text-red-500">{errors.country.message}</p>}
+              </div>
+
+              <div className="grid gap-3">
+                <Label htmlFor="city">City</Label>
+                <Input id="city" {...register('city')} aria-invalid={!!errors.city} />
+                {errors.city && <p className="text-sm text-red-500">{errors.city.message}</p>}
+              </div>
+
+              <div className="grid gap-3">
+                <Label htmlFor="street">Street</Label>
+                <Input id="street" {...register('street')} aria-invalid={!!errors.street} />
+                {errors.street && <p className="text-sm text-red-500">{errors.street.message}</p>}
+              </div>
+
+              <div className="mt-6 grid gap-3">
                 <Label htmlFor="email">Email</Label>
                 <Input
                   id="email"
