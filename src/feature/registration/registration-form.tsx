@@ -1,7 +1,6 @@
 import { valibotResolver } from '@hookform/resolvers/valibot';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import { object, string, minLength, pipe, email, custom, regex } from 'valibot';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -11,54 +10,9 @@ import { cn } from '@/lib/utils';
 
 import { CloseButton } from '../../components/ui/button/close-button';
 
-type FormData = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  dateOfBirth: string;
-  country: string;
-  city: string;
-  street: string;
-};
-
-const schema = object({
-  firstName: pipe(string(), minLength(2, 'Minimum 2 characters')),
-  lastName: pipe(string(), minLength(2, 'Minimum 2 characters')),
-  email: pipe(string(''), email('Incorrect email')),
-  password: pipe(string(''), minLength(8, 'Minimum 8 characters')),
-  dateOfBirth: pipe(
-    string(),
-    minLength(1, 'Date is required'),
-    custom((value) => {
-      if (typeof value !== 'string') return false;
-      const date = new Date(value);
-      return !isNaN(date.getTime());
-    }, 'Invalid date format'),
-
-    custom((value) => {
-      if (typeof value !== 'string') return false;
-      const year = new Date(value).getFullYear();
-      return year >= 1900;
-    }, 'Year must be 1900 or later'),
-
-    custom((value) => {
-      if (typeof value !== 'string') return false;
-      const birthDate = new Date(value);
-      const today = new Date();
-      const minDate = new Date();
-      minDate.setFullYear(today.getFullYear() - 12);
-      return birthDate <= minDate;
-    }, 'You must be at least 12 years old'),
-  ),
-  country: pipe(string(), minLength(1, 'Country is required')),
-  city: pipe(
-    string(),
-    minLength(1, 'City is required'),
-    regex(/^[a-zA-Zа-яА-Я\s]+$/, 'City should contain only letters'),
-  ),
-  street: pipe(string(), minLength(1, 'Street is required')),
-});
+import { AddressFields } from './address-fields';
+import { schema } from './register-schema';
+import type { FormData } from './types';
 
 export function RegistrationForm({ className, ...props }: React.ComponentProps<'div'>) {
   const {
@@ -123,25 +77,7 @@ export function RegistrationForm({ className, ...props }: React.ComponentProps<'
                 )}
               </div>
 
-              <h3 className="text-l mt-6 font-medium">Address Information</h3>
-
-              <div className="grid gap-3">
-                <Label htmlFor="country">Country</Label>
-                <Input id="country" {...register('country')} aria-invalid={!!errors.country} />
-                {errors.country && <p className="text-sm text-red-500">{errors.country.message}</p>}
-              </div>
-
-              <div className="grid gap-3">
-                <Label htmlFor="city">City</Label>
-                <Input id="city" {...register('city')} aria-invalid={!!errors.city} />
-                {errors.city && <p className="text-sm text-red-500">{errors.city.message}</p>}
-              </div>
-
-              <div className="grid gap-3">
-                <Label htmlFor="street">Street</Label>
-                <Input id="street" {...register('street')} aria-invalid={!!errors.street} />
-                {errors.street && <p className="text-sm text-red-500">{errors.street.message}</p>}
-              </div>
+              <AddressFields register={register} errors={errors} />
 
               <div className="mt-6 grid gap-3">
                 <Label htmlFor="email">Email</Label>
