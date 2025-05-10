@@ -1,20 +1,32 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { useState } from 'react';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { AlertFailedLogin } from '@/feature/auth/login/alert-login';
 import { handleLogin } from '@/feature/auth/login/handle-login';
 import { cn } from '@/lib/utils';
 
 export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loginError, setLoginError] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await handleLogin(email, password);
+    setLoginError(false);
+    try {
+      await handleLogin(email, password);
+      await navigate('/');
+    } catch (error) {
+      setLoginError(true);
+      console.error('Login failed', error);
+    }
   };
 
   return (
@@ -24,8 +36,9 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) 
           <CardTitle className="text-xl">Welcome back</CardTitle>
         </CardHeader>
         <CardContent>
-          <form onSubmit={void handleSubmit}>
+          <form onSubmit={handleSubmit}>
             <div className="grid gap-6">
+              {loginError && <AlertFailedLogin />}
               <div className="grid gap-3">
                 <Label htmlFor="email">Email</Label>
                 <Input
