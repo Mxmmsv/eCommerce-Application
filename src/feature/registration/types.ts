@@ -5,6 +5,7 @@ export type FormData = {
   password: string;
   dateOfBirth: string;
   country: string;
+  postalCode: string;
   city: string;
   street: string;
 };

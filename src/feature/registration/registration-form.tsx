@@ -11,7 +11,7 @@ import { cn } from '@/lib/utils';
 import { CloseButton } from '../../components/ui/button/close-button';
 
 import { AddressFields } from './address-fields';
-import { schema } from './register-schema';
+import { schema } from './registration-schema';
 import type { FormData } from './types';
 
 export function RegistrationForm({ className, ...props }: React.ComponentProps<'div'>) {
@@ -40,8 +40,8 @@ export function RegistrationForm({ className, ...props }: React.ComponentProps<'
         </CardHeader>
         <CardContent>
           <form onSubmit={(e) => void handleSubmit(onSubmit)(e)}>
-            <div className="flex flex-col gap-5">
-              <div className="grid gap-3">
+            <div className="flex flex-col gap-3">
+              <div className="grid gap-2">
                 <Label htmlFor="firstName">First name</Label>
                 <Input
                   id="firstName"
@@ -52,7 +52,7 @@ export function RegistrationForm({ className, ...props }: React.ComponentProps<'
                   <p className="text-sm text-red-500">{errors.firstName.message}</p>
                 )}
               </div>
-              <div className="grid gap-3">
+              <div className="grid gap-2">
                 <Label htmlFor="lastName">Last name</Label>
                 <Input
                   id="lastName"
@@ -63,7 +63,7 @@ export function RegistrationForm({ className, ...props }: React.ComponentProps<'
                   <p className="text-sm text-red-500">{errors.lastName.message}</p>
                 )}
               </div>
-              <div className="grid gap-3">
+              <div className="grid gap-2">
                 <Label htmlFor="dateOfBirth">Date of Birth</Label>
                 <Input
                   id="dateOfBirth"
@@ -79,7 +79,7 @@ export function RegistrationForm({ className, ...props }: React.ComponentProps<'
 
               <AddressFields register={register} errors={errors} />
 
-              <div className="mt-6 grid gap-3">
+              <div className="mt-6 grid gap-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
                   id="email"
@@ -92,7 +92,7 @@ export function RegistrationForm({ className, ...props }: React.ComponentProps<'
                 />
                 {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
               </div>
-              <div className="grid gap-3">
+              <div className="grid gap-2">
                 <Label htmlFor="password">Password</Label>
                 <Input
                   id="password"
@@ -104,7 +104,7 @@ export function RegistrationForm({ className, ...props }: React.ComponentProps<'
                   <p className="text-sm text-red-500">{errors.password.message}</p>
                 )}
               </div>
-              <Button type="submit" className="w-3xs self-center">
+              <Button type="submit" className="mt-4 w-3xs self-center">
                 Register
               </Button>
             </div>

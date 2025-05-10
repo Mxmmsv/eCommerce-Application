@@ -30,6 +30,11 @@ export const schema = object({
     }, 'You must be at least 12 years old'),
   ),
   country: pipe(string(), minLength(1, 'Country is required')),
+  postalCode: pipe(
+    string(),
+    minLength(1, 'Postal code is required'),
+    regex(/^[a-zA-Z0-9\s-]+$/, 'Invalid postal code format'),
+  ),
   city: pipe(
     string(),
     minLength(1, 'City is required'),
