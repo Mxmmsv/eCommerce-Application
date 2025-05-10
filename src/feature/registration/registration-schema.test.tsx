@@ -9,7 +9,7 @@ describe('Registration Schema', () => {
     lastName: 'Doe',
     email: 'test@example.com',
     password: 'Password123',
-    dateOfBirth: '01.01.2002',
+    dateOfBirth: '2001-01-02',
     country: 'Country',
     postalCode: '12345',
     city: 'City',
