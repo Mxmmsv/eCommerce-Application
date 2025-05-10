@@ -1,4 +1,5 @@
 import { valibotResolver } from '@hookform/resolvers/valibot';
+import { AlertCircle } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
@@ -43,35 +44,50 @@ export function RegistrationForm({ className, ...props }: React.ComponentProps<'
             <div className="flex flex-col gap-3">
               <div className="grid gap-2">
                 <Label htmlFor="firstName">First name</Label>
-                <Input
-                  id="firstName"
-                  {...register('firstName', { required: 'Required field' })}
-                  aria-invalid={!!errors.firstName}
-                />
+                <div className="relative">
+                  <Input
+                    id="firstName"
+                    {...register('firstName', { required: 'Required field' })}
+                    aria-invalid={!!errors.firstName}
+                  />
+                  {errors.firstName && (
+                    <AlertCircle className="absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 text-red-500" />
+                  )}
+                </div>
                 {errors.firstName && (
                   <p className="text-sm text-red-500">{errors.firstName.message}</p>
                 )}
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="lastName">Last name</Label>
-                <Input
-                  id="lastName"
-                  {...register('lastName', { required: 'Required field' })}
-                  aria-invalid={!!errors.lastName}
-                />
+                <div className="relative">
+                  <Input
+                    id="lastName"
+                    {...register('lastName', { required: 'Required field' })}
+                    aria-invalid={!!errors.lastName}
+                  />
+                  {errors.lastName && (
+                    <AlertCircle className="absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 text-red-500" />
+                  )}
+                </div>
                 {errors.lastName && (
                   <p className="text-sm text-red-500">{errors.lastName.message}</p>
                 )}
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="dateOfBirth">Date of Birth</Label>
-                <Input
-                  id="dateOfBirth"
-                  type="date"
-                  {...register('dateOfBirth')}
-                  max={new Date().toISOString().split('T')[0]}
-                  aria-invalid={!!errors.dateOfBirth}
-                />
+                <div className="relative">
+                  <Input
+                    id="dateOfBirth"
+                    type="date"
+                    {...register('dateOfBirth')}
+                    max={new Date().toISOString().split('T')[0]}
+                    aria-invalid={!!errors.dateOfBirth}
+                  />
+                  {errors.dateOfBirth && (
+                    <AlertCircle className="absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 text-red-500" />
+                  )}
+                </div>
                 {errors.dateOfBirth && (
                   <p className="text-sm text-red-500">{errors.dateOfBirth.message}</p>
                 )}
@@ -81,25 +97,35 @@ export function RegistrationForm({ className, ...props }: React.ComponentProps<'
 
               <div className="mt-6 grid gap-2">
                 <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="m@example.com"
-                  {...register('email', {
-                    required: 'Required field',
-                  })}
-                  aria-invalid={!!errors.email}
-                />
+                <div className="relative">
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="m@example.com"
+                    {...register('email', {
+                      required: 'Required field',
+                    })}
+                    aria-invalid={!!errors.email}
+                  />
+                  {errors.email && (
+                    <AlertCircle className="absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 text-red-500" />
+                  )}
+                </div>
                 {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="password">Password</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  {...register('password', { required: 'Required field' })}
-                  aria-invalid={!!errors.password}
-                />
+                <div className="relative">
+                  <Input
+                    id="password"
+                    type="password"
+                    {...register('password', { required: 'Required field' })}
+                    aria-invalid={!!errors.password}
+                  />
+                  {errors.password && (
+                    <AlertCircle className="absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 text-red-500" />
+                  )}
+                </div>
                 {errors.password && (
                   <p className="text-sm text-red-500">{errors.password.message}</p>
                 )}

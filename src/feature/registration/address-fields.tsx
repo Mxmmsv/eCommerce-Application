@@ -1,3 +1,4 @@
+import { AlertCircle } from 'lucide-react';
 import type { FieldErrors, UseFormRegister } from 'react-hook-form';
 
 import { Input } from '@/components/ui/input';
@@ -17,25 +18,45 @@ export function AddressFields({ register, errors }: AddressFieldsProps) {
 
       <div className="grid gap-2">
         <Label htmlFor="country">Country</Label>
-        <Input id="country" {...register('country')} aria-invalid={!!errors.country} />
+        <div className="relative">
+          <Input id="country" {...register('country')} aria-invalid={!!errors.country} />
+          {errors.country && (
+            <AlertCircle className="absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 text-red-500" />
+          )}
+        </div>
         {errors.country && <p className="text-sm text-red-500">{errors.country.message}</p>}
       </div>
 
       <div className="grid gap-2">
         <Label htmlFor="postalCode">Postal code</Label>
-        <Input id="postalCode" {...register('postalCode')} aria-invalid={!!errors.postalCode} />
+        <div className="relative">
+          <Input id="postalCode" {...register('postalCode')} aria-invalid={!!errors.postalCode} />
+          {errors.postalCode && (
+            <AlertCircle className="absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 text-red-500" />
+          )}
+        </div>
         {errors.postalCode && <p className="text-sm text-red-500">{errors.postalCode.message}</p>}
       </div>
 
       <div className="grid gap-2">
         <Label htmlFor="city">City</Label>
-        <Input id="city" {...register('city')} aria-invalid={!!errors.city} />
+        <div className="relative">
+          <Input id="city" {...register('city')} aria-invalid={!!errors.city} />
+          {errors.city && (
+            <AlertCircle className="absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 text-red-500" />
+          )}
+        </div>
         {errors.city && <p className="text-sm text-red-500">{errors.city.message}</p>}
       </div>
 
       <div className="grid gap-2">
         <Label htmlFor="street">Street</Label>
-        <Input id="street" {...register('street')} aria-invalid={!!errors.street} />
+        <div className="relative">
+          <Input id="street" {...register('street')} aria-invalid={!!errors.street} />
+          {errors.street && (
+            <AlertCircle className="absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 text-red-500" />
+          )}
+        </div>
         {errors.street && <p className="text-sm text-red-500">{errors.street.message}</p>}
       </div>
     </>
