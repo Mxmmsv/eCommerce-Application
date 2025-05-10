@@ -1,8 +1,16 @@
 import { object, string, minLength, pipe, email, custom, regex } from 'valibot';
 
 export const schema = object({
-  firstName: pipe(string(), minLength(2, 'Minimum 2 characters')),
-  lastName: pipe(string(), minLength(2, 'Minimum 2 characters')),
+  firstName: pipe(
+    string(),
+    minLength(2, 'Minimum 2 characters'),
+    regex(/^[a-zA-Zа-яА-Я\s\-']+$/, 'No numbers or special characters allowed'),
+  ),
+  lastName: pipe(
+    string(),
+    minLength(2, 'Minimum 2 characters'),
+    regex(/^[a-zA-Zа-яА-Я\s\-']+$/, 'No numbers or special characters allowed'),
+  ),
   email: pipe(string(''), email('Incorrect email')),
   password: pipe(string(''), minLength(8, 'Minimum 8 characters')),
   dateOfBirth: pipe(
