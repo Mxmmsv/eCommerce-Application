@@ -1,10 +1,12 @@
 import { createApiBuilderFromCtpClient } from '@commercetools/platform-sdk';
-import {
-  ClientBuilder,
-  type AuthMiddlewareOptions,
-  type HttpMiddlewareOptions,
-  type CorrelationIdMiddlewareOptions,
+import type {
+  AuthMiddlewareOptions,
+  HttpMiddlewareOptions,
+  CorrelationIdMiddlewareOptions,
 } from '@commercetools/ts-client';
+import { ClientBuilder } from '@commercetools/ts-client';
+
+import tokenCache from './api-token-store';
 
 const projectKey: string = import.meta.env.VITE_PROJECT_KEY;
 const clientId: string = import.meta.env.VITE_CLIENT_ID;
@@ -21,6 +23,7 @@ const authMiddlewareOptions: AuthMiddlewareOptions = {
     clientSecret,
   },
   scopes,
+  tokenCache,
   httpClient: fetch,
 };
 
