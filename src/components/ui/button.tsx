@@ -50,7 +50,6 @@ function Button({
       data-slot="button"
       className={cn(buttonVariants({ variant, size, className }))}
       onClick={(e) => {
-        console.log('click');
         if (typeof onClick === 'function') {
           onClick(e);
         }
