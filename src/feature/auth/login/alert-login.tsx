@@ -6,7 +6,7 @@ export function AlertFailedLogin() {
   return (
     <Alert variant="destructive">
       <Terminal className="h-4 w-4" />
-      <AlertTitle>Login error!</AlertTitle>
+      <AlertTitle>Authorization error!</AlertTitle>
       <AlertDescription>Please check your email and password and try again.</AlertDescription>
     </Alert>
   );
