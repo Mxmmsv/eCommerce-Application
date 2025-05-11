@@ -25,12 +25,12 @@ describe('Registration Schema', () => {
   });
 
   it('should require email', () => {
-    expect(() => parse(schema, { ...validData, email: '' })).toThrow('Incorrect email');
+    expect(() => parse(schema, { ...validData, email: '' })).toThrow('Email is required');
   });
 
   it('should validate email format', () => {
     expect(() => parse(schema, { ...validData, email: 'invalid-email' })).toThrow(
-      'Incorrect email',
+      'Please enter a valid email (e.g., user@example.com)',
     );
   });
 

@@ -4,12 +4,11 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
 import { Button } from '@/components/ui/button';
+import { CloseButton } from '@/components/ui/button/close-button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
-
-import { CloseButton } from '../../components/ui/button/close-button';
 
 import { AddressFields } from './address-fields';
 import { schema } from './registration-schema';
@@ -40,7 +39,7 @@ export function RegistrationForm({ className, ...props }: React.ComponentProps<'
           <CardTitle className="text-2xl">Create an account</CardTitle>
         </CardHeader>
         <CardContent>
-          <form onSubmit={(e) => void handleSubmit(onSubmit)(e)}>
+          <form noValidate onSubmit={(e) => void handleSubmit(onSubmit)(e)}>
             <div className="flex flex-col gap-3">
               <div className="grid gap-2">
                 <Label htmlFor="firstName">First name</Label>
@@ -55,7 +54,7 @@ export function RegistrationForm({ className, ...props }: React.ComponentProps<'
                   )}
                 </div>
                 {errors.firstName && (
-                  <p className="text-sm text-red-500">{errors.firstName.message}</p>
+                  <p className="error-message text-sm text-red-500">{errors.firstName.message}</p>
                 )}
               </div>
               <div className="grid gap-2">
@@ -71,7 +70,7 @@ export function RegistrationForm({ className, ...props }: React.ComponentProps<'
                   )}
                 </div>
                 {errors.lastName && (
-                  <p className="text-sm text-red-500">{errors.lastName.message}</p>
+                  <p className="error-message text-sm text-red-500">{errors.lastName.message}</p>
                 )}
               </div>
               <div className="grid gap-2">
@@ -89,7 +88,7 @@ export function RegistrationForm({ className, ...props }: React.ComponentProps<'
                   )}
                 </div>
                 {errors.dateOfBirth && (
-                  <p className="text-sm text-red-500">{errors.dateOfBirth.message}</p>
+                  <p className="error-message text-sm text-red-500">{errors.dateOfBirth.message}</p>
                 )}
               </div>
 
@@ -111,7 +110,9 @@ export function RegistrationForm({ className, ...props }: React.ComponentProps<'
                     <AlertCircle className="absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 text-red-500" />
                   )}
                 </div>
-                {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
+                {errors.email && (
+                  <p className="error-message text-sm text-red-500">{errors.email.message}</p>
+                )}
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="password">Password</Label>
@@ -127,7 +128,7 @@ export function RegistrationForm({ className, ...props }: React.ComponentProps<'
                   )}
                 </div>
                 {errors.password && (
-                  <p className="text-sm text-red-500">{errors.password.message}</p>
+                  <p className="error-message text-sm text-red-500">{errors.password.message}</p>
                 )}
               </div>
               <Button type="submit" className="mt-4 w-3xs self-center">

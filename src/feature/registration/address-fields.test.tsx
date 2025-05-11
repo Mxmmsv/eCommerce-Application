@@ -35,9 +35,9 @@ describe('AddressFields', () => {
     expect(screen.getByText(/city should contain only letters/i)).toBeInTheDocument();
     expect(screen.getByText(/street is required/i)).toBeInTheDocument();
 
-    expect(screen.getByText(/country is required/i)).toHaveClass('text-red-500');
-    expect(screen.getByText(/postal code is invalid/i)).toHaveClass('text-red-500');
-    expect(screen.getByText(/city should contain only letters/i)).toHaveClass('text-red-500');
-    expect(screen.getByText(/street is required/i)).toHaveClass('text-red-500');
+    expect(screen.getByText(/country is required/i)).toHaveClass('error-message');
+    expect(screen.getByText(/postal code is invalid/i)).toHaveClass('error-message');
+    expect(screen.getByText(/city should contain only letters/i)).toHaveClass('error-message');
+    expect(screen.getByText(/street is required/i)).toHaveClass('error-message');
   });
 });

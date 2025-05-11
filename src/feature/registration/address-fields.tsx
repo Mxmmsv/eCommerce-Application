@@ -24,7 +24,9 @@ export function AddressFields({ register, errors }: AddressFieldsProps) {
             <AlertCircle className="absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 text-red-500" />
           )}
         </div>
-        {errors.country && <p className="text-sm text-red-500">{errors.country.message}</p>}
+        {errors.country && (
+          <p className="error-message text-sm text-red-500">{errors.country.message}</p>
+        )}
       </div>
 
       <div className="grid gap-2">
@@ -35,7 +37,9 @@ export function AddressFields({ register, errors }: AddressFieldsProps) {
             <AlertCircle className="absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 text-red-500" />
           )}
         </div>
-        {errors.postalCode && <p className="text-sm text-red-500">{errors.postalCode.message}</p>}
+        {errors.postalCode && (
+          <p className="error-message text-sm text-red-500">{errors.postalCode.message}</p>
+        )}
       </div>
 
       <div className="grid gap-2">
@@ -46,7 +50,7 @@ export function AddressFields({ register, errors }: AddressFieldsProps) {
             <AlertCircle className="absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 text-red-500" />
           )}
         </div>
-        {errors.city && <p className="text-sm text-red-500">{errors.city.message}</p>}
+        {errors.city && <p className="error-message text-sm text-red-500">{errors.city.message}</p>}
       </div>
 
       <div className="grid gap-2">
@@ -57,7 +61,9 @@ export function AddressFields({ register, errors }: AddressFieldsProps) {
             <AlertCircle className="absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 text-red-500" />
           )}
         </div>
-        {errors.street && <p className="text-sm text-red-500">{errors.street.message}</p>}
+        {errors.street && (
+          <p className="error-message text-sm text-red-500">{errors.street.message}</p>
+        )}
       </div>
     </>
   );
