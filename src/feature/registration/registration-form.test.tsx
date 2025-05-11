@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import ue from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { describe, it, expect, vi } from 'vitest';
@@ -27,6 +27,7 @@ describe('RegistrationForm', () => {
     expect(screen.getByLabelText(/Password/i)).toBeInTheDocument();
 
     await user.click(screen.getByRole('button', { name: /Register/i }));
+
     expect(await screen.findAllByText(/required/i)).not.toHaveLength(0);
     expect(screen.getByLabelText(/First name/i)).toHaveAttribute('aria-invalid', 'true');
   });
@@ -49,7 +50,8 @@ describe('RegistrationForm', () => {
     await user.type(screen.getByLabelText(/City/i), 'City');
     await user.type(screen.getByLabelText(/Street/i), 'Street');
 
-    await new Promise((resolve) => setTimeout(resolve, 100));
-    expect(screen.queryAllByText(/required/i)).toHaveLength(0);
+    await waitFor(() => {
+      expect(screen.queryAllByText(/required/i)).toHaveLength(0);
+    });
   });
 });
