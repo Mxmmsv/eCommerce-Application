@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
+import { AlertCircle, ToggleLeft, ToggleRight } from 'lucide-react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { safeParse } from 'valibot';
@@ -20,6 +20,7 @@ type FormErrors = {
 export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [loginError, setLoginError] = useState(false);
   const [formErrors, setFormErrors] = useState<FormErrors>({});
 
@@ -63,35 +64,68 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) 
           <CardTitle className="text-xl">Welcome back</CardTitle>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} noValidate>
+          <form
+            onSubmit={(e) => {
+              void handleSubmit(e);
+            }}
+            noValidate
+          >
             <div className="grid gap-6">
               {loginError && <AlertFailedLogin />}
               <div className="grid gap-3">
                 <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="mail@example.com"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
+                <div className="relative">
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="mail@example.com"
+                    required
+                    value={email}
+                    aria-invalid={!!formErrors.email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  {formErrors.email && (
+                    <AlertCircle className="absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 text-red-500" />
+                  )}
+                </div>
                 {formErrors.email && <p className="text-sm text-red-500">{formErrors.email}</p>}
               </div>
+
               <div className="grid gap-3">
                 <Label htmlFor="password">Password</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  placeholder="strong-pass-123"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
+                <div className="relative">
+                  <Input
+                    id="password"
+                    type={showPassword ? 'text' : 'password'}
+                    placeholder="strong-pass-123"
+                    required
+                    value={password}
+                    aria-invalid={!!formErrors.password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 transition-colors hover:text-gray-700"
+                    aria-label={showPassword ? 'Hide password' : 'Show password'}
+                  >
+                    <span className="transition-all duration-300 ease-in-out">
+                      {showPassword ? (
+                        <ToggleLeft className="h-5 w-5 transition-transform duration-300" />
+                      ) : (
+                        <ToggleRight className="h-5 w-5 transition-transform duration-300" />
+                      )}
+                    </span>
+                  </button>
+                  {formErrors.password && (
+                    <AlertCircle className="absolute top-1/2 right-10 h-4 w-4 -translate-y-1/2 text-red-500" />
+                  )}
+                </div>
                 {formErrors.password && (
                   <p className="text-sm text-red-500">{formErrors.password}</p>
                 )}
               </div>
+
               <Button type="submit" className="w-full">
                 Login
               </Button>
