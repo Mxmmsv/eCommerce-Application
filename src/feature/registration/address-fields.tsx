@@ -14,7 +14,7 @@ type AddressFieldsProps = {
 export function AddressFields({ register, errors }: AddressFieldsProps) {
   return (
     <>
-      <h3 className="text-l mt-6 font-medium">Address Information</h3>
+      <h3 className="mt-6 text-lg font-medium">Address Information</h3>
 
       <div className="grid gap-2">
         <Label htmlFor="country">Country</Label>
