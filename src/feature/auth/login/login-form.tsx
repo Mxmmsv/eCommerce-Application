@@ -111,9 +111,9 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) 
                   >
                     <span className="transition-all duration-300 ease-in-out">
                       {showPassword ? (
-                        <ToggleLeft className="h-5 w-5 transition-transform duration-300" />
-                      ) : (
                         <ToggleRight className="h-5 w-5 transition-transform duration-300" />
+                      ) : (
+                        <ToggleLeft className="h-5 w-5 transition-transform duration-300" />
                       )}
                     </span>
                   </button>
