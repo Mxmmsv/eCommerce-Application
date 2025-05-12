@@ -3,22 +3,18 @@ import { object, string, minLength, pipe, custom, regex, email } from 'valibot';
 export const schema = object({
   firstName: pipe(
     string(),
-    minLength(2, 'Minimum 2 characters'),
+    minLength(1, 'First name is required'),
     regex(/^[\p{Letter}\s\-']+$/iu, 'No numbers or special characters allowed'),
   ),
   lastName: pipe(
     string(),
-    minLength(2, 'Minimum 2 characters'),
+    minLength(1, 'Last name is required'),
     regex(/^[\p{Letter}\s\-']+$/iu, 'No numbers or special characters allowed'),
   ),
   email: pipe(
     string(),
     minLength(1, 'Email is required'),
     email('Please enter a valid email (e.g., user@example.com)'),
-    // regex(
-    //   /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-    //   'Please enter a valid email (e.g., user@example.com)',
-    // ),
   ),
   password: pipe(
     string(),

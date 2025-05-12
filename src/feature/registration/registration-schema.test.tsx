@@ -21,7 +21,11 @@ describe('Registration Schema', () => {
   });
 
   it('should require firstName', () => {
-    expect(() => parse(schema, { ...validData, firstName: '' })).toThrow('Minimum 2 characters');
+    expect(() => parse(schema, { ...validData, firstName: '' })).toThrow('First name is required');
+  });
+
+  it('should require lastName', () => {
+    expect(() => parse(schema, { ...validData, lastName: '' })).toThrow('Last name is required');
   });
 
   it('should require email', () => {
