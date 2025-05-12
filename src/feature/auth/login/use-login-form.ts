@@ -1,0 +1,47 @@
+import { valibotResolver } from '@hookform/resolvers/valibot';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router';
+
+import { handleLogin } from '@/feature/auth/login/handle-login';
+import type { LoginForm } from '@/feature/auth/login/types/type';
+import { formSchema } from '@/feature/auth/login/validation';
+
+export function useLoginForm() {
+  const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const [loginError, setLoginError] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+    trigger,
+  } = useForm<LoginForm>({
+    resolver: valibotResolver(formSchema),
+    mode: 'onChange',
+  });
+
+  const onSubmit = async (data: LoginForm) => {
+    setLoginError(false);
+    try {
+      await handleLogin(data.email, data.password);
+      await navigate('/');
+    } catch {
+      setLoginError(true);
+    }
+  };
+
+  return {
+    register,
+    handleSubmit,
+    errors,
+    onSubmit,
+    showPassword,
+    setShowPassword,
+    loginError,
+    trigger,
+    watch,
+  };
+}

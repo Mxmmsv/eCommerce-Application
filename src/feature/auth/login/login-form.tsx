@@ -1,61 +1,17 @@
 import { AlertCircle, ToggleLeft, ToggleRight } from 'lucide-react';
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router';
-import { safeParse } from 'valibot';
+import { Link } from 'react-router';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { AlertFailedLogin } from '@/feature/auth/login/alert-login';
-import { handleLogin } from '@/feature/auth/login/handle-login';
-import { formSchema } from '@/feature/auth/login/handle-validation';
+import { useLoginForm } from '@/feature/auth/login/use-login-form';
 import { cn } from '@/lib/utils';
 
-type FormErrors = {
-  email?: string;
-  password?: string;
-};
-
 export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [loginError, setLoginError] = useState(false);
-  const [formErrors, setFormErrors] = useState<FormErrors>({});
-
-  const navigate = useNavigate();
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setLoginError(false);
-    setFormErrors({});
-
-    const result = safeParse(formSchema, { email, password });
-
-    if (!result.success) {
-      const errors = result.issues.reduce(
-        (acc, issue) => {
-          const path = issue.path?.[0]?.key;
-          if (typeof path === 'string') {
-            acc[path] = issue.message;
-          }
-          return acc;
-        },
-        {} as Record<string, string>,
-      );
-      setFormErrors(errors);
-      return;
-    }
-
-    try {
-      await handleLogin(email, password);
-      await navigate('/');
-    } catch (error) {
-      setLoginError(true);
-      console.error('Login failed', error);
-    }
-  };
+  const { register, handleSubmit, errors, onSubmit, showPassword, setShowPassword, loginError } =
+    useLoginForm();
 
   return (
     <div className={cn('flex flex-col gap-6', className)} {...props}>
@@ -64,12 +20,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) 
           <CardTitle className="text-xl">Welcome back</CardTitle>
         </CardHeader>
         <CardContent>
-          <form
-            onSubmit={(e) => {
-              void handleSubmit(e);
-            }}
-            noValidate
-          >
+          <form onSubmit={(e) => void handleSubmit(onSubmit)(e)} noValidate>
             <div className="grid gap-6">
               {loginError && <AlertFailedLogin />}
               <div className="grid gap-3">
@@ -77,18 +28,16 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) 
                 <div className="relative">
                   <Input
                     id="email"
-                    type="email"
+                    type="text"
                     placeholder="mail@example.com"
-                    required
-                    value={email}
-                    aria-invalid={!!formErrors.email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    aria-invalid={!!errors.email}
+                    {...register('email')}
                   />
-                  {formErrors.email && (
+                  {errors.email && (
                     <AlertCircle className="absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 text-red-500" />
                   )}
                 </div>
-                {formErrors.email && <p className="text-sm text-red-500">{formErrors.email}</p>}
+                {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
               </div>
 
               <div className="grid gap-3">
@@ -98,31 +47,26 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) 
                     id="password"
                     type={showPassword ? 'text' : 'password'}
                     placeholder="strong-pass-123"
-                    required
-                    value={password}
-                    aria-invalid={!!formErrors.password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    aria-invalid={!!errors.password}
+                    {...register('password')}
                   />
                   <button
                     type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 transition-colors hover:text-gray-700"
-                    aria-label={showPassword ? 'Hide password' : 'Show password'}
+                    onClick={() => setShowPassword((prev) => !prev)}
+                    className={`absolute top-1/2 ${errors.password ? 'right-10' : 'right-3'} -translate-y-1/2 text-gray-500 transition-colors hover:text-gray-700`}
                   >
-                    <span className="transition-all duration-300 ease-in-out">
-                      {showPassword ? (
-                        <ToggleRight className="h-5 w-5 transition-transform duration-300" />
-                      ) : (
-                        <ToggleLeft className="h-5 w-5 transition-transform duration-300" />
-                      )}
-                    </span>
+                    {showPassword ? (
+                      <ToggleRight className="h-5 w-5" />
+                    ) : (
+                      <ToggleLeft className="h-5 w-5" />
+                    )}
                   </button>
-                  {formErrors.password && (
-                    <AlertCircle className="absolute top-1/2 right-10 h-4 w-4 -translate-y-1/2 text-red-500" />
+                  {errors.password && (
+                    <AlertCircle className="absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 text-red-500" />
                   )}
                 </div>
-                {formErrors.password && (
-                  <p className="text-sm text-red-500">{formErrors.password}</p>
+                {errors.password && (
+                  <p className="text-sm text-red-500">{errors.password.message}</p>
                 )}
               </div>
 
