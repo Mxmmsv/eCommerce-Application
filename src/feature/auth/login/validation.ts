@@ -10,7 +10,7 @@ const hasLowercase = regex(/[a-z]/, 'Must contain at least one lowercase letter'
 const hasDigit = regex(/[0-9]/, 'Must contain at least one digit');
 const hasSpecialChar = regex(/[!@#$%^&*]/, 'Must contain at least one special character');
 
-export const formLoginSchema = object({
+export const formSchema = object({
   email: pipe(string(), noEdgeWhitespace, email('Please enter a valid email address')),
   password: pipe(
     string(),
