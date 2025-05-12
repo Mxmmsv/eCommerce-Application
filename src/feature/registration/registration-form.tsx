@@ -12,23 +12,23 @@ import { cn } from '@/lib/utils';
 
 import { AddressFields } from './address-fields';
 import { schema } from './registration-schema';
-import type { FormData } from './types';
+import type { RegistrationFormData } from './types';
 
-export function RegistrationForm({ className, ...props }: React.ComponentProps<'div'>) {
+type Props = {
+  onSubmit: (data: RegistrationFormData) => Promise<void>;
+} & React.ComponentProps<'div'>;
+
+export function RegistrationForm({ className, onSubmit, ...props }: Props) {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>({
+  } = useForm<RegistrationFormData>({
     resolver: valibotResolver(schema),
   });
 
-  const onSubmit = (data: FormData) => {
-    try {
-      console.log('Данные формы:', data);
-    } catch (error) {
-      console.error('Ошибка:', error);
-    }
+  const handleFormSubmit = async (data: RegistrationFormData) => {
+    await onSubmit(data);
   };
 
   return (
@@ -39,7 +39,13 @@ export function RegistrationForm({ className, ...props }: React.ComponentProps<'
           <CardTitle className="text-2xl">Create an account</CardTitle>
         </CardHeader>
         <CardContent>
-          <form noValidate onSubmit={(e) => void handleSubmit(onSubmit)(e)}>
+          <form
+            noValidate
+            onSubmit={(e) => {
+              e.preventDefault();
+              void handleSubmit(handleFormSubmit)(e);
+            }}
+          >
             <div className="flex flex-col gap-3">
               <div className="grid gap-2">
                 <Label htmlFor="firstName">First name</Label>

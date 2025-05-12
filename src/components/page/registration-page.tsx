@@ -1,8 +1,14 @@
 import { Link } from 'react-router';
 
 import { RegistrationForm } from '@/feature/registration/registration-form';
+import type { RegistrationFormData } from '@/feature/registration/types';
 
 export default function RegistrationPage() {
+  const handleSubmit = (data: RegistrationFormData): Promise<void> => {
+    console.log(data);
+    return Promise.resolve();
+  };
+
   return (
     <div className="bg-muted flex min-h-svh items-center justify-center p-6">
       <div className="flex w-full max-w-xl min-w-xs flex-col gap-6">
@@ -12,7 +18,7 @@ export default function RegistrationPage() {
           </div>
           Poster Store
         </Link>
-        <RegistrationForm />
+        <RegistrationForm onSubmit={handleSubmit} />
       </div>
     </div>
   );

@@ -4,11 +4,11 @@ import type { FieldErrors, UseFormRegister } from 'react-hook-form';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
-import type { FormData } from './types';
+import type { RegistrationFormData } from './types';
 
 type AddressFieldsProps = {
-  register: UseFormRegister<FormData>;
-  errors: FieldErrors<FormData>;
+  register: UseFormRegister<RegistrationFormData>;
+  errors: FieldErrors<RegistrationFormData>;
 };
 
 export function AddressFields({ register, errors }: AddressFieldsProps) {

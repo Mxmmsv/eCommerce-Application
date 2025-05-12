@@ -1,9 +1,14 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, cleanup } from '@testing-library/react';
 import ue from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, afterEach } from 'vitest';
 
 import { RegistrationForm } from './registration-form';
+
+afterEach(() => {
+  cleanup();
+});
+
 vi.mock('@/components/ui/button/close-button', () => ({
   CloseButton: () => <div data-testid="mock-close-button" />,
 }));
@@ -11,10 +16,11 @@ vi.mock('@/components/ui/button/close-button', () => ({
 describe('RegistrationForm', () => {
   it('should render the form fields', async () => {
     const user = ue.setup();
+    const submitSpy = vi.fn();
 
     render(
       <MemoryRouter>
-        <RegistrationForm />
+        <RegistrationForm onSubmit={submitSpy} />
       </MemoryRouter>,
     );
 
@@ -34,9 +40,11 @@ describe('RegistrationForm', () => {
 
   it('should accept valid input', async () => {
     const user = ue.setup();
+    const submitSpy = vi.fn();
+
     render(
       <MemoryRouter>
-        <RegistrationForm />
+        <RegistrationForm onSubmit={submitSpy} />
       </MemoryRouter>,
     );
 
@@ -50,8 +58,18 @@ describe('RegistrationForm', () => {
     await user.type(screen.getByLabelText(/City/i), 'City');
     await user.type(screen.getByLabelText(/Street/i), 'Street');
 
-    await waitFor(() => {
-      expect(screen.queryAllByText(/required/i)).toHaveLength(0);
+    await user.click(screen.getByRole('button', { name: /Register/i }));
+
+    expect(submitSpy).toHaveBeenCalledWith({
+      city: 'City',
+      country: 'Country',
+      dateOfBirth: '2001-01-02',
+      email: 'test@example.com',
+      firstName: 'John',
+      lastName: 'Doe',
+      password: 'Password123',
+      postalCode: '12345',
+      street: 'Street',
     });
   });
 });
