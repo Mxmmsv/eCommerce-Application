@@ -4,7 +4,7 @@ import { ModeToggle } from '../themeToggler/mode-toggle';
 
 export default function Navbar() {
   return (
-    <nav>
+    <nav className="bg-muted">
       <ModeToggle />
       <ul className="flex justify-center gap-2">
         <li>
