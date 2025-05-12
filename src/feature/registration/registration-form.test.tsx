@@ -20,7 +20,7 @@ describe('RegistrationForm', () => {
 
     render(
       <MemoryRouter>
-        <RegistrationForm onSubmit={submitSpy} />
+        <RegistrationForm onRegister={submitSpy} />
       </MemoryRouter>,
     );
 
@@ -44,7 +44,7 @@ describe('RegistrationForm', () => {
 
     render(
       <MemoryRouter>
-        <RegistrationForm onSubmit={submitSpy} />
+        <RegistrationForm onRegister={submitSpy} />
       </MemoryRouter>,
     );
 
@@ -60,16 +60,19 @@ describe('RegistrationForm', () => {
 
     await user.click(screen.getByRole('button', { name: /Register/i }));
 
-    expect(submitSpy).toHaveBeenCalledWith({
-      city: 'City',
-      country: 'Country',
-      dateOfBirth: '2001-01-02',
-      email: 'test@example.com',
-      firstName: 'John',
-      lastName: 'Doe',
-      password: 'Password123',
-      postalCode: '12345',
-      street: 'Street',
-    });
+    expect(submitSpy).toHaveBeenCalledWith(
+      expect.objectContaining({
+        city: 'City',
+        country: 'Country',
+        dateOfBirth: '2001-01-02',
+        email: 'test@example.com',
+        firstName: 'John',
+        lastName: 'Doe',
+        password: 'Password123',
+        postalCode: '12345',
+        street: 'Street',
+      }),
+      expect.anything(),
+    );
   });
 });

@@ -15,21 +15,19 @@ import { schema } from './registration-schema';
 import type { RegistrationFormData } from './types';
 
 type Props = {
-  onSubmit: (data: RegistrationFormData) => Promise<void>;
+  className?: string;
+  onRegister: (data: RegistrationFormData) => Promise<void>;
 } & React.ComponentProps<'div'>;
 
-export function RegistrationForm({ className, onSubmit, ...props }: Props) {
+export function RegistrationForm({ className, onRegister, ...props }: Props) {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<RegistrationFormData>({
     resolver: valibotResolver(schema),
+    shouldUseNativeValidation: false,
   });
-
-  const handleFormSubmit = async (data: RegistrationFormData) => {
-    await onSubmit(data);
-  };
 
   return (
     <div className={cn('flex flex-col gap-6', className)} {...props}>
@@ -39,13 +37,7 @@ export function RegistrationForm({ className, onSubmit, ...props }: Props) {
           <CardTitle className="text-2xl">Create an account</CardTitle>
         </CardHeader>
         <CardContent>
-          <form
-            noValidate
-            onSubmit={(e) => {
-              e.preventDefault();
-              void handleSubmit(handleFormSubmit)(e);
-            }}
-          >
+          <form noValidate onSubmit={(e) => void handleSubmit(onRegister)(e)}>
             <div className="flex flex-col gap-3">
               <div className="grid gap-2">
                 <Label htmlFor="firstName">First name</Label>

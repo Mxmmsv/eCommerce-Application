@@ -4,9 +4,9 @@ import { RegistrationForm } from '@/feature/registration/registration-form';
 import type { RegistrationFormData } from '@/feature/registration/types';
 
 export default function RegistrationPage() {
-  const handleSubmit = (data: RegistrationFormData): Promise<void> => {
+  const handleRegister = async (data: RegistrationFormData) => {
+    await new Promise((res) => setTimeout(res, 100));
     console.log(data);
-    return Promise.resolve();
   };
 
   return (
@@ -18,7 +18,7 @@ export default function RegistrationPage() {
           </div>
           Poster Store
         </Link>
-        <RegistrationForm onSubmit={handleSubmit} />
+        <RegistrationForm onRegister={(data) => handleRegister(data)} />
       </div>
     </div>
   );
