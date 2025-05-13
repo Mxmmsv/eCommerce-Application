@@ -69,7 +69,6 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) 
                   <p className="text-sm text-red-500">{errors.password.message}</p>
                 )}
               </div>
-
               <Button type="submit" className="w-full">
                 Login
               </Button>
