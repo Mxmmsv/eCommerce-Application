@@ -1,28 +1,35 @@
 import { BrowserRouter, Routes, Route } from 'react-router';
 
-import AboutUs from '@/components/layout/AboutUs-layout';
-import Basket from '@/components/layout/Basket-layout';
-import Catalog from '@/components/layout/Catalog-layout';
-import Login from '@/components/layout/Login-layout';
-import Main from '@/components/layout/Main-layout';
-import ProductDetail from '@/components/layout/ProductDetail-layout';
-import Registration from '@/components/layout/Registration-layout';
-import UserProfile from '@/components/layout/UserProfile-layout';
-import Navbar from '@/components/ui/navBar/NavBar';
+import AboutUs from '@/pages/about-us-page';
+import Cart from '@/pages/cart-page';
+import Catalog from '@/pages/catalog-page';
+import Home from '@/pages/home-page';
+import Login from '@/pages/login-page';
+import NotFound from '@/pages/not-found-page';
+import ProductDetail from '@/pages/product-detail-page';
+import UserProfile from '@/pages/profile-user-page';
+import Registration from '@/pages/registration-page';
+import Wishlist from '@/pages/wishlist-page';
+
+import { Header } from './feature/header/header';
 
 function App() {
   return (
     <BrowserRouter>
-      <Navbar />
+      <Header />
       <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Registration />} />
+        <Route path="/" element={<Home />} />
         <Route path="/catalog" element={<Catalog />} />
         <Route path="/catalog/:id" element={<ProductDetail />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/about_us" element={<AboutUs />} />
+        <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Registration />} />
         <Route path="/profile" element={<UserProfile />} />
-        <Route path="/basket" element={<Basket />} />
-        <Route path="/about" element={<AboutUs />} />
+
+        {/* Ошибка 404 */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
