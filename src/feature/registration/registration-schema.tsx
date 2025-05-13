@@ -58,5 +58,5 @@ export const schema = object({
     minLength(1, 'City is required'),
     regex(/^[a-zA-Zа-яА-Я\s]+$/, 'City should contain only letters'),
   ),
-  street: pipe(string(), minLength(1, 'Street is required')),
+  streetName: pipe(string(), minLength(1, 'Street is required')),
 });

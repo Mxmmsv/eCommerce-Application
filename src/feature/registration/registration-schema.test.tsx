@@ -13,7 +13,7 @@ describe('Registration Schema', () => {
     country: 'Country',
     postalCode: '12345',
     city: 'City',
-    street: 'Street',
+    streetName: 'Street',
   };
 
   it('should validate correct data', () => {

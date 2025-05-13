@@ -25,7 +25,7 @@ describe('AddressFields', () => {
         country: { message: 'Country is required', type: 'required' },
         postalCode: { message: 'Postal code is invalid', type: 'pattern' },
         city: { message: 'City should contain only letters', type: 'pattern' },
-        street: { message: 'Street is required', type: 'required' },
+        streetName: { message: 'Street is required', type: 'required' },
       },
     };
     render(<AddressFields {...mockProps} />);

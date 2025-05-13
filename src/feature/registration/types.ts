@@ -7,5 +7,5 @@ export type RegistrationFormData = {
   country: string;
   postalCode: string;
   city: string;
-  street: string;
+  streetName: string;
 };

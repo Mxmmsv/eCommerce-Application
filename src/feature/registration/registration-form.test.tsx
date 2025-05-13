@@ -70,7 +70,7 @@ describe('RegistrationForm', () => {
         lastName: 'Doe',
         password: 'Password123',
         postalCode: '12345',
-        street: 'Street',
+        streetName: 'Street',
       }),
       expect.anything(),
     );
