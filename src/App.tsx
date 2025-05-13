@@ -9,6 +9,7 @@ import ProductDetail from '@/components/page/product-detail-page';
 import Registration from '@/components/page/registration-page';
 import UserProfile from '@/components/page/user-profile-page';
 import Navbar from '@/components/ui/navBar/NavBar';
+import { Toaster } from '@/components/ui/sonner';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/basket" element={<Basket />} />
         <Route path="/about" element={<AboutUs />} />
       </Routes>
+      <Toaster position="top-center" richColors />
     </BrowserRouter>
   );
 }

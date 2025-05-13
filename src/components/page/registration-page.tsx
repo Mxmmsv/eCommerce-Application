@@ -1,4 +1,5 @@
 import { Link } from 'react-router';
+import { toast } from 'sonner';
 
 import apiRoot from '@/feature/api/apiClient';
 import { RegistrationForm } from '@/feature/registration/registration-form';
@@ -6,6 +7,8 @@ import type { RegistrationFormData } from '@/feature/registration/types';
 
 export default function RegistrationPage() {
   const handleRegister = async (data: RegistrationFormData) => {
+    // await new Promise((res) => setTimeout(res, 100));
+
     console.log('Данные перед отправкой:', JSON.stringify(data, null, 2));
     try {
       const response = await apiRoot
@@ -32,8 +35,12 @@ export default function RegistrationPage() {
         .execute();
 
       console.log('Success:', response);
+      toast.success('Registration successful!');
     } catch (error) {
       console.error('Fail:', error);
+      if (error instanceof Error) {
+        toast.error(`Registration failed. ${error.message}`);
+      } else toast.error('Unknown error');
     }
 
     console.log('data:', data);
