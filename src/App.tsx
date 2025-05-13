@@ -1,13 +1,13 @@
 import { BrowserRouter, Routes, Route } from 'react-router';
 
-import AboutUs from '@/components/layout/AboutUs-layout';
-import Basket from '@/components/layout/Basket-layout';
-import Catalog from '@/components/layout/Catalog-layout';
-import Login from '@/components/layout/Login-layout';
-import Main from '@/components/layout/Main-layout';
-import ProductDetail from '@/components/layout/ProductDetail-layout';
-import Registration from '@/components/layout/Registration-layout';
-import UserProfile from '@/components/layout/UserProfile-layout';
+import AboutUs from '@/components/page/about-us-page';
+import Basket from '@/components/page/basket-page';
+import Catalog from '@/components/page/catalog-page';
+import Login from '@/components/page/login-page';
+import Main from '@/components/page/main-page';
+import ProductDetail from '@/components/page/product-detail-page';
+import Registration from '@/components/page/registration-page';
+import UserProfile from '@/components/page/user-profile-page';
 import Navbar from '@/components/ui/navBar/NavBar';
 
 function App() {
