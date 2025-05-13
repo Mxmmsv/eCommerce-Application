@@ -1,4 +1,4 @@
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { toast } from 'sonner';
 
 import apiRoot from '@/feature/api/apiClient';
@@ -6,8 +6,9 @@ import { RegistrationForm } from '@/feature/registration/registration-form';
 import type { RegistrationFormData } from '@/feature/registration/types';
 
 export default function RegistrationPage() {
+  const navigate = useNavigate();
   const handleRegister = async (data: RegistrationFormData) => {
-    // await new Promise((res) => setTimeout(res, 100));
+    await new Promise((res) => setTimeout(res, 100));
 
     console.log('Данные перед отправкой:', JSON.stringify(data, null, 2));
     try {
@@ -36,6 +37,7 @@ export default function RegistrationPage() {
 
       console.log('Success:', response);
       toast.success('Registration successful!');
+      void navigate(-1);
     } catch (error) {
       console.error('Fail:', error);
       if (error instanceof Error) {
