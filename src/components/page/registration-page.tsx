@@ -1,12 +1,42 @@
 import { Link } from 'react-router';
 
+import apiRoot from '@/feature/api/apiClient';
 import { RegistrationForm } from '@/feature/registration/registration-form';
 import type { RegistrationFormData } from '@/feature/registration/types';
 
 export default function RegistrationPage() {
   const handleRegister = async (data: RegistrationFormData) => {
-    await new Promise((res) => setTimeout(res, 100));
-    console.log(data);
+    console.log('Данные перед отправкой:', JSON.stringify(data, null, 2));
+    try {
+      const response = await apiRoot
+        .customers()
+        .post({
+          body: {
+            firstName: data.firstName,
+            lastName: data.lastName,
+            email: data.email,
+            password: data.password,
+            dateOfBirth: data.dateOfBirth,
+            addresses: [
+              {
+                country: data.country,
+                postalCode: data.postalCode,
+                city: data.city,
+                streetName: data.streetName,
+              },
+            ],
+            defaultShippingAddress: 0,
+            defaultBillingAddress: 0,
+          },
+        })
+        .execute();
+
+      console.log('Success:', response);
+    } catch (error) {
+      console.error('Fail:', error);
+    }
+
+    console.log('data:', data);
   };
 
   return (
