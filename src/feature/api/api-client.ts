@@ -6,7 +6,7 @@ import type {
 } from '@commercetools/ts-client';
 import { ClientBuilder } from '@commercetools/ts-client';
 
-import tokenCache from './api-token-store';
+import tokenCache from '@/feature/api/api-token-store';
 
 const projectKey: string = import.meta.env.VITE_PROJECT_KEY;
 const clientId: string = import.meta.env.VITE_CLIENT_ID;
