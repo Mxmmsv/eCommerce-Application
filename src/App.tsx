@@ -8,7 +8,7 @@ import Main from '@/components/page/main-page';
 import ProductDetail from '@/components/page/product-detail-page';
 import Registration from '@/components/page/registration-page';
 import UserProfile from '@/components/page/user-profile-page';
-import { AuthProvider } from '@/feature/auth/auth-provider';
+import { AuthProvider } from '@/feature/auth/login/auth-provider';
 import Navbar from '@/feature/header/NavBar';
 
 function App() {
