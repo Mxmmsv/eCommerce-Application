@@ -8,8 +8,6 @@ import type { RegistrationFormData } from '@/feature/registration/types';
 export default function RegistrationPage() {
   const navigate = useNavigate();
   const handleRegister = async (data: RegistrationFormData) => {
-    await new Promise((res) => setTimeout(res, 100));
-
     console.log('Данные перед отправкой:', JSON.stringify(data, null, 2));
     try {
       const response = await apiRoot
@@ -36,13 +34,61 @@ export default function RegistrationPage() {
         .execute();
 
       console.log('Success:', response);
-      toast.success('Registration successful!');
+
+      toast.success('Success!', {
+        description: 'Registration completed',
+      });
       void navigate(-1);
     } catch (error) {
       console.error('Fail:', error);
-      if (error instanceof Error) {
-        toast.error(`Registration failed. ${error.message}`);
-      } else toast.error('Unknown error');
+
+      if (
+        typeof error === 'object' &&
+        error !== null &&
+        'body' in error &&
+        error.body &&
+        typeof error.body === 'object' &&
+        'errors' in error.body &&
+        Array.isArray(error.body.errors)
+      ) {
+        const apiError = error as {
+          body: {
+            errors: {
+              code: string;
+              message: string;
+            }[];
+          };
+        };
+
+        if (apiError.body.errors.some((err) => err.code === 'DuplicateField')) {
+          toast.warning('Email is busy', {
+            description: 'This email is already registered',
+            duration: Infinity,
+            action: {
+              label: (
+                <button className="-mx-4 rounded-md border border-[var(--warning-border)] bg-[var(--warning-bg)] px-3 py-1 font-medium text-[var(--warning-text)] transition hover:bg-[var(--warning-border)]">
+                  Login
+                </button>
+              ),
+              onClick: () => {
+                void navigate('/login');
+              },
+            },
+          });
+        } else {
+          const firstError = apiError.body.errors[0];
+          toast.error('Registration failed', {
+            description: firstError?.message || 'Invalid data',
+          });
+        }
+      } else if (error instanceof Error) {
+        toast.error('Registration failed.', {
+          description: error.message,
+        });
+      } else
+        toast.error('Server error', {
+          description: 'Try again later',
+        });
     }
 
     console.log('data:', data);
