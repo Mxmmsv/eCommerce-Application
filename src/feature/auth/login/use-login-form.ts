@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 
-import { handleLogin } from '@/feature/auth/login/handle-login';
+import { signInCustomerWithMail } from '@/feature/auth/login/sign-in-customer';
 import type { LoginForm } from '@/feature/auth/login/types/type';
 import { formSchema } from '@/feature/auth/login/validation';
 
@@ -26,7 +26,7 @@ export function useLoginForm() {
   const onSubmit = async (data: LoginForm) => {
     setLoginError(false);
     try {
-      await handleLogin(data.email, data.password);
+      await signInCustomerWithMail(data.email, data.password);
       await navigate('/');
     } catch {
       setLoginError(true);
