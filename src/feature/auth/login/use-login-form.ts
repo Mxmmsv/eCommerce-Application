@@ -28,7 +28,8 @@ export function useLoginForm() {
     try {
       await signInCustomerWithMail(data.email, data.password);
       await navigate('/');
-    } catch {
+    } catch (error) {
+      console.error(error);
       setLoginError(true);
     }
   };
