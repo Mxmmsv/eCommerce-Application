@@ -5,13 +5,17 @@ const noEdgeWhitespace = custom<string, string>(
   'Must not contain leading or trailing whitespace',
 );
 
-const hasUppercase = regex(/[A-Z]/, 'Must contain at least one uppercase letter');
-const hasLowercase = regex(/[a-z]/, 'Must contain at least one lowercase letter');
-const hasDigit = regex(/[0-9]/, 'Must contain at least one digit');
-const hasSpecialChar = regex(/[!@#$%^&*]/, 'Must contain at least one special character');
+const hasUppercase = regex(/[A-Z]/, 'At least 1 uppercase letter');
+const hasLowercase = regex(/[a-z]/, 'At least 1 lowercase letter');
+const hasDigit = regex(/[0-9]/, 'At least 1 number');
+const hasSpecialChar = regex(/[!@#$%^&*]/, 'At least 1 special character');
 
 export const formSchema = object({
-  email: pipe(string(), noEdgeWhitespace, email('Please enter a valid email address')),
+  email: pipe(
+    string(),
+    noEdgeWhitespace,
+    email('Please enter a valid email (e.g., user@example.com)'),
+  ),
   password: pipe(
     string(),
     noEdgeWhitespace,
@@ -19,6 +23,6 @@ export const formSchema = object({
     hasLowercase,
     hasDigit,
     hasSpecialChar,
-    minLength(8, 'Password must be at least 8 characters long'),
+    minLength(8, 'Minimum 8 characters'),
   ),
 });
