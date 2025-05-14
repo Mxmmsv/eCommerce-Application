@@ -1,11 +1,8 @@
 import { Link } from 'react-router';
 
-import { ModeToggle } from '../themeToggler/mode-toggle';
-
 export default function Navbar() {
   return (
     <nav className="bg-muted">
-      <ModeToggle />
       <ul className="flex justify-center gap-2">
         <li>
           <Link to="/">Main</Link>
