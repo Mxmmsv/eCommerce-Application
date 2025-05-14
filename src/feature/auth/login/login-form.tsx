@@ -31,6 +31,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) 
                     type="text"
                     placeholder="mail@example.com"
                     aria-invalid={!!errors.email}
+                    className={`overflow-hidden ${errors.email ? 'pr-8' : ''}`}
                     {...register('email')}
                   />
                   {errors.email && (
@@ -48,6 +49,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) 
                     type={showPassword ? 'text' : 'password'}
                     placeholder="strong-pass-123"
                     aria-invalid={!!errors.password}
+                    className={`overflow-hidden ${errors.password ? 'pr-16' : 'pr-10'}`}
                     {...register('password')}
                   />
                   <button
