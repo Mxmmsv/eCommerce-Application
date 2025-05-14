@@ -61,9 +61,9 @@ export default function RegistrationPage() {
         };
 
         if (apiError.body.errors.some((err) => err.code === 'DuplicateField')) {
-          toast.warning('Email is busy', {
-            description: 'This email is already registered',
-            duration: Infinity,
+          toast.warning('This email is already registered', {
+            description: 'Please sign in or use a different email address',
+            // duration: Infinity,
             action: {
               label: (
                 <button className="-mx-4 rounded-md border border-[var(--warning-border)] bg-[var(--warning-bg)] px-3 py-1 font-medium text-[var(--warning-text)] transition hover:bg-[var(--warning-border)]">
