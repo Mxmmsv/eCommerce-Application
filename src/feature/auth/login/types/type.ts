@@ -3,4 +3,9 @@ type LoginForm = {
   password: string;
 };
 
-export type { LoginForm };
+type AuthContextType = {
+  isAuthorized: boolean;
+  setAuth: (auth: boolean) => void;
+};
+
+export type { LoginForm, AuthContextType };

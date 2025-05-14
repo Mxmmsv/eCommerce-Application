@@ -1,11 +1,7 @@
 import { createContext, useState, useMemo, useEffect, type ReactNode } from 'react';
 
+import type { AuthContextType } from '@/feature/auth/login/types/type';
 import { getTokenFromLocalStorage } from '@/service/store/local-storage';
-
-type AuthContextType = {
-  isAuthorized: boolean;
-  setAuth: (auth: boolean) => void;
-};
 
 const AuthContext = createContext<AuthContextType>({
   isAuthorized: false,
