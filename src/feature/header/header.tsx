@@ -1,5 +1,4 @@
-import { Heart } from 'lucide-react';
-import { ShoppingCart } from 'lucide-react';
+import { Heart, ShoppingCart } from 'lucide-react';
 import { NavLink } from 'react-router';
 
 import Currency from './currency';

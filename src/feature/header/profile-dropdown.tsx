@@ -1,8 +1,4 @@
-import { UserRound } from 'lucide-react';
-import { UserRoundPen } from 'lucide-react';
-import { UserRoundPlus } from 'lucide-react';
-import { LogIn } from 'lucide-react';
-import { LogOut } from 'lucide-react';
+import { UserRound, UserRoundPen, UserRoundPlus, LogIn, LogOut } from 'lucide-react';
 import { NavLink } from 'react-router';
 
 import {
