@@ -2,6 +2,7 @@ import { valibotResolver } from '@hookform/resolvers/valibot';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
+import { toast } from 'sonner';
 
 import { signInCustomerWithMail } from '@/feature/auth/login/sign-in-customer';
 import type { LoginForm } from '@/feature/auth/login/types/type';
@@ -28,8 +29,11 @@ export function useLoginForm() {
     try {
       await signInCustomerWithMail(data.email, data.password);
       await navigate('/');
+      toast.success('Login successful!');
     } catch (error) {
-      console.error(error);
+      if (error instanceof Error) {
+        toast.error(`Authorization error!`);
+      } else toast.error('Unknown error');
       setLoginError(true);
     }
   };
