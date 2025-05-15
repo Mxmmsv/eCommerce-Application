@@ -15,11 +15,6 @@ import {
 } from '@/components/ui/dropdown-menu';
 
 export function ProfileDropdownMenu() {
-  const DropdownMenuItemStyle = 'w-full cursor-pointer';
-  const NavLinkDropdownMenuStyle = 'w-full justify-center text-xl whitespace-nowrap';
-  const divMenuItemStyle =
-    'flex justify-start items-center rounded-sm hover:bg-[#f5f5f5] border-white shadow-none';
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="cursor-pointer">
@@ -32,19 +27,19 @@ export function ProfileDropdownMenu() {
 
         <DropdownMenuSeparator />
 
-        <div className={divMenuItemStyle}>
+        <div className="flex items-center justify-start rounded-sm border-white shadow-none hover:bg-[#f5f5f5]">
           <LogIn strokeWidth={1.5} size={28} />
-          <DropdownMenuItem className={DropdownMenuItemStyle}>
-            <NavLink to="/login" className={NavLinkDropdownMenuStyle}>
+          <DropdownMenuItem className="w-full cursor-pointer">
+            <NavLink to="/login" className="w-full justify-center text-xl whitespace-nowrap">
               <span className="block">Log in</span>
             </NavLink>
           </DropdownMenuItem>
         </div>
 
-        <div className={divMenuItemStyle}>
+        <div className="flex items-center justify-start rounded-sm border-white shadow-none hover:bg-[#f5f5f5]">
           <UserRoundPlus strokeWidth={1.5} size={28} />
-          <DropdownMenuItem className={DropdownMenuItemStyle}>
-            <NavLink to="/register" className={NavLinkDropdownMenuStyle}>
+          <DropdownMenuItem className="w-full cursor-pointer">
+            <NavLink to="/register" className="w-full justify-center text-xl whitespace-nowrap">
               <span>Registration</span>
             </NavLink>
           </DropdownMenuItem>
@@ -52,10 +47,10 @@ export function ProfileDropdownMenu() {
 
         <DropdownMenuSeparator />
 
-        <div className={divMenuItemStyle}>
+        <div className="flex items-center justify-start rounded-sm border-white shadow-none hover:bg-[#f5f5f5]">
           <UserRoundPen strokeWidth={1.5} size={28} />
-          <DropdownMenuItem className={DropdownMenuItemStyle}>
-            <NavLink to="/profile" className={NavLinkDropdownMenuStyle}>
+          <DropdownMenuItem className="w-full cursor-pointer">
+            <NavLink to="/profile" className="w-full justify-center text-xl whitespace-nowrap">
               <span className="block">Profile</span>
             </NavLink>
           </DropdownMenuItem>
@@ -63,10 +58,10 @@ export function ProfileDropdownMenu() {
 
         <DropdownMenuSeparator />
 
-        <div className={divMenuItemStyle}>
+        <div className="flex items-center justify-start rounded-sm border-white shadow-none hover:bg-[#f5f5f5]">
           <LogOut strokeWidth={1.5} size={28} />
-          <DropdownMenuItem className={DropdownMenuItemStyle}>
-            <NavLink to="/" className={NavLinkDropdownMenuStyle}>
+          <DropdownMenuItem className="w-full cursor-pointer">
+            <NavLink to="/" className="w-full justify-center text-xl whitespace-nowrap">
               <span className="block">Log out</span>
             </NavLink>
           </DropdownMenuItem>

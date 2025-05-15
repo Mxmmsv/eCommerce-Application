@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 
 function NotFound() {
   return (
-    <main className="bg-white-100 m-auto flex min-h-screen w-full flex-col items-center justify-center gap-10">
+    <main className="bg-white-100 m-auto flex w-full flex-col items-center justify-center gap-10">
       <div className="m-5 flex flex-col items-center justify-center gap-7 text-center">
         <img
           src="404-img.svg"

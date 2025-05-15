@@ -17,13 +17,13 @@ export default function Currency() {
       <SelectTrigger className="flex w-20 items-center justify-center border-white shadow-none">
         {selectedCurrency === 'eur' ? <Euro size={20} /> : <RussianRuble size={20} />}
       </SelectTrigger>
-      <SelectContent className="w-20">
-        <SelectGroup>
+      <SelectContent>
+        <SelectGroup className="w-full">
           <SelectItem value="eur" className="flex justify-center">
-            <Euro size={20} className="text-black" />
+            <Euro color="black" size={20} />
           </SelectItem>
           <SelectItem value="rub" className="flex justify-center">
-            <RussianRuble size={20} className="text-black" />
+            <RussianRuble color="black" size={20} />
           </SelectItem>
         </SelectGroup>
       </SelectContent>

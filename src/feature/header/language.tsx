@@ -13,13 +13,17 @@ export default function Language() {
 
   return (
     <Select defaultValue={selectedLanguage} onValueChange={setSelectedLanguage}>
-      <SelectTrigger className="ont-rubik w-20 border-white text-sm font-normal tracking-wider shadow-none">
+      <SelectTrigger className="flex w-20 items-center justify-center border-white shadow-none">
         {selectedLanguage.toUpperCase()}
       </SelectTrigger>
-      <SelectContent className="w-20">
-        <SelectGroup>
-          <SelectItem value="en">EN</SelectItem>
-          <SelectItem value="rus">RUS</SelectItem>
+      <SelectContent>
+        <SelectGroup className="w-full">
+          <SelectItem value="en" className="flex justify-center">
+            EN
+          </SelectItem>
+          <SelectItem value="ru" className="flex justify-center">
+            RU
+          </SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>
