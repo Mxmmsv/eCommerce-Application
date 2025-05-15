@@ -8,7 +8,6 @@ const noEdgeWhitespace = custom<string, string>(
 const hasUppercase = regex(/[A-Z]/, 'At least 1 uppercase letter');
 const hasLowercase = regex(/[a-z]/, 'At least 1 lowercase letter');
 const hasDigit = regex(/[0-9]/, 'At least 1 number');
-const hasSpecialChar = regex(/[!@#$%^&*]/, 'At least 1 special character');
 
 export const formSchema = object({
   email: pipe(
@@ -22,7 +21,6 @@ export const formSchema = object({
     hasUppercase,
     hasLowercase,
     hasDigit,
-    hasSpecialChar,
     minLength(8, 'Minimum 8 characters'),
   ),
 });
