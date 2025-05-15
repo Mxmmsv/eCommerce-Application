@@ -7,7 +7,7 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-} from '../../components/ui/select';
+} from '@/components/ui/select';
 
 export default function Currency() {
   const [selectedCurrency, setSelectedCurrency] = useState('eur');

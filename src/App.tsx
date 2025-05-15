@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router';
 
+import { Header } from '@/feature/header/header';
 import AboutUs from '@/pages/about-us-page';
 import Cart from '@/pages/cart-page';
 import Catalog from '@/pages/catalog-page';
@@ -10,8 +11,6 @@ import ProductDetail from '@/pages/product-detail-page';
 import UserProfile from '@/pages/profile-user-page';
 import Registration from '@/pages/registration-page';
 import Wishlist from '@/pages/wishlist-page';
-
-import { Header } from './feature/header/header';
 
 function Layout() {
   const location = useLocation();
