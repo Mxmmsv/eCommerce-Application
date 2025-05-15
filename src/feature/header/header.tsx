@@ -2,8 +2,6 @@ import { Heart } from 'lucide-react';
 import { ShoppingCart } from 'lucide-react';
 import { NavLink } from 'react-router';
 
-import logoSrc from '@/assets/logo.jpg';
-
 import Currency from './currency';
 import Language from './language';
 import { CustomNavigationMenu } from './nav-menu';
@@ -16,7 +14,7 @@ export function Header() {
       <CustomNavigationMenu />
 
       <div className="flex w-24 items-center justify-center">
-        <img src={logoSrc} alt="logo" />
+        <img src="logo.svg" alt="logo" />
       </div>
 
       <nav className="flex items-center justify-end">
