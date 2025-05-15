@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router';
+import { BrowserRouter, Routes, Route } from 'react-router';
 
 import { Header } from '@/feature/header/header';
 import AboutUs from '@/pages/about-us-page';
@@ -12,22 +12,10 @@ import UserProfile from '@/pages/profile-user-page';
 import Registration from '@/pages/registration-page';
 import Wishlist from '@/pages/wishlist-page';
 
-function Layout() {
-  const location = useLocation();
-  const pathsWithHeader = [
-    '/',
-    '/catalog',
-    '/cart',
-    '/about_us',
-    '/wishlist',
-    '/login',
-    '/register',
-    '/profile',
-  ];
-
+function App() {
   return (
-    <>
-      {pathsWithHeader.includes(location.pathname) && <Header />}
+    <BrowserRouter>
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/catalog" element={<Catalog />} />
@@ -39,17 +27,9 @@ function Layout() {
         <Route path="/register" element={<Registration />} />
         <Route path="/profile" element={<UserProfile />} />
 
-        {/* Страница 404 без `Header` */}
+        {/* Страница 404 */}
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </>
-  );
-}
-
-function App() {
-  return (
-    <BrowserRouter>
-      <Layout />
     </BrowserRouter>
   );
 }
