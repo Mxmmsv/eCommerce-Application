@@ -1,13 +1,16 @@
 import { Link } from 'react-router';
 
-import notFoundImgSrc from '@/assets/404-img.svg';
 import { Button } from '@/components/ui/button';
 
 function NotFound() {
   return (
     <main className="bg-white-100 m-auto flex min-h-screen w-full flex-col items-center justify-center gap-10">
       <div className="m-5 flex flex-col items-center justify-center gap-7 text-center">
-        <img src={notFoundImgSrc} alt="page-not-found" className="flex h-auto w-full" />
+        <img
+          src="404-img.svg"
+          alt="Sorry, page not found! We can not find page you are looking for"
+          className="flex h-auto w-full"
+        />
         <h1 className="text-4xl font-semibold">Sorry, page not found!</h1>
         <p className="text-2xl text-gray-600">We can&apos;t find page you are looking for.</p>
       </div>
