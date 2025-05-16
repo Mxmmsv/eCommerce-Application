@@ -1,6 +1,6 @@
 import { valibotResolver } from '@hookform/resolvers/valibot';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 import { Button } from '@/components/ui/button';
 import { CloseButton } from '@/components/ui/button/close-button';
