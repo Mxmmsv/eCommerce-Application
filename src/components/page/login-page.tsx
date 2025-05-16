@@ -1,5 +1,6 @@
 import { useContext, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router';
+import { toast } from 'sonner';
 
 import AuthContext from '@/feature/auth/login/auth-provider';
 import { LoginForm } from '@/feature/auth/login/login-form';
@@ -10,7 +11,8 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (AUTH_STATUS_KEY) {
-      void navigate('/');
+      void navigate('/', { replace: true });
+      toast.info('You are already login!');
     }
   }, [AUTH_STATUS_KEY, navigate]);
 
