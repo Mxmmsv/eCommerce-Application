@@ -1,25 +1,25 @@
 import { createContext, useState, useMemo, useEffect, type ReactNode } from 'react';
 
 import type { AuthContextType } from '@/feature/auth/login/types/type';
-import { getTokenFromLocalStorage } from '@/service/store/local-storage';
+import { getAuthFromLocalStorage } from '@/service/store/local-storage';
 
 const AuthContext = createContext<AuthContextType>({
-  isAuthorized: false,
+  AUTH_STATUS_KEY: false,
   setAuth: () => {},
 });
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [isAuthorized, setAuth] = useState(() => {
-    const { token, isAuthorized } = getTokenFromLocalStorage();
-    return !!token && !!isAuthorized;
+  const [AUTH_STATUS_KEY, setAuth] = useState(() => {
+    const { ACCESS_TOKEN_KEY, AUTH_STATUS_KEY } = getAuthFromLocalStorage();
+    return !!ACCESS_TOKEN_KEY && !!AUTH_STATUS_KEY;
   });
 
   useEffect(() => {
-    localStorage.setItem('isAuthorized', String(isAuthorized));
-    if (!isAuthorized) delete localStorage.access_token;
-  }, [isAuthorized]);
+    localStorage.setItem('AUTH_STATUS_KEY', String(AUTH_STATUS_KEY));
+    if (!AUTH_STATUS_KEY) localStorage.removeItem('ACCESS_TOKEN_KEY');
+  }, [AUTH_STATUS_KEY]);
 
-  const value = useMemo(() => ({ isAuthorized, setAuth }), [isAuthorized]);
+  const value = useMemo(() => ({ AUTH_STATUS_KEY, setAuth }), [AUTH_STATUS_KEY]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

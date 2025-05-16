@@ -6,7 +6,7 @@ import type {
 
 import PasswordFlowApiClient from '@/feature/api/api-client-password-flow';
 import tokenCache from '@/feature/api/api-token-store';
-import { setTokenToLocalStorage } from '@/service/store/local-storage';
+import { setAuthToLocalStorage } from '@/service/store/local-storage';
 
 export const signInCustomerWithMail = async (
   email: string,
@@ -37,7 +37,7 @@ export const signInCustomerWithMail = async (
     throw new Error('Authentication token not received');
   }
 
-  setTokenToLocalStorage(token, true);
+  setAuthToLocalStorage(token, true);
 
   return response;
 };

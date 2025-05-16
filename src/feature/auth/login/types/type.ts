@@ -4,7 +4,7 @@ type LoginForm = {
 };
 
 type AuthContextType = {
-  isAuthorized: boolean;
+  AUTH_STATUS_KEY: boolean;
   setAuth: (auth: boolean) => void;
 };
 

@@ -5,14 +5,14 @@ import AuthContext from '@/feature/auth/login/auth-provider';
 import { LoginForm } from '@/feature/auth/login/login-form';
 
 export default function LoginPage() {
-  const { isAuthorized } = useContext(AuthContext);
+  const { AUTH_STATUS_KEY } = useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isAuthorized) {
+    if (AUTH_STATUS_KEY) {
       void navigate('/');
     }
-  }, [isAuthorized, navigate]);
+  }, [AUTH_STATUS_KEY, navigate]);
 
   return (
     <div className="bg-muted flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">
