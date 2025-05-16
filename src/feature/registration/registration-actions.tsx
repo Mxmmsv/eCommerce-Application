@@ -1,46 +1,51 @@
 import type { NavigateFunction } from 'react-router';
 import { toast } from 'sonner';
 
-import apiRoot from '@/feature/api/apiClient';
+import AnonymousFlowApiClient from '@/feature/api/api-client-anonymous';
 import type { RegistrationFormData } from '@/feature/registration/types';
+
+import { signInCustomerWithMail } from '../auth/login/sign-in-customer';
 
 export const handleRegister = async (data: RegistrationFormData, navigate: NavigateFunction) => {
   console.log('Данные перед отправкой:', JSON.stringify(data, null, 2));
   try {
-    const response = await apiRoot
+    const anonymousApiRoot = AnonymousFlowApiClient();
+    await anonymousApiRoot
       .customers()
-      .post({
-        body: {
-          firstName: data.firstName,
-          lastName: data.lastName,
-          email: data.email,
-          password: data.password,
-          dateOfBirth: data.dateOfBirth,
-          addresses: [
-            {
-              country: data.country,
-              postalCode: data.postalCode,
-              city: data.city,
-              streetName: data.streetName,
-            },
-          ],
-          defaultShippingAddress: 0,
-          defaultBillingAddress: 0,
-        },
-      })
+      .post({ body: getRegistrationBody(data) })
       .execute();
 
-    console.log('Success:', response);
+    console.log('Success:', anonymousApiRoot);
+
+    await signInCustomerWithMail(data.email, data.password);
 
     toast.success('Success!', {
       description: 'Registration completed',
     });
-    void navigate('/');
+    void navigate('/', { replace: true });
   } catch (error) {
     handleRegisterError(error, navigate);
     console.log('data:', data);
   }
 };
+
+const getRegistrationBody = (data: RegistrationFormData) => ({
+  firstName: data.firstName,
+  lastName: data.lastName,
+  email: data.email,
+  password: data.password,
+  dateOfBirth: data.dateOfBirth,
+  addresses: [
+    {
+      country: data.country,
+      postalCode: data.postalCode,
+      city: data.city,
+      streetName: data.streetName,
+    },
+  ],
+  defaultShippingAddress: 0,
+  defaultBillingAddress: 0,
+});
 
 const handleRegisterError = (error: unknown, navigate: NavigateFunction) => {
   console.error('Fail:', error);
