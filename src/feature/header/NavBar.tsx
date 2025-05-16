@@ -2,7 +2,7 @@ import { Link } from 'react-router';
 
 export default function Navbar() {
   return (
-    <nav>
+    <nav className="bg-muted">
       <ul className="flex justify-center gap-2">
         <li>
           <Link to="/">Main</Link>
