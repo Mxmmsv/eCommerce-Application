@@ -20,8 +20,8 @@ const AnonymousFlowApiClient = () => {
     host: authUrl,
     projectKey,
     credentials: {
-      clientId: clientId,
-      clientSecret: clientSecret,
+      clientId,
+      clientSecret,
     },
     scopes,
     tokenCache,

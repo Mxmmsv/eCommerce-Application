@@ -20,8 +20,8 @@ const PasswordFlowApiClient = (email: string, password: string) => {
     host: authUrl,
     projectKey,
     credentials: {
-      clientId: clientId,
-      clientSecret: clientSecret,
+      clientId,
+      clientSecret,
       user: {
         username: email,
         password: password,
