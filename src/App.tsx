@@ -12,6 +12,7 @@ import { Toaster } from '@/components/ui/sonner';
 import { AuthProvider } from '@/feature/auth/login/auth-provider';
 import Navbar from '@/feature/header/NavBar';
 
+
 function App() {
   return (
     <AuthProvider>
