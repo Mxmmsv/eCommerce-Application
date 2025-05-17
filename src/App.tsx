@@ -29,7 +29,7 @@ function App() {
             <Route path="/about_us" element={<AboutUs />} />
             <Route path="/wishlist" element={<Wishlist />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Registration />} />
+            <Route path="/registration" element={<Registration />} />
             <Route path="/profile" element={<UserProfile />} />
 
             {/* Страница 404 */}

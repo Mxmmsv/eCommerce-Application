@@ -4,8 +4,8 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router';
 
 import { Button } from '@/components/ui/button';
-import { CloseButton } from '@/components/ui/button/close-button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { CloseButton } from '@/components/ui/close-button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
@@ -30,7 +30,7 @@ export function RegistrationForm({ className, onRegister, ...props }: Props) {
   });
 
   return (
-    <div className={cn('flex flex-col gap-6', className)} {...props}>
+    <div className={cn('flex flex-col gap-6 p-0', className)} {...props}>
       <Card className="relative p-12">
         <CloseButton className="flex justify-end" />
         <CardHeader className="flex justify-center">

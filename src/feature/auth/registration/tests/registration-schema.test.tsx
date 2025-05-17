@@ -1,7 +1,7 @@
 import { parse } from 'valibot';
 import { describe, it, expect } from 'vitest';
 
-import { schema } from './registration-schema';
+import { schema } from '../registration-schema';
 
 describe('Registration Schema', () => {
   const validData = {
