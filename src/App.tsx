@@ -1,33 +1,39 @@
 import { BrowserRouter, Routes, Route } from 'react-router';
 
-import AboutUs from '@/components/page/about-us-page';
-import Basket from '@/components/page/basket-page';
-import Catalog from '@/components/page/catalog-page';
-import Login from '@/components/page/login-page';
-import Main from '@/components/page/main-page';
-import ProductDetail from '@/components/page/product-detail-page';
-import Registration from '@/components/page/registration-page';
-import UserProfile from '@/components/page/user-profile-page';
 import { Toaster } from '@/components/ui/sonner';
 import { ThemeProvider } from '@/components/ui/theme-provider';
 import { AuthProvider } from '@/feature/auth/login/auth-provider';
-import Navbar from '@/feature/header/NavBar';
+import { Header } from '@/feature/header/header';
+import AboutUs from '@/pages/about-us-page';
+import Cart from '@/pages/cart-page';
+import Catalog from '@/pages/catalog-page';
+import Home from '@/pages/home-page';
+import Login from '@/pages/login-page';
+import NotFound from '@/pages/not-found-page';
+import ProductDetail from '@/pages/product-detail-page';
+import UserProfile from '@/pages/profile-user-page';
+import Registration from '@/pages/registration-page';
+import Wishlist from '@/pages/wishlist-page';
 
 function App() {
   return (
     <AuthProvider>
       <ThemeProvider defaultTheme="dark" storageKey="UI-THEME">
         <BrowserRouter>
-          <Navbar />
+          <Header />
           <Routes>
-            <Route path="/" element={<Main />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Registration />} />
+            <Route path="/" element={<Home />} />
             <Route path="/catalog" element={<Catalog />} />
             <Route path="/catalog/:id" element={<ProductDetail />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/about_us" element={<AboutUs />} />
+            <Route path="/wishlist" element={<Wishlist />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Registration />} />
             <Route path="/profile" element={<UserProfile />} />
-            <Route path="/basket" element={<Basket />} />
-            <Route path="/about" element={<AboutUs />} />
+
+            {/* Страница 404 */}
+            <Route path="*" element={<NotFound />} />
           </Routes>
           <Toaster position="top-center" richColors closeButton />
         </BrowserRouter>
