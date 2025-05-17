@@ -84,11 +84,7 @@ export default tseslint.config(
         version: 'detect',
       },
       'import/resolver': {
-        typescript: {
-          alwaysTryTypes: true,
-          project: path.dirname(fileURLToPath(import.meta.url)),
-        },
-        node: true,
+        typescript: true,
       },
     },
   },
