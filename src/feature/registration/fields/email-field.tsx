@@ -21,6 +21,7 @@ export function EmailField({ register, errors }: AddressFieldsProps) {
             id="email"
             type="email"
             placeholder="m@example.com"
+            autoComplete="username"
             {...register('email', {
               required: 'Required field',
             })}

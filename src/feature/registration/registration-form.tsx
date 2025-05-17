@@ -25,9 +25,13 @@ export function RegistrationForm({ className, onRegister, ...props }: Props) {
     register,
     handleSubmit,
     formState: { errors },
+    control,
   } = useForm<RegistrationFormData>({
     resolver: valibotResolver(schema),
     shouldUseNativeValidation: false,
+    defaultValues: {
+      country: '',
+    },
   });
 
   return (
@@ -42,7 +46,7 @@ export function RegistrationForm({ className, onRegister, ...props }: Props) {
             <div className="flex flex-col gap-3">
               <NameFields register={register} errors={errors} />
               <DateField register={register} errors={errors} />
-              <AddressFields register={register} errors={errors} />
+              <AddressFields register={register} errors={errors} control={control} />
               <EmailField register={register} errors={errors} />
               <PasswordField register={register} errors={errors} />
 

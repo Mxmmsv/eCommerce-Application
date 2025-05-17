@@ -20,6 +20,7 @@ export function PasswordField({ register, errors }: AddressFieldsProps) {
           <Input
             id="password"
             type="password"
+            autoComplete="current-password"
             {...register('password', { required: 'Required field' })}
             aria-invalid={!!errors.password}
           />
