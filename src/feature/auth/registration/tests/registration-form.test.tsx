@@ -3,7 +3,7 @@ import ue from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router';
 import { describe, it, expect, vi, afterEach } from 'vitest';
 
-import { RegistrationForm } from './registration-form';
+import { RegistrationForm } from '../registration-form';
 
 afterEach(() => {
   cleanup();

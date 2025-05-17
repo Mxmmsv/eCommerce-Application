@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
 
 import { signInCustomerWithMail } from '@/feature/auth/login/sign-in-customer';
-import type { LoginForm } from '@/feature/auth/login/types/type';
+import type { LoginForm } from '@/feature/auth/login/type';
 import { formSchema } from '@/feature/auth/login/validation';
 
 export function useLoginForm() {

@@ -35,7 +35,7 @@ export function ProfileDropdownMenu() {
         <div className="flex items-center justify-start rounded-sm border-white shadow-none hover:bg-[#f5f5f5]">
           <UserRoundPlus strokeWidth={1.5} size={28} />
           <DropdownMenuItem className="w-full cursor-pointer">
-            <NavLink to="/register" className="w-full justify-center text-xl whitespace-nowrap">
+            <NavLink to="/registration" className="w-full justify-center text-xl whitespace-nowrap">
               <span>Registration</span>
             </NavLink>
           </DropdownMenuItem>

@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 
-import { AddressFields } from './address-fields';
+import { AddressFields } from '../address-fields';
 
 describe('AddressFields', () => {
   it('should render the form title and fields', () => {
