@@ -10,5 +10,16 @@ export type RegistrationFormData = {
   streetName: string;
   setAsDefaultShipping: boolean;
   setAsDefaultBilling: boolean;
-  useSameForBilling: boolean;
+  alternativeShippingAddress?: {
+    country: string;
+    postalCode: string;
+    city: string;
+    streetName: string;
+  };
+  alternativeBillingAddress?: {
+    country: string;
+    postalCode: string;
+    city: string;
+    streetName: string;
+  };
 };

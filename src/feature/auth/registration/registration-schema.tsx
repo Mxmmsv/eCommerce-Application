@@ -51,5 +51,4 @@ export const schema = object({
   streetName: nameValidator,
   setAsDefaultShipping: boolean(),
   setAsDefaultBilling: boolean(),
-  useSameForBilling: boolean(),
 });

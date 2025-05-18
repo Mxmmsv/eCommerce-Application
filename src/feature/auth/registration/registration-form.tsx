@@ -26,9 +26,8 @@ export function RegistrationForm({ className, onRegister, ...props }: Props) {
     shouldUseNativeValidation: false,
     defaultValues: {
       country: '',
-      setAsDefaultShipping: false,
-      setAsDefaultBilling: false,
-      useSameForBilling: true,
+      setAsDefaultShipping: true,
+      setAsDefaultBilling: true,
     },
   });
 
@@ -45,9 +44,9 @@ export function RegistrationForm({ className, onRegister, ...props }: Props) {
               <div className="flex flex-col gap-3">
                 <NameFields />
                 <DateField />
-                <AddressFields />
                 <EmailField />
                 <PasswordField />
+                <AddressFields />
 
                 <Button type="submit" className="mt-4 w-3xs self-center">
                   Register

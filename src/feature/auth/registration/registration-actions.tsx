@@ -29,23 +29,34 @@ export const handleRegister = async (data: RegistrationFormData, navigate: Navig
   }
 };
 
-const getRegistrationBody = (data: RegistrationFormData) => ({
-  firstName: data.firstName,
-  lastName: data.lastName,
-  email: data.email,
-  password: data.password,
-  dateOfBirth: data.dateOfBirth,
-  addresses: [
+const getRegistrationBody = (data: RegistrationFormData) => {
+  const addresses = [
     {
       country: data.country,
       postalCode: data.postalCode,
       city: data.city,
       streetName: data.streetName,
     },
-  ],
-  defaultShippingAddress: data.setAsDefaultShipping ? 0 : undefined,
-  defaultBillingAddress: data.setAsDefaultShipping ? 0 : undefined,
-});
+  ];
+
+  if (data.alternativeShippingAddress) {
+    addresses.push(data.alternativeShippingAddress);
+  }
+  if (data.alternativeBillingAddress) {
+    addresses.push(data.alternativeBillingAddress);
+  }
+
+  return {
+    firstName: data.firstName,
+    lastName: data.lastName,
+    email: data.email,
+    password: data.password,
+    dateOfBirth: data.dateOfBirth,
+    addresses,
+    defaultShippingAddress: data.setAsDefaultShipping ? 0 : 1,
+    defaultBillingAddress: data.setAsDefaultBilling ? 0 : data.alternativeBillingAddress ? 2 : 1,
+  };
+};
 
 const handleRegisterError = (error: unknown, navigate: NavigateFunction) => {
   console.error('Fail:', error);
