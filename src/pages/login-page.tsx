@@ -1,19 +1,13 @@
-import { useContext, useRef } from 'react';
+import { useContext } from 'react';
 import { Link, Navigate } from 'react-router';
-import { toast } from 'sonner';
 
 import AuthContext from '@/feature/auth/login/auth-provider';
 import { LoginForm } from '@/feature/auth/login/login-form';
 
 export default function LoginPage() {
   const { AUTH_STATUS_KEY } = useContext(AuthContext);
-  const isToasted = useRef(false);
 
   if (AUTH_STATUS_KEY) {
-    if (!isToasted.current) {
-      toast.info('You are already login!');
-      isToasted.current = true;
-    }
     return <Navigate to="/" replace />;
   }
 
