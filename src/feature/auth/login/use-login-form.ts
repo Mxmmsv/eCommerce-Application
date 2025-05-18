@@ -35,7 +35,7 @@ export function useLoginForm() {
       toast.success('Login successful!');
     } catch (error) {
       if (error instanceof Error) {
-        toast.error(`Authorization error!`);
+        toast.error('Authorization error!');
       } else toast.error('Unknown error');
       setLoginError(true);
       setIsAuthorized(false);
