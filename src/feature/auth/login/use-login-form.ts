@@ -4,9 +4,9 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
 
+import { signInCustomer } from '@/feature/api/sign-in-customer';
 import AuthContext from '@/feature/auth/login/auth-provider';
 import { formSchema } from '@/feature/auth/login/login-schema';
-import { signInCustomerWithMail } from '@/feature/auth/login/sign-in-customer';
 import type { LoginForm } from '@/feature/auth/login/type';
 
 export function useLoginForm() {
@@ -29,7 +29,7 @@ export function useLoginForm() {
   const onSubmit = async (data: LoginForm) => {
     setLoginError(false);
     try {
-      await signInCustomerWithMail(data.email, data.password);
+      await signInCustomer(data.email, data.password);
       setIsAuthorized(true);
       await navigate('/');
       toast.success('Login successful!');
