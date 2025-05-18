@@ -7,7 +7,7 @@ const noEdgeWhitespace = custom<string, string>(
 
 const hasUppercase = regex(/[A-Z]/, 'At least 1 uppercase letter');
 const hasLowercase = regex(/[a-z]/, 'At least 1 lowercase letter');
-const hasDigit = regex(/[0-9]/, 'At least 1 number');
+const hasDigit = regex(/[0-9]/, 'At least 1 digit');
 
 export const formSchema = object({
   email: pipe(

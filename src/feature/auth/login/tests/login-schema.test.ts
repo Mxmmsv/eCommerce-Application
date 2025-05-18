@@ -76,7 +76,7 @@ describe('formSchema', () => {
       });
       expect(result.success).toBe(false);
       if (result.issues && result.issues.length > 0) {
-        expect(result.issues[0].message).toBe('At least 1 number');
+        expect(result.issues[0].message).toBe('At least 1 digit');
       } else {
         throw new Error('Expected validation issues but got none');
       }
