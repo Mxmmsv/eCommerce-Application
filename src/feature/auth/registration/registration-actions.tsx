@@ -30,6 +30,22 @@ export const handleRegister = async (data: RegistrationFormData, navigate: Navig
 };
 
 const getRegistrationBody = (data: RegistrationFormData) => {
+  const cleanData = {
+    ...data,
+    ...(data.setAsDefaultShipping && {
+      alternativeShippingCountry: undefined,
+      alternativeShippingPostalCode: undefined,
+      alternativeShippingCity: undefined,
+      alternativeShippingStreet: undefined,
+    }),
+    ...(data.setAsDefaultBilling && {
+      alternativeBillingCountry: undefined,
+      alternativeBillingPostalCode: undefined,
+      alternativeBillingCity: undefined,
+      alternativeBillingStreet: undefined,
+    }),
+  };
+
   const addresses = [
     {
       country: data.country,
@@ -39,21 +55,21 @@ const getRegistrationBody = (data: RegistrationFormData) => {
     },
   ];
 
-  if (!data.setAsDefaultShipping && data.alternativeShippingStreet) {
+  if (!cleanData.setAsDefaultShipping) {
     addresses.push({
-      country: data.alternativeShippingCountry || data.country,
-      postalCode: data.alternativeShippingPostalCode || data.postalCode,
-      city: data.alternativeShippingCity || data.city,
-      streetName: data.alternativeShippingStreet,
+      country: cleanData.alternativeShippingCountry || cleanData.country,
+      postalCode: cleanData.alternativeShippingPostalCode || cleanData.postalCode,
+      city: cleanData.alternativeShippingCity || cleanData.city,
+      streetName: cleanData.alternativeShippingStreet || cleanData.streetName,
     });
   }
 
-  if (!data.setAsDefaultBilling && data.alternativeBillingStreet) {
+  if (!cleanData.setAsDefaultBilling) {
     addresses.push({
-      country: data.alternativeBillingCountry || data.country,
-      postalCode: data.alternativeBillingPostalCode || data.postalCode,
-      city: data.alternativeBillingCity || data.city,
-      streetName: data.alternativeBillingStreet,
+      country: cleanData.alternativeBillingCountry || cleanData.country,
+      postalCode: cleanData.alternativeBillingPostalCode || cleanData.postalCode,
+      city: cleanData.alternativeBillingCity || cleanData.city,
+      streetName: cleanData.alternativeBillingStreet || cleanData.streetName,
     });
   }
 
@@ -64,8 +80,8 @@ const getRegistrationBody = (data: RegistrationFormData) => {
     password: data.password,
     dateOfBirth: data.dateOfBirth,
     addresses,
-    defaultShippingAddress: data.setAsDefaultShipping ? 0 : 1,
-    defaultBillingAddress: data.setAsDefaultBilling ? 0 : data.alternativeBillingStreet ? 2 : 1,
+    defaultShippingAddress: data.setAsDefaultShipping ? 0 : addresses.length > 1 ? 1 : 0,
+    defaultBillingAddress: data.setAsDefaultBilling ? 0 : 0,
   };
 };
 

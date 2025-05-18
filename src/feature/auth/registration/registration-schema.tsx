@@ -6,21 +6,12 @@ const nameValidator = pipe(
   regex(/^[\p{Letter}\s\-']{2,}$/u, 'No numbers or special characters allowed'),
 );
 
-const addressSchema = object({
-  country: pipe(string(), minLength(1, 'Country is required')),
-  postalCode: pipe(string(), minLength(1, 'Postal code is required')),
-  city: nameValidator,
-  streetName: nameValidator,
-});
+const requiredValidator = pipe(string(), minLength(1, 'Field is required'));
 
 export const schema = object({
   firstName: nameValidator,
   lastName: nameValidator,
-  email: pipe(
-    string(),
-    minLength(1, 'Email is required'),
-    email('Please enter a valid email (e.g., user@example.com)'),
-  ),
+  email: pipe(requiredValidator, email('Please enter a valid email (e.g., user@example.com)')),
   password: pipe(
     string(),
     minLength(8, 'Minimum 8 characters'),
@@ -29,8 +20,7 @@ export const schema = object({
     regex(/[0-9]/, 'At least 1 number'),
   ),
   dateOfBirth: pipe(
-    string(),
-    minLength(1, 'Date is required'),
+    requiredValidator,
     custom((value) => {
       if (typeof value !== 'string') return false;
       const date = new Date(value);
@@ -53,11 +43,17 @@ export const schema = object({
     }, 'You must be at least 12 years old'),
   ),
   country: pipe(string(), minLength(1, 'Please select a country')),
-  postalCode: pipe(string(), minLength(1, 'Postal code is required')),
+  postalCode: pipe(requiredValidator),
   city: nameValidator,
   streetName: nameValidator,
   setAsDefaultShipping: boolean(),
   setAsDefaultBilling: boolean(),
-  alternativeShippingAddress: optional(addressSchema),
-  alternativeBillingAddress: optional(addressSchema),
+  alternativeShippingCountry: optional(requiredValidator),
+  alternativeShippingPostalCode: optional(requiredValidator),
+  alternativeShippingCity: optional(requiredValidator),
+  alternativeShippingStreet: optional(requiredValidator),
+  alternativeBillingCountry: optional(requiredValidator),
+  alternativeBillingPostalCode: optional(requiredValidator),
+  alternativeBillingCity: optional(requiredValidator),
+  alternativeBillingStreet: optional(requiredValidator),
 });

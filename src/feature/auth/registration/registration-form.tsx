@@ -1,5 +1,6 @@
 import { valibotResolver } from '@hookform/resolvers/valibot';
-import { useForm, FormProvider } from 'react-hook-form';
+import { useEffect } from 'react';
+import { useForm, FormProvider, useWatch } from 'react-hook-form';
 import { Link } from 'react-router';
 
 import { Button } from '@/components/ui/button';
@@ -32,6 +33,26 @@ export function RegistrationForm({ className, onRegister, ...props }: Props) {
       setAsDefaultBilling: true,
     },
   });
+
+  const [setAsDefaultShipping, setAsDefaultBilling] = useWatch({
+    control: methods.control,
+    name: ['setAsDefaultShipping', 'setAsDefaultBilling'],
+  });
+
+  useEffect(() => {
+    if (setAsDefaultShipping) {
+      methods.setValue('alternativeShippingStreet', undefined);
+      methods.setValue('alternativeShippingCity', undefined);
+      methods.setValue('alternativeShippingPostalCode', undefined);
+      methods.setValue('alternativeShippingCountry', undefined);
+    }
+    if (setAsDefaultBilling) {
+      methods.setValue('alternativeBillingStreet', undefined);
+      methods.setValue('alternativeBillingCity', undefined);
+      methods.setValue('alternativeBillingPostalCode', undefined);
+      methods.setValue('alternativeBillingCountry', undefined);
+    }
+  }, [setAsDefaultShipping, setAsDefaultBilling, methods]);
 
   return (
     <div className={cn('flex flex-col gap-6', className)} {...props}>
