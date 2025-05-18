@@ -1,7 +1,7 @@
 import { safeParse } from 'valibot';
 import { describe, it, expect } from 'vitest';
 
-import { formSchema } from '@/feature/auth/login/login-schema';
+import { formSchema } from '../login-schema';
 
 describe('formSchema', () => {
   it('should pass with valid email and password', () => {
