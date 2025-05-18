@@ -8,4 +8,7 @@ export type RegistrationFormData = {
   postalCode: string;
   city: string;
   streetName: string;
+  setAsDefaultShipping: boolean;
+  setAsDefaultBilling: boolean;
+  useSameForBilling: boolean;
 };

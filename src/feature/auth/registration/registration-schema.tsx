@@ -1,4 +1,4 @@
-import { object, string, minLength, pipe, custom, regex, email } from 'valibot';
+import { object, string, minLength, pipe, custom, regex, email, boolean } from 'valibot';
 
 const nameValidator = pipe(
   string(),
@@ -49,4 +49,7 @@ export const schema = object({
   postalCode: pipe(string(), minLength(1, 'Postal code is required')),
   city: nameValidator,
   streetName: nameValidator,
+  setAsDefaultShipping: boolean(),
+  setAsDefaultBilling: boolean(),
+  useSameForBilling: boolean(),
 });

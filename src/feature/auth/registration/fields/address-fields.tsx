@@ -1,7 +1,7 @@
 import { AlertCircle } from 'lucide-react';
-import type { FieldErrors, UseFormRegister, Control } from 'react-hook-form';
-import { Controller } from 'react-hook-form';
+import { useFormContext, Controller } from 'react-hook-form';
 
+import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import {
@@ -15,12 +15,6 @@ import { cn } from '@/lib/utils';
 
 import type { RegistrationFormData } from '../types';
 
-type AddressFieldsProps = {
-  register: UseFormRegister<RegistrationFormData>;
-  errors: FieldErrors<RegistrationFormData>;
-  control: Control<RegistrationFormData>;
-};
-
 const countries = [
   { code: 'RU', name: 'Russia' },
   { code: 'BY', name: 'Belarus' },
@@ -30,7 +24,18 @@ const countries = [
   { code: 'RS', name: 'Serbia' },
 ];
 
-export function AddressFields({ register, errors, control }: AddressFieldsProps) {
+export function AddressFields() {
+  const {
+    register,
+    control,
+    setValue,
+    watch,
+    formState: { errors },
+  } = useFormContext<RegistrationFormData>();
+
+  const watchSetAsShipping = watch('setAsDefaultShipping');
+  const watchSetAsBilling = watch('setAsDefaultBilling');
+
   return (
     <>
       <h3 className="mt-6 text-lg font-medium">Address Information</h3>
@@ -105,6 +110,58 @@ export function AddressFields({ register, errors, control }: AddressFieldsProps)
         {errors.streetName && (
           <p className="error-message text-sm text-red-500">{errors.streetName.message}</p>
         )}
+      </div>
+
+      <div className="mt-4 space-y-3">
+        <div className="flex items-center space-x-2">
+          <Controller
+            control={control}
+            name="setAsDefaultShipping"
+            render={({ field }) => (
+              <Checkbox
+                id="setAsDefaultShipping"
+                checked={field.value}
+                onCheckedChange={(checked) => {
+                  field.onChange(checked);
+                  if (checked && watchSetAsShipping) {
+                    setValue('setAsDefaultShipping', false);
+                  }
+                }}
+              />
+            )}
+          />
+          <label
+            htmlFor="setAsDefaultShipping"
+            className="text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+          >
+            Set as default shipping address
+          </label>
+        </div>
+
+        <div className="flex items-center space-x-2">
+          <Controller
+            control={control}
+            name="setAsDefaultBilling"
+            render={({ field }) => (
+              <Checkbox
+                id="setAsDefaultBilling"
+                checked={field.value}
+                onCheckedChange={(checked) => {
+                  field.onChange(checked);
+                  if (checked && watchSetAsBilling) {
+                    setValue('setAsDefaultBilling', false);
+                  }
+                }}
+              />
+            )}
+          />
+          <label
+            htmlFor="setAsDefaultBilling"
+            className="text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+          >
+            Set as default billing address
+          </label>
+        </div>
       </div>
     </>
   );

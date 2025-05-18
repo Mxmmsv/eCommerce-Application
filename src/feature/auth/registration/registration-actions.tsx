@@ -43,8 +43,8 @@ const getRegistrationBody = (data: RegistrationFormData) => ({
       streetName: data.streetName,
     },
   ],
-  defaultShippingAddress: 0,
-  defaultBillingAddress: 0,
+  defaultShippingAddress: data.setAsDefaultShipping ? 0 : undefined,
+  defaultBillingAddress: data.setAsDefaultShipping ? 0 : undefined,
 });
 
 const handleRegisterError = (error: unknown, navigate: NavigateFunction) => {
