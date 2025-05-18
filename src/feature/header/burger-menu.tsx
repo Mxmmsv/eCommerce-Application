@@ -27,6 +27,7 @@ import {
   SheetTitle,
 } from '@/components/ui/sheet';
 
+import { ModeToggle } from './mode-toggle';
 import SearchBar from './search';
 
 export default function BurgerMenu() {
@@ -63,6 +64,7 @@ export default function BurgerMenu() {
               </NavLink>
             </div>
             <SearchBar />
+            <ModeToggle />
             <SheetClose asChild>
               <Button
                 variant="ghost"
