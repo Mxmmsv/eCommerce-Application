@@ -1,9 +1,10 @@
 import { valibotResolver } from '@hookform/resolvers/valibot';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
 
+import AuthContext from '@/feature/auth/login/auth-provider';
 import { signInCustomerWithMail } from '@/feature/auth/login/sign-in-customer';
 import type { LoginForm } from '@/feature/auth/login/type';
 import { formSchema } from '@/feature/auth/login/validation';
@@ -12,6 +13,7 @@ export function useLoginForm() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [loginError, setLoginError] = useState(false);
+  const { setAuth } = useContext(AuthContext);
 
   const {
     register,
@@ -28,6 +30,7 @@ export function useLoginForm() {
     setLoginError(false);
     try {
       await signInCustomerWithMail(data.email, data.password);
+      setAuth(true);
       await navigate('/');
       toast.success('Login successful!');
     } catch (error) {
@@ -35,6 +38,7 @@ export function useLoginForm() {
         toast.error(`Authorization error!`);
       } else toast.error('Unknown error');
       setLoginError(true);
+      setAuth(false);
     }
   };
 
