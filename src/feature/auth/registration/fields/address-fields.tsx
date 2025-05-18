@@ -53,7 +53,7 @@ export function AddressFields({ register, errors, control }: AddressFieldsProps)
                 </SelectTrigger>
                 <SelectContent>
                   {countries.map((country) => (
-                    <SelectItem key={country.code} value={country.name}>
+                    <SelectItem key={country.code} value={country.code}>
                       {country.name}
                     </SelectItem>
                   ))}
