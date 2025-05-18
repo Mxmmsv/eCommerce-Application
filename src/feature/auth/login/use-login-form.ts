@@ -1,5 +1,5 @@
 import { valibotResolver } from '@hookform/resolvers/valibot';
-import { useContext, useState } from 'react';
+import { useCallback, useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
@@ -27,21 +27,26 @@ export function useLoginForm() {
     mode: 'onChange',
   });
 
-  const onSubmit = async (data: LoginForm) => {
-    setLoginError(false);
-    try {
-      await signInCustomer(data.email, data.password);
-      setIsAuthorized(true);
-      await navigate('/');
-      toast.success('Login successful!');
-    } catch (error) {
-      if (error instanceof Error) {
-        toast.error('Authorization error!');
-      } else toast.error('Unknown error');
-      setLoginError(true);
-      setIsAuthorized(false);
-    }
-  };
+  const onSubmit = useCallback(
+    async (data: LoginForm) => {
+      setLoginError(false);
+      try {
+        await signInCustomer(data.email, data.password);
+        setIsAuthorized(true);
+        await navigate('/');
+        toast.success('Login successful!');
+      } catch (error) {
+        if (error instanceof Error) {
+          toast.error('Authorization error!');
+        } else {
+          toast.error('Unknown error');
+        }
+        setLoginError(true);
+        setIsAuthorized(false);
+      }
+    },
+    [navigate, setIsAuthorized],
+  );
 
   return {
     register,
