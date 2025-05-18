@@ -1,16 +1,16 @@
 import { BrowserRouter, Routes, Route } from 'react-router';
 
-import AboutUs from '@/components/page/about-us-page';
-import Basket from '@/components/page/basket-page';
-import Catalog from '@/components/page/catalog-page';
-import Login from '@/components/page/login-page';
-import Main from '@/components/page/main-page';
-import ProductDetail from '@/components/page/product-detail-page';
-import Registration from '@/components/page/registration-page';
-import UserProfile from '@/components/page/user-profile-page';
 import { Toaster } from '@/components/ui/sonner';
 import { AuthProvider } from '@/feature/auth/login/auth-provider';
 import Navbar from '@/feature/header/NavBar';
+import AboutUs from '@/pages/about-us-page';
+import Basket from '@/pages/basket-page';
+import Catalog from '@/pages/catalog-page';
+import Login from '@/pages/login-page';
+import Main from '@/pages/main-page';
+import ProductDetail from '@/pages/product-detail-page';
+import Registration from '@/pages/registration-page';
+import UserProfile from '@/pages/user-profile-page';
 
 function App() {
   return (

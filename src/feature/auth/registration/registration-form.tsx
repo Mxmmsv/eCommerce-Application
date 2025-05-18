@@ -3,8 +3,8 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router';
 
 import { Button } from '@/components/ui/button';
-import { CloseButton } from '@/components/ui/button/close-button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { CloseButton } from '@/components/ui/close-button';
 import { cn } from '@/lib/utils';
 
 import { AddressFields } from './fields/address-fields';

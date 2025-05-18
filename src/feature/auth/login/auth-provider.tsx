@@ -1,6 +1,6 @@
 import { createContext, useState, useMemo, useEffect, type ReactNode } from 'react';
 
-import type { AuthContextType } from '@/feature/auth/login/types/type';
+import type { AuthContextType } from '@/feature/auth/login/type';
 import { getAuthFromLocalStorage } from '@/service/store/local-storage';
 
 const AuthContext = createContext<AuthContextType>({

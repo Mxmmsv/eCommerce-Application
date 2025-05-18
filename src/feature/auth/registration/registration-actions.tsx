@@ -2,9 +2,9 @@ import type { NavigateFunction } from 'react-router';
 import { toast } from 'sonner';
 
 import AnonymousFlowApiClient from '@/feature/api/api-client-anonymous';
-import type { RegistrationFormData } from '@/feature/registration/types';
+import { signInCustomerWithMail } from '@/feature/auth/login/sign-in-customer';
 
-import { signInCustomerWithMail } from '../auth/login/sign-in-customer';
+import type { RegistrationFormData } from './types';
 
 export const handleRegister = async (data: RegistrationFormData, navigate: NavigateFunction) => {
   console.log('Данные перед отправкой:', JSON.stringify(data, null, 2));

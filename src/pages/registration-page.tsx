@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router';
 
-import { handleRegister } from '@/feature/registration/registration-actions.tsx';
-import { RegistrationForm } from '@/feature/registration/registration-form';
+import { handleRegister } from '@/feature/auth/registration/registration-actions.tsx';
+import { RegistrationForm } from '@/feature/auth/registration/registration-form';
 
 export default function RegistrationPage() {
   const navigate = useNavigate();
