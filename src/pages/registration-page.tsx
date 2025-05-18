@@ -10,7 +10,7 @@ export default function RegistrationPage() {
     <div className="bg-muted flex min-h-svh items-center justify-center p-6">
       <div className="flex w-full max-w-xl min-w-xs flex-col gap-6">
         <Link to="/" className="flex items-center gap-2 self-center font-medium">
-          <div className="flex h-10 w-10 items-center justify-center">
+          <div className="flex h-10 w-10 items-center justify-center rounded-md bg-white">
             <img src="logo.svg" alt="logo" />
           </div>
           Poster Store
