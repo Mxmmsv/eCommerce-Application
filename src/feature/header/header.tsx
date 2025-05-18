@@ -18,6 +18,7 @@ export function Header() {
           </NavLink>
         </div>
         <div className="flex items-center justify-center gap-4">
+          <ModeToggle />
           <NavLink to="/wishlist" className="px-1.5 text-xl font-normal tracking-wider">
             <Heart strokeWidth={1.5} size={32} />
           </NavLink>
