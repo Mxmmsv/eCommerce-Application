@@ -5,9 +5,10 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { AlertFailedLogin } from '@/feature/auth/login/alert-login';
-import { useLoginForm } from '@/feature/auth/login/use-login-form';
 import { cn } from '@/lib/utils';
+
+import { AlertFailedLogin } from './alert-login';
+import { useLoginForm } from './use-login-form';
 
 export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) {
   const { register, handleSubmit, errors, onSubmit, showPassword, setShowPassword, loginError } =
