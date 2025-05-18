@@ -36,7 +36,10 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) 
                     {...register('email')}
                   />
                   {errors.email && (
-                    <AlertCircle className="absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 text-red-500" />
+                    <AlertCircle
+                      data-testid="alert-icon"
+                      className="absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 text-red-500"
+                    />
                   )}
                 </div>
                 {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
@@ -65,7 +68,10 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) 
                     )}
                   </button>
                   {errors.password && (
-                    <AlertCircle className="absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 text-red-500" />
+                    <AlertCircle
+                      data-testid="alert-icon"
+                      className="absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 text-red-500"
+                    />
                   )}
                 </div>
                 {errors.password && (
