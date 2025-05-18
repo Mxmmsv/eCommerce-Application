@@ -4,7 +4,7 @@ export default function UserProfilePage() {
   const location = useLocation();
 
   return (
-    <div className="p-4 text-center">
+    <div className="bg-muted flex min-h-svh flex-col items-center justify-center text-lg">
       {location.pathname === '/profile' && (
         <h1 className="text-2xl font-bold">User Profile Page</h1>
       )}

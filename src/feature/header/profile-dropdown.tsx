@@ -16,14 +16,14 @@ export function ProfileDropdownMenu() {
       <DropdownMenuTrigger className="cursor-pointer">
         <UserRound strokeWidth={1.5} size={32} />
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="flex w-56 flex-col justify-start pr-4 pl-4 text-black">
+      <DropdownMenuContent className="flex w-56 flex-col justify-start pr-4 pl-4">
         <DropdownMenuLabel className="flex justify-center">
           <span className="text-xl">My Account</span>
         </DropdownMenuLabel>
 
         <DropdownMenuSeparator />
 
-        <div className="flex items-center justify-start rounded-sm border-white shadow-none hover:bg-[#f5f5f5]">
+        <div className="hover:bg-secondary flex items-center justify-start rounded-sm border-white shadow-none">
           <LogIn strokeWidth={1.5} size={28} />
           <DropdownMenuItem className="w-full cursor-pointer">
             <NavLink to="/login" className="w-full justify-center text-xl whitespace-nowrap">
@@ -32,7 +32,7 @@ export function ProfileDropdownMenu() {
           </DropdownMenuItem>
         </div>
 
-        <div className="flex items-center justify-start rounded-sm border-white shadow-none hover:bg-[#f5f5f5]">
+        <div className="hover:bg-secondary flex items-center justify-start rounded-sm border-white shadow-none">
           <UserRoundPlus strokeWidth={1.5} size={28} />
           <DropdownMenuItem className="w-full cursor-pointer">
             <NavLink to="/registration" className="w-full justify-center text-xl whitespace-nowrap">
@@ -43,7 +43,7 @@ export function ProfileDropdownMenu() {
 
         <DropdownMenuSeparator />
 
-        <div className="flex items-center justify-start rounded-sm border-white shadow-none hover:bg-[#f5f5f5]">
+        <div className="hover:bg-secondary flex items-center justify-start rounded-sm border-white shadow-none">
           <UserRoundPen strokeWidth={1.5} size={28} />
           <DropdownMenuItem className="w-full cursor-pointer">
             <NavLink to="/profile" className="w-full justify-center text-xl whitespace-nowrap">
@@ -54,7 +54,7 @@ export function ProfileDropdownMenu() {
 
         <DropdownMenuSeparator />
 
-        <div className="flex items-center justify-start rounded-sm border-white shadow-none hover:bg-[#f5f5f5]">
+        <div className="hover:bg-secondary flex items-center justify-start rounded-sm border-white shadow-none">
           <LogOut strokeWidth={1.5} size={28} />
           <DropdownMenuItem className="w-full cursor-pointer">
             <NavLink to="/" className="w-full justify-center text-xl whitespace-nowrap">
