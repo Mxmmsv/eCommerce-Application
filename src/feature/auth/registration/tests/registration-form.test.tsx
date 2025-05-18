@@ -9,7 +9,7 @@ afterEach(() => {
   cleanup();
 });
 
-vi.mock('@/components/ui/button/close-button', () => ({
+vi.mock('@/components/ui/close-button', () => ({
   CloseButton: () => <div data-testid="mock-close-button" />,
 }));
 
