@@ -1,16 +1,14 @@
 import { object, string, minLength, pipe, custom, regex, email } from 'valibot';
 
+const nameValidator = pipe(
+  string(),
+  minLength(1, 'Field is required'),
+  regex(/^[\p{Letter}\s\-']{2,}$/u, 'No numbers or special characters allowed'),
+);
+
 export const schema = object({
-  firstName: pipe(
-    string(),
-    minLength(1, 'First name is required'),
-    regex(/^[\p{Letter}\s\-']+$/iu, 'No numbers or special characters allowed'),
-  ),
-  lastName: pipe(
-    string(),
-    minLength(1, 'Last name is required'),
-    regex(/^[\p{Letter}\s\-']+$/iu, 'No numbers or special characters allowed'),
-  ),
+  firstName: nameValidator,
+  lastName: nameValidator,
   email: pipe(
     string(),
     minLength(1, 'Email is required'),
@@ -47,16 +45,8 @@ export const schema = object({
       return birthDate <= minDate;
     }, 'You must be at least 12 years old'),
   ),
-  country: pipe(string(), minLength(1, 'Country is required')),
-  postalCode: pipe(
-    string(),
-    minLength(1, 'Postal code is required'),
-    regex(/^[a-zA-Z0-9\s-]+$/, 'Invalid postal code format'),
-  ),
-  city: pipe(
-    string(),
-    minLength(1, 'City is required'),
-    regex(/^[a-zA-Zа-яА-Я\s]+$/, 'City should contain only letters'),
-  ),
-  streetName: pipe(string(), minLength(1, 'Street is required')),
+  country: pipe(string(), minLength(1, 'Please select a country')),
+  postalCode: pipe(string(), minLength(1, 'Postal code is required')),
+  city: nameValidator,
+  streetName: nameValidator,
 });

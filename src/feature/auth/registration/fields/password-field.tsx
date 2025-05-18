@@ -6,12 +6,12 @@ import { Label } from '@/components/ui/label';
 
 import type { RegistrationFormData } from '../types';
 
-type AddressFieldsProps = {
+type PasswordFieldsProps = {
   register: UseFormRegister<RegistrationFormData>;
   errors: FieldErrors<RegistrationFormData>;
 };
 
-export function PasswordField({ register, errors }: AddressFieldsProps) {
+export function PasswordField({ register, errors }: PasswordFieldsProps) {
   return (
     <>
       <div className="grid gap-2">
