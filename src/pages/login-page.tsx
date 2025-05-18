@@ -5,9 +5,9 @@ import AuthContext from '@/feature/auth/login/auth-provider';
 import { LoginForm } from '@/feature/auth/login/login-form';
 
 export default function LoginPage() {
-  const { AUTH_STATUS_KEY } = useContext(AuthContext);
+  const { IS_AUTHORIZED } = useContext(AuthContext);
 
-  if (AUTH_STATUS_KEY) {
+  if (IS_AUTHORIZED) {
     return <Navigate to="/" replace />;
   }
 

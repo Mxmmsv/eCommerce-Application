@@ -4,8 +4,8 @@ type LoginForm = {
 };
 
 type AuthContext = {
-  AUTH_STATUS_KEY: boolean;
-  setAuth: (auth: boolean) => void;
+  IS_AUTHORIZED: boolean;
+  setIsAuthorized: (auth: boolean) => void;
 };
 
 export type { LoginForm, AuthContext };

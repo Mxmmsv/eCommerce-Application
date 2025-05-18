@@ -13,7 +13,7 @@ export function useLoginForm() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [loginError, setLoginError] = useState(false);
-  const { setAuth } = useContext(AuthContext);
+  const { setIsAuthorized } = useContext(AuthContext);
 
   const {
     register,
@@ -30,7 +30,7 @@ export function useLoginForm() {
     setLoginError(false);
     try {
       await signInCustomerWithMail(data.email, data.password);
-      setAuth(true);
+      setIsAuthorized(true);
       await navigate('/');
       toast.success('Login successful!');
     } catch (error) {
@@ -38,7 +38,7 @@ export function useLoginForm() {
         toast.error(`Authorization error!`);
       } else toast.error('Unknown error');
       setLoginError(true);
-      setAuth(false);
+      setIsAuthorized(false);
     }
   };
 
