@@ -5,9 +5,9 @@ import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
 
 import AuthContext from '@/feature/auth/login/auth-provider';
+import { formSchema } from '@/feature/auth/login/login-schema';
 import { signInCustomerWithMail } from '@/feature/auth/login/sign-in-customer';
 import type { LoginForm } from '@/feature/auth/login/type';
-import { formSchema } from '@/feature/auth/login/validation';
 
 export function useLoginForm() {
   const navigate = useNavigate();
