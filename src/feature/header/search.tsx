@@ -2,7 +2,7 @@ import { Command, CommandInput } from '@/components/ui/command';
 
 export default function SearchBar() {
   return (
-    <Command className="flex min-w-40 rounded-lg border">
+    <Command className="flex max-w-70">
       <CommandInput placeholder="search..." />
     </Command>
   );

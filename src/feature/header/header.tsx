@@ -14,7 +14,7 @@ export function Header() {
       <header className="bg-background flex items-center justify-between p-4 shadow-lg lg:hidden">
         <div className="flex w-24 cursor-pointer items-center justify-center">
           <NavLink to="/">
-            <img src="logo.svg" alt="logo" />
+            <img src="logo.svg" alt="logo" className="flex h-auto w-full" />
           </NavLink>
         </div>
         <div className="flex items-center justify-center gap-4">
@@ -30,7 +30,7 @@ export function Header() {
         </div>
       </header>
 
-      <header className="bg-background hidden grid-cols-[1fr_125px_1fr] place-items-center border-b-3 border-solid py-4 lg:grid">
+      <header className="bg-background hidden grid-cols-[1fr_125px_1fr] place-items-center py-4 lg:grid">
         <CustomNavigationMenu />
 
         <div className="flex w-24 cursor-pointer items-center justify-center">
