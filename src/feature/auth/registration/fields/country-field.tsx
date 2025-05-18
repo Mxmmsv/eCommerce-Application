@@ -22,26 +22,33 @@ const countries = [
   { code: 'RS', name: 'Serbia' },
 ];
 
-export function CountryField() {
+type CountryFieldProps = {
+  prefix?: 'alternativeShipping' | 'alternativeBilling';
+};
+
+export function CountryField({ prefix }: CountryFieldProps) {
   const {
     control,
     formState: { errors },
   } = useFormContext<RegistrationFormData>();
 
+  const fieldName: keyof RegistrationFormData = prefix ? `${prefix}Country` : 'country';
+  const error = errors[fieldName as keyof typeof errors];
+
   return (
     <div className="grid gap-2">
-      <Label htmlFor="country">Country</Label>
+      <Label htmlFor={fieldName}>{prefix ? 'Alternative Country' : 'Country'}</Label>
       <div className="relative">
         <Controller
           control={control}
-          name="country"
+          name={fieldName}
           rules={{ required: 'Country is required' }}
           render={({ field }) => (
             <Select value={field.value} onValueChange={field.onChange}>
               <SelectTrigger
-                id="country"
-                aria-invalid={!!errors.country}
-                className={cn('w-full', errors.country ? 'border-red-500' : '')}
+                id={fieldName}
+                aria-invalid={!!error}
+                className={cn('w-full', error ? 'border-red-500' : '')}
               >
                 <SelectValue placeholder="Select your country" />
               </SelectTrigger>
@@ -55,13 +62,11 @@ export function CountryField() {
             </Select>
           )}
         />
-        {errors.country && (
+        {error && (
           <AlertCircle className="absolute top-1/2 right-8 h-4 w-4 -translate-y-1/2 text-red-500" />
         )}
       </div>
-      {errors.country && (
-        <p className="error-message text-sm text-red-500">{errors.country.message}</p>
-      )}
+      {error && <p className="error-message text-sm text-red-500">{error.message}</p>}
     </div>
   );
 }

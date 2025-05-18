@@ -39,11 +39,22 @@ const getRegistrationBody = (data: RegistrationFormData) => {
     },
   ];
 
-  if (data.alternativeShippingAddress) {
-    addresses.push(data.alternativeShippingAddress);
+  if (!data.setAsDefaultShipping && data.alternativeShippingStreet) {
+    addresses.push({
+      country: data.alternativeShippingCountry || data.country,
+      postalCode: data.alternativeShippingPostalCode || data.postalCode,
+      city: data.alternativeShippingCity || data.city,
+      streetName: data.alternativeShippingStreet,
+    });
   }
-  if (data.alternativeBillingAddress) {
-    addresses.push(data.alternativeBillingAddress);
+
+  if (!data.setAsDefaultBilling && data.alternativeBillingStreet) {
+    addresses.push({
+      country: data.alternativeBillingCountry || data.country,
+      postalCode: data.alternativeBillingPostalCode || data.postalCode,
+      city: data.alternativeBillingCity || data.city,
+      streetName: data.alternativeBillingStreet,
+    });
   }
 
   return {
@@ -54,7 +65,7 @@ const getRegistrationBody = (data: RegistrationFormData) => {
     dateOfBirth: data.dateOfBirth,
     addresses,
     defaultShippingAddress: data.setAsDefaultShipping ? 0 : 1,
-    defaultBillingAddress: data.setAsDefaultBilling ? 0 : data.alternativeBillingAddress ? 2 : 1,
+    defaultBillingAddress: data.setAsDefaultBilling ? 0 : data.alternativeBillingStreet ? 2 : 1,
   };
 };
 

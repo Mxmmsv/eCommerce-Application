@@ -26,6 +26,8 @@ export function RegistrationForm({ className, onRegister, ...props }: Props) {
     shouldUseNativeValidation: false,
     defaultValues: {
       country: '',
+      alternativeShippingCountry: '',
+      alternativeBillingCountry: '',
       setAsDefaultShipping: true,
       setAsDefaultBilling: true,
     },

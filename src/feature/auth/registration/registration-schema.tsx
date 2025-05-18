@@ -1,10 +1,17 @@
-import { object, string, minLength, pipe, custom, regex, email, boolean } from 'valibot';
+import { object, string, minLength, pipe, custom, regex, email, boolean, optional } from 'valibot';
 
 const nameValidator = pipe(
   string(),
   minLength(1, 'Field is required'),
   regex(/^[\p{Letter}\s\-']{2,}$/u, 'No numbers or special characters allowed'),
 );
+
+const addressSchema = object({
+  country: pipe(string(), minLength(1, 'Country is required')),
+  postalCode: pipe(string(), minLength(1, 'Postal code is required')),
+  city: nameValidator,
+  streetName: nameValidator,
+});
 
 export const schema = object({
   firstName: nameValidator,
@@ -51,4 +58,6 @@ export const schema = object({
   streetName: nameValidator,
   setAsDefaultShipping: boolean(),
   setAsDefaultBilling: boolean(),
+  alternativeShippingAddress: optional(addressSchema),
+  alternativeBillingAddress: optional(addressSchema),
 });
