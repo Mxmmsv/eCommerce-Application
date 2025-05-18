@@ -11,8 +11,3 @@ export function getAuthFromLocalStorage(): {
   const IS_AUTHORIZED = localStorage.getItem('IS_AUTHORIZED') === 'true';
   return { ACCESS_TOKEN_KEY, IS_AUTHORIZED };
 }
-
-export function clearAuthFromLocalStorage() {
-  localStorage.removeItem('ACCESS_TOKEN_KEY');
-  localStorage.removeItem('IS_AUTHORIZED');
-}
