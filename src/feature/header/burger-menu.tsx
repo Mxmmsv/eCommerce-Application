@@ -153,7 +153,7 @@ export default function BurgerMenu() {
                 </SheetClose>
 
                 <SheetClose asChild>
-                  <NavLink to="/register" className="flex items-center py-3 hover:underline">
+                  <NavLink to="/registration" className="flex items-center py-3 hover:underline">
                     <UserRoundPlus size={28} className="mr-2" />
                     Registration
                   </NavLink>
