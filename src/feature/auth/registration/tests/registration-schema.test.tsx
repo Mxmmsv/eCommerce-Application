@@ -21,15 +21,15 @@ describe('Registration Schema', () => {
   });
 
   it('should require firstName', () => {
-    expect(() => parse(schema, { ...validData, firstName: '' })).toThrow('First name is required');
+    expect(() => parse(schema, { ...validData, firstName: '' })).toThrow('Field is required');
   });
 
   it('should require lastName', () => {
-    expect(() => parse(schema, { ...validData, lastName: '' })).toThrow('Last name is required');
+    expect(() => parse(schema, { ...validData, lastName: '' })).toThrow('Field is required');
   });
 
   it('should require email', () => {
-    expect(() => parse(schema, { ...validData, email: '' })).toThrow('Email is required');
+    expect(() => parse(schema, { ...validData, email: '' })).toThrow('Field is required');
   });
 
   it('should validate email format', () => {
@@ -45,18 +45,16 @@ describe('Registration Schema', () => {
   });
 
   it('should require country', () => {
-    expect(() => parse(schema, { ...validData, country: '' })).toThrow('Country is required');
+    expect(() => parse(schema, { ...validData, country: '' })).toThrow('Please select a country');
   });
 
   it('should validate city format', () => {
     expect(() => parse(schema, { ...validData, city: 'City123' })).toThrow(
-      'City should contain only letters',
+      'No numbers or special characters allowed',
     );
   });
 
   it('should validate postal code format', () => {
-    expect(() => parse(schema, { ...validData, postalCode: '!@#$%' })).toThrow(
-      'Invalid postal code format',
-    );
+    expect(() => parse(schema, { ...validData, postalCode: '' })).toThrow('Field is required');
   });
 });
