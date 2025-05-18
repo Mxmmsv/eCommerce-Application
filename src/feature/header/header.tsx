@@ -17,13 +17,13 @@ export function Header() {
             <img src="logo.svg" alt="logo" className="flex h-auto w-full" />
           </NavLink>
         </div>
-        <div className="flex items-center justify-center gap-4">
+        <div className="flex items-center justify-center gap-4 max-sm:gap-1">
           <ModeToggle />
           <NavLink to="/wishlist" className="px-1.5 text-xl font-normal tracking-wider">
-            <Heart strokeWidth={1.5} size={32} />
+            <Heart strokeWidth={1.5} size={32} className="max-sm:size-6" />
           </NavLink>
           <NavLink to="/cart" className="px-1.5 text-xl font-normal tracking-wider">
-            <ShoppingCart strokeWidth={1.5} size={32} />
+            <ShoppingCart strokeWidth={1.5} size={32} className="max-sm:size-6" />
           </NavLink>
 
           <BurgerMenu />

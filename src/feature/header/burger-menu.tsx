@@ -42,7 +42,7 @@ export default function BurgerMenu() {
             variant="ghost"
             className="flex h-auto w-full items-center justify-center [&_svg:not([class*='size-'])]:size-8"
           >
-            <Menu size={32} />
+            <Menu size={32} className="max-sm:size-6" />
           </Button>
         </SheetTrigger>
 
