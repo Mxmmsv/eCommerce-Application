@@ -18,7 +18,7 @@ import Wishlist from '@/pages/wishlist-page';
 function App() {
   return (
     <AuthProvider>
-      <ThemeProvider defaultTheme="dark" storageKey="UI-THEME">
+      <ThemeProvider defaultTheme="light" storageKey="UI-THEME">
         <BrowserRouter>
           <Header />
           <Routes>
