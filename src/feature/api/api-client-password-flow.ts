@@ -1,14 +1,12 @@
 import { createApiBuilderFromCtpClient } from '@commercetools/platform-sdk';
-import type {
-  CorrelationIdMiddlewareOptions,
-  PasswordAuthMiddlewareOptions,
-} from '@commercetools/ts-client';
+import type { PasswordAuthMiddlewareOptions } from '@commercetools/ts-client';
 import { ClientBuilder } from '@commercetools/ts-client';
 
 import {
   authUrl,
   clientId,
   clientSecret,
+  correlationIdMiddlewareOptions,
   httpMiddlewareOptions,
   projectKey,
   scopes,
@@ -30,10 +28,6 @@ const PasswordFlowApiClient = (email: string, password: string) => {
     scopes,
     tokenCache,
     httpClient: fetch,
-  };
-
-  const correlationIdMiddlewareOptions: CorrelationIdMiddlewareOptions = {
-    generate: (): string => crypto.randomUUID(),
   };
 
   const passwordFlowClient = new ClientBuilder()
