@@ -46,7 +46,7 @@ describe('CityField', () => {
           type: 'required',
           message: 'Shipping city error',
         });
-      }, []);
+      }, [methods]);
       return (
         <FormProvider {...methods}>
           <>
