@@ -24,6 +24,8 @@ type Props = {
 export function RegistrationForm({ className, onRegister, ...props }: Props) {
   const methods = useForm<RegistrationFormData>({
     resolver: valibotResolver(schema),
+    mode: 'onChange',
+    criteriaMode: 'all',
     shouldUseNativeValidation: false,
     defaultValues: {
       country: '',
@@ -38,6 +40,22 @@ export function RegistrationForm({ className, onRegister, ...props }: Props) {
     control: methods.control,
     name: ['setAsDefaultShipping', 'setAsDefaultBilling'],
   });
+
+  useEffect(() => {
+    const unsub = methods.subscribe({
+      formState: { values: true },
+      name: 'country',
+      callback: ({ values }) => {
+        if (values.postalCode.length > 0) {
+          void methods.trigger('postalCode');
+        }
+      },
+    });
+
+    return () => {
+      unsub();
+    };
+  }, [methods]);
 
   useEffect(() => {
     if (setAsDefaultShipping) {
