@@ -1,0 +1,21 @@
+export type RegistrationFormData = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  dateOfBirth: string;
+  country: string;
+  postalCode: string;
+  city: string;
+  streetName: string;
+  setAsDefaultShipping?: boolean;
+  setAsDefaultBilling?: boolean;
+  alternativeShippingCountry?: string;
+  alternativeShippingPostalCode?: string;
+  alternativeShippingCity?: string;
+  alternativeShippingStreet?: string;
+  alternativeBillingCountry?: string;
+  alternativeBillingPostalCode?: string;
+  alternativeBillingCity?: string;
+  alternativeBillingStreet?: string;
+};

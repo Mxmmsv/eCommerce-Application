@@ -16,6 +16,7 @@ export default tseslint.config(
   {
     extends: [
       js.configs.recommended,
+      importPlugin.flatConfigs.recommended,
       ...tseslint.configs.recommendedTypeChecked,
       reactPlugin.configs.flat.recommended,
       reactPlugin.configs.flat['jsx-runtime'],
@@ -37,7 +38,6 @@ export default tseslint.config(
       'testing-library': testingLibrary,
       'jest-dom': jestDom,
       vitest: vitest,
-      import: importPlugin,
     },
     rules: {
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
@@ -77,9 +77,18 @@ export default tseslint.config(
     },
   },
   {
+    files: ['src/components/ui/**/*'],
+    rules: {
+      'react-refresh/only-export-components': 'off',
+    },
+  },
+  {
     settings: {
       react: {
         version: 'detect',
+      },
+      'import/resolver': {
+        typescript: true,
       },
     },
   },
