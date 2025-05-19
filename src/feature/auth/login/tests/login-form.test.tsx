@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router';
 import { describe, it, expect } from 'vitest';
 
+import { AlertFailedLogin } from '../alert-login';
 import { LoginForm } from '../login-form';
 
 describe('Login form', () => {
@@ -34,7 +35,16 @@ describe('Login form', () => {
     await userEvent.click(submitButton);
 
     expect(screen.queryByText(/please enter a valid email/i)).not.toBeInTheDocument();
-    expect(screen.queryByText(/password/i)).not.toHaveClass('text-red-500');
+    expect(screen.getByLabelText('Password')).not.toHaveClass('text-red-500');
+  });
+
+  describe('Alert Failed', () => {
+    it('should render error alert with correct message', () => {
+      render(<AlertFailedLogin />);
+      expect(screen.getByRole('alert')).toHaveTextContent(
+        'Authorization error!Please check your email and password and try again.',
+      );
+    });
   });
 
   describe('Email', () => {
