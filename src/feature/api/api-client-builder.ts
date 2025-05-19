@@ -1,4 +1,7 @@
-import type { HttpMiddlewareOptions } from '@commercetools/ts-client';
+import type {
+  CorrelationIdMiddlewareOptions,
+  HttpMiddlewareOptions,
+} from '@commercetools/ts-client';
 
 const projectKey: string = import.meta.env.VITE_PROJECT_KEY;
 const clientId: string = import.meta.env.VITE_CLIENT_ID;
@@ -20,6 +23,20 @@ const httpMiddlewareOptions: HttpMiddlewareOptions = {
     backoff: false,
     retryCodes: [500, 503],
   },
+  httpClient: fetch,
 };
 
-export { projectKey, clientId, clientSecret, authUrl, apiUrl, scopes, httpMiddlewareOptions };
+const correlationIdMiddlewareOptions: CorrelationIdMiddlewareOptions = {
+  generate: (): string => crypto.randomUUID(),
+};
+
+export {
+  projectKey,
+  clientId,
+  clientSecret,
+  authUrl,
+  apiUrl,
+  scopes,
+  httpMiddlewareOptions,
+  correlationIdMiddlewareOptions,
+};

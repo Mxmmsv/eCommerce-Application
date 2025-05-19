@@ -1,19 +1,17 @@
 import { createApiBuilderFromCtpClient } from '@commercetools/platform-sdk';
-import type {
-  AuthMiddlewareOptions,
-  CorrelationIdMiddlewareOptions,
-} from '@commercetools/ts-client';
+import type { AuthMiddlewareOptions } from '@commercetools/ts-client';
 import { ClientBuilder } from '@commercetools/ts-client';
 
 import {
   authUrl,
   clientId,
   clientSecret,
+  correlationIdMiddlewareOptions,
   httpMiddlewareOptions,
   projectKey,
   scopes,
-} from '@/feature/api/api-client-builder';
-import tokenCache from '@/feature/api/api-token-store';
+} from './api-client-builder';
+import tokenCache from './api-token-store';
 
 const AnonymousFlowApiClient = () => {
   const authMiddlewareOptions: AuthMiddlewareOptions = {
@@ -26,10 +24,6 @@ const AnonymousFlowApiClient = () => {
     scopes,
     tokenCache,
     httpClient: fetch,
-  };
-
-  const correlationIdMiddlewareOptions: CorrelationIdMiddlewareOptions = {
-    generate: (): string => crypto.randomUUID(),
   };
 
   const anonymousFlowClient = new ClientBuilder()
