@@ -7,15 +7,12 @@ import { signInCustomer } from '@/feature/api/sign-in-customer';
 import type { RegistrationFormData } from './types';
 
 export const handleRegister = async (data: RegistrationFormData, navigate: NavigateFunction) => {
-  console.log('Данные перед отправкой:', JSON.stringify(data, null, 2));
   try {
     const anonymousApiRoot = AnonymousFlowApiClient();
     await anonymousApiRoot
       .customers()
       .post({ body: getRegistrationBody(data) })
       .execute();
-
-    console.log('Success:', anonymousApiRoot);
 
     await signInCustomer(data.email, data.password);
 
@@ -25,7 +22,6 @@ export const handleRegister = async (data: RegistrationFormData, navigate: Navig
     void navigate('/', { replace: true });
   } catch (error) {
     handleRegisterError(error, navigate);
-    console.log('data:', data);
   }
 };
 
@@ -86,7 +82,6 @@ const getRegistrationBody = (data: RegistrationFormData) => {
 };
 
 const handleRegisterError = (error: unknown, navigate: NavigateFunction) => {
-  console.error('Fail:', error);
   if (
     typeof error === 'object' &&
     error !== null &&
