@@ -46,32 +46,32 @@ const getRegistrationBody = (data: RegistrationFormData) => {
     }),
   };
 
-  const addresses = [
-    {
-      country: data.country,
-      postalCode: data.postalCode,
-      city: data.city,
-      streetName: data.streetName,
-    },
-  ];
+  const addresses = [];
 
-  if (!cleanData.setAsDefaultShipping) {
-    addresses.push({
-      country: cleanData.alternativeShippingCountry || cleanData.country,
-      postalCode: cleanData.alternativeShippingPostalCode || cleanData.postalCode,
-      city: cleanData.alternativeShippingCity || cleanData.city,
-      streetName: cleanData.alternativeShippingStreet || cleanData.streetName,
-    });
-  }
+  addresses.push({
+    country: data.country,
+    postalCode: data.postalCode,
+    city: data.city,
+    streetName: data.streetName,
+  });
 
-  if (!cleanData.setAsDefaultBilling) {
-    addresses.push({
-      country: cleanData.alternativeBillingCountry || cleanData.country,
-      postalCode: cleanData.alternativeBillingPostalCode || cleanData.postalCode,
-      city: cleanData.alternativeBillingCity || cleanData.city,
-      streetName: cleanData.alternativeBillingStreet || cleanData.streetName,
-    });
-  }
+  const shippingIndex = !cleanData.setAsDefaultShipping
+    ? addresses.push({
+        country: cleanData.alternativeShippingCountry || cleanData.country,
+        postalCode: cleanData.alternativeShippingPostalCode || cleanData.postalCode,
+        city: cleanData.alternativeShippingCity || cleanData.city,
+        streetName: cleanData.alternativeShippingStreet || cleanData.streetName,
+      }) - 1
+    : 0;
+
+  const billingIndex = !cleanData.setAsDefaultBilling
+    ? addresses.push({
+        country: cleanData.alternativeBillingCountry || cleanData.country,
+        postalCode: cleanData.alternativeBillingPostalCode || cleanData.postalCode,
+        city: cleanData.alternativeBillingCity || cleanData.city,
+        streetName: cleanData.alternativeBillingStreet || cleanData.streetName,
+      }) - 1
+    : 0;
 
   return {
     firstName: data.firstName,
@@ -80,8 +80,8 @@ const getRegistrationBody = (data: RegistrationFormData) => {
     password: data.password,
     dateOfBirth: data.dateOfBirth,
     addresses,
-    defaultShippingAddress: data.setAsDefaultShipping ? 0 : addresses.length > 1 ? 1 : 0,
-    defaultBillingAddress: data.setAsDefaultBilling ? 0 : 0,
+    defaultShippingAddress: shippingIndex,
+    defaultBillingAddress: billingIndex,
   };
 };
 
