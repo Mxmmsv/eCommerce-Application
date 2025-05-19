@@ -15,7 +15,7 @@ import {
 const nameValidator = pipe(
   string(),
   minLength(1, 'Field is required'),
-  regex(/^[\p{Letter}\s\-']{2,}$/u, 'No numbers or special characters allowed'),
+  regex(/^\p{L}+[\p{L}\s\-']*$/u, 'No numbers or special characters allowed.'),
 );
 
 const requiredValidator = pipe(string(), minLength(1, 'Field is required'));
@@ -72,12 +72,12 @@ export const schema = pipe(
     setAsDefaultBilling: optional(boolean()),
     alternativeShippingCountry: optional(requiredValidator),
     alternativeShippingPostalCode: optional(requiredValidator),
-    alternativeShippingCity: optional(requiredValidator),
-    alternativeShippingStreet: optional(requiredValidator),
+    alternativeShippingCity: optional(nameValidator),
+    alternativeShippingStreet: optional(nameValidator),
     alternativeBillingCountry: optional(requiredValidator),
     alternativeBillingPostalCode: optional(requiredValidator),
-    alternativeBillingCity: optional(requiredValidator),
-    alternativeBillingStreet: optional(requiredValidator),
+    alternativeBillingCity: optional(nameValidator),
+    alternativeBillingStreet: optional(nameValidator),
   }),
   forward(
     partialCheck(
