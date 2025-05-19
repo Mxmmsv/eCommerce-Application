@@ -57,7 +57,7 @@ export default function BurgerMenu() {
           <div className="bg-background flex items-center justify-between gap-10 border-b-2 border-solid p-4 max-md:gap-2 max-md:p-2">
             <div className="flex w-24 cursor-pointer items-center justify-center">
               <NavLink to="/">
-                <img src="logo.svg" alt="logo" />
+                <img src="logo.svg" alt="logo" className="rounded-2xl bg-white" />
               </NavLink>
             </div>
             <SearchBar />
@@ -69,7 +69,7 @@ export default function BurgerMenu() {
                   variant="ghost"
                   className="flex h-[55px] w-[55px] items-center justify-center [&_svg:not([class*='size-'])]:size-8"
                 >
-                  <X size={32} />
+                  <X size={32} className="max-sm:size-6" />
                 </Button>
               </SheetClose>
             </div>

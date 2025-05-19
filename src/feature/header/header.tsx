@@ -11,13 +11,13 @@ import SearchBar from './search';
 export function Header() {
   return (
     <>
-      <header className="bg-background flex items-center justify-between p-4 shadow-lg lg:hidden">
+      <header className="bg-background flex items-center justify-between p-4 shadow-lg max-sm:p-0 lg:hidden">
         <div className="flex w-24 cursor-pointer items-center justify-center">
           <NavLink to="/">
-            <img src="logo.svg" alt="logo" className="flex h-auto w-full" />
+            <img src="logo.svg" alt="logo" className="flex h-auto w-full rounded-2xl bg-white" />
           </NavLink>
         </div>
-        <div className="flex items-center justify-center gap-4 max-sm:gap-1">
+        <div className="flex items-center justify-center gap-4 max-sm:gap-0">
           <ModeToggle />
           <NavLink to="/wishlist" className="px-1.5 text-xl font-normal tracking-wider">
             <Heart strokeWidth={1.5} size={32} className="max-sm:size-6" />
@@ -35,26 +35,38 @@ export function Header() {
 
         <div className="flex w-24 cursor-pointer items-center justify-center">
           <NavLink to="/">
-            <img src="logo.svg" alt="logo" />
+            <img src="logo.svg" alt="logo" className="flex h-auto w-full rounded-2xl bg-white" />
           </NavLink>
         </div>
 
         <nav className="flex items-center justify-end">
           <ul className="flex flex-row items-center gap-4">
-            <SearchBar />
-            <Currency />
-            <ModeToggle />
-            <div className="mr-6 flex gap-4">
-              <NavLink to="/wishlist" className="text-xl font-normal tracking-wider">
-                <Heart strokeWidth={1.5} size={32} />
-              </NavLink>
-
-              <ProfileDropdownMenu />
-
-              <NavLink to="/cart" className="text-xl font-normal tracking-wider">
-                <ShoppingCart strokeWidth={1.5} size={32} />
-              </NavLink>
-            </div>
+            <li>
+              <SearchBar />
+            </li>
+            <li>
+              <Currency />
+            </li>
+            <li>
+              <ModeToggle />
+            </li>
+            <li className="mr-6 flex gap-4">
+              <ul className="flex flex-row items-center gap-4">
+                <li>
+                  <NavLink to="/wishlist" className="text-xl font-normal tracking-wider">
+                    <Heart strokeWidth={1.5} size={32} />
+                  </NavLink>
+                </li>
+                <li>
+                  <ProfileDropdownMenu />
+                </li>
+                <li>
+                  <NavLink to="/cart" className="text-xl font-normal tracking-wider">
+                    <ShoppingCart strokeWidth={1.5} size={32} />
+                  </NavLink>
+                </li>
+              </ul>
+            </li>
           </ul>
         </nav>
       </header>
