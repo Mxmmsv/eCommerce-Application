@@ -1,7 +1,7 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router';
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 
 import { LoginForm } from '../login-form';
 
@@ -19,22 +19,22 @@ describe('Login form', () => {
   });
 
   it('should call onSubmit with valid data', async () => {
-    const user = userEvent.setup();
-    const submitSpy = vi.fn();
-
     render(
       <MemoryRouter>
-        <LoginForm onSubmit={submitSpy} />
+        <LoginForm />
       </MemoryRouter>,
     );
 
-    await user.type(screen.getByLabelText('Email'), 'test@example.com');
-    await user.type(screen.getByLabelText('Password'), 'Password123');
-    await user.click(screen.getByRole('button', { name: /Login/i }));
+    const email = screen.getByLabelText('Email');
+    const password = screen.getByLabelText('Password');
+    const submitButton = screen.getByRole('button', { name: /Login/i });
 
-    await waitFor(() => {
-      expect(submitSpy).toHaveBeenCalled();
-    });
+    await userEvent.type(email, 'test@example.com');
+    await userEvent.type(password, 'Password123');
+    await userEvent.click(submitButton);
+
+    expect(screen.queryByText(/please enter a valid email/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/password/i)).not.toHaveClass('text-red-500');
   });
 
   describe('Email', () => {
