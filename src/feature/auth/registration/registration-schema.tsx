@@ -8,6 +8,15 @@ const nameValidator = pipe(
 
 const requiredValidator = pipe(string(), minLength(1, 'Field is required'));
 
+const postalCodePatterns: Record<string, RegExp> = {
+  RU: /^\d{6}$/,
+  BY: /^\d{6}$/,
+  KZ: /^\d{6}$/,
+  AM: /^\d{4}$/,
+  UZ: /^\d{6}$/,
+  RS: /^\d{5}$/,
+};
+
 export const schema = object({
   firstName: nameValidator,
   lastName: nameValidator,
@@ -43,7 +52,15 @@ export const schema = object({
     }, 'You must be at least 12 years old'),
   ),
   country: pipe(string(), minLength(1, 'Please select a country')),
-  postalCode: pipe(requiredValidator),
+  postalCode: pipe(
+    requiredValidator,
+    custom((value) => {
+      if (typeof value !== 'string') return false;
+      const country = 'RU';
+      const pattern = postalCodePatterns[country];
+      return pattern.test(value);
+    }, 'Invalid postal code format for selected country'),
+  ),
   city: nameValidator,
   streetName: nameValidator,
   setAsDefaultShipping: optional(boolean()),
