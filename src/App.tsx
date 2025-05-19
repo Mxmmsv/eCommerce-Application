@@ -31,8 +31,6 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/registration" element={<Registration />} />
             <Route path="/profile" element={<UserProfile />} />
-
-            {/* Страница 404 */}
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Toaster position="top-center" richColors closeButton />

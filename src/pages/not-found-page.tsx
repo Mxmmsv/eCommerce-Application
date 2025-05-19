@@ -1,8 +1,8 @@
 import { Link } from 'react-router';
 
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 
-function NotFound() {
+export default function NotFoundPage() {
   return (
     <main className="bg-white-100 m-auto flex w-full flex-col items-center justify-center gap-10">
       <div className="m-5 flex flex-col items-center justify-center gap-7 text-center">
@@ -12,24 +12,23 @@ function NotFound() {
           className="flex h-auto w-full"
         />
         <h1 className="text-4xl font-semibold">Sorry, page not found!</h1>
-        <p className="text-2xl text-gray-600">We can&apos;t find page you are looking for.</p>
+        <p className="text-2xl">We can&apos;t find page you are looking for.</p>
       </div>
       <div className="flex flex-col items-center justify-around gap-5 md:flex-row">
-        <Button
-          variant="secondary"
-          className="flex h-auto w-38 items-center bg-teal-300 px-10 py-3 text-2xl text-teal-900 hover:bg-teal-200 md:w-48 md:text-3xl"
+        <Link
+          className={`${buttonVariants({ variant: 'secondary' })} flex h-auto w-38 items-center px-10 py-3 text-2xl hover:bg-teal-100 max-md:text-2xl md:w-48 md:text-3xl dark:bg-teal-600 dark:hover:bg-teal-500 dark:hover:text-black`}
+          to={'/'}
         >
-          <Link to="/">Home</Link>
-        </Button>
-        <Button
-          variant="secondary"
-          className="flex h-auto w-38 items-center bg-teal-300 px-10 py-3 text-2xl text-teal-900 hover:bg-teal-200 md:w-48 md:text-3xl"
+          Home
+        </Link>
+
+        <Link
+          className={`${buttonVariants({ variant: 'secondary' })} flex h-auto w-38 items-center px-10 py-3 text-2xl hover:bg-teal-100 max-md:text-2xl md:w-48 md:text-3xl dark:bg-teal-600 dark:hover:bg-teal-500 dark:hover:text-black`}
+          to={'/catalog'}
         >
-          <Link to="/catalog">Catalog</Link>
-        </Button>
+          Catalog
+        </Link>
       </div>
     </main>
   );
 }
-
-export default NotFound;
