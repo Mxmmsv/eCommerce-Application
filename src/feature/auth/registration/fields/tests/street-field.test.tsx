@@ -46,7 +46,7 @@ describe('StreetField', () => {
           type: 'required',
           message: 'Shipping street error',
         });
-      }, []);
+      }, [methods]);
       return (
         <FormProvider {...methods}>
           <>
