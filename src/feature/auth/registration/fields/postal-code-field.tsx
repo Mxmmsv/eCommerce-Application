@@ -14,6 +14,7 @@ export function PostalCodeField({ prefix }: PostalCodeFieldProps) {
   const {
     register,
     formState: { errors },
+    watch,
   } = useFormContext<RegistrationFormData>();
 
   const fieldName: keyof RegistrationFormData = prefix ? `${prefix}PostalCode` : 'postalCode';
@@ -23,7 +24,12 @@ export function PostalCodeField({ prefix }: PostalCodeFieldProps) {
     <div className="grid gap-2">
       <Label htmlFor={fieldName}>{prefix ? 'Alternative Postal Code' : 'Postal Code'}</Label>
       <div className="relative">
-        <Input id={fieldName} {...register(fieldName)} aria-invalid={!!error} />
+        <Input
+          id={fieldName}
+          {...register(fieldName)}
+          aria-invalid={!!error}
+          disabled={!watch('country')}
+        />
         {error && (
           <AlertCircle className="absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 text-red-500" />
         )}
