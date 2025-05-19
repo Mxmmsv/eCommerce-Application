@@ -1,40 +1,75 @@
 import { Heart, ShoppingCart } from 'lucide-react';
 import { NavLink } from 'react-router';
 
-import { ModeToggle } from '@/feature/header/mode-toggle';
-
+import BurgerMenu from './burger-menu';
 import Currency from './currency';
+import { ModeToggle } from './mode-toggle';
 import { CustomNavigationMenu } from './nav-menu';
 import { ProfileDropdownMenu } from './profile-dropdown';
-import Search from './search';
+import SearchBar from './search';
 
 export function Header() {
   return (
-    <header className="bg-background grid grid-cols-[1fr_150px_1fr] items-center p-4 shadow-xl">
-      <CustomNavigationMenu />
-
-      <div className="flex w-24 items-center justify-center rounded-md bg-white">
-        <img src="logo.svg" alt="logo" />
-      </div>
-
-      <nav className="flex items-center justify-end">
-        <ul className="flex flex-row items-center gap-4">
-          <Search />
-          <Currency />
+    <>
+      <header className="bg-background flex items-center justify-between p-4 shadow-lg max-sm:p-0 lg:hidden">
+        <div className="flex w-24 cursor-pointer items-center justify-center">
+          <NavLink to="/">
+            <img src="logo.svg" alt="logo" className="flex h-auto w-full rounded-2xl bg-white" />
+          </NavLink>
+        </div>
+        <div className="flex items-center justify-center gap-4 max-sm:gap-0">
           <ModeToggle />
-          <div className="flex gap-4">
-            <NavLink to="/wishlist" className="text-xl font-normal tracking-wider">
-              <Heart strokeWidth={1.5} size={32} />
-            </NavLink>
+          <NavLink to="/wishlist" className="px-1.5 text-xl font-normal tracking-wider">
+            <Heart strokeWidth={1.5} size={32} className="max-sm:size-6" />
+          </NavLink>
+          <NavLink to="/cart" className="px-1.5 text-xl font-normal tracking-wider">
+            <ShoppingCart strokeWidth={1.5} size={32} className="max-sm:size-6" />
+          </NavLink>
 
-            <ProfileDropdownMenu />
+          <BurgerMenu />
+        </div>
+      </header>
 
-            <NavLink to="/cart" className="text-xl font-normal tracking-wider">
-              <ShoppingCart strokeWidth={1.5} size={32} />
-            </NavLink>
-          </div>
-        </ul>
-      </nav>
-    </header>
+      <header className="bg-background hidden grid-cols-[1fr_125px_1fr] place-items-center py-4 lg:grid">
+        <CustomNavigationMenu />
+
+        <div className="flex w-24 cursor-pointer items-center justify-center">
+          <NavLink to="/">
+            <img src="logo.svg" alt="logo" className="flex h-auto w-full rounded-2xl bg-white" />
+          </NavLink>
+        </div>
+
+        <nav className="flex items-center justify-end">
+          <ul className="flex flex-row items-center gap-4">
+            <li>
+              <SearchBar />
+            </li>
+            <li>
+              <Currency />
+            </li>
+            <li>
+              <ModeToggle />
+            </li>
+            <li className="mr-6 flex gap-4">
+              <ul className="flex flex-row items-center gap-4">
+                <li>
+                  <NavLink to="/wishlist" className="text-xl font-normal tracking-wider">
+                    <Heart strokeWidth={1.5} size={32} />
+                  </NavLink>
+                </li>
+                <li>
+                  <ProfileDropdownMenu />
+                </li>
+                <li>
+                  <NavLink to="/cart" className="text-xl font-normal tracking-wider">
+                    <ShoppingCart strokeWidth={1.5} size={32} />
+                  </NavLink>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </header>
+    </>
   );
 }

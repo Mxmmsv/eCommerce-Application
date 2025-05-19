@@ -14,7 +14,7 @@ export default function Currency() {
 
   return (
     <Select defaultValue={selectedCurrency} onValueChange={setSelectedCurrency}>
-      <SelectTrigger className="flex w-20 items-center justify-center border-white shadow-none">
+      <SelectTrigger className="flex w-20 items-center justify-center border shadow-none">
         {selectedCurrency === 'eur' ? <Euro size={20} /> : <RussianRuble size={20} />}
       </SelectTrigger>
       <SelectContent>
