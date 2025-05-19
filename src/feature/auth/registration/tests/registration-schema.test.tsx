@@ -10,7 +10,7 @@ describe('Registration Schema', () => {
     email: 'test@example.com',
     password: 'Password123',
     dateOfBirth: '2001-01-02',
-    country: 'Country',
+    country: 'RU',
     postalCode: '12345',
     city: 'City',
     streetName: 'Street',
@@ -38,14 +38,46 @@ describe('Registration Schema', () => {
     );
   });
 
-  it('should validate password length', () => {
-    expect(() => parse(schema, { ...validData, password: 'short' })).toThrow(
-      'Minimum 8 characters',
-    );
+  it('should validate password format', () => {
+    const tests = [
+      { password: 'short', error: 'Minimum 8 characters' },
+      { password: 'lowercase', error: 'At least 1 uppercase letter' },
+      { password: 'UPPERCASE', error: 'At least 1 lowercase letter' },
+      { password: 'NoNumbers', error: 'At least 1 number' },
+    ];
+
+    tests.forEach(({ password, error }) => {
+      expect(() => parse(schema, { ...validData, password })).toThrow(error);
+    });
+  });
+
+  it('should validate date of birth', () => {
+    const tests = [
+      { date: '', error: 'Field is required' },
+      { date: 'invalid-date', error: 'Invalid date format' },
+      { date: '1899-12-31', error: 'Year must be 1900 or later' },
+      { date: new Date().toISOString().split('T')[0], error: 'You must be at least 12 years old' },
+    ];
+
+    tests.forEach(({ date, error }) => {
+      expect(() => parse(schema, { ...validData, dateOfBirth: date })).toThrow(error);
+    });
   });
 
   it('should require country', () => {
     expect(() => parse(schema, { ...validData, country: '' })).toThrow('Please select a country');
+  });
+
+  it('should validate postal code by country', () => {
+    const tests = [
+      { country: 'RU', postalCode: '123', error: 'Postal code does not match country' },
+      { country: 'AM', postalCode: '12345', error: 'Postal code does not match country' },
+      { country: 'RS', postalCode: '1234', error: 'Postal code does not match country' },
+    ];
+
+    tests.forEach(({ country, postalCode, error }) => {
+      expect(() => parse(schema, { ...validData, country, postalCode })).toThrow(error);
+    });
   });
 
   it('should validate city format', () => {
@@ -56,5 +88,14 @@ describe('Registration Schema', () => {
 
   it('should validate postal code format', () => {
     expect(() => parse(schema, { ...validData, postalCode: '' })).toThrow('Field is required');
+  });
+
+  it('should work without optional fields', () => {
+    const minimalData = {
+      ...validData,
+      setAsDefaultShipping: undefined,
+      alternativeShippingCountry: undefined,
+    };
+    expect(() => parse(schema, minimalData)).not.toThrow();
   });
 });
