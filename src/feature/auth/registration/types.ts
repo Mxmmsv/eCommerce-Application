@@ -7,5 +7,15 @@ export type RegistrationFormData = {
   country: string;
   postalCode: string;
   city: string;
-  street: string;
+  streetName: string;
+  setAsDefaultShipping?: boolean;
+  setAsDefaultBilling?: boolean;
+  alternativeShippingCountry?: string;
+  alternativeShippingPostalCode?: string;
+  alternativeShippingCity?: string;
+  alternativeShippingStreet?: string;
+  alternativeBillingCountry?: string;
+  alternativeBillingPostalCode?: string;
+  alternativeBillingCity?: string;
+  alternativeBillingStreet?: string;
 };
