@@ -2,7 +2,7 @@ import type { NavigateFunction } from 'react-router';
 import { toast } from 'sonner';
 
 import AnonymousFlowApiClient from '@/feature/api/api-client-anonymous';
-import { signInCustomerWithMail } from '@/feature/auth/login/sign-in-customer';
+import { signInCustomer } from '@/feature/api/sign-in-customer';
 
 import type { RegistrationFormData } from './types';
 
@@ -17,7 +17,7 @@ export const handleRegister = async (data: RegistrationFormData, navigate: Navig
 
     console.log('Success:', anonymousApiRoot);
 
-    await signInCustomerWithMail(data.email, data.password);
+    await signInCustomer(data.email, data.password);
 
     toast.success('Success!', {
       description: 'Registration completed',

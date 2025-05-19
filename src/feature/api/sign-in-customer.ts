@@ -8,7 +8,7 @@ import PasswordFlowApiClient from '@/feature/api/api-client-password-flow';
 import tokenCache from '@/feature/api/api-token-store';
 import { setAuthToLocalStorage } from '@/service/store/local-storage';
 
-export const signInCustomerWithMail = async (
+export const signInCustomer = async (
   email: string,
   password: string,
 ): Promise<ClientResponse<CustomerSignInResult>> => {
