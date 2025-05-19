@@ -74,7 +74,7 @@ export function RegistrationForm({ className, onRegister, ...props }: Props) {
 
   return (
     <div className={cn('flex flex-col gap-6', className)} {...props}>
-      <Card className="relative p-12">
+      <Card className="relative px-6 py-12 sm:px-8 md:px-12">
         <CloseButton className="flex justify-end" />
         <CardHeader className="flex justify-center">
           <CardTitle className="text-2xl">Create an account</CardTitle>
