@@ -10,8 +10,6 @@ import jestDom from 'eslint-plugin-jest-dom';
 import vitest from '@vitest/eslint-plugin';
 import importPlugin from 'eslint-plugin-import';
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
-import { fileURLToPath } from 'node:url';
-import path from 'path';
 
 export default tseslint.config(
   { ignores: ['dist', 'coverage'] },
@@ -76,6 +74,12 @@ export default tseslint.config(
     files: ['src/vite-env.d.ts'],
     rules: {
       '@typescript-eslint/consistent-type-definitions': 'off',
+    },
+  },
+  {
+    files: ['src/components/ui/**/*'],
+    rules: {
+      'react-refresh/only-export-components': 'off',
     },
   },
   {
