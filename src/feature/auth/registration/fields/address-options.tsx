@@ -20,7 +20,6 @@ export function AddressOptions() {
           <Controller
             control={control}
             name="setAsDefaultShipping"
-            defaultValue={true}
             render={({ field }) => (
               <Checkbox
                 id="setAsDefaultShipping"

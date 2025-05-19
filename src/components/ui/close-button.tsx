@@ -18,7 +18,7 @@ export function CloseButton({ className }: CloseButtonProps) {
     <button
       onClick={handleClick}
       className={cn(
-        'bg-background absolute top-2 right-2 rounded-full p-1 shadow-sm transition-colors hover:bg-gray-100',
+        'bg-background hover:bg-accent absolute top-2 right-2 rounded-full p-1 shadow-sm transition-colors',
         className,
       )}
       aria-label="Close"
