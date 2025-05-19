@@ -82,16 +82,56 @@ export const schema = pipe(
   forward(
     partialCheck(
       [['country'], ['postalCode']],
+
       (input) => {
         const { country, postalCode } = input;
 
+        if (!country || !postalCode) return true;
+
         const postalPattern = postalCodePatterns[country];
 
-        console.log(postalPattern);
+        if (!postalPattern) return true;
         return postalPattern.test(postalCode);
       },
       'Postal code does not match country',
     ),
     ['postalCode'],
+  ),
+  forward(
+    partialCheck(
+      [['alternativeBillingCountry'], ['alternativeBillingPostalCode']],
+
+      (input) => {
+        const country = input.alternativeBillingCountry;
+        const postalCode = input.alternativeBillingPostalCode;
+
+        if (!country || !postalCode) return true;
+
+        const postalPattern = postalCodePatterns[country];
+        if (!postalPattern) return true;
+
+        return postalPattern.test(postalCode);
+      },
+      'Postal code does not match country',
+    ),
+    ['alternativeBillingPostalCode'],
+  ),
+  forward(
+    partialCheck(
+      [['alternativeShippingCountry'], ['alternativeShippingPostalCode']],
+      (input) => {
+        const country = input.alternativeShippingCountry;
+        const postalCode = input.alternativeShippingPostalCode;
+
+        if (!country || !postalCode) return true;
+
+        const postalPattern = postalCodePatterns[country];
+        if (!postalPattern) return true;
+
+        return postalPattern.test(postalCode);
+      },
+      'Postal code does not match country',
+    ),
+    ['alternativeShippingPostalCode'],
   ),
 );
