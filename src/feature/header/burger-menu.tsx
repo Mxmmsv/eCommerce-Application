@@ -17,7 +17,7 @@ import {
 import { useState } from 'react';
 import { NavLink } from 'react-router';
 
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import {
   Sheet,
   SheetContent,
@@ -26,6 +26,7 @@ import {
   SheetDescription,
   SheetTitle,
 } from '@/components/ui/sheet';
+import { useLogout } from '@/feature/auth/login/use-logout';
 
 import { ModeToggle } from './mode-toggle';
 import SearchBar from './search';
@@ -33,6 +34,7 @@ import SearchBar from './search';
 export default function BurgerMenu() {
   const [catalogOpen, setCatalogOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+  const handleLogout = useLogout();
 
   return (
     <div className="flex items-center justify-center gap-4">
@@ -166,10 +168,13 @@ export default function BurgerMenu() {
                   </NavLink>
                 </SheetClose>
 
-                <SheetClose asChild>
-                  <NavLink to="/logout" className="flex items-center p-3 hover:underline">
-                    <LogOut size={28} className="mr-2" />
-                    Logout
+                <SheetClose asChild onClick={handleLogout}>
+                  <NavLink
+                    className={`${buttonVariants({ variant: 'link' })} h-auto w-full cursor-pointer items-center justify-start hover:underline`}
+                    to={'/login'}
+                  >
+                    <LogOut size={28} className="[&_svg:not([class*='size-'])]:size-8" />
+                    <span className="py-1 text-2xl font-normal">Log out</span>
                   </NavLink>
                 </SheetClose>
               </div>
