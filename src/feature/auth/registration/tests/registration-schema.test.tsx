@@ -11,14 +11,10 @@ describe('Registration Schema', () => {
     password: 'Password123',
     dateOfBirth: '2001-01-02',
     country: 'RU',
-    postalCode: '12345',
+    postalCode: '123456',
     city: 'City',
     streetName: 'Street',
   };
-
-  it('should validate correct data', () => {
-    expect(() => parse(schema, validData)).not.toThrow();
-  });
 
   it('should require firstName', () => {
     expect(() => parse(schema, { ...validData, firstName: '' })).toThrow('Field is required');
@@ -68,15 +64,23 @@ describe('Registration Schema', () => {
     expect(() => parse(schema, { ...validData, country: '' })).toThrow('Please select a country');
   });
 
-  it('should validate postal code by country', () => {
+  it('should validate postal codes by country', () => {
     const tests = [
-      { country: 'RU', postalCode: '123', error: 'Postal code does not match country' },
+      { country: 'RU', postalCode: '123456', error: undefined },
+      { country: 'RU', postalCode: '12345', error: 'Postal code does not match country' },
+      { country: 'AM', postalCode: '1234', error: undefined },
       { country: 'AM', postalCode: '12345', error: 'Postal code does not match country' },
+      { country: 'RS', postalCode: '12345', error: undefined },
       { country: 'RS', postalCode: '1234', error: 'Postal code does not match country' },
     ];
 
     tests.forEach(({ country, postalCode, error }) => {
-      expect(() => parse(schema, { ...validData, country, postalCode })).toThrow(error);
+      const testData = { ...validData, country, postalCode };
+      if (error) {
+        expect(() => parse(schema, testData)).toThrow(error);
+      } else {
+        expect(() => parse(schema, testData)).not.toThrow();
+      }
     });
   });
 
