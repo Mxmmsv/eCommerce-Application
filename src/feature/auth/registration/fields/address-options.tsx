@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { useFormContext, Controller } from 'react-hook-form';
 
 import { Checkbox } from '@/components/ui/checkbox';
@@ -12,30 +12,19 @@ import { StreetField } from './street-field';
 
 export function AddressOptions() {
   const { control, watch, setValue } = useFormContext<RegistrationFormData>();
-  const prevValues = useRef({
-    shipping: true,
-    billing: true,
-  });
 
-  const [defaultShipping, defaultBilling, skipDefaults] = watch([
+  const [skipDefaults, defaultShipping, defaultBilling] = watch([
+    'skipDefaultAddresses',
     'setAsDefaultShipping',
     'setAsDefaultBilling',
-    'skipDefaultAddresses',
   ]);
 
   useEffect(() => {
     if (skipDefaults) {
-      prevValues.current = {
-        shipping: defaultShipping,
-        billing: defaultBilling,
-      };
       setValue('setAsDefaultShipping', false);
       setValue('setAsDefaultBilling', false);
-    } else {
-      setValue('setAsDefaultShipping', prevValues.current.shipping);
-      setValue('setAsDefaultBilling', prevValues.current.billing);
     }
-  }, [skipDefaults]);
+  }, [skipDefaults, setValue]);
 
   return (
     <div className="mt-4 space-y-3">
@@ -48,13 +37,7 @@ export function AddressOptions() {
               <Checkbox
                 id="skipDefaultAddresses"
                 checked={field.value}
-                onCheckedChange={(checked) => {
-                  field.onChange(checked);
-                  if (checked) {
-                    setValue('setAsDefaultShipping', false);
-                    setValue('setAsDefaultBilling', false);
-                  }
-                }}
+                onCheckedChange={field.onChange}
               />
             )}
           />
@@ -78,7 +61,7 @@ export function AddressOptions() {
                   <Checkbox
                     id="setAsDefaultShipping"
                     checked={field.value}
-                    onChange={(e) => field.onChange(e.target.checked)}
+                    onCheckedChange={field.onChange}
                   />
                 )}
               />
@@ -111,7 +94,7 @@ export function AddressOptions() {
                   <Checkbox
                     id="setAsDefaultBilling"
                     checked={field.value}
-                    onChange={(e) => field.onChange(e.target.checked)}
+                    onCheckedChange={field.onChange}
                   />
                 )}
               />
