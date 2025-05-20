@@ -14,7 +14,7 @@ export function useLogout() {
     setIsAuthorized(false);
     useCustomerStore.getState().clearCustomer();
     void navigate('/login');
-    toast.success('Login successful!');
+    toast.success('Logout successful!');
   };
 
   return handleLogout;
