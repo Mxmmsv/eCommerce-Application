@@ -18,4 +18,5 @@ export type RegistrationFormData = {
   alternativeBillingPostalCode?: string;
   alternativeBillingCity?: string;
   alternativeBillingStreet?: string;
+  skipDefaultAddresses?: boolean;
 };
