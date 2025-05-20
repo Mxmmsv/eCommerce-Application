@@ -33,6 +33,7 @@ export function RegistrationForm({ className, onRegister, ...props }: Props) {
       alternativeBillingCountry: '',
       setAsDefaultShipping: true,
       setAsDefaultBilling: true,
+      skipDefaultAddresses: false,
     },
   });
 
