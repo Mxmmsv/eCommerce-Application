@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
 
-import { signInCustomer } from '@/feature/api/sign-in-customer';
+import { signInCustomer } from '@/feature/auth/login/api/sign-in-customer';
 
 import AuthContext from './auth-provider';
 import { formSchema } from './login-schema';

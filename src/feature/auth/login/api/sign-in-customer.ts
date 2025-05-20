@@ -7,6 +7,7 @@ import type {
 import PasswordFlowApiClient from '@/feature/api/api-client-password-flow';
 import tokenCache from '@/feature/api/api-token-store';
 import { setAuthToLocalStorage } from '@/service/store/local-storage';
+import { useCustomerStore } from '@/service/store/use-user-store';
 
 export const signInCustomer = async (
   email: string,
@@ -38,6 +39,23 @@ export const signInCustomer = async (
   }
 
   setAuthToLocalStorage(token, true);
+
+  const { customer } = response.body;
+
+  useCustomerStore.getState().setCustomer({
+    id: customer.id,
+    version: customer.version,
+    createdAt: customer.createdAt,
+    lastModifiedAt: customer.lastModifiedAt,
+    email: customer.email,
+    firstName: customer.firstName ?? '',
+    lastName: customer.lastName ?? '',
+    dateOfBirth: customer.dateOfBirth ?? '',
+    addresses: customer.addresses,
+    isEmailVerified: customer.isEmailVerified,
+    stores: customer.stores,
+    authenticationMode: customer.authenticationMode,
+  });
 
   return response;
 };
