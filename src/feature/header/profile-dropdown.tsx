@@ -9,7 +9,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
-import { useLogout } from '@/feature/auth/login/use-logout';
+import { useLogout } from '@/feature/auth/login/api/use-logout';
 
 export function ProfileDropdownMenu() {
   const handleLogout = useLogout();

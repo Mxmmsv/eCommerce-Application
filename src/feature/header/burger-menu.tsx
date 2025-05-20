@@ -26,7 +26,7 @@ import {
   SheetDescription,
   SheetTitle,
 } from '@/components/ui/sheet';
-import { useLogout } from '@/feature/auth/login/use-logout';
+import { useLogout } from '@/feature/auth/login/api/use-logout';
 
 import { ModeToggle } from './mode-toggle';
 import SearchBar from './search';

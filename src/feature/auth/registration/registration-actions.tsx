@@ -2,7 +2,7 @@ import type { NavigateFunction } from 'react-router';
 import { toast } from 'sonner';
 
 import AnonymousFlowApiClient from '@/feature/api/api-client-anonymous';
-import { signInCustomer } from '@/feature/api/sign-in-customer';
+import { signInCustomer } from '@/feature/auth/login/api/sign-in-customer';
 
 import type { RegistrationFormData } from './types';
 
