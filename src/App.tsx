@@ -15,7 +15,7 @@ import UserProfile from '@/pages/profile-user-page';
 import Registration from '@/pages/registration-page';
 import Wishlist from '@/pages/wishlist-page';
 
-import { ScrollToTop } from './components/scroll-to-top';
+import { ScrollToTop } from './service/scroll-to-top';
 
 function App() {
   return (
