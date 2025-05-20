@@ -68,6 +68,7 @@ export const schema = pipe(
     postalCode: pipe(requiredValidator),
     city: nameValidator,
     streetName: nameValidator,
+    skipDefaultAddresses: optional(boolean()),
     setAsDefaultShipping: optional(boolean()),
     setAsDefaultBilling: optional(boolean()),
     alternativeShippingCountry: optional(requiredValidator),
