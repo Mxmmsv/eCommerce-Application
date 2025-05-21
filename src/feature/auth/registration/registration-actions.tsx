@@ -35,6 +35,9 @@ const getRegistrationBody = (data: RegistrationFormData) => {
     },
   ];
 
+  let shippingAddressIndex = 0;
+  let billingAddressIndex = 0;
+
   if (!data.skipDefaultAddresses) {
     if (!data.setAsDefaultShipping && data.alternativeShippingStreet) {
       addresses.push({
@@ -43,6 +46,7 @@ const getRegistrationBody = (data: RegistrationFormData) => {
         city: data.alternativeShippingCity || data.city,
         streetName: data.alternativeShippingStreet,
       });
+      shippingAddressIndex = 1;
     }
 
     if (!data.setAsDefaultBilling && data.alternativeBillingStreet) {
@@ -52,6 +56,7 @@ const getRegistrationBody = (data: RegistrationFormData) => {
         city: data.alternativeBillingCity || data.city,
         streetName: data.alternativeBillingStreet,
       });
+      billingAddressIndex = addresses.length - 1;
     }
   }
 
@@ -62,20 +67,8 @@ const getRegistrationBody = (data: RegistrationFormData) => {
     password: data.password,
     dateOfBirth: data.dateOfBirth,
     addresses,
-    defaultShippingAddress: data.skipDefaultAddresses
-      ? undefined
-      : data.setAsDefaultShipping
-        ? 0
-        : addresses.length > 1
-          ? 1
-          : 0,
-    defaultBillingAddress: data.skipDefaultAddresses
-      ? undefined
-      : data.setAsDefaultBilling
-        ? 0
-        : addresses.length > 1
-          ? 2
-          : 0,
+    defaultShippingAddress: data.skipDefaultAddresses ? undefined : shippingAddressIndex,
+    defaultBillingAddress: data.skipDefaultAddresses ? undefined : billingAddressIndex,
   };
 };
 
