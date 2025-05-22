@@ -43,12 +43,18 @@ export default function BurgerMenu() {
           <Button
             variant="ghost"
             className="flex h-auto w-full items-center justify-center [&_svg:not([class*='size-'])]:size-8"
+            aria-label="open menu"
           >
             <Menu size={32} className="max-sm:size-6" />
           </Button>
         </SheetTrigger>
 
-        <SheetContent side="top" className="flex max-h-[100vh] space-y-4 overflow-y-auto text-2xl">
+        <SheetContent
+          side="top"
+          className="flex max-h-[100vh] space-y-4 overflow-y-auto text-2xl"
+          role="dialog"
+          aria-label="burger menu"
+        >
           <SheetTitle className="sr-only">
             Burger menu for screens with a resolution of less than 1025px.
           </SheetTitle>
@@ -70,6 +76,7 @@ export default function BurgerMenu() {
                 <Button
                   variant="ghost"
                   className="flex h-[55px] w-[55px] items-center justify-center [&_svg:not([class*='size-'])]:size-8"
+                  aria-label="close menu"
                 >
                   <X size={32} className="max-sm:size-6" />
                 </Button>
