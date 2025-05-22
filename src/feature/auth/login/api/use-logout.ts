@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
 
+import { clearTokenCache } from '@/feature/api/api-token-store';
 import AuthContext from '@/feature/auth/login/auth-provider';
 import { useCustomerStore } from '@/service/store/use-user-store';
 
@@ -10,7 +11,7 @@ export function useLogout() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem('ACCESS_TOKEN_KEY');
+    clearTokenCache();
     setIsAuthorized(false);
     useCustomerStore.getState().clearCustomer();
     void navigate('/login');
