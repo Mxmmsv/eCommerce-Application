@@ -6,11 +6,17 @@ let tokenCacheStore: TokenStore = {
   refreshToken: '',
 };
 
-const tokenCache: TokenCache = {
+export const tokenCache: TokenCache = {
   get: () => tokenCacheStore,
   set: (cache) => {
     tokenCacheStore = cache;
   },
 };
 
-export default tokenCache;
+export const clearTokenCache = () => {
+  tokenCache.set({
+    token: '',
+    expirationTime: 0,
+    refreshToken: '',
+  });
+};

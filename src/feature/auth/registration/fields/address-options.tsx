@@ -21,8 +21,15 @@ export function AddressOptions() {
 
   useEffect(() => {
     if (skipDefaults) {
-      setValue('setAsDefaultShipping', false);
-      setValue('setAsDefaultBilling', false);
+      setValue('alternativeShippingStreet', undefined);
+      setValue('alternativeShippingCity', undefined);
+      setValue('alternativeShippingPostalCode', undefined);
+      setValue('alternativeShippingCountry', undefined);
+
+      setValue('alternativeBillingStreet', undefined);
+      setValue('alternativeBillingCity', undefined);
+      setValue('alternativeBillingPostalCode', undefined);
+      setValue('alternativeBillingCountry', undefined);
     }
   }, [skipDefaults, setValue]);
 
