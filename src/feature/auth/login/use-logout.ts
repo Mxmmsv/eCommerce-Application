@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router';
 
+import { clearTokenCache } from '@/feature/api/api-token-store';
 import AuthContext from '@/feature/auth/login/auth-provider';
 
 export function useLogout() {
@@ -8,7 +9,7 @@ export function useLogout() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem('ACCESS_TOKEN_KEY');
+    clearTokenCache();
     setIsAuthorized(false);
     void navigate('/login');
   };
