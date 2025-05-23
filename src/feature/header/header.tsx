@@ -19,10 +19,13 @@ export function Header() {
         </div>
         <div className="flex items-center justify-center gap-4 max-sm:gap-0">
           <ModeToggle />
-          <NavLink to="/wishlist" className="px-1.5 text-xl font-normal tracking-wider">
+          <NavLink
+            to="/wishlist"
+            className="hover:text-chart-3 px-1.5 transition-colors duration-300"
+          >
             <Heart strokeWidth={1.5} size={32} className="max-sm:size-6" />
           </NavLink>
-          <NavLink to="/cart" className="px-1.5 text-xl font-normal tracking-wider">
+          <NavLink to="/cart" className="hover:text-chart-3 px-1.5 transition-colors duration-300">
             <ShoppingCart strokeWidth={1.5} size={32} className="max-sm:size-6" />
           </NavLink>
 
@@ -53,7 +56,10 @@ export function Header() {
             <li className="mr-6 flex gap-4">
               <ul className="flex flex-row items-center gap-4">
                 <li>
-                  <NavLink to="/wishlist" className="text-xl font-normal tracking-wider">
+                  <NavLink
+                    to="/wishlist"
+                    className="hover:text-chart-3 transition-colors duration-300"
+                  >
                     <Heart strokeWidth={1.5} size={32} />
                   </NavLink>
                 </li>
@@ -61,7 +67,7 @@ export function Header() {
                   <ProfileDropdownMenu />
                 </li>
                 <li>
-                  <NavLink to="/cart" className="text-xl font-normal tracking-wider">
+                  <NavLink to="/cart" className="hover:text-chart-3 transition-colors duration-300">
                     <ShoppingCart strokeWidth={1.5} size={32} />
                   </NavLink>
                 </li>
