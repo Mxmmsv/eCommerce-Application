@@ -3,7 +3,6 @@ import {
   ChevronDown,
   X,
   LayoutGrid,
-  BookImage,
   Heart,
   UserRound,
   ShoppingCart,
@@ -32,7 +31,6 @@ import { ModeToggle } from './mode-toggle';
 import SearchBar from './search';
 
 export default function BurgerMenu() {
-  const [catalogOpen, setCatalogOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const handleLogout = useLogout();
 
@@ -87,28 +85,15 @@ export default function BurgerMenu() {
               </NavLink>
             </SheetClose>
 
-            <button
-              className="flex items-center justify-between md:items-center"
-              onClick={() => setCatalogOpen(!catalogOpen)}
-              aria-expanded={catalogOpen}
-              aria-controls="catalog-menu"
-              tabIndex={0}
-              onKeyDown={(e) => e.key === 'Enter' && setCatalogOpen(!catalogOpen)}
-            >
-              <BookImage size={36} className="mr-2" />
-              <span className="flex w-full cursor-pointer py-5 hover:underline">Catalog</span>
-              <ChevronDown className={`transition-transform ${catalogOpen ? 'rotate-180' : ''}`} />
-            </button>
-            {catalogOpen && (
-              <div id="catalog-menu" className="ml-4 flex flex-col">
-                <SheetClose asChild>
-                  <NavLink to="/catalog" className="flex items-center py-3 hover:underline">
-                    <Box size={28} className="mr-2" />
-                    All Products
-                  </NavLink>
-                </SheetClose>
-              </div>
-            )}
+            <SheetClose asChild>
+              <NavLink
+                to="/catalog"
+                className="flex w-full cursor-pointer py-5 hover:underline md:justify-center"
+              >
+                <Box size={28} className="mr-2" />
+                Catalog
+              </NavLink>
+            </SheetClose>
 
             <SheetClose asChild>
               <NavLink
