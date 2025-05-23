@@ -31,7 +31,7 @@ import { ModeToggle } from './mode-toggle';
 import SearchBar from './search';
 
 export default function BurgerMenu() {
-  const [profileOpen, setProfileOpen] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
   const handleLogout = useLogout();
 
   return (
@@ -118,19 +118,21 @@ export default function BurgerMenu() {
           <div className="flex flex-col border-t p-4 md:items-center">
             <button
               className="flex items-center justify-between"
-              onClick={() => setProfileOpen(!profileOpen)}
-              aria-expanded={profileOpen}
+              onClick={() => setIsProfileOpen(!isProfileOpen)}
+              aria-expanded={isProfileOpen}
               aria-controls="profile-menu"
               tabIndex={0}
-              onKeyDown={(e) => e.key === 'Enter' && setProfileOpen(!profileOpen)}
+              onKeyDown={(e) => e.key === 'Enter' && setIsProfileOpen(!isProfileOpen)}
             >
               <span className="flex w-full cursor-pointer p-5 hover:underline">
                 <UserRound size={28} className="mr-2" />
                 Profile
               </span>
-              <ChevronDown className={`transition-transform ${profileOpen ? 'rotate-180' : ''}`} />
+              <ChevronDown
+                className={`transition-transform ${isProfileOpen ? 'rotate-180' : ''}`}
+              />
             </button>
-            {profileOpen && (
+            {isProfileOpen && (
               <div id="profile-menu" className="ml-4 flex flex-col">
                 <SheetClose asChild>
                   <NavLink to="/login" className="flex items-center p-3 hover:underline">
