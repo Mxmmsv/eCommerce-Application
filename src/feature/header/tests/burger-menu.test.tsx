@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { BrowserRouter } from 'react-router';
+import { MemoryRouter } from 'react-router';
 import { describe, it, expect } from 'vitest';
 
 import BurgerMenu from '../burger-menu';
@@ -8,9 +8,9 @@ import BurgerMenu from '../burger-menu';
 describe('BurgerMenu', () => {
   it('opens when clicking menu-open-button and closes when clicking on X-button', async () => {
     render(
-      <BrowserRouter>
+      <MemoryRouter>
         <BurgerMenu />
-      </BrowserRouter>,
+      </MemoryRouter>,
     );
     const user = userEvent.setup();
 
@@ -30,9 +30,9 @@ describe('BurgerMenu', () => {
 
   it('closes the burger menu after clicking a link', async () => {
     render(
-      <BrowserRouter>
+      <MemoryRouter>
         <BurgerMenu />
-      </BrowserRouter>,
+      </MemoryRouter>,
     );
     const user = userEvent.setup();
 
