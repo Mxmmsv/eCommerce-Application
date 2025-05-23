@@ -1,6 +1,6 @@
 import { useParams } from 'react-router';
 
-import ProductOverview from '@/feature/product-overview/product-overview-form';
+import ProductOverview from '@/feature/product-overview/product-overview-component';
 
 export default function ProductDetailPage() {
   const { id } = useParams();
