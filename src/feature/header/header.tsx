@@ -11,7 +11,7 @@ import SearchBar from './search';
 export function Header() {
   return (
     <>
-      <header className="bg-background flex items-center justify-between p-4 shadow-lg max-sm:p-0 lg:hidden">
+      <header className="bg-background flex items-center justify-between p-4 shadow-lg max-sm:gap-4 lg:hidden">
         <div className="flex w-24 cursor-pointer items-center justify-center">
           <NavLink to="/">
             <img src="logo.svg" alt="logo" className="flex h-auto w-full rounded-2xl bg-white" />
