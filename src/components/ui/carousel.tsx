@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+'use client';
+
+>>>>>>> a13ec8f (feat: add product display to catalog page)
 import useEmblaCarousel, { type UseEmblaCarouselType } from 'embla-carousel-react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import * as React from 'react';
