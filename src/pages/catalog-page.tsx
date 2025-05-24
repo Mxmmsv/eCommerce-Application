@@ -1,52 +1,52 @@
 import { useEffect, useState } from 'react';
 
-import { ProductGrid } from '@/components/product-grid';
-import AnonymousFlowApiClient from '@/feature/api/api-client-anonymous';
-import type { Product, ProductFromApi } from '@/feature/catalog/types';
+import { ProductList } from '@/components/product-list';
+import { fetchProducts } from '@/feature/catalog/api/fetch-products';
+import { mapToProduct } from '@/feature/catalog/api/map-products';
+import type { Product } from '@/feature/catalog/types';
 
 export default function CatalogPage() {
   const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      const apiRoot = AnonymousFlowApiClient();
+    const loadProducts = async () => {
       try {
-        const response = await apiRoot.products().get().execute();
-        console.log('Full API data:', response.body);
-
-        const mappedProducts = response.body.results.map((product: ProductFromApi) => {
-          const currentData = product.masterData?.current;
-          const variant = currentData?.masterVariant;
-          return {
-            id: product.id,
-            name:
-              currentData?.name?.['en-US'] ??
-              Object.values(currentData?.name ?? {})[0] ??
-              'No name',
-            description:
-              currentData?.description?.['en-US'] ??
-              Object.values(currentData?.description ?? {})[0] ??
-              '',
-            image: variant?.images?.[0]?.url ?? '',
-          };
-        });
-        setProducts(mappedProducts);
+        setIsLoading(true);
+        const apiProducts = await fetchProducts();
+        setProducts(apiProducts.map(mapToProduct));
       } catch (error) {
-        console.error('Error fetching products:', error);
+        console.error('Error to load products:', error);
+        setError('Failed to load products. Please try again later.');
+      } finally {
+        setIsLoading(false);
       }
     };
 
-    void fetchProducts();
+    void loadProducts();
   }, []);
+
+  if (isLoading) {
+    return (
+      <div className="flex min-h-svh items-center justify-center">
+        <div className="text-center">Loading products...</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex min-h-svh items-center justify-center">
+        <div className="text-center text-red-500">{error}</div>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-muted flex min-h-svh items-center justify-center text-lg">
       <div className="container py-8">
-        {products.length > 0 ? (
-          <ProductGrid products={products.filter((p) => p.image !== null)} />
-        ) : (
-          <div className="text-center">Loading products...</div>
-        )}
+        <ProductList products={products} />
       </div>
     </div>
   );
