@@ -32,8 +32,8 @@ export function ProfileDropdownMenu() {
 
         <div className="hover:bg-secondary flex items-center justify-start rounded-sm border-white shadow-none">
           <LogIn strokeWidth={1.5} size={28} />
-          <DropdownMenuItem className="w-full cursor-pointer">
-            <NavLink to="/login" className="w-full justify-center text-xl whitespace-nowrap">
+          <DropdownMenuItem asChild>
+            <NavLink to="/login" className="flex w-full cursor-pointer justify-start text-xl">
               <span className="block">Log in</span>
             </NavLink>
           </DropdownMenuItem>
@@ -41,8 +41,11 @@ export function ProfileDropdownMenu() {
 
         <div className="hover:bg-secondary flex items-center justify-start rounded-sm border-white shadow-none">
           <UserRoundPlus strokeWidth={1.5} size={28} />
-          <DropdownMenuItem className="w-full cursor-pointer">
-            <NavLink to="/registration" className="w-full justify-center text-xl whitespace-nowrap">
+          <DropdownMenuItem asChild>
+            <NavLink
+              to="/registration"
+              className="flex w-full cursor-pointer justify-start text-xl"
+            >
               <span>Registration</span>
             </NavLink>
           </DropdownMenuItem>
@@ -52,8 +55,8 @@ export function ProfileDropdownMenu() {
 
         <div className="hover:bg-secondary flex items-center justify-start rounded-sm border-white shadow-none">
           <UserRoundPen strokeWidth={1.5} size={28} />
-          <DropdownMenuItem className="w-full cursor-pointer">
-            <NavLink to="/profile" className="w-full justify-center text-xl whitespace-nowrap">
+          <DropdownMenuItem asChild>
+            <NavLink to="/profile" className="flex w-full cursor-pointer justify-start text-xl">
               <span className="block">Profile</span>
             </NavLink>
           </DropdownMenuItem>
