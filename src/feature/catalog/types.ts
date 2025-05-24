@@ -5,7 +5,7 @@ export type Product = {
   image: string;
 };
 
-export type ProductFromApi = {
+export type CommercetoolsProduct = {
   id: string;
   masterData?: {
     current?: {
