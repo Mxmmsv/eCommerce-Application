@@ -1,4 +1,6 @@
+import { clsx } from 'clsx';
 import { UserRound, UserRoundPen, UserRoundPlus, LogIn, LogOut } from 'lucide-react';
+import { useContext } from 'react';
 import { NavLink } from 'react-router';
 
 import {
@@ -10,9 +12,11 @@ import {
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
 import { useLogout } from '@/feature/auth/login/api/use-logout';
+import AuthContext from '@/feature/auth/login/auth-provider';
 
 export function ProfileDropdownMenu() {
   const handleLogout = useLogout();
+  const { IS_AUTHORIZED } = useContext(AuthContext);
 
   return (
     <DropdownMenu>
@@ -57,9 +61,21 @@ export function ProfileDropdownMenu() {
 
         <DropdownMenuSeparator />
 
-        <div className="hover:bg-secondary flex items-center justify-start rounded-sm border-white shadow-none">
+        <div
+          className={clsx(
+            'flex w-full items-center justify-start rounded-sm border-white shadow-none',
+            {
+              'cursor-not-allowed opacity-50': !IS_AUTHORIZED,
+              'hover:bg-secondary cursor-pointer': IS_AUTHORIZED,
+            },
+          )}
+        >
           <LogOut strokeWidth={1.5} size={28} />
-          <DropdownMenuItem className="w-full cursor-pointer" onClick={handleLogout}>
+          <DropdownMenuItem
+            className="w-full cursor-pointer"
+            onClick={handleLogout}
+            disabled={!IS_AUTHORIZED}
+          >
             <span className="w-full text-start text-xl whitespace-nowrap">Log out</span>
           </DropdownMenuItem>
         </div>
