@@ -1,10 +1,10 @@
 import type { Product } from '@/feature/catalog/types';
 
-type ProductGridProps = {
+type ProductListProps = {
   products: Product[];
 };
 
-const ProductGrid = ({ products }: ProductGridProps) => {
+const ProductList = ({ products }: ProductListProps) => {
   if (products.length === 0) {
     return <div className="py-32 text-center">No products found</div>;
   }
@@ -43,4 +43,4 @@ const ProductGrid = ({ products }: ProductGridProps) => {
   );
 };
 
-export { ProductGrid };
+export { ProductList };

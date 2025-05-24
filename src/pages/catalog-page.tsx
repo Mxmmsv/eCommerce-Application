@@ -38,6 +38,22 @@ export default function CatalogPage() {
     );
   }
 
+  if (isLoading) {
+    return (
+      <div className="flex min-h-svh items-center justify-center">
+        <div className="text-center">Loading products...</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex min-h-svh items-center justify-center">
+        <div className="text-center text-red-500">{error}</div>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-muted flex min-h-svh justify-center text-lg">
       <div className="container py-8">
