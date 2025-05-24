@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { ProductList } from '@/components/product-list';
+import { Spinner } from '@/components/ui/spiner';
 import { fetchProducts } from '@/feature/catalog/api/fetch-products';
 import { mapToProduct } from '@/feature/catalog/api/map-products';
 import type { Product } from '@/feature/catalog/types';
@@ -29,8 +30,10 @@ export default function CatalogPage() {
 
   if (isLoading) {
     return (
-      <div className="flex min-h-svh items-center justify-center">
-        <div className="text-center">Loading products...</div>
+      <div className="column flex min-h-svh items-center justify-center">
+        <Spinner size="medium" className="text-primary">
+          <span className="text-center">Loading products...</span>
+        </Spinner>
       </div>
     );
   }
