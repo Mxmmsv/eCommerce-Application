@@ -40,8 +40,10 @@ export default function CatalogPage() {
 
   if (isLoading) {
     return (
-      <div className="flex min-h-svh items-center justify-center">
-        <div className="text-center">Loading products...</div>
+      <div className="column flex min-h-svh items-center justify-center">
+        <Spinner size="medium" className="text-primary">
+          <span className="text-center">Loading products...</span>
+        </Spinner>
       </div>
     );
   }
