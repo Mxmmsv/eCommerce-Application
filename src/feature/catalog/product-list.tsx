@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { ProductComponent } from './product-component';
 import type { Poster } from './types';
 
@@ -6,6 +7,9 @@ type ProductListProps = {
   products: Poster[];
 =======
 import type { Product } from '@/feature/catalog/types';
+=======
+import type { Product } from '@commercetools/platform-sdk';
+>>>>>>> da20b29 (refactor: add type from sdk, add swr)
 
 import { ProductComponent } from './product-component';
 

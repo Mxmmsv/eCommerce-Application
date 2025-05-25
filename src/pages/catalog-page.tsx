@@ -69,7 +69,7 @@ export default function CatalogPage() {
   if (error) {
     return (
       <div className="flex min-h-svh items-center justify-center">
-        <div className="text-center text-red-500">{error}</div>
+        <div className="text-center text-red-500">{error.message || 'Failed to load products'}</div>
       </div>
     );
   }
@@ -77,10 +77,13 @@ export default function CatalogPage() {
   return (
     <div className="bg-muted flex min-h-svh justify-center text-lg">
       <div className="container py-8">
+<<<<<<< HEAD
         <div className="mb-6 flex items-start gap-4 px-4">
           <CategoryNavigation />
           <Breadcrumbs />
         </div>
+=======
+>>>>>>> da20b29 (refactor: add type from sdk, add swr)
         <ProductList products={products || []} />
       </div>
     </div>

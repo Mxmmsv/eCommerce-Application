@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import apiRoot from '@/feature/api/api-client-credentials-flow';
 
 import type { Poster } from '../types';
@@ -14,4 +15,13 @@ export const fetchProducts = async (categoryId?: string): Promise<Poster[]> => {
     })
     .execute();
   return response.body.results.map(mapToPoster);
+=======
+import type { Product } from '@commercetools/platform-sdk';
+
+import apiRoot from '@/feature/api/api-client-credentials-flow';
+
+export const fetchProducts = async (): Promise<Product[]> => {
+  const response = await apiRoot.products().get().execute();
+  return response.body.results;
+>>>>>>> da20b29 (refactor: add type from sdk, add swr)
 };
