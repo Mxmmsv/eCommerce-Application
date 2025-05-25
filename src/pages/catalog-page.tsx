@@ -77,13 +77,10 @@ export default function CatalogPage() {
   return (
     <div className="bg-muted flex min-h-svh justify-center text-lg">
       <div className="container py-8">
-<<<<<<< HEAD
         <div className="mb-6 flex items-start gap-4 px-4">
           <CategoryNavigation />
           <Breadcrumbs />
         </div>
-=======
->>>>>>> da20b29 (refactor: add type from sdk, add swr)
         <ProductList products={products || []} />
       </div>
     </div>
