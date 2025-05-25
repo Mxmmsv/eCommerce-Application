@@ -8,7 +8,7 @@ import {
 
 export function CustomNavigationMenu() {
   return (
-    <NavigationMenu className="flex items-center justify-between gap-5 text-xl">
+    <NavigationMenu className="items-center justify-between gap-5 text-xl max-lg:hidden lg:flex">
       <NavigationMenuList className="flex items-center justify-between">
         <NavigationMenuItem className="hover:text-chart-3 flex h-auto items-center justify-between rounded-sm text-xl font-medium">
           <NavLink
