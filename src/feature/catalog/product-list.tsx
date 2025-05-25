@@ -1,9 +1,9 @@
-import type { Product } from '@commercetools/platform-sdk';
+import type { ProductProjection } from '@commercetools/platform-sdk';
 
 import { ProductComponent } from './product-component';
 
 type ProductListProps = {
-  products: Product[];
+  products: ProductProjection[];
 };
 
 const ProductList = ({ products }: ProductListProps) => {
