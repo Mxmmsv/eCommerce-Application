@@ -36,12 +36,12 @@ export default function BurgerMenu() {
   const handleLogout = useLogout();
 
   return (
-    <div className="flex items-center justify-center gap-4">
+    <div className="max-lg: flex items-center justify-center lg:hidden">
       <Sheet>
         <SheetTrigger asChild>
           <Button
             variant="ghost"
-            className="flex h-auto w-full items-center justify-center has-[>svg]:px-2"
+            className="h-auto w-full items-center justify-center has-[>svg]:px-3 has-[>svg]:py-3 max-lg:flex lg:hidden"
           >
             <Menu size={32} strokeWidth={1.5} className="max-sm:size-6" />
           </Button>
