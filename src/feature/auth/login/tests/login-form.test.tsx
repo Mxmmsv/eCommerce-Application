@@ -7,7 +7,7 @@ import { AlertFailedLogin } from '../alert-login';
 import { LoginForm } from '../login-form';
 
 describe('Login form', () => {
-  it(`should contain 'Welcome back'`, () => {
+  it('should contain "Welcome back"', () => {
     render(
       <MemoryRouter>
         <LoginForm />
