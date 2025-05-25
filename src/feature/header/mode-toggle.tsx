@@ -11,7 +11,7 @@ export function ModeToggle() {
   };
 
   return (
-    <Toggle onClick={toggleTheme} role="button">
+    <Toggle onClick={toggleTheme} aria-label="toggle-button">
       <Sun className="scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90 [&_svg:not([class*='size-'])]:size-6" />
       <Moon className="absolute scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0 [&_svg:not([class*='size-'])]:size-6" />
     </Toggle>
