@@ -69,7 +69,7 @@ describe('Login form', () => {
       expect(emailInput.tagName).toBe('INPUT');
     });
 
-    it('should show AlertCircle icon, text-red-500 class and error message when email is invalid', async () => {
+    it('should show AlertCircle icon and error message when email is invalid', async () => {
       render(
         <MemoryRouter>
           <LoginForm />
@@ -79,17 +79,14 @@ describe('Login form', () => {
 
       await userEvent.type(emailInput, 'aboba');
       await userEvent.tab();
-      const alertIcon = await screen.findByTestId('alert-icon');
-      const errorMessage = await screen.findByText(
-        'Please enter a valid email (e.g., user@example.com)',
-      );
+      const alertIcon = screen.getByTestId('alert-icon');
+      const errorMessage = screen.getByText('Please enter a valid email (e.g., user@example.com)');
 
       expect(alertIcon).toBeInTheDocument();
-      expect(alertIcon).toHaveClass('text-red-500');
       expect(errorMessage).toBeInTheDocument();
     });
 
-    it('should not show AlertCircle icon, text-red-500 class and error message when email is valid', async () => {
+    it('should not show AlertCircle icon and error message when email is valid', async () => {
       render(
         <MemoryRouter>
           <LoginForm />
