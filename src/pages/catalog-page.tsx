@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 
-import { ProductList } from '@/components/product-list';
 import { Spinner } from '@/components/ui/spiner';
 import { fetchProducts } from '@/feature/catalog/api/fetch-products';
 import { mapToProduct } from '@/feature/catalog/api/map-products';
+import { ProductList } from '@/feature/catalog/product-list';
 import type { Product } from '@/feature/catalog/types';
 
 export default function CatalogPage() {
