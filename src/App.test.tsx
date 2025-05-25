@@ -8,10 +8,10 @@ describe('App', () => {
   it('renders content on the pages and navigates to the pages', async () => {
     render(<App />);
     const user = userEvent.setup();
-    expect(screen.getByText(/home page/i)).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /home page/i })).toBeInTheDocument();
 
-    await user.click(screen.getByText(/about us/i));
-    expect(screen.getByText(/about us page/i)).toBeInTheDocument();
+    await user.click(screen.getByRole('link', { name: /about us/i }));
+    expect(screen.getByRole('heading', { name: /about us page/i })).toBeInTheDocument();
   });
 
   it('redirects on a not-found-page', () => {
