@@ -5,11 +5,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@radix-ui/react-dropdown-menu';
-import { useMemo } from 'react';
+import { arrayToTree } from 'performant-array-to-tree';
 import useSWR from 'swr';
 
 import { Button } from '@/components/ui/button';
-import { buildCategoryTree } from '@/lib/category-tree';
 import { useCategoryStore } from '@/service/store/use-category-store';
 
 import { fetchCategories } from './api/fetch-categories';
@@ -20,7 +19,10 @@ export const CategoryNavigation = () => {
 
   console.log('Сategories from API:', categories);
 
-  const categoryTree = useMemo(() => buildCategoryTree(categories || []), [categories]);
+  const categoryTree = arrayToTree(categories || [], {
+    parentId: 'parent.obj.id',
+    dataField: null,
+  });
   console.log('Category tree:', categoryTree);
 
   const handleCategoryClick = (category: Category) => {
