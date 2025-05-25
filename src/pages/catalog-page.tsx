@@ -1,32 +1,21 @@
-import { useEffect, useState } from 'react';
+import type { Product } from '@commercetools/platform-sdk';
+import useSWR from 'swr';
 
 import { Spinner } from '@/components/ui/spiner';
 import { fetchProducts } from '@/feature/catalog/api/fetch-products';
-import { mapToProduct } from '@/feature/catalog/api/map-products';
 import { ProductList } from '@/feature/catalog/product-list';
-import type { Product } from '@/feature/catalog/types';
+
+const fetcher = async () => {
+  const products = await fetchProducts();
+  return products;
+};
 
 export default function CatalogPage() {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const loadProducts = async () => {
-      try {
-        setIsLoading(true);
-        const apiProducts = await fetchProducts();
-        setProducts(apiProducts.map(mapToProduct));
-      } catch (error) {
-        console.error('Error to load products:', error);
-        setError('Failed to load products. Please try again later.');
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    void loadProducts();
-  }, []);
+  const {
+    data: products,
+    error,
+    isLoading,
+  } = useSWR<Product[], Error>('commercetools/products', fetcher);
 
   if (isLoading) {
     return (
@@ -41,7 +30,7 @@ export default function CatalogPage() {
   if (error) {
     return (
       <div className="flex min-h-svh items-center justify-center">
-        <div className="text-center text-red-500">{error}</div>
+        <div className="text-center text-red-500">{error.message || 'Failed to load products'}</div>
       </div>
     );
   }
@@ -49,7 +38,7 @@ export default function CatalogPage() {
   return (
     <div className="bg-muted flex min-h-svh items-center justify-center text-lg">
       <div className="container py-8">
-        <ProductList products={products} />
+        <ProductList products={products || []} />
       </div>
     </div>
   );

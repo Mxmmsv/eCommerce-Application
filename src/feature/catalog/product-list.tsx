@@ -1,4 +1,4 @@
-import type { Product } from '@/feature/catalog/types';
+import type { Product } from '@commercetools/platform-sdk';
 
 import { ProductComponent } from './product-component';
 

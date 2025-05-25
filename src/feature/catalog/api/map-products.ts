@@ -1,19 +1,15 @@
-import type { CommercetoolsProduct, Product } from '../types';
+import type { Product } from '@commercetools/platform-sdk';
 
-export const mapToProduct = (product: CommercetoolsProduct): Product => {
-  const currentData = product.masterData?.current;
-  const name = currentData?.name ? Object.values(currentData.name)[0] : 'No name';
-  const imageUrl = currentData?.masterVariant?.images?.[0]?.url;
+export const mapToProduct = (product: Product) => {
+  const current = product.masterData.current;
+  const name = current.name['en-GB'] || 'No name';
+  const image = current.masterVariant.images?.[0]?.url || '/placeholder-product.webp';
+  const description = current.description?.['en-GB'] || 'No description available';
 
-  const description = currentData?.description
-    ? Object.values(currentData.description)[0]
-    : 'No description available';
-
-  console.log('Raw product data:', product);
   return {
     id: product.id,
     name,
     description,
-    image: imageUrl || '/placeholder-product.webp',
+    image,
   };
 };
