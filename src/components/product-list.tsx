@@ -25,7 +25,7 @@ const ProductList = ({ products }: ProductListProps) => {
                     alt={product.name}
                     className="aspect-3/4 w-full object-cover"
                     onError={(e) => {
-                      (e.target as HTMLImageElement).src = '/placeholder-product.jpg';
+                      (e.target as HTMLImageElement).src = '/placeholder-product.webp';
                     }}
                   />
                 </div>

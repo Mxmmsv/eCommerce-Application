@@ -14,6 +14,6 @@ export const mapToProduct = (product: CommercetoolsProduct): Product => {
     id: product.id,
     name,
     description,
-    image: imageUrl || '/placeholder-product.jpg',
+    image: imageUrl || '/placeholder-product.webp',
   };
 };
