@@ -1,6 +1,8 @@
 import apiRoot from '@/feature/api/api-client-credentials-flow';
 
-export const fetchCategories = async () => {
+import type { CategoryWithParent } from '../types';
+
+export const fetchCategories = async (): Promise<CategoryWithParent[]> => {
   const response = await apiRoot
     .categories()
     .get({

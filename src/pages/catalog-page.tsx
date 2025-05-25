@@ -12,8 +12,6 @@ export default function CatalogPage() {
   const { currentPath } = useCategoryStore();
   const lastCategoryId = currentPath[currentPath.length - 1]?.id;
 
-  console.log(lastCategoryId);
-
   const {
     data: products,
     error,
