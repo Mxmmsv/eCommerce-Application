@@ -129,7 +129,6 @@ export default function BurgerMenu() {
               aria-expanded={isProfileOpen}
               aria-controls="profile-menu"
               tabIndex={0}
-              onKeyDown={(e) => e.key === 'Enter' && setIsProfileOpen(!isProfileOpen)}
             >
               <span className="hover:text-chart-3 flex w-full cursor-pointer p-5 transition-colors duration-300 hover:underline">
                 <UserRound size={28} className="mr-2" />
