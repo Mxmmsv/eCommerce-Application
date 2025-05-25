@@ -27,7 +27,7 @@ const ProductList = ({ products }: ProductListProps) => {
 <<<<<<< HEAD
 <<<<<<< HEAD
                     onError={(e) => {
-                      (e.target as HTMLImageElement).src = '/placeholder-product.jpg';
+                      (e.target as HTMLImageElement).src = '/placeholder-product.webp';
                     }}
 =======
 >>>>>>> e0950d7 (refactor: code simplification and renaming)
