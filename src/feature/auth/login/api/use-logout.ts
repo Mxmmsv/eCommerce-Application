@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useCallback, useContext } from 'react';
 import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
 
@@ -9,13 +9,13 @@ export function useLogout() {
   const { setIsAuthorized } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handleLogout = () => {
+  const handleLogout = useCallback(() => {
     localStorage.removeItem('ACCESS_TOKEN_KEY');
     setIsAuthorized(false);
     useCustomerStore.getState().clearCustomer();
     void navigate('/login');
     toast.success('Logout successful!');
-  };
+  }, [setIsAuthorized, navigate]);
 
   return handleLogout;
 }
