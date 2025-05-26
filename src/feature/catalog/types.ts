@@ -27,3 +27,10 @@ export type CategoryDropdownProps = {
   openedSubmenus: Record<string, boolean>;
   toggleSubmenu: (id: string) => void;
 };
+
+export type CategoryDropdownProps = {
+  categoryTree: CategoryNode[];
+  onSelect: (category: BasicCategory) => void;
+  openedSubmenus: Record<string, boolean>;
+  toggleSubmenu: (id: string) => void;
+};

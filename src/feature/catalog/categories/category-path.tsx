@@ -18,3 +18,8 @@ export const getCategoryPath = (
   }
   return path;
 };
+
+export const getCategoryPath = (categoryId: string, categories: BasicCategory[]) => {
+  const category = categories.find((c) => c.id === categoryId);
+  return category ? getFullPath(category, categories) : [];
+};
