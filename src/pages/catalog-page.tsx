@@ -41,8 +41,10 @@ export default function CatalogPage() {
   return (
     <div className="bg-muted flex min-h-svh items-center justify-center text-lg">
       <div className="container py-8">
-        <CategoryNavigation />
-        <Breadcrumbs />
+        <div className="mb-6 flex items-center gap-4">
+          <CategoryNavigation />
+          <Breadcrumbs />
+        </div>
         <ProductList products={products || []} />
       </div>
     </div>

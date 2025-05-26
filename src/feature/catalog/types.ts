@@ -10,3 +10,10 @@ export type BasicCategory = {
 export type CategoryNode = BasicCategory & {
   children: CategoryNode[];
 };
+
+export type CategoryDropdownProps = {
+  categoryTree: CategoryNode[];
+  onSelect: (category: BasicCategory) => void;
+  openedSubmenus: Record<string, boolean>;
+  toggleSubmenu: (id: string) => void;
+};

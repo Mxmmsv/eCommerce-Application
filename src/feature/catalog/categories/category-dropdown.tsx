@@ -7,16 +7,9 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-import type { CategoryNode, BasicCategory } from '../types';
+import type { CategoryDropdownProps } from '../types';
 
 import { CategoryTree } from './category-tree';
-
-type CategoryDropdownProps = {
-  categoryTree: CategoryNode[];
-  onSelect: (category: BasicCategory) => void;
-  openedSubmenus: Record<string, boolean>;
-  toggleSubmenu: (id: string) => void;
-};
 
 export const CategoryDropdown = ({
   categoryTree,
@@ -27,7 +20,7 @@ export const CategoryDropdown = ({
   return (
     <DropdownMenu modal={true}>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline">
+        <Button variant="outline" className="rounded-xl">
           <MenuIcon className="mr-2 h-4 w-4" />
           Categories
         </Button>
