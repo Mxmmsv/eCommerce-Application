@@ -25,7 +25,7 @@ export function CustomNavigationMenu() {
 
           <NavigationMenuContent className="hover:bg-secondary flex cursor-pointer items-center justify-center p-10 hover:rounded-sm">
             <NavLink to="/catalog">
-              <span>All&nbsp;products</span>
+              <span role="button">All&nbsp;products</span>
             </NavLink>
           </NavigationMenuContent>
         </NavigationMenuItem>
