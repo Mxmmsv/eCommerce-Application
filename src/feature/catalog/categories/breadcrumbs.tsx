@@ -1,30 +1,59 @@
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@/components/ui/breadcrumb';
+import { Images } from 'lucide-react';
+import { Link } from 'react-router';
+
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb';
 import { useCategoryStore } from '@/service/store/use-category-store';
 
 export const Breadcrumbs = () => {
-  const { currentPath } = useCategoryStore();
+  const { currentPath, setCurrentPath } = useCategoryStore();
 
-  if (currentPath.length === 0) return null;
+  const handleAllCategoriesClick = () => {
+    setCurrentPath([]);
+  };
 
   return (
-    <Breadcrumb>
-      {currentPath.map((item, index) => (
-        <BreadcrumbItem key={item.id}>
-          {index === currentPath.length - 1 ? (
-            <span className="text-foreground font-medium">{item.name}</span>
-          ) : (
-            <BreadcrumbLink
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-              }}
-              className="hover:text-primary"
+    <Breadcrumb className="bg-muted rounded-lg px-4 py-2">
+      <BreadcrumbList>
+        <BreadcrumbItem>
+          <BreadcrumbLink asChild>
+            <Link
+              to="/catalog"
+              onClick={handleAllCategoriesClick}
+              className="hover:text-primary flex items-center gap-1"
             >
-              {item.name}
-            </BreadcrumbLink>
-          )}
+              <Images className="h-4 w-4" />
+              <span>All Categories</span>
+            </Link>
+          </BreadcrumbLink>
         </BreadcrumbItem>
-      ))}
+
+        {currentPath.map((item, index) => (
+          <>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem key={item.id}>
+              {index === currentPath.length - 1 ? (
+                <BreadcrumbPage className="text-primary font-medium">{item.name}</BreadcrumbPage>
+              ) : (
+                <BreadcrumbLink asChild>
+                  <Link
+                    to={`/category/${item.id}`}
+                    className="hover:text-primary transition-colors"
+                  >
+                    {item.name}
+                  </Link>
+                </BreadcrumbLink>
+              )}
+            </BreadcrumbItem>
+          </>
+        ))}
+      </BreadcrumbList>
     </Breadcrumb>
   );
 };
