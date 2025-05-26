@@ -1,8 +1,12 @@
-import type { Category } from '@commercetools/platform-sdk';
-
-export type CategoryWithParent = Category & {
+export type BasicCategory = {
+  id: string;
+  name: Record<string, string>;
   parent?: {
-    obj?: Category;
+    id: string;
+    obj?: BasicCategory;
   };
-  children?: CategoryWithParent[];
+};
+
+export type CategoryNode = BasicCategory & {
+  children: CategoryNode[];
 };

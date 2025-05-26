@@ -1,8 +1,8 @@
 import apiRoot from '@/feature/api/api-client-credentials-flow';
 
-import type { CategoryWithParent } from '../types';
+import type { BasicCategory } from '../types';
 
-export const fetchCategories = async (): Promise<CategoryWithParent[]> => {
+export const fetchCategories = async (): Promise<BasicCategory[]> => {
   const response = await apiRoot
     .categories()
     .get({
@@ -11,5 +11,9 @@ export const fetchCategories = async (): Promise<CategoryWithParent[]> => {
       },
     })
     .execute();
-  return response.body.results;
+  return response.body.results.map((category) => ({
+    id: category.id,
+    name: category.name,
+    parent: category.parent,
+  }));
 };
