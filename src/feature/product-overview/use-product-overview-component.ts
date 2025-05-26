@@ -3,7 +3,7 @@ import useFetchProduct from './api/get-product-overview';
 type ProductData = {
   name: string;
   description: string;
-  image: string;
+  image: { url: string }[];
   price: string;
   currencyCode: string;
   discount: string;
@@ -14,7 +14,7 @@ type ProductData = {
 const defaultProduct: Omit<ProductData, 'isLoading' | 'error'> = {
   name: 'Product not found',
   description: 'No description available',
-  image: '/placeholder-product.webp',
+  image: [{ url: '/placeholder-product.webp' }],
   price: '0.00',
   currencyCode: 'EUR',
   discount: '0.00',
@@ -35,7 +35,9 @@ export function useProductOverview(productId: string) {
   return {
     name: currentData.name['en-GB'] || defaultProduct.name,
     description: currentData.description?.['en-GB'] || defaultProduct.description,
-    image: currentData.masterVariant.images?.[0]?.url || defaultProduct.image,
+    image: currentData.masterVariant.images?.length
+      ? currentData.masterVariant.images
+      : defaultProduct.image,
     price: priceInfo ? (priceInfo.value.centAmount / 100).toFixed(2) : defaultProduct.price,
     currencyCode: priceInfo?.value.currencyCode || defaultProduct.currencyCode,
     discount,
