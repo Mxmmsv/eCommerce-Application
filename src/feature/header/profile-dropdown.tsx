@@ -81,7 +81,7 @@ export function ProfileDropdownMenu() {
             <div className="flex w-full items-center justify-start rounded-sm border-white shadow-none">
               <DropdownMenuItem className="w-full cursor-pointer" onClick={handleLogout}>
                 <LogOut strokeWidth={1.5} className="text-foreground size-6" />
-                <span className="text-lg">Log out</span>
+                <span className="text-xl">Log out</span>
               </DropdownMenuItem>
             </div>
           </>
