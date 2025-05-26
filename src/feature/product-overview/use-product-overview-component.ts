@@ -29,7 +29,8 @@ export function useProductOverview(productId: string) {
     const loadProduct = async () => {
       try {
         setLoading(true);
-        const product = await getProductOverview(productId);
+        const fetchedData = await getProductOverview(productId);
+        const product = fetchedData.masterData.current;
 
         if (product) {
           const name = product.name['en-GB'];
