@@ -5,7 +5,7 @@ import type {
 } from '@commercetools/platform-sdk';
 
 import PasswordFlowApiClient from '@/feature/api/api-client-password-flow';
-import tokenCache from '@/feature/api/api-token-store';
+import { tokenCache, clearTokenCache } from '@/feature/api/api-token-store';
 import { setAuthToLocalStorage } from '@/service/store/local-storage';
 import { useCustomerStore } from '@/service/store/use-user-store';
 
@@ -13,6 +13,7 @@ export const signInCustomer = async (
   email: string,
   password: string,
 ): Promise<ClientResponse<CustomerSignInResult>> => {
+  clearTokenCache();
   const customerLogin: CustomerSignin = {
     email,
     password,

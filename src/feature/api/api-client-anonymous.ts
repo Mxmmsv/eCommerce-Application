@@ -11,7 +11,7 @@ import {
   projectKey,
   scopes,
 } from './api-client-builder';
-import tokenCache from './api-token-store';
+import { tokenCache } from './api-token-store';
 
 const AnonymousFlowApiClient = () => {
   const authMiddlewareOptions: AuthMiddlewareOptions = {

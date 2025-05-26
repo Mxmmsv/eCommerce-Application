@@ -37,7 +37,6 @@ function Button({
   variant,
   size,
   asChild = false,
-  onClick,
   ...props
 }: React.ComponentProps<'button'> &
   VariantProps<typeof buttonVariants> & {
@@ -49,11 +48,6 @@ function Button({
     <Comp
       data-slot="button"
       className={cn(buttonVariants({ variant, size, className }))}
-      onClick={(e) => {
-        if (typeof onClick === 'function') {
-          onClick(e);
-        }
-      }}
       {...props}
     />
   );
