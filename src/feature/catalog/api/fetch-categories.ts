@@ -11,9 +11,9 @@ export const fetchCategories = async (): Promise<BasicCategory[]> => {
       },
     })
     .execute();
-  return response.body.results.map((category) => ({
-    id: category.id,
-    name: category.name,
-    parent: category.parent,
+  return response.body.results.map(({ id, name, parent }) => ({
+    id,
+    name,
+    parent,
   }));
 };

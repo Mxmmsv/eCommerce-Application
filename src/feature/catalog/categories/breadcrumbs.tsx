@@ -39,7 +39,7 @@ export const Breadcrumbs = () => {
         {currentPath.map((item, index) => (
           <Fragment key={item.id}>
             <BreadcrumbSeparator />
-            <BreadcrumbItem key={item.id}>
+            <BreadcrumbItem>
               {index === currentPath.length - 1 ? (
                 <BreadcrumbPage className="text-primary font-medium">{item.name}</BreadcrumbPage>
               ) : (
