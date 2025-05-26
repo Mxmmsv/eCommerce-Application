@@ -40,26 +40,30 @@ export function ProfileDropdownMenu() {
 
         <DropdownMenuSeparator />
 
-        <div className="hover:bg-secondary flex items-center justify-start rounded-sm border-white shadow-none">
-          <LogIn strokeWidth={1.5} size={28} />
-          <DropdownMenuItem asChild>
-            <NavLink to="/login" className="flex w-full cursor-pointer justify-start text-xl">
-              <span className="block">Log in</span>
-            </NavLink>
-          </DropdownMenuItem>
-        </div>
+        {!IS_AUTHORIZED && (
+          <>
+            <div className="hover:bg-secondary flex items-center justify-start rounded-sm border-white shadow-none">
+              <DropdownMenuItem asChild>
+                <NavLink to="/login" className="flex w-full cursor-pointer justify-start text-xl">
+                  <LogIn strokeWidth={1.5} className="text-foreground size-6" />
+                  Log in
+                </NavLink>
+              </DropdownMenuItem>
+            </div>
 
-        <div className="hover:bg-secondary flex items-center justify-start rounded-sm border-white shadow-none">
-          <UserRoundPlus strokeWidth={1.5} size={28} />
-          <DropdownMenuItem asChild>
-            <NavLink
-              to="/registration"
-              className="flex w-full cursor-pointer justify-start text-xl"
-            >
-              <span>Registration</span>
-            </NavLink>
-          </DropdownMenuItem>
-        </div>
+            <div className="hover:bg-secondary flex items-center justify-start rounded-sm border-white shadow-none">
+              <DropdownMenuItem asChild>
+                <NavLink
+                  to="/registration"
+                  className="flex w-full cursor-pointer justify-start text-xl"
+                >
+                  <UserRoundPlus strokeWidth={1.5} className="text-foreground size-6" />
+                  Registration
+                </NavLink>
+              </DropdownMenuItem>
+            </div>
+          </>
+        )}
 
         {IS_AUTHORIZED && (
           <>
