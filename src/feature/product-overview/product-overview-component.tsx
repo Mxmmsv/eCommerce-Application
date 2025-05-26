@@ -1,14 +1,30 @@
 import { Euro, RussianRuble } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
+import { Spinner } from '@/components/ui/spiner';
 
 import { useProductOverview } from './use-product-overview-component';
 
 export default function ProductOverview({ productId }: { productId: string }) {
   const { isLoading, error, ...product } = useProductOverview(productId);
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error loading product: {error.message}</div>;
+  if (isLoading) {
+    return (
+      <div className="column flex min-h-svh items-center justify-center">
+        <Spinner size="medium" className="text-primary">
+          <span className="text-center">Loading products...</span>
+        </Spinner>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex min-h-svh items-center justify-center">
+        <div className="text-center text-red-500">{error.message || 'Failed to load products'}</div>
+      </div>
+    );
+  }
 
   const PriceIcon = product.currencyCode === 'EUR' ? Euro : RussianRuble;
   const original = Number(product.price);
