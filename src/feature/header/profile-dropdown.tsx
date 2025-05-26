@@ -1,4 +1,3 @@
-import { clsx } from 'clsx';
 import {
   UserRound,
   UserRoundPen,
@@ -62,37 +61,27 @@ export function ProfileDropdownMenu() {
           </DropdownMenuItem>
         </div>
 
-        <DropdownMenuSeparator />
+        {IS_AUTHORIZED && (
+          <>
+            <div className="hover:bg-secondary flex items-center justify-start rounded-sm border-white shadow-none">
+              <DropdownMenuItem asChild>
+                <NavLink to="/profile" className="flex w-full cursor-pointer justify-start text-xl">
+                  <UserRoundPen strokeWidth={1.5} className="text-foreground size-6" />
+                  Profile
+                </NavLink>
+              </DropdownMenuItem>
+            </div>
 
-        <div className="hover:bg-secondary flex items-center justify-start rounded-sm border-white shadow-none">
-          <UserRoundPen strokeWidth={1.5} size={28} />
-          <DropdownMenuItem asChild>
-            <NavLink to="/profile" className="flex w-full cursor-pointer justify-start text-xl">
-              <span className="block">Profile</span>
-            </NavLink>
-          </DropdownMenuItem>
-        </div>
+            <DropdownMenuSeparator />
 
-        <DropdownMenuSeparator />
-
-        <div
-          className={clsx(
-            'flex w-full items-center justify-start rounded-sm border-white shadow-none',
-            {
-              'cursor-not-allowed opacity-50': !IS_AUTHORIZED,
-              'hover:bg-secondary cursor-pointer': IS_AUTHORIZED,
-            },
-          )}
-        >
-          <LogOut strokeWidth={1.5} size={28} />
-          <DropdownMenuItem
-            className="w-full cursor-pointer"
-            onClick={handleLogout}
-            disabled={!IS_AUTHORIZED}
-          >
-            <span className="w-full text-start text-xl whitespace-nowrap">Log out</span>
-          </DropdownMenuItem>
-        </div>
+            <div className="flex w-full items-center justify-start rounded-sm border-white shadow-none">
+              <DropdownMenuItem className="w-full cursor-pointer" onClick={handleLogout}>
+                <LogOut strokeWidth={1.5} className="text-foreground size-6" />
+                <span className="text-lg">Log out</span>
+              </DropdownMenuItem>
+            </div>
+          </>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );
