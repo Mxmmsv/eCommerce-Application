@@ -19,11 +19,7 @@ describe('formSchema', () => {
         password: 'Password1',
       });
       expect(result.success).toBe(false);
-      if (result.issues && result.issues.length > 0) {
-        expect(result.issues[0].message).toBe('Must not contain leading or trailing whitespace');
-      } else {
-        throw new Error('Expected validation issues but got none');
-      }
+      expect(result.issues?.[0]?.message).toBe('Must not contain leading or trailing whitespace');
     });
 
     it('should fail if email is invalid', () => {
