@@ -14,6 +14,7 @@ export function ModeToggle() {
     <Toggle
       onClick={toggleTheme}
       className="hover:bg-accent hover:text-chart-3 dark:hover:bg-accent/50 h-max w-full has-[>svg]:px-3 has-[>svg]:py-3 lg:p-3"
+      aria-label="toggle-button"
     >
       <Sun
         strokeWidth={1.5}

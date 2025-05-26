@@ -15,7 +15,7 @@ export function Header() {
 
         <div className="flex w-24 cursor-pointer items-center justify-center">
           <NavLink to="/">
-            <img src="logo.svg" alt="logo" className="flex h-auto w-full rounded-2xl bg-white" />
+            <img src="/logo.svg" alt="logo" className="flex h-auto w-full rounded-2xl bg-white" />
           </NavLink>
         </div>
 

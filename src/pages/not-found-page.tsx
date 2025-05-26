@@ -7,7 +7,7 @@ export default function NotFoundPage() {
     <main className="bg-white-100 m-auto flex w-full flex-col items-center justify-center gap-10">
       <div className="m-5 flex flex-col items-center justify-center gap-7 text-center">
         <img
-          src="404-img.svg"
+          src="/404-img.svg"
           alt="Sorry, page not found! We can not find page you are looking for"
           className="flex h-auto w-full"
         />

@@ -30,7 +30,6 @@ const AnonymousFlowApiClient = () => {
     .withAnonymousSessionFlow(authMiddlewareOptions)
     .withHttpMiddleware(httpMiddlewareOptions)
     .withCorrelationIdMiddleware(correlationIdMiddlewareOptions)
-
     .build();
 
   const anonymousFlowApiRoot = createApiBuilderFromCtpClient(anonymousFlowClient).withProjectKey({
