@@ -1,16 +1,17 @@
+import { MenuIcon } from 'lucide-react';
+
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
-} from '@radix-ui/react-dropdown-menu';
-
-import { Button } from '@/components/ui/button';
+} from '@/components/ui/dropdown-menu';
 
 import type { CategoryNode, BasicCategory } from '../types';
 
 import { CategoryTree } from './category-tree';
 
-type Props = {
+type CategoryDropdownProps = {
   categoryTree: CategoryNode[];
   onSelect: (category: BasicCategory) => void;
   openedSubmenus: Record<string, boolean>;
@@ -22,18 +23,23 @@ export const CategoryDropdown = ({
   onSelect,
   openedSubmenus,
   toggleSubmenu,
-}: Props) => (
-  <DropdownMenu>
-    <DropdownMenuTrigger asChild>
-      <Button variant="outline">Categories</Button>
-    </DropdownMenuTrigger>
-    <DropdownMenuContent className="min-w-[200px]">
-      <CategoryTree
-        categories={categoryTree}
-        onSelect={onSelect}
-        openedSubmenus={openedSubmenus}
-        toggleSubmenu={toggleSubmenu}
-      />
-    </DropdownMenuContent>
-  </DropdownMenu>
-);
+}: CategoryDropdownProps) => {
+  return (
+    <DropdownMenu modal={true}>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline">
+          <MenuIcon className="mr-2 h-4 w-4" />
+          Categories
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="min-w-[200px]" align="start">
+        <CategoryTree
+          categories={categoryTree}
+          onSelect={onSelect}
+          openedSubmenus={openedSubmenus}
+          toggleSubmenu={toggleSubmenu}
+        />
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};

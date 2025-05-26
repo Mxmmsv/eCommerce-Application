@@ -7,7 +7,7 @@ export const getFullPath = (
   const path = [];
   let current = categories?.find((c) => c.id === category.id);
   while (current) {
-    path.unshift({ id: current.id, name: current.name['en-GB'] || 'Unnamed' });
+    path.unshift({ id: current.id, name: current.name['en-GB'] });
     current = current.parent?.obj;
   }
 
