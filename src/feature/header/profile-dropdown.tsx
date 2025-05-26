@@ -1,5 +1,12 @@
 import { clsx } from 'clsx';
-import { UserRound, UserRoundPen, UserRoundPlus, LogIn, LogOut } from 'lucide-react';
+import {
+  UserRound,
+  UserRoundPen,
+  UserRoundPlus,
+  LogIn,
+  LogOut,
+  UserRoundCheck,
+} from 'lucide-react';
 import { useContext } from 'react';
 import { NavLink } from 'react-router';
 
@@ -21,7 +28,11 @@ export function ProfileDropdownMenu() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="cursor-pointer">
-        <UserRound strokeWidth={1.5} size={32} />
+        {IS_AUTHORIZED ? (
+          <UserRoundCheck strokeWidth={1.5} size={32} />
+        ) : (
+          <UserRound strokeWidth={1.5} size={32} />
+        )}
       </DropdownMenuTrigger>
       <DropdownMenuContent className="flex w-56 flex-col justify-start pr-4 pl-4">
         <DropdownMenuLabel className="flex justify-center">
