@@ -1,9 +1,10 @@
-import fetchProducts from '@/feature/api/api-fetch-products';
+import type { Product } from '@commercetools/platform-sdk';
 
-const getProductOverview = async (productId: string) => {
-  const products = await fetchProducts();
-  const product = products.find((product) => product.id === productId);
-  return product;
+import apiRoot from '@/feature/api/api-client-credentials-flow';
+
+const getProductOverview = async (productId: string): Promise<Product> => {
+  const product = await apiRoot.products().withId({ ID: productId }).get().execute();
+  return product.body;
 };
 
 export default getProductOverview;
