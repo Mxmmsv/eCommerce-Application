@@ -23,8 +23,6 @@ export const signInCustomer = async (
 
   const apiRoot = PasswordFlowApiClient(email, password);
 
-  await apiRoot.get().execute();
-
   const response = await apiRoot
     .me()
     .login()

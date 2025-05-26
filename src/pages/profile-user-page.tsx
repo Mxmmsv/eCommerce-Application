@@ -3,14 +3,14 @@ import { Link, Outlet } from 'react-router';
 import { useCustomerStore } from '@/service/store/use-user-store';
 
 export default function UserProfilePage() {
-  const store = useCustomerStore();
+  const customer = useCustomerStore((state) => state.customer);
 
   return (
     <div className="bg-muted flex min-h-svh flex-col items-center justify-center text-lg">
       <h1 className="text-2xl font-bold">User Profile Page</h1>
-      {store.customer !== null && (
+      {customer !== null && (
         <span>
-          Hello, {store.customer?.firstName} {store.customer?.lastName}
+          Hello, {customer?.firstName} {customer?.lastName}
         </span>
       )}
       <div className="mt-4 flex flex-col items-center justify-center">
