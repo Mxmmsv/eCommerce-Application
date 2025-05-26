@@ -1,4 +1,5 @@
 import { Images } from 'lucide-react';
+import { Fragment } from 'react/jsx-runtime';
 import { Link } from 'react-router';
 
 import {
@@ -11,12 +12,13 @@ import {
 } from '@/components/ui/breadcrumb';
 import { useCategoryStore } from '@/service/store/use-category-store';
 
-export const Breadcrumbs = () => {
-  const { currentPath, setCurrentPath } = useCategoryStore();
+import { useCategoryNavigation } from './use-category-navigation';
 
-  const handleAllCategoriesClick = () => {
-    setCurrentPath([]);
-  };
+export const Breadcrumbs = () => {
+  const { currentPath } = useCategoryStore();
+  const { handleAllCategoriesClick } = useCategoryNavigation();
+
+  if (currentPath.length === 0) return null;
 
   return (
     <Breadcrumb className="bg-muted rounded-lg px-4 py-2">
@@ -35,7 +37,7 @@ export const Breadcrumbs = () => {
         </BreadcrumbItem>
 
         {currentPath.map((item, index) => (
-          <>
+          <Fragment key={item.id}>
             <BreadcrumbSeparator />
             <BreadcrumbItem key={item.id}>
               {index === currentPath.length - 1 ? (
@@ -51,7 +53,7 @@ export const Breadcrumbs = () => {
                 </BreadcrumbLink>
               )}
             </BreadcrumbItem>
-          </>
+          </Fragment>
         ))}
       </BreadcrumbList>
     </Breadcrumb>
