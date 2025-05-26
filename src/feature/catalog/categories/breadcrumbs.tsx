@@ -18,7 +18,9 @@ export const Breadcrumbs = () => {
   const { currentPath } = useCategoryStore();
   const { handleAllCategoriesClick } = useCategoryNavigation();
 
-  if (currentPath.length === 0) return null;
+  const handleAllCategoriesClick = () => {
+    setCurrentPath([]);
+  };
 
   return (
     <Breadcrumb className="bg-muted rounded-lg px-4 py-2">
@@ -37,15 +39,25 @@ export const Breadcrumbs = () => {
         </BreadcrumbItem>
 
         {currentPath.map((item, index) => (
+<<<<<<< HEAD
           <Fragment key={item.id}>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
+=======
+          <>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem key={item.id}>
+>>>>>>> b6ac64f (refactor: refactor breadcrumbs)
               {index === currentPath.length - 1 ? (
                 <BreadcrumbPage className="text-primary font-medium">{item.name}</BreadcrumbPage>
               ) : (
                 <BreadcrumbLink asChild>
                   <Link
+<<<<<<< HEAD
                     to={`/catalog/category/${item.id}`}
+=======
+                    to={`/category/${item.id}`}
+>>>>>>> b6ac64f (refactor: refactor breadcrumbs)
                     className="hover:text-primary transition-colors"
                   >
                     {item.name}
@@ -53,7 +65,11 @@ export const Breadcrumbs = () => {
                 </BreadcrumbLink>
               )}
             </BreadcrumbItem>
+<<<<<<< HEAD
           </Fragment>
+=======
+          </>
+>>>>>>> b6ac64f (refactor: refactor breadcrumbs)
         ))}
       </BreadcrumbList>
     </Breadcrumb>
