@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import {
   Menu,
   ChevronDown,
@@ -12,8 +13,9 @@ import {
   UserRoundPen,
   ShieldCheck,
   Box,
+  UserRoundCheck,
 } from 'lucide-react';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { NavLink } from 'react-router';
 
 import { Button, buttonVariants } from '@/components/ui/button';
@@ -27,6 +29,7 @@ import {
   SheetHeader,
 } from '@/components/ui/sheet';
 import { useLogout } from '@/feature/auth/login/api/use-logout';
+import AuthContext from '@/feature/auth/login/auth-provider';
 
 import { ModeToggle } from './mode-toggle';
 import SearchBar from './search';
@@ -34,9 +37,10 @@ import SearchBar from './search';
 export default function BurgerMenu() {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const handleLogout = useLogout();
+  const { IS_AUTHORIZED } = useContext(AuthContext);
 
   return (
-    <div className="max-lg: flex items-center justify-center lg:hidden">
+    <div className="items-center justify-center max-lg:flex lg:hidden">
       <Sheet>
         <SheetTrigger asChild>
           <Button
@@ -63,9 +67,11 @@ export default function BurgerMenu() {
           </SheetDescription>
           <div className="bg-background flex items-center justify-between gap-10 p-4">
             <div className="flex w-24 cursor-pointer items-center justify-center">
-              <NavLink to="/">
-                <img src="logo.svg" alt="logo" className="rounded-2xl bg-white" />
-              </NavLink>
+              <SheetClose asChild>
+                <NavLink to="/">
+                  <img src="logo.svg" alt="logo" className="rounded-2xl bg-white" />
+                </NavLink>
+              </SheetClose>
             </div>
 
             <div className="flex items-center justify-center gap-5 max-md:gap-1">
@@ -92,7 +98,7 @@ export default function BurgerMenu() {
             <SheetClose asChild>
               <NavLink
                 to="/"
-                className="hover:text-chart-3 flex w-full cursor-pointer py-5 transition-colors duration-300 hover:underline md:justify-center"
+                className="hover:text-chart-3 flex w-full cursor-pointer items-center py-5 transition-colors duration-300 hover:underline md:justify-center"
               >
                 <LayoutGrid size={28} className="mr-2" />
                 Home
@@ -102,7 +108,7 @@ export default function BurgerMenu() {
             <SheetClose asChild>
               <NavLink
                 to="/catalog"
-                className="hover:text-chart-3 flex w-full cursor-pointer py-5 transition-colors duration-300 hover:underline md:justify-center"
+                className="hover:text-chart-3 flex w-full cursor-pointer items-center py-5 transition-colors duration-300 hover:underline md:justify-center"
               >
                 <Box size={28} className="mr-2" />
                 Catalog
@@ -138,55 +144,73 @@ export default function BurgerMenu() {
               tabIndex={0}
             >
               <span className="hover:text-chart-3 flex w-full cursor-pointer p-5 transition-colors duration-300 hover:underline">
-                <UserRound size={28} className="mr-2" />
+                {IS_AUTHORIZED ? (
+                  <UserRoundCheck size={28} className="mr-2" />
+                ) : (
+                  <UserRound size={28} className="mr-2" />
+                )}
                 Profile
               </span>
               <ChevronDown
-                className={`transition-transform ${isProfileOpen ? 'rotate-180' : ''}`}
+                className={clsx('transition-transform', { 'rotate-180': isProfileOpen })}
               />
             </button>
-            {isProfileOpen && (
-              <div id="profile-menu" className="ml-4 flex flex-col">
-                <SheetClose asChild>
-                  <NavLink
-                    to="/login"
-                    className="hover:text-chart-3 flex items-center p-3 transition-colors duration-300 hover:underline"
-                  >
-                    <LogIn size={28} className="mr-2" />
-                    Login
-                  </NavLink>
-                </SheetClose>
 
-                <SheetClose asChild>
-                  <NavLink
-                    to="/registration"
-                    className="hover:text-chart-3 flex items-center p-3 transition-colors duration-300 hover:underline"
-                  >
-                    <UserRoundPlus size={28} className="mr-2" />
-                    Registration
-                  </NavLink>
-                </SheetClose>
+            {!IS_AUTHORIZED ? (
+              <>
+                {isProfileOpen && (
+                  <div id="profile-menu" className="ml-4 flex flex-col">
+                    <SheetClose asChild>
+                      <NavLink
+                        to="/login"
+                        className="hover:text-chart-3 flex items-center p-3 transition-colors duration-300 hover:underline"
+                      >
+                        <LogIn size={28} className="mr-2" />
+                        Login
+                      </NavLink>
+                    </SheetClose>
 
-                <SheetClose asChild>
-                  <NavLink
-                    to="/profile"
-                    className="hover:text-chart-3 flex items-center p-3 transition-colors duration-300 hover:underline"
-                  >
-                    <UserRoundPen size={28} className="mr-2" />
-                    Profile
-                  </NavLink>
-                </SheetClose>
+                    <SheetClose asChild>
+                      <NavLink
+                        to="/registration"
+                        className="hover:text-chart-3 flex items-center p-3 transition-colors duration-300 hover:underline"
+                      >
+                        <UserRoundPlus size={28} className="mr-2" />
+                        Registration
+                      </NavLink>
+                    </SheetClose>
+                  </div>
+                )}
+              </>
+            ) : (
+              <>
+                {isProfileOpen && (
+                  <div id="profile-menu" className="ml-4 flex flex-col">
+                    <SheetClose asChild>
+                      <NavLink
+                        to="/profile"
+                        className="hover:text-chart-3 flex items-center p-3 transition-colors duration-300 hover:underline"
+                      >
+                        <UserRoundPen size={28} className="mr-2" />
+                        Profile
+                      </NavLink>
+                    </SheetClose>
 
-                <SheetClose asChild onClick={handleLogout}>
-                  <NavLink
-                    className={`${buttonVariants({ variant: 'link' })} hover:text-chart-3 h-auto w-full cursor-pointer items-center justify-start transition-colors duration-300 hover:underline`}
-                    to={'/login'}
-                  >
-                    <LogOut size={28} className="[&_svg:not([class*='size-'])]:size-8" />
-                    <span className="py-1 text-2xl font-normal">Log out</span>
-                  </NavLink>
-                </SheetClose>
-              </div>
+                    <SheetClose asChild onClick={handleLogout}>
+                      <NavLink
+                        className={clsx(
+                          buttonVariants({ variant: 'link' }),
+                          'hover:text-chart-3 h-auto w-full cursor-pointer items-center justify-start transition-colors duration-300 hover:underline',
+                        )}
+                        to={'/login'}
+                      >
+                        <LogOut size={28} className="[&_svg:not([class*='size-'])]:size-8" />
+                        <span className="py-1 text-2xl font-normal">Log out</span>
+                      </NavLink>
+                    </SheetClose>
+                  </div>
+                )}
+              </>
             )}
 
             <SheetClose asChild>
