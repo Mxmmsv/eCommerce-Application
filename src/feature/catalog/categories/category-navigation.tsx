@@ -8,7 +8,7 @@ import type { BasicCategory } from '../types';
 
 import { CategoryDropdown } from './category-dropdown';
 import { getFullPath } from './category-path';
-import { useCategoryTree } from './category-tree';
+import { useCategoryTree } from './use-category-tree';
 
 export const CategoryNavigation = () => {
   const { data: categories } = useSWR('commercetools/categories', fetchCategories);

@@ -1,5 +1,3 @@
-import { arrayToTree } from 'performant-array-to-tree';
-
 import type { BasicCategory, CategoryNode } from '../types';
 
 import { CategoryItem } from './category-item';
@@ -24,11 +22,3 @@ export const CategoryTree = ({ categories, onSelect, openedSubmenus, toggleSubme
     ))}
   </>
 );
-
-export const useCategoryTree = (categories?: BasicCategory[]): CategoryNode[] => {
-  if (!categories) return [];
-  return arrayToTree(categories, {
-    parentId: 'parent.obj.id',
-    dataField: null,
-  }) as CategoryNode[];
-};
