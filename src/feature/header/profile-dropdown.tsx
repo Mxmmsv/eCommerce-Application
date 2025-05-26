@@ -16,7 +16,7 @@ export function ProfileDropdownMenu() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="cursor-pointer">
+      <DropdownMenuTrigger className="hover:text-chart-3 cursor-pointer p-3 transition-colors duration-300 max-lg:hidden lg:p-2">
         <UserRound strokeWidth={1.5} size={32} />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="flex w-56 flex-col justify-start pr-4 pl-4">
