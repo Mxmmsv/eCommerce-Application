@@ -25,6 +25,7 @@ function App() {
         <BrowserRouter>
           <ScrollToTop />
           <Header />
+          <Toaster position="top-center" richColors closeButton />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/catalog" element={<Catalog />} />
@@ -44,7 +45,6 @@ function App() {
             />
             <Route path="*" element={<NotFound />} />
           </Routes>
-          <Toaster position="top-center" richColors closeButton />
         </BrowserRouter>
       </ThemeProvider>
     </AuthProvider>
