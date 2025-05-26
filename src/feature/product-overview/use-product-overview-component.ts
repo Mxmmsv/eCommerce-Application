@@ -22,7 +22,9 @@ const defaultProduct: Omit<ProductData, 'isLoading' | 'error'> = {
 
 export function useProductOverview(productId: string) {
   const { data, error, isLoading } = useFetchProduct(productId);
-  if (!data) return { ...defaultProduct, isLoading: false, error: null };
+
+  if (error?.name === 'NotFound') return { ...defaultProduct, isLoading: false, error: null };
+  if (!data) return { isLoading: true, error: null };
 
   const currentData = data.masterData.current;
   const priceInfo = currentData.masterVariant.prices?.[0];
