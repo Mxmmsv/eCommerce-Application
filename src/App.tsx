@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router';
 import { Toaster } from '@/components/ui/sonner';
 import { ThemeProvider } from '@/components/ui/theme-provider';
 import { AuthProvider } from '@/feature/auth/login/auth-provider';
+import ProtectedRoute from '@/feature/auth/login/protected-route';
 import { Header } from '@/feature/header/header';
 import AboutUs from '@/pages/about-us-page';
 import Cart from '@/pages/cart-page';
@@ -24,6 +25,7 @@ function App() {
         <BrowserRouter>
           <ScrollToTop />
           <Header />
+          <Toaster position="top-center" richColors closeButton />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/catalog" element={<Catalog />} />
@@ -33,10 +35,16 @@ function App() {
             <Route path="/wishlist" element={<Wishlist />} />
             <Route path="/login" element={<Login />} />
             <Route path="/registration" element={<Registration />} />
-            <Route path="/profile" element={<UserProfile />} />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute>
+                  <UserProfile />
+                </ProtectedRoute>
+              }
+            />
             <Route path="*" element={<NotFound />} />
           </Routes>
-          <Toaster position="top-center" richColors closeButton />
         </BrowserRouter>
       </ThemeProvider>
     </AuthProvider>
