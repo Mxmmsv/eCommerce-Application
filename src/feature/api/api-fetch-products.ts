@@ -1,11 +1,16 @@
 import type { Product } from '@commercetools/platform-sdk';
+import useSWR from 'swr';
 
-import apiRoot from '@/feature/api/api-client-credentials-flow';
+import apiRoot from './api-client-credentials-flow';
 
-const fetchProducts = async (): Promise<Product[]> => {
+const fetcher = async (): Promise<Product[]> => {
   const response = await apiRoot.products().get().execute();
-  const products = response.body.results;
-  return products;
+  return response.body.results;
 };
 
-export default fetchProducts;
+const useFetchProducts = () => {
+  const { data, error, isLoading } = useSWR<Product[], Error>('products', fetcher);
+  return { data, error, isLoading };
+};
+
+export default useFetchProducts;
