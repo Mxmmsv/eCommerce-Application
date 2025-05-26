@@ -8,7 +8,7 @@ import { signInCustomer } from '@/feature/auth/login/api/sign-in-customer';
 
 import AuthContext from './auth-provider';
 import { formSchema } from './login-schema';
-import type { LoginForm } from './type';
+import type { LoginForm } from './types';
 
 export function useLoginForm() {
   const navigate = useNavigate();
