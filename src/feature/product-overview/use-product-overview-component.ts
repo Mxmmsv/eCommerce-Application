@@ -1,6 +1,4 @@
-import { useEffect, useState } from 'react';
-
-import getProductOverview from './api/get-product-overview';
+import useFetchProduct from './api/get-product-overview';
 
 type ProductData = {
   name: string;
@@ -9,68 +7,37 @@ type ProductData = {
   price: string;
   currencyCode: string;
   discount: string;
+  isLoading: boolean;
+  error: Error | null;
 };
 
-const initialProductData: ProductData = {
-  name: '',
-  description: '',
-  image: '',
-  price: '',
-  currencyCode: '',
-  discount: '',
+const defaultProduct: Omit<ProductData, 'isLoading' | 'error'> = {
+  name: 'Product not found',
+  description: 'No description available',
+  image: '/placeholder-product.webp',
+  price: '0.00',
+  currencyCode: 'EUR',
+  discount: '0.00',
 };
 
 export function useProductOverview(productId: string) {
-  const [product, setProduct] = useState<ProductData>(initialProductData);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { data, error, isLoading } = useFetchProduct(productId);
+  if (!data) return { ...defaultProduct, isLoading: false, error: null };
 
-  useEffect(() => {
-    const loadProduct = async () => {
-      try {
-        setLoading(true);
-        const fetchedData = await getProductOverview(productId);
-        const product = fetchedData.masterData.current;
-
-        if (product) {
-          const name = product.name['en-GB'];
-          const description = product.description?.['en-GB'] || 'No description available';
-          const image = product.masterVariant?.images?.[0]?.url || '/placeholder-product.webp';
-          const prices = product.masterVariant?.prices;
-
-          let price = '';
-          let currencyCode = '';
-          let discount = '';
-
-          if (prices) {
-            const { value, discounted } = prices[0];
-            currencyCode = value.currencyCode;
-            price = (value.centAmount / 100).toFixed(2);
-            discount = discounted ? (discounted.value.centAmount / 100).toFixed(2) : price;
-          }
-
-          setProduct({
-            name,
-            description,
-            image,
-            price,
-            currencyCode,
-            discount,
-          });
-        }
-      } catch (e) {
-        setError(e instanceof Error ? e.message : 'Unknown error');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    void loadProduct();
-  }, [productId]);
+  const currentData = data.masterData.current;
+  const priceInfo = currentData.masterVariant.prices?.[0];
+  const discount = priceInfo?.discounted
+    ? (priceInfo.discounted.value.centAmount / 100).toFixed(2)
+    : defaultProduct.discount;
 
   return {
-    ...product,
-    loading,
+    name: currentData.name['en-GB'] || defaultProduct.name,
+    description: currentData.description?.['en-GB'] || defaultProduct.description,
+    image: currentData.masterVariant.images?.[0]?.url || defaultProduct.image,
+    price: priceInfo ? (priceInfo.value.centAmount / 100).toFixed(2) : defaultProduct.price,
+    currencyCode: priceInfo?.value.currencyCode || defaultProduct.currencyCode,
+    discount,
+    isLoading,
     error,
   };
 }

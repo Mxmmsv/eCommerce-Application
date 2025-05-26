@@ -5,10 +5,10 @@ import { Button } from '@/components/ui/button';
 import { useProductOverview } from './use-product-overview-component';
 
 export default function ProductOverview({ productId }: { productId: string }) {
-  const { loading, error, ...product } = useProductOverview(productId);
+  const { isLoading, error, ...product } = useProductOverview(productId);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading product: {error.message}</div>;
 
   const PriceIcon = product.currencyCode === 'EUR' ? Euro : RussianRuble;
   const original = Number(product.price);
