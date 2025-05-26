@@ -2,13 +2,26 @@ import { useEffect, useState } from 'react';
 
 import getProductOverview from './api/get-product-overview';
 
+type ProductData = {
+  name: string;
+  description: string;
+  image: string;
+  price: string;
+  currencyCode: string;
+  discount: string;
+};
+
+const initialProductData: ProductData = {
+  name: '',
+  description: '',
+  image: '',
+  price: '',
+  currencyCode: '',
+  discount: '',
+};
+
 export function useProductOverview(productId: string) {
-  const [productName, setProductName] = useState('');
-  const [productDescription, setProductDescription] = useState('');
-  const [productImage, setProductImage] = useState('');
-  const [productPrice, setProductPrice] = useState('');
-  const [productCurrencyCode, setProductCurrencyCode] = useState('');
-  const [productDiscount, setProductDiscount] = useState('');
+  const [product, setProduct] = useState<ProductData>(initialProductData);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -17,30 +30,35 @@ export function useProductOverview(productId: string) {
       try {
         setLoading(true);
         const product = await getProductOverview(productId);
+
         if (product) {
           const name = product.name['en-GB'];
-          const description = product.description?.['en-GB'];
-          const image = product.masterVariant?.images?.[0]?.url;
-          const prices = product.masterVariant.prices;
+          const description = product.description?.['en-GB'] || 'No description available';
+          const image = product.masterVariant?.images?.[0]?.url || '/placeholder-product.webp';
+          const prices = product.masterVariant?.prices;
+
+          let price = '';
+          let currencyCode = '';
+          let discount = '';
 
           if (prices) {
             const { value, discounted } = prices[0];
-            const currency = value.currencyCode;
-            const price = (value.centAmount / 100).toFixed(2);
-            const discountPrice = discounted
-              ? (discounted.value.centAmount / 100).toFixed(2)
-              : price;
-
-            setProductCurrencyCode(currency);
-            setProductPrice(price);
-            setProductDiscount(discountPrice);
+            currencyCode = value.currencyCode;
+            price = (value.centAmount / 100).toFixed(2);
+            discount = discounted ? (discounted.value.centAmount / 100).toFixed(2) : price;
           }
-          setProductName(name);
-          setProductDescription(description ?? '');
-          setProductImage(image ?? '');
+
+          setProduct({
+            name,
+            description,
+            image,
+            price,
+            currencyCode,
+            discount,
+          });
         }
-      } catch (error) {
-        setError(error instanceof Error ? error.message : 'Unknown error');
+      } catch (e) {
+        setError(e instanceof Error ? e.message : 'Unknown error');
       } finally {
         setLoading(false);
       }
@@ -50,12 +68,7 @@ export function useProductOverview(productId: string) {
   }, [productId]);
 
   return {
-    productImage,
-    productName,
-    productPrice,
-    productCurrencyCode,
-    productDescription,
-    productDiscount,
+    ...product,
     loading,
     error,
   };
