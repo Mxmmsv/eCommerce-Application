@@ -26,11 +26,11 @@ export function ProfileDropdownMenu() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="cursor-pointer">
+      <DropdownMenuTrigger className="cursor-pointer p-3 transition-colors duration-300 lg:p-2">
         {IS_AUTHORIZED ? (
-          <UserRoundCheck strokeWidth={1.5} size={32} />
+          <UserRoundCheck strokeWidth={1.5} size={32} className="max-sm:size-6" />
         ) : (
-          <UserRound strokeWidth={1.5} size={32} />
+          <UserRound strokeWidth={1.5} size={32} className="max-sm:size-6" />
         )}
       </DropdownMenuTrigger>
       <DropdownMenuContent className="flex w-56 flex-col justify-start pr-4 pl-4">
