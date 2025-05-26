@@ -2,13 +2,11 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from '@radix-ui/react-dropdown-menu';
 import { ChevronRight } from 'lucide-react';
 import { arrayToTree } from 'performant-array-to-tree';
+import { useState } from 'react';
 import useSWR from 'swr';
 
 import { Button } from '@/components/ui/button';
@@ -20,6 +18,7 @@ import type { BasicCategory, CategoryNode } from './types';
 export const CategoryNavigation = () => {
   const { data: categories } = useSWR('commercetools/categories', fetchCategories);
   const { setCurrentPath } = useCategoryStore();
+  const [openedSubmenus, setOpenedSubmenus] = useState<Record<string, boolean>>({});
 
   console.log('Сategories from API:', categories);
 
@@ -40,29 +39,51 @@ export const CategoryNavigation = () => {
     return path;
   };
 
+  const toggleSubmenu = (categoryId: string) => {
+    setOpenedSubmenus((prev) => ({
+      ...prev,
+      [categoryId]: !prev[categoryId],
+    }));
+  };
+
   const handleCategoryClick = (category: BasicCategory) => {
     setCurrentPath(getFullPath(category));
   };
 
   const renderCategory = (category: CategoryNode) => (
-    <DropdownMenuItem
-      key={category.id}
-      onSelect={(e) => {
-        e.preventDefault();
-        handleCategoryClick(category);
-      }}
-      className="flex items-center justify-between"
-    >
-      <span>{category.name['en-GB']}</span>
-      {category.children.length > 0 && (
-        <DropdownMenuSub>
-          <DropdownMenuSubTrigger className="ml-2">
-            <ChevronRight className="h-4 w-4" />
-          </DropdownMenuSubTrigger>
-          <DropdownMenuSubContent>{category.children.map(renderCategory)}</DropdownMenuSubContent>
-        </DropdownMenuSub>
+    <div key={category.id} className="relative">
+      <DropdownMenuItem
+        onSelect={(e) => {
+          e.preventDefault();
+          handleCategoryClick(category);
+        }}
+        className="flex items-center justify-between"
+      >
+        <span>{category.name['en-GB']}</span>
+        {category.children.length > 0 && (
+          <button
+            type="button"
+            aria-label={`Toggle ${category.name['en-GB']} submenu`}
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleSubmenu(category.id);
+            }}
+            className="rounded p-1 hover:bg-gray-100"
+          >
+            <ChevronRight
+              className={`h-4 w-4 transition-transform ${
+                openedSubmenus[category.id] ? 'rotate-90' : ''
+              }`}
+            />
+          </button>
+        )}
+      </DropdownMenuItem>
+      {category.children.length > 0 && openedSubmenus[category.id] && (
+        <div className="ml-4 border-l-2 border-gray-200 pl-2">
+          {category.children.map(renderCategory)}
+        </div>
       )}
-    </DropdownMenuItem>
+    </div>
   );
 
   return (
