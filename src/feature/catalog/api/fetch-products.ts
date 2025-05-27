@@ -1,8 +1,10 @@
-import type { ProductProjection } from '@commercetools/platform-sdk';
-
 import apiRoot from '@/feature/api/api-client-credentials-flow';
 
-export const fetchProducts = async (categoryId?: string): Promise<ProductProjection[]> => {
+import type { Poster } from '../types';
+
+import { mapToPoster } from './map-products';
+
+export const fetchProducts = async (categoryId?: string): Promise<Poster[]> => {
   const response = await apiRoot
     .productProjections()
     .get({
@@ -11,5 +13,5 @@ export const fetchProducts = async (categoryId?: string): Promise<ProductProject
       },
     })
     .execute();
-  return response.body.results;
+  return response.body.results.map(mapToPoster);
 };

@@ -1,20 +1,20 @@
-import type { BasicCategory } from '../types';
+import type { PosterCategory } from '../types';
 
-export const getFullPath = (
-  category: BasicCategory,
-  categories: BasicCategory[],
+export const getCategoryPath = (
+  categoryId: string,
+  categories: PosterCategory[],
 ): { id: string; name: string }[] => {
+  const categoryMap = new Map(categories.map((c) => [c.id, c]));
+
   const path = [];
-  let current = categories?.find((c) => c.id === category.id);
-  while (current) {
-    path.unshift({ id: current.id, name: current.name['en-GB'] });
-    current = current.parent?.obj;
+  let currentId: string | null | undefined = categoryId;
+
+  while (currentId) {
+    const category = categoryMap.get(currentId);
+    if (!category) break;
+
+    path.unshift({ id: category.id, name: category.name });
+    currentId = category.parentId;
   }
-
   return path;
-};
-
-export const getCategoryPath = (categoryId: string, categories: BasicCategory[]) => {
-  const category = categories.find((c) => c.id === categoryId);
-  return category ? getFullPath(category, categories) : [];
 };

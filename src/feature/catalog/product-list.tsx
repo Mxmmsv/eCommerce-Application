@@ -1,9 +1,8 @@
-import type { ProductProjection } from '@commercetools/platform-sdk';
-
 import { ProductComponent } from './product-component';
+import type { Poster } from './types';
 
 type ProductListProps = {
-  products: ProductProjection[];
+  products: Poster[];
 };
 
 const ProductList = ({ products }: ProductListProps) => {
@@ -15,8 +14,8 @@ const ProductList = ({ products }: ProductListProps) => {
     <section className="py-6">
       <div className="container flex flex-col gap-16 lg:px-16">
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
-          {products.map((product) => (
-            <ProductComponent key={product.id} product={product} />
+          {products.map((poster) => (
+            <ProductComponent key={poster.id} poster={poster} />
           ))}
         </div>
       </div>

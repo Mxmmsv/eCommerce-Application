@@ -19,7 +19,7 @@ export const CategoryDropdown = ({
   toggleSubmenu,
 }: CategoryDropdownProps) => {
   return (
-    <DropdownMenu modal={true}>
+    <DropdownMenu modal>
       <DropdownMenuTrigger asChild>
         <Button
           variant="outline"
@@ -49,6 +49,7 @@ export const CategoryDropdown = ({
           'data-[side=top]:slide-in-from-bottom-2',
         )}
         align="start"
+        sideOffset={8}
       >
         <CategoryTree
           categories={categoryTree}

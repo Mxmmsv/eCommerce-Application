@@ -1,19 +1,29 @@
-export type BasicCategory = {
+export type Poster = {
   id: string;
-  name: Record<string, string>;
-  parent?: {
-    id: string;
-    obj?: BasicCategory;
-  };
+  name: string;
+  description: string;
+  image: string;
 };
 
-export type CategoryNode = BasicCategory & {
-  children: CategoryNode[];
+export type PosterCategory = {
+  id: string;
+  name: string;
+  parentId: string | null;
+};
+
+export type CategoryApiResponse = {
+  id: string;
+  name: Record<string, string>;
+  parent?: { id: string };
+};
+
+export type PosterCategoryNode = PosterCategory & {
+  children: PosterCategoryNode[];
 };
 
 export type CategoryDropdownProps = {
-  categoryTree: CategoryNode[];
-  onSelect: (category: BasicCategory) => void;
+  categoryTree: PosterCategoryNode[];
+  onSelect: (category: PosterCategory) => void;
   openedSubmenus: Record<string, boolean>;
   toggleSubmenu: (id: string) => void;
 };

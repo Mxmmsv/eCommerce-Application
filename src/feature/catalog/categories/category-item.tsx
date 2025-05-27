@@ -3,11 +3,11 @@ import { ChevronRight } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 
-import type { CategoryNode, BasicCategory } from '../types';
+import type { PosterCategory, PosterCategoryNode } from '../types';
 
 type CategoryItemProps = {
-  category: CategoryNode;
-  onSelect: (category: BasicCategory) => void;
+  category: PosterCategoryNode;
+  onSelect: (category: PosterCategory) => void;
   openedSubmenus: Record<string, boolean>;
   toggleSubmenu: (id: string) => void;
 };
@@ -20,7 +20,7 @@ export const CategoryItem = ({
 }: CategoryItemProps) => {
   const hasChildren = category.children.length > 0;
   const isOpen = openedSubmenus[category.id];
-  const categoryName = category.name['en-GB'];
+  const categoryName = category.name;
 
   return (
     <div className="relative">

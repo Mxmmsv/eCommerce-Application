@@ -1,24 +1,13 @@
-import type { ProductProjection } from '@commercetools/platform-sdk';
+import type { Poster } from './types';
 
-import { mapToProduct } from '@/feature/catalog/api/map-products';
-
-type ProductComponentProps = {
-  product: ProductProjection;
-};
-
-const ProductComponent = ({ product }: ProductComponentProps) => {
-  const mappedProduct = mapToProduct(product);
-
+const ProductComponent = ({ poster }: { poster: Poster }) => {
   return (
-    <div
-      key={mappedProduct.id}
-      className="bg-background border-border flex flex-col overflow-clip border"
-    >
+    <div key={poster.id} className="bg-background border-border flex flex-col overflow-clip border">
       <div className="px-6 py-8 md:px-6 md:py-10 lg:px-6 lg:py-8">
         <div className="mb-6 md:mb-6 lg:mb-6">
           <img
-            src={mappedProduct.image}
-            alt={mappedProduct.name}
+            src={poster.image}
+            alt={poster.name}
             className="aspect-3/4 w-full object-cover"
             onError={(e) => {
               (e.target as HTMLImageElement).src = '/placeholder-product.webp';
@@ -27,9 +16,9 @@ const ProductComponent = ({ product }: ProductComponentProps) => {
         </div>
         <div>
           <h3 className="mb-3 text-lg font-semibold md:mb-3 md:text-xl lg:mb-3 lg:text-xl">
-            {mappedProduct.name}
+            {poster.name}
           </h3>
-          <p className="text-muted-foreground text-sm">{mappedProduct.description}</p>
+          <p className="text-muted-foreground text-sm">{poster.description}</p>
         </div>
       </div>
     </div>

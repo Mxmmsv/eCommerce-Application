@@ -5,7 +5,7 @@ import useSWR from 'swr';
 import { useCategoryStore } from '@/service/store/use-category-store';
 
 import { fetchCategories } from '../api/fetch-categories';
-import type { BasicCategory } from '../types';
+import type { PosterCategory } from '../types';
 
 import { getCategoryPath } from './category-path';
 import { useCategoryTree } from './use-category-tree';
@@ -16,7 +16,7 @@ export const useCategoryManagement = () => {
     data: categories,
     error,
     isLoading,
-  } = useSWR<BasicCategory[], Error>('commercetools/categories', fetchCategories);
+  } = useSWR<PosterCategory[], Error>('commercetools/categories', fetchCategories);
 
   const { setCurrentPath } = useCategoryStore();
   const categoryTree = useCategoryTree(categories);

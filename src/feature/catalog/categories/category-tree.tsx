@@ -1,10 +1,10 @@
-import type { BasicCategory, CategoryNode } from '../types';
+import type { PosterCategory, PosterCategoryNode } from '../types';
 
 import { CategoryItem } from './category-item';
 
 type Props = {
-  categories: CategoryNode[];
-  onSelect: (category: BasicCategory) => void;
+  categories: PosterCategoryNode[];
+  onSelect: (category: PosterCategory) => void;
   openedSubmenus: Record<string, boolean>;
   toggleSubmenu: (id: string) => void;
 };

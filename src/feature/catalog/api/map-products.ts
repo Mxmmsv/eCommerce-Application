@@ -1,6 +1,8 @@
 import type { ProductProjection } from '@commercetools/platform-sdk';
 
-export const mapToProduct = (product: ProductProjection) => {
+import type { Poster } from '../types';
+
+export const mapToPoster = (product: ProductProjection): Poster => {
   return {
     id: product.id,
     name: product.name['en-GB'] || 'No name',

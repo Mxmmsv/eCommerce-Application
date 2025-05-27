@@ -1,11 +1,11 @@
 import { arrayToTree } from 'performant-array-to-tree';
 
-import type { BasicCategory, CategoryNode } from '../types';
+import type { PosterCategory, PosterCategoryNode } from '../types';
 
-export const useCategoryTree = (categories?: BasicCategory[]): CategoryNode[] => {
+export const useCategoryTree = (categories?: PosterCategory[]): PosterCategoryNode[] => {
   if (!categories) return [];
   return arrayToTree(categories, {
-    parentId: 'parent.obj.id',
+    parentId: 'parentId',
     dataField: null,
-  }) as CategoryNode[];
+  }) as PosterCategoryNode[];
 };

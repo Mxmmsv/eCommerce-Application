@@ -1,8 +1,14 @@
 import apiRoot from '@/feature/api/api-client-credentials-flow';
 
-import type { BasicCategory } from '../types';
+import type { CategoryApiResponse, PosterCategory } from '../types';
 
-export const fetchCategories = async (): Promise<BasicCategory[]> => {
+const mapToCategory = (category: CategoryApiResponse): PosterCategory => ({
+  id: category.id,
+  name: category.name['en-GB'] || 'Unnamed Category',
+  parentId: category.parent?.id || null,
+});
+
+export const fetchCategories = async (): Promise<PosterCategory[]> => {
   const response = await apiRoot
     .categories()
     .get({
@@ -11,9 +17,5 @@ export const fetchCategories = async (): Promise<BasicCategory[]> => {
       },
     })
     .execute();
-  return response.body.results.map(({ id, name, parent }) => ({
-    id,
-    name,
-    parent,
-  }));
+  return response.body.results.map(mapToCategory);
 };
