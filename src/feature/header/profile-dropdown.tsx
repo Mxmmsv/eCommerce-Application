@@ -26,7 +26,7 @@ export function ProfileDropdownMenu() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="cursor-pointer p-3 transition-colors duration-300 lg:p-2">
+      <DropdownMenuTrigger className="hover:text-chart-3 cursor-pointer p-3 transition-colors duration-300 lg:p-2">
         {IS_AUTHORIZED ? (
           <UserRoundCheck strokeWidth={1.5} size={32} className="max-sm:size-6" />
         ) : (
