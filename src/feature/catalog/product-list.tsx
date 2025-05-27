@@ -12,7 +12,7 @@ const ProductList = ({ products }: ProductListProps) => {
   }
 
   return (
-    <section className="py-32">
+    <section className="py-6">
       <div className="container flex flex-col gap-16 lg:px-16">
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
           {products.map((product) => (
