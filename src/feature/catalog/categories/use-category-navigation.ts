@@ -8,7 +8,11 @@ export const useCategoryNavigation = () => {
 
   const handleCategoryClick = useCallback(
     (category: PosterCategory) => {
+<<<<<<< HEAD
       void navigate(`/catalog/category/${category.id}`);
+=======
+      void navigate(`/category/${category.id}`);
+>>>>>>> 29f3ea1 (refactor: correct type)
     },
     [navigate],
   );
