@@ -3,6 +3,7 @@ import { Euro, RussianRuble } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spiner';
 
+import { ProductImages } from './product-images';
 import { useProductOverview } from './use-product-overview-component';
 
 export default function ProductOverview({ productId }: { productId: string }) {
@@ -35,15 +36,7 @@ export default function ProductOverview({ productId }: { productId: string }) {
   return (
     <div className="mx-auto w-full max-w-7xl p-6">
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-        <div className="bg-muted relative aspect-square overflow-hidden rounded-lg">
-          <img
-            src={product.image}
-            alt="Product"
-            width={700}
-            height={700}
-            className="h-full w-full rounded-2xl bg-white object-cover"
-          />
-        </div>
+        <ProductImages image={product.image} alt={product.alt} />
 
         <div className="flex flex-col">
           <h1 className="mb-2 text-3xl font-bold">{product.name}</h1>
