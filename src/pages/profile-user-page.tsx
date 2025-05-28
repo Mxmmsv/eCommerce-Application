@@ -1,4 +1,4 @@
-import { MapPinCheck, Key, Lock, SquarePen, User } from 'lucide-react';
+import { MapPinCheck, Key, Lock, User } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -12,6 +12,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import ProfileCard from '@/feature/user-profile/profile-card';
 import { useCustomerStore } from '@/service/store/use-user-store';
 
 export default function UserProfilePage() {
@@ -47,38 +48,7 @@ export default function UserProfilePage() {
                 </TabsTrigger>
               </TabsList>
               <TabsContent value="profile">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Profile</CardTitle>
-                    <CardDescription>
-                      Make changes to your profile here. Click save when you are done.
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-2">
-                    <div className="space-y-1">
-                      <Label htmlFor="name">First name</Label>
-                      <Input id="name" defaultValue="Pedro" />
-                    </div>
-                    <div className="space-y-1">
-                      <Label htmlFor="surname">Last name</Label>
-                      <Input id="surname" defaultValue="Duarte" />
-                    </div>
-                    <div className="space-y-1">
-                      <Label htmlFor="email">Email</Label>
-                      <Input id="email" defaultValue="pedro@example.com" />
-                    </div>
-                    <div className="space-y-1">
-                      <Label htmlFor="date">Date of birth</Label>
-                      <Input id="date" defaultValue="01-01-1998" />
-                    </div>
-                  </CardContent>
-                  <CardFooter className="justify-end">
-                    <Button>
-                      <SquarePen size={20} strokeWidth={1.25} />
-                      Edit profile
-                    </Button>
-                  </CardFooter>
-                </Card>
+                <ProfileCard />
               </TabsContent>
 
               <TabsContent value="security">
