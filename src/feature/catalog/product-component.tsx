@@ -1,6 +1,14 @@
+import { Euro, RussianRuble } from 'lucide-react';
+
 import type { Poster } from './types';
 
 const ProductComponent = ({ poster }: { poster: Poster }) => {
+  const PriceIcon = poster.currencyCode === 'EUR' ? Euro : RussianRuble;
+  const hasDiscount = poster.discount && poster.discount !== poster.price;
+  const discountPercent = hasDiscount
+    ? Math.round(((Number(poster.price) - Number(poster.discount)) / Number(poster.price)) * 100)
+    : 0;
+
   return (
     <div key={poster.id} className="bg-background border-border flex flex-col overflow-clip border">
       <div className="px-6 py-8 md:px-6 md:py-10 lg:px-6 lg:py-8">
@@ -19,6 +27,26 @@ const ProductComponent = ({ poster }: { poster: Poster }) => {
             {poster.name}
           </h3>
           <p className="text-muted-foreground line-clamp-2 text-sm">{poster.description}</p>
+        </div>
+        <div className="mt-4">
+          {hasDiscount ? (
+            <div className="flex items-baseline gap-2">
+              <span className="text-foreground text-lg font-bold">
+                <PriceIcon className="inline h-4 w-4" />
+                {poster.discount}
+              </span>
+              <span className="text-muted-foreground text-sm line-through">
+                <PriceIcon className="inline h-3 w-3" />
+                {poster.price}
+              </span>
+              <span className="text-xs font-medium text-green-600">Save {discountPercent}%</span>
+            </div>
+          ) : (
+            <span className="text-lg font-medium">
+              <PriceIcon className="inline h-4 w-4" />
+              {poster.price}
+            </span>
+          )}
         </div>
       </div>
     </div>
