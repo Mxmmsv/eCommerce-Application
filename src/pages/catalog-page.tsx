@@ -1,4 +1,3 @@
-import type { ProductProjection } from '@commercetools/platform-sdk';
 import useSWR from 'swr';
 
 import { Spinner } from '@/components/ui/spiner';
@@ -6,6 +5,7 @@ import { fetchProducts } from '@/feature/catalog/api/fetch-products';
 import { Breadcrumbs } from '@/feature/catalog/categories/breadcrumbs';
 import { CategoryNavigation } from '@/feature/catalog/categories/category-navigation';
 import { ProductList } from '@/feature/catalog/product-list';
+import type { Poster } from '@/feature/catalog/types';
 import { useCategoryStore } from '@/service/store/use-category-store';
 
 export default function CatalogPage() {
@@ -16,7 +16,7 @@ export default function CatalogPage() {
     data: products,
     error,
     isLoading,
-  } = useSWR<ProductProjection[], Error>(['commercetools/products', lastCategoryId], () =>
+  } = useSWR<Poster[], Error>(['commercetools/products', lastCategoryId], () =>
     fetchProducts(lastCategoryId),
   );
 
