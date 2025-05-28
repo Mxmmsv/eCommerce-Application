@@ -11,6 +11,7 @@ import { cn } from '@/lib/utils';
 import type { CategoryDropdownProps } from '../types';
 
 import { CategoryTree } from './category-tree';
+import { useCategoryUI } from './use-category-ui';
 
 export const CategoryDropdown = ({
   categoryTree,
@@ -18,8 +19,14 @@ export const CategoryDropdown = ({
   openedSubmenus,
   toggleSubmenu,
 }: CategoryDropdownProps) => {
+  const { resetSubmenus } = useCategoryUI();
+
   return (
-    <DropdownMenu modal>
+    <DropdownMenu
+      onOpenChange={(isOpen) => {
+        if (!isOpen) resetSubmenus();
+      }}
+    >
       <DropdownMenuTrigger asChild>
         <Button
           variant="outline"
@@ -32,7 +39,7 @@ export const CategoryDropdown = ({
             'flex items-center gap-2',
           )}
         >
-          <MenuIcon className="text-foreground/80 h-4 w-4" />
+          <MenuIcon className="h-4 w-4" />
           Categories
           <ChevronDown
             className={cn('text-foreground/60 h-3 w-3', 'transition-transform duration-200')}

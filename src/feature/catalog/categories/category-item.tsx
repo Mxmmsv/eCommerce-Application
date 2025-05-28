@@ -33,7 +33,6 @@ export const CategoryItem = ({
           'rounded-lg px-3 py-2',
           'cursor-pointer transition-colors',
           'hover:bg-accent focus:bg-accent',
-          'text-sm font-medium',
           'flex items-center justify-between',
         )}
       >
@@ -52,14 +51,13 @@ export const CategoryItem = ({
                 'h-4 w-4 transition-transform duration-200',
                 isOpen ? 'rotate-90' : '',
                 'text-muted-foreground hover:text-primary',
-                'hover:scale-125 hover:stroke-[2.3px]',
               )}
             />
           </button>
         )}
       </DropdownMenuItem>
       {hasChildren && isOpen && (
-        <div className="ml-4 border-l-2 border-gray-200 pl-2">
+        <div className="ml-4 pl-2">
           {category.children.map((child) => (
             <CategoryItem
               key={child.id}
