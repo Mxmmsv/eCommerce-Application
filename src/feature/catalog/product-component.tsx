@@ -3,6 +3,12 @@ import { Link } from 'react-router';
 import type { Poster } from './types';
 
 const ProductComponent = ({ poster }: { poster: Poster }) => {
+  const PriceIcon = poster.currencyCode === 'EUR' ? Euro : RussianRuble;
+  const hasDiscount = poster.discount && poster.discount !== poster.price;
+  const discountPercent = hasDiscount
+    ? Math.round(((Number(poster.price) - Number(poster.discount)) / Number(poster.price)) * 100)
+    : 0;
+
   return (
     <div key={poster.id} className="bg-background border-border flex flex-col overflow-clip border">
       <Link to={`/catalog/product/${poster.id}`}>

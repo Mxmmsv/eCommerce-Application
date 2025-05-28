@@ -3,6 +3,9 @@ export type Poster = {
   name: string;
   description: string;
   image: string;
+  price: string;
+  currencyCode: string;
+  discount?: string;
 };
 
 export type PosterCategory = {
