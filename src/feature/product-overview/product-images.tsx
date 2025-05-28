@@ -17,7 +17,7 @@ export function ProductImages({ image, alt }: Pick<ProductData, 'image' | 'alt'>
           alt={alt}
           loading="lazy"
           decoding="sync"
-          className="h-full w-full rounded-2xl bg-white object-cover"
+          className="h-full w-full rounded-2xl bg-white object-contain"
         />
       </div>
     );
@@ -33,7 +33,7 @@ export function ProductImages({ image, alt }: Pick<ProductData, 'image' | 'alt'>
               alt={alt}
               loading="lazy"
               decoding="async"
-              className="h-full w-full rounded-2xl bg-white object-cover"
+              className="bg-muted h-full w-full rounded-2xl object-contain"
             />
           </CarouselItem>
         ))}
