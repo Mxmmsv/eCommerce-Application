@@ -28,6 +28,7 @@ export function CustomNavigationMenu() {
             className={({ isActive }) =>
               `before:text-chart-3 relative px-6 py-4 transition-all duration-300 ease-in-out before:absolute before:right-0 before:bottom-2 before:left-0 before:mx-auto before:h-[2px] before:w-0 before:bg-current before:transition-all before:duration-300 before:content-[''] hover:before:w-[calc(100%-3rem)] ${isActive ? 'text-chart-3 cursor-default before:w-[calc(100%-3rem)]' : ''}`
             }
+            end
           >
             Catalog
           </NavLink>
