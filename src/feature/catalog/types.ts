@@ -30,3 +30,8 @@ export type CategoryDropdownProps = {
   openedSubmenus: Record<string, boolean>;
   toggleSubmenu: (id: string) => void;
 };
+
+export type CategoryPathItem = {
+  id: string;
+  name: string;
+};
