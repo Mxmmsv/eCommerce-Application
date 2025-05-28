@@ -1,4 +1,5 @@
-import { Euro, Link, RussianRuble } from 'lucide-react';
+import { Euro, RussianRuble } from 'lucide-react';
+import { Link } from 'react-router';
 
 import type { Poster } from './types';
 
@@ -12,7 +13,6 @@ const ProductComponent = ({ poster }: { poster: Poster }) => {
   return (
     <div key={poster.id} className="bg-background border-border flex flex-col overflow-clip border">
       <Link to={`/catalog/${poster.id}`}>
-        \
         <div className="px-6 py-8 md:px-6 md:py-10 lg:px-6 lg:py-8">
           <div className="relative aspect-[2/3] w-full overflow-hidden">
             <img
