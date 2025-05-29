@@ -57,36 +57,37 @@ export function ProductImages({
                 </button>
               </DialogTrigger>
 
-              <DialogContent className="max-h-[90vh] max-w-[50vw] p-5">
-                <DialogTitle className="flex items-center justify-center">{alt}</DialogTitle>
-                <DialogDescription className="mb-4 flex items-center justify-center">
-                  {description}
-                </DialogDescription>
-                <Carousel className="w-full">
-                  <CarouselContent>
-                    {imageArr.map((image, index) => (
-                      <CarouselItem key={index} className="flex items-center justify-center">
-                        <div className="flex aspect-square max-h-[70vh] w-full items-center justify-center">
-                          <img
-                            src={image.url}
-                            alt={alt}
-                            loading="lazy"
-                            decoding="async"
-                            className="max-h-full max-w-full object-contain"
-                          />
-                        </div>
-                      </CarouselItem>
-                    ))}
-                  </CarouselContent>
-                  <CarouselPrevious
-                    className="top-1/2 left-2 z-10 -translate-y-1/2 transform"
-                    variant="secondary"
-                  />
-                  <CarouselNext
-                    className="top-1/2 right-2 z-10 -translate-y-1/2 transform"
-                    variant="secondary"
-                  />
-                </Carousel>
+              <DialogContent className="max-h-[90vh] w-full max-w-3xl overflow-hidden p-5 sm:p-0 md:p-4">
+                <DialogTitle className="text-center">{alt}</DialogTitle>
+                <DialogDescription className="text-center">{description}</DialogDescription>
+
+                <div className="flex items-center justify-center">
+                  <Carousel className="w-full">
+                    <CarouselContent>
+                      {imageArr.map((image, index) => (
+                        <CarouselItem key={index} className="flex items-center justify-center">
+                          <div className="flex aspect-square max-h-[60vh] w-full items-center justify-center sm:max-h-[70vh] md:max-h-[75vh]">
+                            <img
+                              src={image.url}
+                              alt={alt}
+                              loading="lazy"
+                              decoding="async"
+                              className="max-h-full max-w-full rounded-xl object-contain"
+                            />
+                          </div>
+                        </CarouselItem>
+                      ))}
+                    </CarouselContent>
+                    <CarouselPrevious
+                      className="top-1/2 left-2 -translate-y-1/2"
+                      variant="secondary"
+                    />
+                    <CarouselNext
+                      className="top-1/2 right-2 -translate-y-1/2"
+                      variant="secondary"
+                    />
+                  </Carousel>
+                </div>
               </DialogContent>
             </Dialog>
           </CarouselItem>
