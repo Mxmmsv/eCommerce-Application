@@ -32,8 +32,8 @@ export function ProductImages({
                   src={image[0].url}
                   alt={alt}
                   loading="lazy"
-                  decoding="sync"
-                  className="h-full w-full cursor-zoom-in rounded-2xl bg-white object-contain"
+                  decoding="async"
+                  className="bg-muted-foreground h-full w-full cursor-zoom-in rounded-2xl object-contain"
                 />
               </div>
             </DialogTrigger>
