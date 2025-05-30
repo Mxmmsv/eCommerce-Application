@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import {
   Menu,
   ChevronDown,
@@ -30,6 +29,7 @@ import {
 } from '@/components/ui/sheet';
 import { useLogout } from '@/feature/auth/login/api/use-logout';
 import AuthContext from '@/feature/auth/login/auth-provider';
+import { cn } from '@/lib/utils';
 
 import { ModeToggle } from './mode-toggle';
 import SearchBar from './search';
@@ -151,9 +151,7 @@ export default function BurgerMenu() {
                 )}
                 Profile
               </span>
-              <ChevronDown
-                className={clsx('transition-transform', { 'rotate-180': isProfileOpen })}
-              />
+              <ChevronDown className={cn('transition-transform', isProfileOpen && 'rotate-180')} />
             </button>
 
             {!IS_AUTHORIZED ? (
@@ -198,7 +196,7 @@ export default function BurgerMenu() {
 
                     <SheetClose asChild onClick={handleLogout}>
                       <NavLink
-                        className={clsx(
+                        className={cn(
                           buttonVariants({ variant: 'link' }),
                           'hover:text-chart-3 h-auto w-full cursor-pointer items-center justify-start transition-colors duration-300 hover:underline',
                         )}
