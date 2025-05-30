@@ -12,7 +12,8 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import ProfileCard from '@/feature/user-profile/profile-card';
+import AllCustomerAddress from '@/feature/user-profile/card-address-book';
+import ProfileCard from '@/feature/user-profile/card-profile';
 import { useCustomerStore } from '@/service/store/use-user-store';
 
 export default function UserProfilePage() {
@@ -83,17 +84,7 @@ export default function UserProfilePage() {
               </TabsContent>
 
               <TabsContent value="addresses">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Address Book</CardTitle>
-                    <CardDescription>
-                      Choose your shipping and billing addresses here. Save all your available
-                      address.
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-2"></CardContent>
-                  <CardFooter className="justify-end"></CardFooter>
-                </Card>
+                <AllCustomerAddress />
               </TabsContent>
             </Tabs>
           </div>
