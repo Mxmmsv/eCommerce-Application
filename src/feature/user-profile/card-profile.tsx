@@ -5,6 +5,7 @@ import type {
   MyCustomerSetLastNameAction,
   MyCustomerUpdateAction,
 } from '@commercetools/platform-sdk';
+import { SquarePen } from 'lucide-react';
 import { useRef } from 'react';
 import { mutate } from 'swr';
 
@@ -123,6 +124,7 @@ export default function ProfileCard() {
             handleSave().catch(console.error);
           }}
         >
+          <SquarePen size={20} strokeWidth={1.25} />
           Edit profile
         </Button>
       </CardFooter>
