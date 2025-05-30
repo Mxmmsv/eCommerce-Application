@@ -23,26 +23,30 @@ export function ProductImages({
   const imageArr = image;
   if (image.length === 1) {
     return (
-      <Dialog>
-        <div className="flex aspect-square items-center justify-center">
-          <DialogTrigger asChild>
-            <img
-              src={image[0].url}
-              alt={alt}
-              loading="lazy"
-              decoding="sync"
-              className="h-full w-full cursor-zoom-in rounded-2xl bg-white object-contain"
-            />
-          </DialogTrigger>
-        </div>
-        <DialogContent>
-          <DialogTitle hidden>{alt}</DialogTitle>
-          <DialogDescription hidden>{description}</DialogDescription>
-          <div className="flex items-center justify-center">
-            <img src={image[0].url} alt={alt} loading="lazy" decoding="sync" />
+      <div className="grid grid-cols-5 grid-rows-4">
+        <Dialog>
+          <div className="col-span-3 col-start-2 row-span-4 row-start-1">
+            <DialogTrigger asChild>
+              <div className="flex aspect-square items-center justify-center">
+                <img
+                  src={image[0].url}
+                  alt={alt}
+                  loading="lazy"
+                  decoding="sync"
+                  className="h-full w-full cursor-zoom-in rounded-2xl bg-white object-contain"
+                />
+              </div>
+            </DialogTrigger>
           </div>
-        </DialogContent>
-      </Dialog>
+          <DialogContent>
+            <DialogTitle hidden>{alt}</DialogTitle>
+            <DialogDescription hidden>{description}</DialogDescription>
+            <div className="flex items-center justify-center">
+              <img src={image[0].url} alt={alt} loading="lazy" decoding="sync" />
+            </div>
+          </DialogContent>
+        </Dialog>
+      </div>
     );
   }
 
