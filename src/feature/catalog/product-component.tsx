@@ -24,7 +24,7 @@ const ProductComponent = ({ poster }: { poster: Poster }) => {
                 'h-full w-full object-cover object-center px-0',
                 'shadow-chart-3/15 my-4 rounded-sm shadow-[-8px_8px_16px_-3px]',
                 'transition-all duration-500',
-                'lg:hover:-translate-y-3 lg:hover:scale-115 lg:hover:shadow-xl',
+                'hover:scale-105 hover:shadow-xl lg:hover:-translate-y-3 lg:hover:scale-115',
               )}
               onError={(e) => {
                 (e.target as HTMLImageElement).src = '/placeholder-product.webp';
