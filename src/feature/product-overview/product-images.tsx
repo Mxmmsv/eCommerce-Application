@@ -38,10 +38,10 @@ export function ProductImages({
               </div>
             </DialogTrigger>
           </div>
-          <DialogContent>
+          <DialogContent className="grid grid-cols-12 grid-rows-9 gap-4">
             <DialogTitle hidden>{alt}</DialogTitle>
             <DialogDescription hidden>{description}</DialogDescription>
-            <div className="flex items-center justify-center">
+            <div className="col-span-10 col-start-2 row-span-9 row-start-1">
               <img src={image[0].url} alt={alt} loading="lazy" decoding="sync" />
             </div>
           </DialogContent>
@@ -67,11 +67,11 @@ export function ProductImages({
                   />
                 </DialogTrigger>
 
-                <DialogContent>
+                <DialogContent className="grid grid-cols-12 grid-rows-9">
                   <DialogTitle hidden>{alt}</DialogTitle>
                   <DialogDescription hidden>{description}</DialogDescription>
 
-                  <Carousel>
+                  <Carousel className="col-span-10 col-start-2 row-span-9 row-start-1">
                     <CarouselContent>
                       {imageArr.map((image, index) => (
                         <CarouselItem key={index} className="flex items-center justify-center">
@@ -79,8 +79,8 @@ export function ProductImages({
                         </CarouselItem>
                       ))}
                     </CarouselContent>
-                    <CarouselPrevious />
-                    <CarouselNext />
+                    <CarouselPrevious className="col-start-1 row-span-9 row-start-1" />
+                    <CarouselNext className="col-start-12 row-span-9 row-start-1" />
                   </Carousel>
                 </DialogContent>
               </Dialog>
