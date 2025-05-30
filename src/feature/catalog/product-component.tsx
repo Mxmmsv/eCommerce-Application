@@ -35,7 +35,7 @@ const ProductComponent = ({ poster }: { poster: Poster }) => {
             className={cn(
               'group/texthover flex h-full flex-grow flex-col justify-between',
               'shadow-chart-3/15 my-4 rounded-sm px-2 shadow-[-8px_8px_16px_-5px]',
-              'sm:px-4 sm:pt-3 md:px-5 md:pt-4 lg:py-3',
+              'py-2 sm:px-4 sm:pt-3 md:px-5 md:pt-4 lg:py-3',
               'hover:bg-popover/55 transition-colors duration-200 hover:rounded-sm',
             )}
           >
