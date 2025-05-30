@@ -8,7 +8,7 @@ export const useCategoryNavigation = () => {
 
   const handleCategoryClick = useCallback(
     (category: PosterCategory) => {
-      void navigate(`/category/${category.id}`);
+      void navigate(`/catalog/category/${category.id}`);
     },
     [navigate],
   );

@@ -45,7 +45,7 @@ export const Breadcrumbs = () => {
               ) : (
                 <BreadcrumbLink asChild>
                   <Link
-                    to={`/category/${item.id}`}
+                    to={`/catalog/category/${item.id}`}
                     className="hover:text-primary transition-colors"
                   >
                     {item.name}
