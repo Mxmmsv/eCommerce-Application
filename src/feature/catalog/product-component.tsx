@@ -13,47 +13,65 @@ const ProductComponent = ({ poster }: { poster: Poster }) => {
     : 0;
 
   return (
-    <div key={poster.id} className="bg-background border-border flex flex-col overflow-clip border">
+    <div key={poster.id} className="flex flex-col overflow-visible">
       <Link to={`/catalog/${poster.id}`}>
-        <div className="px-6 py-8 md:px-6 md:py-10 lg:px-6 lg:py-8">
-          <div className="group relative aspect-[2/3] w-full overflow-hidden">
+        <div className="">
+          <div className="aspect-[2/3] h-full">
             <img
               src={poster.image}
               alt={poster.name}
               className={cn(
-                'h-full w-full object-contain',
-                'transition-transform duration-300 hover:scale-150',
+                'h-full w-full object-cover object-center',
+                'rounded-xs shadow-md',
+                'transition-all duration-500',
+                'lg:hover:-translate-y-3 lg:hover:scale-115 lg:hover:shadow-xl',
               )}
               onError={(e) => {
                 (e.target as HTMLImageElement).src = '/placeholder-product.webp';
               }}
             />
           </div>
-          <div className="group/texthover">
+          <div
+            className={cn(
+              'group/texthover flex h-full flex-grow flex-col justify-between',
+              'my-4 rounded-sm px-2 shadow-md',
+              'sm:px-4 sm:pt-3 md:px-5 md:pt-4 lg:py-3',
+              'hover:bg-background transition-colors duration-200 hover:rounded-sm',
+            )}
+          >
             <div>
               <h3
                 className={cn(
-                  'mt-3 text-lg font-semibold md:mb-3 md:text-xl lg:mb-3 lg:text-base',
+                  'text-center text-lg font-semibold',
+                  'sm:text-xl',
+                  'md:mb-3 lg:mb-3',
                   'group-hover/texthover:text-chart-3 transition-colors duration-200',
+
+                  'sm:mt-3 lg:mt-0',
                 )}
               >
                 {poster.name}
               </h3>
-              <p className="text-muted-foreground line-clamp-2 text-sm">{poster.description}</p>
+              <p className={cn('text-muted-foreground line-clamp-2', 'text-sm sm:text-base')}>
+                {poster.description}
+              </p>
             </div>
-            <div className="mt-4">
+            <div className="mt-auto flex flex-row-reverse pt-4">
               {hasDiscount ? (
-                <div className="flex items-baseline gap-2">
+                <div className="flex-end flex flex-row-reverse items-baseline gap-2">
                   <span
                     className={cn(
-                      'text-foreground text-lg font-bold',
+                      'text-base font-bold',
+                      'sm:text-lg',
                       'group-hover/texthover:text-chart-3 transition-colors duration-200',
                     )}
                   >
                     <PriceIcon className="inline h-4 w-4" />
                     {poster.discount}
                   </span>
-                  <span className="text-muted-foreground text-sm line-through">
+                  <span
+                    className={cn('text-muted-foreground line-through', 'text-sm sm:text-base')}
+                  >
                     <PriceIcon className="inline h-3 w-3" />
                     {poster.price}
                   </span>
@@ -64,7 +82,8 @@ const ProductComponent = ({ poster }: { poster: Poster }) => {
               ) : (
                 <span
                   className={cn(
-                    'text-foreground text-lg font-bold',
+                    'text-base font-bold',
+                    'sm:text-lg',
                     'group-hover/texthover:text-chart-3 transition-colors duration-200',
                   )}
                 >
