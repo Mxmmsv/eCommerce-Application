@@ -21,8 +21,8 @@ const ProductComponent = ({ poster }: { poster: Poster }) => {
               src={poster.image}
               alt={poster.name}
               className={cn(
-                'h-full w-full object-cover object-center',
-                'rounded-xs shadow-md',
+                'h-full w-full object-cover object-center px-0',
+                'shadow-chart-3/15 my-4 rounded-sm shadow-[-8px_8px_16px_-3px]',
                 'transition-all duration-500',
                 'lg:hover:-translate-y-3 lg:hover:scale-115 lg:hover:shadow-xl',
               )}
@@ -34,9 +34,9 @@ const ProductComponent = ({ poster }: { poster: Poster }) => {
           <div
             className={cn(
               'group/texthover flex h-full flex-grow flex-col justify-between',
-              'my-4 rounded-sm px-2 shadow-md',
+              'shadow-chart-3/15 my-4 rounded-sm px-2 shadow-[-8px_8px_16px_-5px]',
               'sm:px-4 sm:pt-3 md:px-5 md:pt-4 lg:py-3',
-              'hover:bg-background transition-colors duration-200 hover:rounded-sm',
+              'hover:bg-popover/55 transition-colors duration-200 hover:rounded-sm',
             )}
           >
             <div>

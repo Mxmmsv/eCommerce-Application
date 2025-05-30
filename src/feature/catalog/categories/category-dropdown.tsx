@@ -31,7 +31,7 @@ export const CategoryDropdown = ({
         <Button
           variant="outline"
           className={cn(
-            'h-auto rounded-full px-4 py-2',
+            'mx-6 h-auto rounded-full px-4 py-2 lg:mb-5',
             'bg-background hover:bg-muted/80',
             'transition-all duration-200 ease-in-out',
             'shadow-sm hover:shadow-md',
@@ -49,7 +49,7 @@ export const CategoryDropdown = ({
       <DropdownMenuContent
         className={cn(
           'min-w-[240px] rounded-xl p-2',
-          'bg-popover/95 backdrop-blur-sm',
+          'bg-popover/95 backdrop-blur-xs',
           'border-border/50 border shadow-lg',
           'animate-in fade-in-80 zoom-in-95',
           'data-[side=bottom]:slide-in-from-top-2',
