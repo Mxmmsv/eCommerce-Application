@@ -23,15 +23,40 @@ export function ProductImages({
   const imageArr = image;
   if (image.length === 1) {
     return (
-      <div className="flex aspect-square items-center justify-center">
-        <img
-          src={image[0].url}
-          alt={alt}
-          loading="lazy"
-          decoding="sync"
-          className="h-full w-full rounded-2xl bg-white object-contain"
-        />
-      </div>
+      <Dialog>
+        <div className="flex aspect-square items-center justify-center">
+          <DialogTrigger asChild>
+            <button
+              type="button"
+              className="h-full w-full cursor-zoom-in p-0"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={image[0].url}
+                alt={alt}
+                loading="lazy"
+                decoding="sync"
+                className="h-full w-full rounded-2xl bg-white object-contain"
+              />
+            </button>
+          </DialogTrigger>
+          <DialogContent className="max-h-[90vh] w-full max-w-3xl overflow-hidden p-5 sm:p-0 md:p-4">
+            <DialogTitle className="text-center">{alt}</DialogTitle>
+            <DialogDescription className="text-center">{description}</DialogDescription>
+            <div className="flex items-center justify-center">
+              <div className="flex aspect-square max-h-[60vh] w-full items-center justify-center sm:max-h-[70vh] md:max-h-[75vh]">
+                <img
+                  src={image[0].url}
+                  alt={alt}
+                  loading="lazy"
+                  decoding="sync"
+                  className="h-full w-full rounded-2xl bg-white object-contain"
+                />
+              </div>
+            </div>
+          </DialogContent>
+        </div>
+      </Dialog>
     );
   }
 
