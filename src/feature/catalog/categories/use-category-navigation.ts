@@ -10,13 +10,10 @@ export const useCategoryNavigation = () => {
   const { currentPath, setCurrentPath } = useCategoryStore();
 
   const handleCategoryClick = useCallback(
-    (category: PosterCategory) => {
-      const pathItem: CategoryPathItem = {
-        id: category.id,
-        name: category.name,
-      };
+    ({ id, name }: PosterCategory) => {
+      const pathItem: CategoryPathItem = { id, name };
       setCurrentPath([...currentPath, pathItem]);
-      void navigate(`/catalog/category/${category.id}`);
+      void navigate(`/catalog/category/${id}`);
     },
     [navigate, setCurrentPath, currentPath],
   );
