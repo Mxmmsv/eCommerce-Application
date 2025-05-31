@@ -38,11 +38,17 @@ export function ProductImages({
               </div>
             </DialogTrigger>
           </div>
-          <DialogContent className="grid grid-cols-12 grid-rows-9 gap-4">
+          <DialogContent className="grid max-h-[90dvh] max-w-[90dvw] grid-cols-12 grid-rows-9 overflow-hidden p-0">
             <DialogTitle hidden>{alt}</DialogTitle>
             <DialogDescription hidden>{description}</DialogDescription>
-            <div className="col-span-10 col-start-2 row-span-9 row-start-1">
-              <img src={image[0].url} alt={alt} loading="lazy" decoding="sync" />
+            <div className="col-span-10 col-start-2 row-span-9 row-start-1 flex items-center justify-center">
+              <img
+                src={image[0].url}
+                alt={alt}
+                loading="lazy"
+                decoding="sync"
+                className="max-h-[90dvh] max-w-[90dvw] object-contain"
+              />
             </div>
           </DialogContent>
         </Dialog>
