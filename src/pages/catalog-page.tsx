@@ -38,50 +38,10 @@ export default function CatalogPage() {
     );
   }
 
-  if (isLoading) {
-    return (
-      <div className="column flex min-h-svh items-center justify-center">
-        <Spinner size="medium" className="text-primary">
-          <span className="text-center">Loading products...</span>
-        </Spinner>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="flex min-h-svh items-center justify-center">
-        <div className="text-center text-red-500">{error}</div>
-      </div>
-    );
-  }
-
-  if (isLoading) {
-    return (
-      <div className="column flex min-h-svh items-center justify-center">
-        <Spinner size="medium" className="text-primary">
-          <span className="text-center">Loading products...</span>
-        </Spinner>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="flex min-h-svh items-center justify-center">
-        <div className="text-center text-red-500">{error.message || 'Failed to load products'}</div>
-      </div>
-    );
-  }
-
   return (
     <div className="bg-muted flex min-h-svh justify-center text-lg">
       <div className="container py-8">
-<<<<<<< HEAD
         <div className="mb-6 flex items-start gap-4 px-4">
-=======
-        <div className="mb-6 flex items-center gap-4">
->>>>>>> c6c33ea (refactor: refactor categoty-navigation)
           <CategoryNavigation />
           <Breadcrumbs />
         </div>

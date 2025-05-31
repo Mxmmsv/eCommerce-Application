@@ -1,3 +1,4 @@
+import { Euro, RussianRuble } from 'lucide-react';
 import { Link } from 'react-router';
 
 import type { Poster } from './types';
@@ -28,6 +29,26 @@ const ProductComponent = ({ poster }: { poster: Poster }) => {
               {poster.name}
             </h3>
             <p className="text-muted-foreground line-clamp-2 text-sm">{poster.description}</p>
+          </div>
+          <div className="mt-4">
+            {hasDiscount ? (
+              <div className="flex items-baseline gap-2">
+                <span className="text-foreground text-lg font-bold">
+                  <PriceIcon className="inline h-4 w-4" />
+                  {poster.discount}
+                </span>
+                <span className="text-muted-foreground text-sm line-through">
+                  <PriceIcon className="inline h-3 w-3" />
+                  {poster.price}
+                </span>
+                <span className="text-xs font-medium text-green-600">Save {discountPercent}%</span>
+              </div>
+            ) : (
+              <span className="text-lg font-medium">
+                <PriceIcon className="inline h-4 w-4" />
+                {poster.price}
+              </span>
+            )}
           </div>
         </div>
       </Link>

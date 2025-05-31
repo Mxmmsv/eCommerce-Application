@@ -11,16 +11,12 @@ export const useCategoryNavigation = () => {
 
   const handleCategoryClick = useCallback(
     (category: PosterCategory) => {
-<<<<<<< HEAD
-      void navigate(`/catalog/category/${category.id}`);
-=======
       const pathItem: CategoryPathItem = {
         id: category.id,
         name: category.name,
       };
       setCurrentPath([...currentPath, pathItem]);
-      void navigate(`/category/${category.id}`);
->>>>>>> 4b079db (fix: fix history when clicking on all categories)
+      void navigate(`/catalog/category/${category.id}`);
     },
     [navigate, setCurrentPath, currentPath],
   );

@@ -31,9 +31,7 @@ export type CategoryDropdownProps = {
   toggleSubmenu: (id: string) => void;
 };
 
-export type CategoryDropdownProps = {
-  categoryTree: PosterCategoryNode[];
-  onSelect: (category: PosterCategory) => void;
-  openedSubmenus: Record<string, boolean>;
-  toggleSubmenu: (id: string) => void;
+export type CategoryPathItem = {
+  id: string;
+  name: string;
 };
