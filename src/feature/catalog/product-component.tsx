@@ -7,10 +7,6 @@ import type { Poster } from './types';
 
 const ProductComponent = ({ poster }: { poster: Poster }) => {
   const PriceIcon = poster.currencyCode === 'EUR' ? Euro : RussianRuble;
-  const hasDiscount = poster.discount && poster.discount !== poster.price;
-  const discountPercent = hasDiscount
-    ? Math.round(((Number(poster.price) - Number(poster.discount)) / Number(poster.price)) * 100)
-    : 0;
 
   return (
     <div key={poster.id} className="flex flex-col overflow-visible">
@@ -57,7 +53,7 @@ const ProductComponent = ({ poster }: { poster: Poster }) => {
               </p>
             </div>
             <div className="mt-auto flex flex-row-reverse pt-4">
-              {hasDiscount ? (
+              {poster.hasDiscount ? (
                 <div className="flex-end flex flex-row-reverse items-baseline gap-2">
                   <span
                     className={cn(
@@ -76,7 +72,7 @@ const ProductComponent = ({ poster }: { poster: Poster }) => {
                     {poster.price}
                   </span>
                   <span className="text-xs font-medium text-green-600">
-                    Save {discountPercent}%
+                    Save {poster.discountPercent}%
                   </span>
                 </div>
               ) : (

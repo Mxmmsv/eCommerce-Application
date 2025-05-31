@@ -6,6 +6,8 @@ export type Poster = {
   price: string;
   currencyCode: string;
   discount?: string;
+  discountPercent?: number;
+  hasDiscount?: boolean;
 };
 
 export type PosterCategory = {
