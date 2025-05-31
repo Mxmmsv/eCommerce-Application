@@ -35,7 +35,6 @@ export function CustomNavigationMenu() {
               isCatalogActive && 'text-chart-3 cursor-default before:w-[calc(100%-3rem)]',
               isCategoryActive && 'text-chart-3 before:w-[calc(100%-3rem)]',
             )}
-            end
           >
             Catalog
           </NavLink>
