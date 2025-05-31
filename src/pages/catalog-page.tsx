@@ -39,14 +39,17 @@ export default function CatalogPage() {
   }
 
   return (
-    <div className="bg-muted flex min-h-svh justify-center text-lg">
-      <div className="container py-8">
-        <div className="mb-6 flex items-start gap-4 px-4">
-          <CategoryNavigation />
-          <Breadcrumbs />
+    <>
+      <title>{'Catalog :: Poster store'}</title>
+      <div className="bg-muted flex min-h-svh justify-center text-lg">
+        <div className="container py-8">
+          <div className="mb-6 flex items-start gap-4 px-4">
+            <CategoryNavigation />
+            <Breadcrumbs />
+          </div>
+          <ProductList products={products || []} />
         </div>
-        <ProductList products={products || []} />
       </div>
-    </div>
+    </>
   );
 }

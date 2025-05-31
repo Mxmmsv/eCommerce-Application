@@ -7,10 +7,13 @@ export default function RegistrationPage() {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-muted flex min-h-svh items-center justify-center p-6">
-      <div className="flex w-full max-w-xl min-w-xs flex-col gap-6">
-        <RegistrationForm onRegister={(data) => handleRegister(data, navigate)} />
+    <>
+      <title>{'Registration :: Poster store'}</title>
+      <div className="bg-muted flex min-h-svh items-center justify-center p-6">
+        <div className="flex w-full max-w-xl min-w-xs flex-col gap-6">
+          <RegistrationForm onRegister={(data) => handleRegister(data, navigate)} />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
