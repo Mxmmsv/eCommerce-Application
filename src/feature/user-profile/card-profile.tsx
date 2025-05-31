@@ -6,7 +6,7 @@ import type {
   MyCustomerUpdateAction,
 } from '@commercetools/platform-sdk';
 import { SquarePen } from 'lucide-react';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { mutate } from 'swr';
 
 import { Button } from '@/components/ui/button';
@@ -32,9 +32,18 @@ export default function ProfileCard() {
   const emailRef = useRef<HTMLInputElement>(null);
   const dobRef = useRef<HTMLInputElement>(null);
 
-  const handleSave = async () => {
-    console.log('handleSave called');
+  const [isEditing, setIsEditing] = useState(false);
 
+  const handleCancel = () => {
+    if (!customer) return;
+    if (firstNameRef.current) firstNameRef.current.value = customer.firstName || '';
+    if (lastNameRef.current) lastNameRef.current.value = customer.lastName || '';
+    if (emailRef.current) emailRef.current.value = customer.email || '';
+    if (dobRef.current) dobRef.current.value = customer.dateOfBirth || '';
+    setIsEditing(false);
+  };
+
+  const handleSave = async () => {
     if (!customer) {
       console.error('Customer is null');
       return;
@@ -67,8 +76,6 @@ export default function ProfileCard() {
       } as MyCustomerSetDateOfBirthAction,
     ];
 
-    console.log('Sending update:', { version: customer.version, actions });
-
     try {
       const response = await apiRoot
         .me()
@@ -80,12 +87,9 @@ export default function ProfileCard() {
         })
         .execute();
 
-      console.log('Update response:', response.body);
-
       setCustomer(response.body);
       await mutate('customer-profile', response.body, false);
-
-      console.log('Customer updated successfully');
+      setIsEditing(false);
     } catch (error) {
       console.error('Failed to update customer:', error);
     }
@@ -102,31 +106,56 @@ export default function ProfileCard() {
       <CardContent className="space-y-2">
         <div className="space-y-1">
           <Label htmlFor="name">First name</Label>
-          <Input id="name" defaultValue={customer?.firstName} ref={firstNameRef} />
+          <Input
+            id="name"
+            defaultValue={customer?.firstName}
+            ref={firstNameRef}
+            disabled={!isEditing}
+          />
         </div>
         <div className="space-y-1">
           <Label htmlFor="surname">Last name</Label>
-          <Input id="surname" defaultValue={customer?.lastName} ref={lastNameRef} />
+          <Input
+            id="surname"
+            defaultValue={customer?.lastName}
+            ref={lastNameRef}
+            disabled={!isEditing}
+          />
         </div>
         <div className="space-y-1">
           <Label htmlFor="email">Email</Label>
-          <Input id="email" defaultValue={customer?.email} ref={emailRef} />
+          <Input id="email" defaultValue={customer?.email} ref={emailRef} disabled={!isEditing} />
         </div>
         <div className="space-y-1">
           <Label htmlFor="date">Date of birth</Label>
-          <Input id="date" defaultValue={customer?.dateOfBirth} ref={dobRef} />
+          <Input
+            id="date"
+            defaultValue={customer?.dateOfBirth}
+            ref={dobRef}
+            disabled={!isEditing}
+          />
         </div>
       </CardContent>
-      <CardFooter className="justify-end">
-        <Button
-          onClick={() => {
-            console.log('Button clicked');
-            handleSave().catch(console.error);
-          }}
-        >
-          <SquarePen size={20} strokeWidth={1.25} />
-          Edit profile
-        </Button>
+      <CardFooter className="justify-end space-x-3">
+        {!isEditing ? (
+          <Button onClick={() => setIsEditing(true)}>
+            <SquarePen size={20} strokeWidth={1.25} />
+            Edit profile
+          </Button>
+        ) : (
+          <>
+            <Button variant="outline" onClick={handleCancel}>
+              Cancel
+            </Button>
+            <Button
+              onClick={() => {
+                void handleSave();
+              }}
+            >
+              Save Changes
+            </Button>
+          </>
+        )}
       </CardFooter>
     </Card>
   );
