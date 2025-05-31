@@ -67,7 +67,7 @@ export function ProductImages({
                   />
                 </DialogTrigger>
 
-                <DialogContent className="grid grid-cols-12 grid-rows-9">
+                <DialogContent className="grid max-h-[90dvh] max-w-[90dvw] grid-cols-12 grid-rows-9 overflow-hidden p-0">
                   <DialogTitle hidden>{alt}</DialogTitle>
                   <DialogDescription hidden>{description}</DialogDescription>
 
@@ -75,7 +75,13 @@ export function ProductImages({
                     <CarouselContent>
                       {imageArr.map((image, index) => (
                         <CarouselItem key={index} className="flex items-center justify-center">
-                          <img src={image.url} alt={alt} loading="lazy" decoding="async" />
+                          <img
+                            src={image.url}
+                            alt={alt}
+                            loading="lazy"
+                            decoding="async"
+                            className="max-h-[90dvh] max-w-[90dvw] object-contain"
+                          />
                         </CarouselItem>
                       ))}
                     </CarouselContent>
