@@ -16,7 +16,7 @@ export const useCategoryNavigation = () => {
         name: category.name,
       };
       setCurrentPath([...currentPath, pathItem]);
-      void navigate(`/category/${category.id}`);
+      void navigate(`/catalog/category/${category.id}`);
     },
     [navigate, setCurrentPath, currentPath],
   );

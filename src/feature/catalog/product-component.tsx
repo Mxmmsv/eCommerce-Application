@@ -14,7 +14,7 @@ const ProductComponent = ({ poster }: { poster: Poster }) => {
 
   return (
     <div key={poster.id} className="flex flex-col overflow-visible">
-      <Link to={`/catalog/${poster.id}`}>
+      <Link to={`/catalog/product/${poster.id}`}>
         <div>
           <div className="aspect-[2/3] h-full">
             <img
