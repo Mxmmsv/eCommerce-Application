@@ -21,7 +21,7 @@ export default function AddAddressDialog({ trigger }: { trigger: ReactNode }) {
     <Dialog>
       <form>
         {trigger}
-        <DialogContent className="flex max-h-[95vh] max-w-[95vw] flex-col overflow-y-auto">
+        <DialogContent className="flex max-h-[95vh] max-w-[70vw] flex-col overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="text-2xl">Add new address here</DialogTitle>
             <DialogDescription>
