@@ -3,14 +3,21 @@ import useSWR from 'swr';
 
 import apiRoot from '@/feature/api/api-client-credentials-flow';
 
-const getProductOverview = async (productId: string): Promise<Product> => {
-  const product = await apiRoot.products().withId({ ID: productId }).get().execute();
-  return product.body;
+const getProductOverview = async (productSlug: string): Promise<Product> => {
+  const product = await apiRoot
+    .products()
+    .get({
+      queryArgs: {
+        where: `masterData(current(slug(en-GB="${productSlug}")))`,
+      },
+    })
+    .execute();
+  return product.body.results[0];
 };
 
-const useFetchProduct = (productId: string) => {
-  const { data, error, isLoading } = useSWR<Product, Error>(['product', productId], () =>
-    getProductOverview(productId),
+const useFetchProduct = (productSlug: string) => {
+  const { data, error, isLoading } = useSWR<Product, Error>(['product', productSlug], () =>
+    getProductOverview(productSlug),
   );
 
   return { data, error, isLoading };

@@ -3,11 +3,18 @@ import { useParams } from 'react-router';
 import ProductOverview from '@/feature/product-overview/product-overview-component';
 
 export default function ProductDetailPage() {
-  const { id } = useParams();
+  const { slug } = useParams();
 
-  if (!id) {
+  if (!slug) {
     return null;
   }
 
-  return <ProductOverview productId={id} />;
+  const formattedSlug = slug.replace(/-/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase());
+
+  return (
+    <>
+      <title>{`Product - ${formattedSlug.replace(/-/g, ' ')} :: Poster store`}</title>
+      <ProductOverview productSlug={slug} />
+    </>
+  );
 }

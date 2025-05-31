@@ -5,6 +5,7 @@ import type { Poster } from '../types';
 export const mapToPoster = (product: ProductProjection): Poster => {
   return {
     id: product.id,
+    slug: product.slug['en-GB'],
     name: product.name['en-GB'] || 'No name',
     description: product.description?.['en-GB'] || 'No description available',
     image: product.masterVariant.images?.[0]?.url || '/placeholder-product.webp',

@@ -1,7 +1,7 @@
 import useFetchProduct from './api/get-product-overview';
 import type { ProductData } from './types';
 
-const defaultProduct: Omit<ProductData, 'isLoading' | 'error'> = {
+export const defaultProduct: Omit<ProductData, 'isLoading' | 'error'> = {
   name: 'Product not found',
   description: 'No description available',
   image: [{ url: '/placeholder-product.webp' }],
@@ -11,8 +11,8 @@ const defaultProduct: Omit<ProductData, 'isLoading' | 'error'> = {
   discount: '0.00',
 };
 
-export function useProductOverview(productId: string): ProductData {
-  const { data, error, isLoading } = useFetchProduct(productId);
+export function useProductOverview(productSlug: string): ProductData {
+  const { data, error, isLoading } = useFetchProduct(productSlug);
 
   if (error?.name === 'NotFound') return { ...defaultProduct, isLoading: false, error: null };
   if (!data) return { ...defaultProduct, isLoading: true, error: null };

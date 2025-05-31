@@ -6,8 +6,8 @@ import { Spinner } from '@/components/ui/spiner';
 import { ProductImages } from './product-images';
 import { useProductOverview } from './use-product-overview-component';
 
-export default function ProductOverview({ productId }: { productId: string }) {
-  const { isLoading, error, ...product } = useProductOverview(productId);
+export default function ProductOverview({ productSlug }: { productSlug: string }) {
+  const { isLoading, error, ...product } = useProductOverview(productSlug);
 
   if (isLoading) {
     return (
