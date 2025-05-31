@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spiner';
 
 import { ProductImages } from './product-images';
-import { useProductOverview } from './use-product-overview-component';
+import { useProductOverview } from './use-product-overview';
 
 export default function ProductOverview({ productId }: { productId: string }) {
   const { isLoading, error, ...product } = useProductOverview(productId);
