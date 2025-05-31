@@ -8,12 +8,12 @@ import {
 
 import type { ProductData } from './types';
 
-export function ProductImages({ image, alt }: Pick<ProductData, 'image' | 'alt'>) {
-  if (image.length === 1) {
+export function ProductImages({ images, alt }: Pick<ProductData, 'images' | 'alt'>) {
+  if (images.length === 1) {
     return (
       <div className="flex aspect-square items-center justify-center">
         <img
-          src={image[0].url}
+          src={images[0].url}
           alt={alt}
           loading="lazy"
           decoding="sync"
@@ -26,7 +26,7 @@ export function ProductImages({ image, alt }: Pick<ProductData, 'image' | 'alt'>
   return (
     <Carousel className="h-full w-full">
       <CarouselContent>
-        {image.map((image, index) => (
+        {images.map((image, index) => (
           <CarouselItem key={index} className="flex aspect-square items-center justify-center">
             <img
               src={image.url}
