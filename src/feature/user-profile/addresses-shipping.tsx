@@ -1,13 +1,5 @@
 import type { Address } from '@commercetools/platform-sdk';
-import {
-  ChevronDown,
-  ChevronUp,
-  CircleCheckBig,
-  Plus,
-  SquarePen,
-  Trash,
-  Truck,
-} from 'lucide-react';
+import { ChevronDown, ChevronUp, CircleCheckBig, SquarePen, Trash, Truck } from 'lucide-react';
 import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -332,11 +324,7 @@ export default function AddressesShipping() {
               </div>
             )}
           </div>
-          <div>
-            <Button>
-              <Plus /> Add address
-            </Button>
-          </div>
+          <div></div>
         </div>
       </CollapsibleContent>
     </Collapsible>

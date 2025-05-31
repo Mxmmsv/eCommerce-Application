@@ -3,7 +3,6 @@ import {
   ChevronDown,
   ChevronUp,
   CircleCheckBig,
-  Plus,
   ReceiptText,
   SquarePen,
   Trash,
@@ -329,11 +328,6 @@ export default function AddressesBilling() {
                 ))}
               </div>
             )}
-          </div>
-          <div>
-            <Button>
-              <Plus /> Add address
-            </Button>
           </div>
         </div>
       </CollapsibleContent>

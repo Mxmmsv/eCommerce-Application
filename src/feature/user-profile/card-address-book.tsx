@@ -1,5 +1,10 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Plus } from 'lucide-react';
 
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { DialogTrigger } from '@/components/ui/dialog';
+
+import AddAddressDialog from './add-address-dialog';
 import AddressesBilling from './addresses-billing';
 import AddressesShipping from './addresses-shipping';
 
@@ -8,9 +13,20 @@ export default function AllCustomerAddress() {
     <Card>
       <CardHeader>
         <CardTitle>Address Book</CardTitle>
-        <CardDescription>
-          Choose your shipping and billing addresses here. Save all your available addresses.
+        <CardDescription className="my-3">
+          Choose your shipping and billing addresses here. Edit all your available addresses or add
+          a new ones.
         </CardDescription>
+        <AddAddressDialog
+          trigger={
+            <DialogTrigger asChild>
+              <Button>
+                <Plus />
+                Add address
+              </Button>
+            </DialogTrigger>
+          }
+        />
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
         <div className="w-full">
