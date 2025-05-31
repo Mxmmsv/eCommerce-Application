@@ -27,10 +27,7 @@ export const Breadcrumbs = () => {
           <BreadcrumbLink asChild>
             <Link
               to="/catalog"
-              onClick={(e) => {
-                e.preventDefault();
-                handleAllCategoriesClick();
-              }}
+              onClick={handleAllCategoriesClick}
               className="hover:text-primary flex items-center gap-1"
             >
               <Images className="h-4 w-4" />
