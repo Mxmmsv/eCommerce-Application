@@ -38,7 +38,7 @@ export function ProductImages({
               </div>
             </DialogTrigger>
           </div>
-          <DialogContent className="grid max-h-[90dvh] max-w-[90dvw] grid-cols-12 grid-rows-9 overflow-hidden p-0">
+          <DialogContent className="grid max-h-[90dvh] max-w-[90dvw] grid-cols-12 grid-rows-9 overflow-hidden">
             <DialogTitle hidden>{alt}</DialogTitle>
             <DialogDescription hidden>{description}</DialogDescription>
             <div className="col-span-10 col-start-2 row-span-9 row-start-1 flex items-center justify-center">
@@ -47,7 +47,7 @@ export function ProductImages({
                 alt={alt}
                 loading="lazy"
                 decoding="sync"
-                className="max-h-[90dvh] max-w-[90dvw] object-contain"
+                className="max-h-[85vh] object-contain"
               />
             </div>
           </DialogContent>
@@ -73,7 +73,7 @@ export function ProductImages({
                   />
                 </DialogTrigger>
 
-                <DialogContent className="grid max-h-[90dvh] max-w-[90dvw] grid-cols-12 grid-rows-9 overflow-hidden p-0">
+                <DialogContent className="grid max-h-[90dvh] max-w-[90dvw] grid-cols-12 grid-rows-9 overflow-hidden">
                   <DialogTitle hidden>{alt}</DialogTitle>
                   <DialogDescription hidden>{description}</DialogDescription>
 
@@ -86,7 +86,7 @@ export function ProductImages({
                             alt={alt}
                             loading="lazy"
                             decoding="async"
-                            className="max-h-[90dvh] max-w-[90dvw] object-contain"
+                            className="max-h-[85vh] object-contain"
                           />
                         </CarouselItem>
                       ))}
