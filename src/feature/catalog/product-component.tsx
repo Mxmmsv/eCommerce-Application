@@ -14,7 +14,7 @@ const ProductComponent = ({ poster }: { poster: Poster }) => {
       className={cn(
         'group/texthover group/cardhover hover:bg-popover/55',
         'flex flex-col overflow-visible transition-colors duration-200 hover:rounded-sm',
-        'shadow-chart-3/15 my-4 rounded-sm shadow-[-8px_8px_16px_-5px]',
+        'shadow-chart-3/75 my-4 rounded-sm shadow-[-8px_8px_16px_-5px]',
       )}
     >
       <Link to={`/catalog/product/${poster.id}`}>
