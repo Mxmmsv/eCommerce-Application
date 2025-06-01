@@ -4,14 +4,22 @@ import type { Poster } from '../types';
 
 import { mapToPoster } from './map-products';
 
-export const fetchProducts = async (categoryId?: string): Promise<Poster[]> => {
-  const response = await apiRoot
-    .productProjections()
-    .get({
-      queryArgs: {
-        where: categoryId ? `categories(id="${categoryId}")` : undefined,
-      },
-    })
-    .execute();
+export const fetchProducts = async (
+  categoryId?: string,
+  searchQuery?: string,
+): Promise<Poster[]> => {
+  const queryArgs: Record<string, string | boolean> = {
+    fuzzy: true,
+  };
+
+  if (searchQuery) {
+    queryArgs['text.en-GB'] = searchQuery;
+  }
+  if (categoryId) {
+    queryArgs['filter.query'] = `categories.id:"${categoryId}"`;
+  }
+
+  const response = await apiRoot.productProjections().search().get({ queryArgs }).execute();
+
   return response.body.results.map(mapToPoster);
 };
