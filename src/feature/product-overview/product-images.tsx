@@ -16,12 +16,12 @@ import {
 import type { ProductData } from './types';
 
 export function ProductImages({
-  image,
+  images,
   alt,
   description,
-}: Pick<ProductData, 'image' | 'alt' | 'description'>) {
-  const imageArr = image;
-  if (image.length === 1) {
+}: Pick<ProductData, 'images' | 'alt' | 'description'>) {
+  const imageArr = images;
+  if (images.length === 1) {
     return (
       <div className="grid grid-cols-5 grid-rows-4">
         <Dialog>
@@ -29,7 +29,7 @@ export function ProductImages({
             <DialogTrigger asChild>
               <div className="flex aspect-square items-center justify-center">
                 <img
-                  src={image[0].url}
+                  src={images[0].url}
                   alt={alt}
                   loading="lazy"
                   decoding="async"
@@ -43,7 +43,7 @@ export function ProductImages({
             <DialogDescription hidden>{description}</DialogDescription>
             <div className="col-span-10 col-start-2 row-span-9 row-start-1 flex items-center justify-center">
               <img
-                src={image[0].url}
+                src={images[0].url}
                 alt={alt}
                 loading="lazy"
                 decoding="sync"

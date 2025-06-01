@@ -3,6 +3,11 @@ export type Poster = {
   name: string;
   description: string;
   image: string;
+  price: string;
+  currencyCode: string;
+  discount?: string;
+  discountPercent?: number;
+  hasDiscount?: boolean;
 };
 
 export type PosterCategory = {
@@ -26,4 +31,9 @@ export type CategoryDropdownProps = {
   onSelect: (category: PosterCategory) => void;
   openedSubmenus: Record<string, boolean>;
   toggleSubmenu: (id: string) => void;
+};
+
+export type CategoryPathItem = {
+  id: string;
+  name: string;
 };
