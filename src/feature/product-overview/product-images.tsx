@@ -47,7 +47,7 @@ export function ProductImages({
                 alt={alt}
                 loading="lazy"
                 decoding="sync"
-                className="max-h-[85vh] object-contain"
+                className="max-h-[85dvh] object-contain"
               />
             </div>
           </DialogContent>
@@ -86,7 +86,7 @@ export function ProductImages({
                             alt={alt}
                             loading="lazy"
                             decoding="async"
-                            className="max-h-[85vh] object-contain"
+                            className="max-h-[85dvh] object-contain"
                           />
                         </CarouselItem>
                       ))}
