@@ -10,6 +10,7 @@ export const fetchProducts = async (categoryId?: string): Promise<Poster[]> => {
     .get({
       queryArgs: {
         where: categoryId ? `categories(id="${categoryId}")` : undefined,
+        limit: 100,
       },
     })
     .execute();
