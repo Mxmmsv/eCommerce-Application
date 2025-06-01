@@ -37,3 +37,5 @@ export type CategoryPathItem = {
   id: string;
   name: string;
 };
+
+export type SortOption = 'price asc' | 'price desc' | 'name.en asc' | null;
