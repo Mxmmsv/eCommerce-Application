@@ -4,11 +4,7 @@ import type { Poster } from '../types';
 
 import { mapToPoster } from './map-products';
 
-export const fetchProducts = async (
-  categoryId?: string,
-  sortOption?: string | null,
-): Promise<Poster[]> => {
-  console.log('Sort option:', sortOption);
+export const fetchProducts = async (categoryId?: string): Promise<Poster[]> => {
   const response = await apiRoot
     .productProjections()
     .get({
@@ -18,6 +14,5 @@ export const fetchProducts = async (
       },
     })
     .execute();
-  console.log('API response:', response.body.results);
   return response.body.results.map(mapToPoster);
 };
