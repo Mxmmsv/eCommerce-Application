@@ -35,7 +35,7 @@ export const CategoryDropdown = ({
             'bg-background hover:bg-muted/80',
             'transition-all duration-200 ease-in-out',
             'shadow-sm hover:shadow-md',
-            'border-border/50 hover:border-primary',
+            'border-border/50 hover:border-primary/60',
             'flex items-center gap-2',
           )}
         >

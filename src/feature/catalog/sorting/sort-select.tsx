@@ -5,6 +5,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { cn } from '@/lib/utils';
 
 import type { SortOption } from '../types';
 
@@ -18,7 +19,17 @@ export const SortSelect = () => {
       value={sortOption ?? 'none'}
       onValueChange={(value) => setSortOption(value === 'none' ? null : (value as SortOption))}
     >
-      <SelectTrigger className="w-[200px] rounded-full">
+      <SelectTrigger
+        className={cn(
+          'hover:text-primary w-[200px] rounded-full pl-4',
+          sortOption ? 'bg-background' : 'bg-transparent',
+          sortOption ? 'text-primary font-medium' : 'text-muted-foreground',
+          'transition-all duration-200 ease-in-out',
+          'hover:bg-muted/80 shadow-sm hover:shadow-md',
+          'border-border/50 hover:border-primary/60',
+          '[&:hover_svg]:text-primary [&_svg]:transition-colors [&_svg]:duration-200',
+        )}
+      >
         <SelectValue placeholder="Sort by" />
       </SelectTrigger>
       <SelectContent>
