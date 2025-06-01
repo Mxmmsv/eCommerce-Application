@@ -7,14 +7,17 @@ import {
 } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
 
-import { SORT_OPTIONS } from './sort-options';
+import { DEFAULT_SORT, SORT_OPTIONS } from './sort-options';
 import { useSortStore } from './use-sort-store';
 
 export const SortSelect = () => {
   const { sortOption, setSortOption } = useSortStore();
 
   return (
-    <Select value={sortOption} onValueChange={setSortOption}>
+    <Select
+      value={sortOption || DEFAULT_SORT}
+      onValueChange={(value) => setSortOption(value === DEFAULT_SORT ? undefined : value)}
+    >
       <SelectTrigger
         className={cn(
           'hover:text-primary w-[200px] rounded-full pl-4',
@@ -29,6 +32,7 @@ export const SortSelect = () => {
         <SelectValue placeholder="Sort by" />
       </SelectTrigger>
       <SelectContent>
+        <SelectItem value={DEFAULT_SORT}>Not sorted</SelectItem>
         {SORT_OPTIONS.map((option) => (
           <SelectItem key={option.value} value={option.value}>
             {option.label}

@@ -1,12 +1,12 @@
 import { create } from 'zustand';
 
 type SortStore = {
-  sortOption: string;
-  setSortOption: (option: string) => void;
+  sortOption: string | undefined;
+  setSortOption: (option: string | undefined) => void;
 };
 
 export const useSortStore = create<SortStore>((set) => ({
-  sortOption: 'none',
+  sortOption: undefined,
   setSortOption: (option) => {
     set({ sortOption: option });
   },

@@ -18,7 +18,7 @@ export default function CatalogPage() {
     error,
     isLoading,
   } = useSWR<Poster[], Error>(['commercetools/products', lastCategoryId, sortOption], () =>
-    fetchProducts(lastCategoryId, sortOption !== 'none' ? sortOption : undefined),
+    fetchProducts(lastCategoryId, sortOption),
   );
 
   if (isLoading) {
