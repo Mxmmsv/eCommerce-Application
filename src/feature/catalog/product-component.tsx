@@ -12,7 +12,8 @@ const ProductComponent = ({ poster }: { poster: Poster }) => {
     <div
       key={poster.id}
       className={cn(
-        'group/texthover flex flex-col overflow-visible transition-colors duration-200 hover:rounded-sm',
+        'group/texthover group/cardhover hover:bg-popover/55',
+        'flex flex-col overflow-visible transition-colors duration-200 hover:rounded-sm',
         'shadow-chart-3/15 my-4 rounded-sm shadow-[-8px_8px_16px_-5px]',
       )}
     >
@@ -25,7 +26,7 @@ const ProductComponent = ({ poster }: { poster: Poster }) => {
               className={cn(
                 'h-full w-full object-cover object-center px-0',
                 'rounded-t-sm transition-all duration-500',
-                'hover:scale-105 hover:shadow-xl lg:hover:-translate-y-3 lg:hover:scale-105',
+                'group-hover/cardhover:scale-105 lg:group-hover/cardhover:-translate-y-3 lg:group-hover/cardhover:scale-105',
               )}
               onError={(e) => {
                 (e.target as HTMLImageElement).src = '/placeholder-product.webp';
@@ -34,11 +35,11 @@ const ProductComponent = ({ poster }: { poster: Poster }) => {
           </div>
           <div
             className={cn(
-              'group/texthover flex h-full flex-grow flex-col justify-between',
+              'flex h-full flex-grow flex-col justify-between',
 
               'p-4 sm:px-4 sm:pt-3 md:px-5 md:pt-4 lg:py-5',
               'min-h-[185px]',
-              'hover:bg-popover/55 transition-colors duration-200 hover:rounded-b-sm',
+              'transition-colors duration-200 hover:rounded-b-sm',
             )}
           >
             <div>
