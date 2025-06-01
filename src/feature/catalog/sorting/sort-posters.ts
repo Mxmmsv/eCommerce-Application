@@ -12,6 +12,8 @@ export const sortPosters = (posters: Poster[], sortOption: SortOption): Poster[]
       return sorted.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
     case 'name asc':
       return sorted.sort((a, b) => a.name.localeCompare(b.name));
+    case 'name desc':
+      return sorted.sort((a, b) => b.name.localeCompare(a.name));
     default:
       return posters;
   }

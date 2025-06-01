@@ -26,6 +26,7 @@ export const SortSelect = () => {
         <SelectItem value="price asc">Price (Low to High)</SelectItem>
         <SelectItem value="price desc">Price (High to Low)</SelectItem>
         <SelectItem value="name asc">Name (A-Z)</SelectItem>
+        <SelectItem value="name desc">Name (Z-A)</SelectItem>
       </SelectContent>
     </Select>
   );

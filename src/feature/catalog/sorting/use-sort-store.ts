@@ -11,7 +11,7 @@ export const useSortStore = create<SortStore>((set) => ({
   sortOption: null,
   setSortOption: (option) => {
     console.log('Setting sort option:', option);
-    if (option !== null && !['price asc', 'price desc', 'name asc'].includes(option)) {
+    if (option !== null && !['price asc', 'price desc', 'name asc', 'name desc'].includes(option)) {
       return;
     }
     set({ sortOption: option });

@@ -38,4 +38,4 @@ export type CategoryPathItem = {
   name: string;
 };
 
-export type SortOption = 'price asc' | 'price desc' | 'name asc' | null;
+export type SortOption = 'price asc' | 'price desc' | 'name asc' | 'name desc' | null;
