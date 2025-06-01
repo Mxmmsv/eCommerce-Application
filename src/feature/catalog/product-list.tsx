@@ -13,8 +13,8 @@ const ProductList = ({ products }: ProductListProps) => {
   console.log('Products received:', products);
 
   return (
-    <section className="py-6">
-      <div className="container flex flex-col gap-16 px-4 lg:px-16">
+    <section className="py-2">
+      <div className="container flex flex-col gap-8 px-4 lg:px-16">
         <div className="flex justify-end">
           <SortSelect />
         </div>

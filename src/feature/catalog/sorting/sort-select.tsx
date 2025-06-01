@@ -18,7 +18,7 @@ export const SortSelect = () => {
       value={sortOption ?? 'none'}
       onValueChange={(value) => setSortOption(value === 'none' ? null : (value as SortOption))}
     >
-      <SelectTrigger className="w-[200px]">
+      <SelectTrigger className="w-[200px] rounded-full">
         <SelectValue placeholder="Sort by" />
       </SelectTrigger>
       <SelectContent>
