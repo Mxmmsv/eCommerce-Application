@@ -10,6 +10,7 @@ const ProductList = ({ products }: ProductListProps) => {
   if (products.length === 0) {
     return <div className="py-32 text-center">No products found</div>;
   }
+  console.log('Products received:', products);
 
   return (
     <section className="py-6">

@@ -8,15 +8,16 @@ export const fetchProducts = async (
   categoryId?: string,
   sortOption?: string | null,
 ): Promise<Poster[]> => {
+  console.log('Sort option:', sortOption);
   const response = await apiRoot
     .productProjections()
     .get({
       queryArgs: {
         where: categoryId ? `categories(id="${categoryId}")` : undefined,
-        sort: sortOption ? [sortOption] : undefined,
         limit: 100,
       },
     })
     .execute();
+  console.log('API response:', response.body.results);
   return response.body.results.map(mapToPoster);
 };

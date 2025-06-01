@@ -8,7 +8,6 @@ export const mapToPoster = (product: ProductProjection): Poster => {
   const discounted = priceInfo?.discounted ? priceInfo.discounted.value.centAmount / 100 : original;
   const discountPercent =
     original > discounted ? Math.round(((original - discounted) / original) * 100) : 0;
-
   return {
     id: product.id,
     name: product.name['en-GB'] || 'No name',
