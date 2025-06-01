@@ -7,18 +7,14 @@ import {
 } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
 
-import type { SortOption } from '../types';
-
+import { SORT_OPTIONS } from './sort-options';
 import { useSortStore } from './use-sort-store';
 
 export const SortSelect = () => {
   const { sortOption, setSortOption } = useSortStore();
 
   return (
-    <Select
-      value={sortOption ?? 'none'}
-      onValueChange={(value) => setSortOption(value === 'none' ? null : (value as SortOption))}
-    >
+    <Select value={sortOption} onValueChange={setSortOption}>
       <SelectTrigger
         className={cn(
           'hover:text-primary w-[200px] rounded-full pl-4',
@@ -33,11 +29,11 @@ export const SortSelect = () => {
         <SelectValue placeholder="Sort by" />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="none">Not sorted</SelectItem>
-        <SelectItem value="price asc">Price (Low to High)</SelectItem>
-        <SelectItem value="price desc">Price (High to Low)</SelectItem>
-        <SelectItem value="name asc">Name (A-Z)</SelectItem>
-        <SelectItem value="name desc">Name (Z-A)</SelectItem>
+        {SORT_OPTIONS.map((option) => (
+          <SelectItem key={option.value} value={option.value}>
+            {option.label}
+          </SelectItem>
+        ))}
       </SelectContent>
     </Select>
   );

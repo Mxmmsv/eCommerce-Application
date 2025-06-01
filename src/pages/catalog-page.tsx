@@ -5,7 +5,6 @@ import { fetchProducts } from '@/feature/catalog/api/fetch-products';
 import { Breadcrumbs } from '@/feature/catalog/categories/breadcrumbs';
 import { CategoryNavigation } from '@/feature/catalog/categories/category-navigation';
 import { ProductList } from '@/feature/catalog/product-list';
-import { sortPosters } from '@/feature/catalog/sorting/sort-posters';
 import { useSortStore } from '@/feature/catalog/sorting/use-sort-store';
 import type { Poster } from '@/feature/catalog/types';
 import { useCategoryStore } from '@/service/store/use-category-store';
@@ -18,11 +17,9 @@ export default function CatalogPage() {
     data: products,
     error,
     isLoading,
-  } = useSWR<Poster[], Error>(['commercetools/products', lastCategoryId], () =>
-    fetchProducts(lastCategoryId),
+  } = useSWR<Poster[], Error>(['commercetools/products', lastCategoryId, sortOption], () =>
+    fetchProducts(lastCategoryId, sortOption !== 'none' ? sortOption : undefined),
   );
-
-  const sortedProducts = sortPosters(products || [], sortOption);
 
   if (isLoading) {
     return (
@@ -51,7 +48,7 @@ export default function CatalogPage() {
             <CategoryNavigation />
             <Breadcrumbs />
           </div>
-          <ProductList products={sortedProducts} />
+          <ProductList products={products || []} />
         </div>
       </div>
     </>

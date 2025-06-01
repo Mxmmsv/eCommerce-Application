@@ -1,18 +1,13 @@
 import { create } from 'zustand';
 
-import type { SortOption } from '../types';
-
 type SortStore = {
-  sortOption: SortOption;
-  setSortOption: (option: SortOption) => void;
+  sortOption: string;
+  setSortOption: (option: string) => void;
 };
 
 export const useSortStore = create<SortStore>((set) => ({
-  sortOption: null,
+  sortOption: 'none',
   setSortOption: (option) => {
-    if (option !== null && !['price asc', 'price desc', 'name asc', 'name desc'].includes(option)) {
-      return;
-    }
     set({ sortOption: option });
   },
 }));
