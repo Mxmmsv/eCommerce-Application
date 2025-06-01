@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spiner';
 
 import { ProductImages } from './product-images';
-import { useProductOverview } from './use-product-overview-component';
+import { useProductOverview } from './use-product-overview';
 
 export default function ProductOverview({ productId }: { productId: string }) {
   const { isLoading, error, ...product } = useProductOverview(productId);
@@ -32,7 +32,11 @@ export default function ProductOverview({ productId }: { productId: string }) {
   return (
     <div className="mx-auto w-full max-w-7xl p-6">
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-        <ProductImages images={product.images} alt={product.alt} />
+        <ProductImages
+          images={product.images}
+          alt={product.alt}
+          description={product.description}
+        />
 
         <div className="flex flex-col">
           <h1 className="mb-2 text-3xl font-bold">{product.name}</h1>
