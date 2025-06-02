@@ -36,9 +36,8 @@ const ProductComponent = ({ poster }: { poster: Poster }) => {
           <div
             className={cn(
               'flex h-full flex-grow flex-col justify-between',
-
               'p-4 sm:px-4 sm:pt-3 md:px-5 md:pt-4 lg:py-5',
-              'min-h-[185px]',
+              'min-h-[176px]',
               'transition-colors duration-200 hover:rounded-b-sm',
             )}
           >
@@ -49,14 +48,13 @@ const ProductComponent = ({ poster }: { poster: Poster }) => {
                   'sm:text-xl',
                   'md:mb-3 lg:mb-3',
                   'group-hover/texthover:text-chart-3 transition-colors duration-200',
-
                   'sm:mt-3 lg:mt-0',
                 )}
               >
                 {poster.name}
               </h3>
               <p className={cn('text-muted-foreground line-clamp-2', 'text-sm sm:text-base')}>
-                {poster.description}
+                {poster.productTypeName}
               </p>
             </div>
             <div className="mt-auto flex flex-row-reverse pt-4">

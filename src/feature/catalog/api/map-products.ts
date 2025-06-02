@@ -11,12 +11,13 @@ export const mapToPoster = (product: ProductProjection): Poster => {
   return {
     id: product.id,
     name: product.name['en-GB'] || 'No name',
-    description: product.description?.['en-GB'] || 'No description available',
+    description: product.description?.['en-GB'] || '',
     image: product.masterVariant.images?.[0]?.url || '/placeholder-product.webp',
     price: original.toFixed(2),
     discount: discounted !== original ? discounted.toFixed(2) : undefined,
     discountPercent: discounted !== original ? discountPercent : undefined,
     hasDiscount: discounted !== original,
     currencyCode: priceInfo?.value.currencyCode || 'EUR',
+    productTypeName: product.productType?.obj?.name || 'Unknown type',
   };
 };

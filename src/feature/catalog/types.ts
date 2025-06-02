@@ -8,6 +8,7 @@ export type Poster = {
   discount?: string;
   discountPercent?: number;
   hasDiscount?: boolean;
+  productTypeName: string;
 };
 
 export type PosterCategory = {

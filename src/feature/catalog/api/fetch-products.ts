@@ -11,6 +11,7 @@ export const fetchProducts = async (
 ): Promise<Poster[]> => {
   const baseQueryArgs = {
     limit: 100,
+    expand: ['productType'],
     ...(categoryId && { where: `categories(id="${categoryId}")` }),
     ...(selectedTypes &&
       selectedTypes.length > 0 && {
