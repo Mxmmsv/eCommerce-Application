@@ -37,7 +37,7 @@ const ProductComponent = ({ poster }: { poster: Poster }) => {
             className={cn(
               'flex h-full flex-grow flex-col justify-between',
               'p-4 sm:px-4 sm:pt-3 md:px-5 md:pt-4 lg:py-5',
-              'min-h-[176px]',
+              'min-h-[232px]',
               'transition-colors duration-200 hover:rounded-b-sm',
             )}
           >
@@ -45,17 +45,23 @@ const ProductComponent = ({ poster }: { poster: Poster }) => {
               <h3
                 className={cn(
                   'text-center text-lg font-semibold',
-                  'sm:text-xl',
-                  'md:mb-3 lg:mb-3',
+                  'mb-2 sm:text-xl',
+
                   'group-hover/texthover:text-chart-3 transition-colors duration-200',
                   'sm:mt-3 lg:mt-0',
                 )}
               >
                 {poster.name}
               </h3>
-              <p className={cn('text-muted-foreground line-clamp-2', 'text-sm sm:text-base')}>
+              <p
+                className={cn(
+                  'text-muted-foreground line-clamp-2 flex justify-end',
+                  'text-sm sm:text-base md:mb-3 lg:mb-3',
+                )}
+              >
                 {poster.productTypeName}
               </p>
+              <p className={cn('line-clamp-2', 'text-sm sm:text-base')}>{poster.description}</p>
             </div>
             <div className="mt-auto flex flex-row-reverse pt-4">
               {poster.hasDiscount ? (

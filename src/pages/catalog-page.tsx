@@ -5,7 +5,6 @@ import { Spinner } from '@/components/ui/spiner';
 import { fetchProducts } from '@/feature/catalog/api/fetch-products';
 import { Breadcrumbs } from '@/feature/catalog/categories/breadcrumbs';
 import { CategoryNavigation } from '@/feature/catalog/categories/category-navigation';
-import { PriceRangeFilter } from '@/feature/catalog/filter/price-ranger-filter';
 import { TypeFilter } from '@/feature/catalog/filter/type-filter';
 import { useFilterStore } from '@/feature/catalog/filter/use-filter-store';
 import { ProductList } from '@/feature/catalog/product-list';
@@ -91,7 +90,6 @@ export default function CatalogPage() {
             <Breadcrumbs />
           </div>
           <TypeFilter />
-          <PriceRangeFilter />
           <ProductList products={products || []} />
         </div>
       </div>

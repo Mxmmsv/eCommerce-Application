@@ -7,8 +7,6 @@ import {
 } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
 
-import { PriceRangeFilter } from '../filter/price-ranger-filter';
-
 import { DEFAULT_SORT, SORT_OPTIONS } from './sort-options';
 import { useSortStore } from './use-sort-store';
 
@@ -17,7 +15,6 @@ export const SortSelect = () => {
 
   return (
     <>
-      <PriceRangeFilter />
       <Select
         value={sortOption || DEFAULT_SORT}
         onValueChange={(value) => setSortOption(value === DEFAULT_SORT ? undefined : value)}

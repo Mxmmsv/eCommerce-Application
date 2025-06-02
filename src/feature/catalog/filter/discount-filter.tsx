@@ -15,18 +15,18 @@ export const DiscountFilter = () => {
         onlyDiscounted ? 'text-primary font-medium' : 'text-muted-foreground bg-transparent',
       )}
     >
-      <Switch
-        id="discount-filter"
-        checked={onlyDiscounted}
-        onCheckedChange={toggleDiscounted}
-        className="data-[state=checked]:bg-primary"
-      />
       <Label
         htmlFor="discount-filter"
         className={cn('cursor-pointer', onlyDiscounted ? 'text-primary' : 'text-muted-foreground')}
       >
         Discount
       </Label>
+      <Switch
+        id="discount-filter"
+        checked={onlyDiscounted}
+        onCheckedChange={toggleDiscounted}
+        className="data-[state=checked]:bg-primary"
+      />
     </div>
   );
 };

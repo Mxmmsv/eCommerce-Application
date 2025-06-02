@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 import { fetchProductTypes } from '../api/fetch-product-types';
 import { useSortStore } from '../sorting/use-sort-store';
 
-import { DiscountFilter } from './discount-filter';
+import { PriceRangeFilter } from './price-ranger-filter';
 import { ResetFiltersButton } from './reset-filter';
 import { useFilterStore } from './use-filter-store';
 
@@ -37,16 +37,16 @@ export const TypeFilter = () => {
   }
 
   return (
-    <div className="mt-8 flex justify-end gap-2 space-y-2 px-4 lg:px-16">
+    <div className="mt-5 flex justify-end gap-2 space-y-2 px-4 lg:px-16">
       {hasActiveFilters && <ResetFiltersButton />}
-      <div className="flex flex-wrap gap-2">
+      <div className="mb-4 flex flex-wrap items-end gap-2">
         {availableTypes.map((type) => (
           <Button
             key={type.id}
             size="sm"
             variant="ghost"
             className={cn(
-              'rounded-full px-4',
+              'rounded-full px-3 py-5',
               selectedTypes.includes(type.id)
                 ? 'bg-background text-primary font-medium shadow-sm'
                 : 'text-muted-foreground bg-transparent shadow-sm',
@@ -61,7 +61,7 @@ export const TypeFilter = () => {
           </Button>
         ))}
         <div className="flex items-center justify-center">
-          <DiscountFilter />
+          <PriceRangeFilter />
         </div>
       </div>
     </div>
