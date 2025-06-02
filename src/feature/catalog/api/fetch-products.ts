@@ -9,59 +9,29 @@ export const fetchProducts = async (
   sortOption?: string,
   selectedTypes?: string[],
 ): Promise<Poster[]> => {
-  const baseQueryArgs = {
-    limit: 100,
-    expand: ['productType'],
-    ...(categoryId && { where: `categories(id="${categoryId}")` }),
-    ...(selectedTypes &&
-      selectedTypes.length > 0 && {
-        where: selectedTypes.map((typeId) => `productType(id="${typeId}")`).join(' or '),
-      }),
-  };
+  const filters = [];
 
-  if (!sortOption) {
-    const response = await apiRoot.productProjections().get({ queryArgs: baseQueryArgs }).execute();
-    return response.body.results.map(mapToPoster);
+  if (categoryId) {
+    filters.push(`categories.id:"${categoryId}"`);
   }
 
-  if (sortOption.startsWith('name.en-GB')) {
-    const response = await apiRoot
-      .productProjections()
-      .get({
-        queryArgs: {
-          ...baseQueryArgs,
-          sort: [sortOption],
-        },
-      })
-      .execute();
-    return response.body.results.map(mapToPoster);
+  if (selectedTypes && selectedTypes.length > 0) {
+    filters.push(`productType.id:${selectedTypes.map((id) => `"${id}"`).join(',')}`);
   }
 
-  if (sortOption.includes('price')) {
-    const filterQueries = [];
-    if (categoryId) {
-      filterQueries.push(`categories.id:"${categoryId}"`);
-    }
+  const response = await apiRoot
+    .productProjections()
+    .search()
+    .get({
+      queryArgs: {
+        ...(filters.length > 0 && { filter: filters }),
+        ...(sortOption && { sort: [sortOption] }),
+        expand: ['productType'],
+        limit: 100,
+        priceCurrency: 'EUR',
+      },
+    })
+    .execute();
 
-    if (selectedTypes && selectedTypes.length > 0) {
-      filterQueries.push(`productType.id:${selectedTypes.map((id) => `"${id}"`).join(',')}`);
-    }
-
-    const response = await apiRoot
-      .productProjections()
-      .search()
-      .get({
-        queryArgs: {
-          ...(filterQueries.length > 0 && { filter: filterQueries }),
-          expand: ['productType'],
-          sort: [sortOption],
-          limit: 100,
-          priceCurrency: 'EUR',
-        },
-      })
-      .execute();
-    return response.body.results.map(mapToPoster);
-  }
-
-  throw new Error(`Unsupported sort option: ${sortOption}`);
+  return response.body.results.map(mapToPoster);
 };
