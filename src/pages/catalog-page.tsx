@@ -1,3 +1,4 @@
+import { useSearchParams } from 'react-router';
 import useSWR from 'swr';
 
 import { Spinner } from '@/components/ui/spiner';
@@ -6,18 +7,18 @@ import { Breadcrumbs } from '@/feature/catalog/categories/breadcrumbs';
 import { CategoryNavigation } from '@/feature/catalog/categories/category-navigation';
 import { ProductList } from '@/feature/catalog/product-list';
 import type { Poster } from '@/feature/catalog/types';
-import { useCategoryStore } from '@/service/store/use-category-store';
 
 export default function CatalogPage() {
-  const { currentPath } = useCategoryStore();
-  const lastCategoryId = currentPath[currentPath.length - 1]?.id;
+  const [searchParams] = useSearchParams();
+  const searchQuery = searchParams.get('search') || undefined;
+  const categoryId = searchParams.get('category') || undefined;
 
   const {
     data: products,
     error,
     isLoading,
-  } = useSWR<Poster[], Error>(['commercetools/products', lastCategoryId], () =>
-    fetchProducts(lastCategoryId),
+  } = useSWR<Poster[], Error>(['commercetools/products', categoryId, searchQuery], () =>
+    fetchProducts(categoryId, searchQuery),
   );
 
   if (isLoading) {
@@ -47,6 +48,18 @@ export default function CatalogPage() {
             <CategoryNavigation />
             <Breadcrumbs />
           </div>
+          {searchQuery && (
+            <div className="mb-4 px-4">
+              <h2 className="text-xl font-semibold">
+                Search results for: <span className="text-primary">{searchQuery}</span>
+              </h2>
+            </div>
+          )}
+          {products?.length === 0 && (
+            <div className="text-muted-foreground mt-4 text-center">
+              No products found {searchQuery ? `for "${searchQuery}"` : ''}.
+            </div>
+          )}
           <ProductList products={products || []} />
         </div>
       </div>

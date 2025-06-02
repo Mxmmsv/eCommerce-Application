@@ -6,10 +6,6 @@ type ProductListProps = {
 };
 
 const ProductList = ({ products }: ProductListProps) => {
-  if (products.length === 0) {
-    return <div className="py-32 text-center">No products found</div>;
-  }
-
   return (
     <section className="py-6">
       <div className="container flex flex-col gap-16 px-4 lg:px-16">
