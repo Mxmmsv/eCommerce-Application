@@ -8,6 +8,8 @@ type FilterStore = {
   setAvailableTypes: (types: PosterType[]) => void;
   toggleType: (typeId: string) => void;
   resetTypes: () => void;
+  onlyDiscounted: boolean;
+  toggleDiscounted: () => void;
 };
 
 export const useFilterStore = create<FilterStore>((set) => ({
@@ -21,4 +23,6 @@ export const useFilterStore = create<FilterStore>((set) => ({
         : [...state.selectedTypes, type],
     })),
   resetTypes: () => set({ selectedTypes: [] }),
+  onlyDiscounted: false,
+  toggleDiscounted: () => set((state) => ({ onlyDiscounted: !state.onlyDiscounted })),
 }));

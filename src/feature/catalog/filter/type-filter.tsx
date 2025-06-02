@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 
 import { fetchProductTypes } from '../api/fetch-product-types';
 
+import { DiscountFilter } from './discount-filter';
 import { useFilterStore } from './use-filter-store';
 
 export const TypeFilter = () => {
@@ -29,6 +30,7 @@ export const TypeFilter = () => {
             {type.name}
           </Button>
         ))}
+        <DiscountFilter />
       </div>
     </div>
   );

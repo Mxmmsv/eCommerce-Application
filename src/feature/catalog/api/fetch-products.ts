@@ -8,6 +8,7 @@ export const fetchProducts = async (
   categoryId?: string,
   sortOption?: string,
   selectedTypes?: string[],
+  onlyDiscounted?: boolean,
 ): Promise<Poster[]> => {
   const filters = [];
 
@@ -19,19 +20,20 @@ export const fetchProducts = async (
     filters.push(`productType.id:${selectedTypes.map((id) => `"${id}"`).join(',')}`);
   }
 
-  const response = await apiRoot
-    .productProjections()
-    .search()
-    .get({
-      queryArgs: {
-        ...(filters.length > 0 && { filter: filters }),
-        ...(sortOption && { sort: [sortOption] }),
-        expand: ['productType'],
-        limit: 100,
-        priceCurrency: 'EUR',
-      },
-    })
-    .execute();
+  const queryArgs = {
+    ...(filters.length > 0 && { filter: filters }),
+    ...(sortOption && { sort: [sortOption] }),
+    expand: ['productType'],
+    limit: 100,
+    priceCurrency: 'EUR',
+  };
 
-  return response.body.results.map(mapToPoster);
+  const response = await apiRoot.productProjections().search().get({ queryArgs }).execute();
+
+  let products = response.body.results.map(mapToPoster);
+  if (onlyDiscounted) {
+    products = products.filter((product) => product.hasDiscount);
+  }
+
+  return products;
 };

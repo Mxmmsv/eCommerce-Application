@@ -15,15 +15,15 @@ export default function CatalogPage() {
   const { currentPath } = useCategoryStore();
   const lastCategoryId = currentPath[currentPath.length - 1]?.id;
   const { sortOption } = useSortStore();
-  const { selectedTypes } = useFilterStore();
+  const { selectedTypes, onlyDiscounted } = useFilterStore();
 
   const {
     data: products,
     error,
     isLoading,
   } = useSWR<Poster[], Error>(
-    ['commercetools/products', lastCategoryId, sortOption, selectedTypes],
-    () => fetchProducts(lastCategoryId, sortOption, selectedTypes),
+    ['commercetools/products', lastCategoryId, sortOption, selectedTypes, onlyDiscounted],
+    () => fetchProducts(lastCategoryId, sortOption, selectedTypes, onlyDiscounted),
   );
 
   if (isLoading) {
