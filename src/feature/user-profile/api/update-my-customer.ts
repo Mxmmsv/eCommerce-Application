@@ -44,3 +44,26 @@ export async function updateMyCustomer(
 
   return response.body;
 }
+
+export async function changeCustomerPassword(
+  version: number,
+  currentPassword: string,
+  newPassword: string,
+  token: string,
+): Promise<Customer> {
+  const apiRoot = createApiClientWithToken(token);
+
+  const response = await apiRoot
+    .me()
+    .password()
+    .post({
+      body: {
+        version,
+        currentPassword,
+        newPassword,
+      },
+    })
+    .execute();
+
+  return response.body;
+}
