@@ -7,18 +7,21 @@ import { Breadcrumbs } from '@/feature/catalog/categories/breadcrumbs';
 import { CategoryNavigation } from '@/feature/catalog/categories/category-navigation';
 import { ProductList } from '@/feature/catalog/product-list';
 import type { Poster } from '@/feature/catalog/types';
+import { useCategoryStore } from '@/service/store/use-category-store';
 
 export default function CatalogPage() {
+  const { currentPath } = useCategoryStore();
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get('search') || undefined;
-  const categoryId = searchParams.get('category') || undefined;
+
+  const lastCategoryId = currentPath[currentPath.length - 1]?.id;
 
   const {
     data: products,
     error,
     isLoading,
-  } = useSWR<Poster[], Error>(['commercetools/products', categoryId, searchQuery], () =>
-    fetchProducts(categoryId, searchQuery),
+  } = useSWR<Poster[], Error>(['commercetools/products', lastCategoryId, searchQuery], () =>
+    fetchProducts(lastCategoryId, searchQuery),
   );
 
   if (isLoading) {
