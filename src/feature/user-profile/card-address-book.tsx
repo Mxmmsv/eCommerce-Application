@@ -1,14 +1,19 @@
-import { Plus } from 'lucide-react';
+import { MapPinHouse, NotebookTabs, Plus } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { DialogTrigger } from '@/components/ui/dialog';
+import { useCustomerStore } from '@/service/store/use-user-store';
 
 import AddAddressDialog from './add-address-dialog';
-import AddressesBilling from './addresses-billing';
-import AddressesShipping from './addresses-shipping';
+import { DefaultAddressesDisplay, AllAddressesDisplay } from './utils/addresses-render';
+import CollapsibleSection from './utils/collapsible-section';
+import { getAddresses } from './utils/get-address';
 
 export default function AllCustomerAddress() {
+  const customer = useCustomerStore((state) => state.customer);
+  const addressesData = getAddresses(customer ?? { addresses: [] });
+
   return (
     <Card>
       <CardHeader>
@@ -29,12 +34,22 @@ export default function AllCustomerAddress() {
         />
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
-        <div className="w-full">
-          <AddressesShipping />
-        </div>
-        <div className="w-full">
-          <AddressesBilling />
-        </div>
+        <CollapsibleSection
+          title="Default addresses"
+          icon={<MapPinHouse className="text-primary h-4 w-4" />}
+        >
+          <DefaultAddressesDisplay
+            addresses={addressesData.allAddresses}
+            defaultShippingAddressId={customer?.defaultShippingAddressId ?? null}
+            defaultBillingAddressId={customer?.defaultBillingAddressId ?? null}
+          />
+        </CollapsibleSection>
+        <CollapsibleSection
+          title="All available addresses"
+          icon={<NotebookTabs className="text-primary h-4 w-4" />}
+        >
+          <AllAddressesDisplay addresses={addressesData.allAddresses} label="Your Addresses" />
+        </CollapsibleSection>
       </CardContent>
     </Card>
   );
