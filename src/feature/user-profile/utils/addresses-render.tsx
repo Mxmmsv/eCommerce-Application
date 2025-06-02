@@ -2,6 +2,7 @@ import type { Address } from '@commercetools/platform-sdk';
 import { SquarePen, Trash } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
 
 import { getAddresses } from './get-address';
 
@@ -18,7 +19,7 @@ type AllProps = {
 
 function renderAddressContent(address: Address, label: string) {
   return (
-    <div className="border-b py-3 pb-2">
+    <div className="py-3 pb-2">
       <div>
         <h3 className="text-foreground mb-2 text-sm font-medium">{label}</h3>
         <p className="text-muted-foreground text-sm">
@@ -48,7 +49,7 @@ function renderAddressContent(address: Address, label: string) {
           )}
         </p>
       </div>
-      <div className="mt-2 flex justify-end gap-2">
+      <div className="mt-2 flex justify-start gap-2">
         <Button variant="outline" size="icon">
           <SquarePen size={20} strokeWidth={1.25} />
         </Button>
@@ -63,7 +64,7 @@ function renderAddressContent(address: Address, label: string) {
 export function AllAddressesDisplay({ addresses, label }: AllProps) {
   if (!addresses || addresses.length === 0) {
     return (
-      <div className="border-b py-3 pb-2">
+      <div className="py-3 pb-2">
         <h3 className="text-foreground mb-2 text-sm font-medium">{label}</h3>
         <p className="text-muted-foreground text-sm italic">You have no addresses added yet.</p>
       </div>
@@ -72,7 +73,26 @@ export function AllAddressesDisplay({ addresses, label }: AllProps) {
 
   return (
     <div className="px-5">
-      {addresses.map((address, index) => renderAddressContent(address, `Address №${index + 1}`))}
+      {addresses.map((address, index) => (
+        <div key={address.id ?? index} className="mb-4">
+          {renderAddressContent(address, `Address №${index + 1}`)}
+
+          <div className="mt-2 flex flex-col gap-2 border-b py-3 text-sm">
+            <label
+              htmlFor="billing"
+              className="flex items-center gap-2 text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
+              <Checkbox id="billing" /> Set as default billing address
+            </label>
+            <label
+              htmlFor="shipping"
+              className="flex items-center gap-2 text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
+              <Checkbox id="shipping" /> Set as default shipping address
+            </label>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
