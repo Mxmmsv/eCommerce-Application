@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import useSWR from 'swr';
 
 import { Spinner } from '@/components/ui/spiner';
@@ -16,8 +15,7 @@ export default function CatalogPage() {
   const { currentPath } = useCategoryStore();
   const lastCategoryId = currentPath[currentPath.length - 1]?.id;
   const { sortOption } = useSortStore();
-  const { selectedTypes, onlyDiscounted, priceRange, setAvailablePriceRange, setPriceRange } =
-    useFilterStore();
+  const { selectedTypes, onlyDiscounted, priceRange } = useFilterStore();
 
   const {
     data: products,
@@ -34,18 +32,6 @@ export default function CatalogPage() {
     ],
     () => fetchProducts(lastCategoryId, sortOption, selectedTypes, onlyDiscounted, priceRange),
   );
-
-  useEffect(() => {
-    if (products && products.length > 0) {
-      const prices = products.map((p) =>
-        parseFloat(p.hasDiscount ? p.discount || p.price : p.price),
-      );
-      const min = Math.floor(Math.min(...prices));
-      const max = Math.ceil(Math.max(...prices));
-      setAvailablePriceRange([min, max]);
-      setPriceRange([min, max]);
-    }
-  }, [products, setAvailablePriceRange, setPriceRange]);
 
   if (isLoading) {
     return (

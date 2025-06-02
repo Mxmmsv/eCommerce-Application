@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { Slider } from '@/components/ui/slider';
 import { cn } from '@/lib/utils';
@@ -6,21 +6,16 @@ import { cn } from '@/lib/utils';
 import { useFilterStore } from './use-filter-store';
 
 export const PriceRangeFilter = () => {
-  const { priceRange, availablePriceRange, setPriceRange, applyPriceFilter, isPriceFilterActive } =
-    useFilterStore();
+  const { priceRange, setPriceRange, applyPriceFilter, isPriceFilterActive } = useFilterStore();
   const [tempRange, setTempRange] = useState<[number, number]>(priceRange);
 
-  useEffect(() => {
-    setTempRange(priceRange);
-  }, [priceRange]);
-
-  const handleSliderChange = (value: number[]) => {
+  const handleValueChange = (value: number[]) => {
     if (value.length === 2) {
       setTempRange([value[0], value[1]]);
     }
   };
 
-  const handleSliderCommit = (value: number[]) => {
+  const handleValueCommit = (value: number[]) => {
     if (value.length === 2) {
       setPriceRange([value[0], value[1]]);
       applyPriceFilter(true);
@@ -56,12 +51,12 @@ export const PriceRangeFilter = () => {
         )}
       >
         <Slider
-          min={availablePriceRange[0]}
-          max={availablePriceRange[1]}
+          min={0}
+          max={30}
           step={0.01}
           value={tempRange}
-          onValueChange={handleSliderChange}
-          onValueCommit={handleSliderCommit}
+          onValueChange={handleValueChange}
+          onValueCommit={handleValueCommit}
           className={cn('[&_.slider-thumb]:bg-primary', '[&_.slider-range]:bg-primary/50')}
         />
       </div>

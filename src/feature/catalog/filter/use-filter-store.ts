@@ -12,11 +12,7 @@ type FilterStore = {
   toggleDiscounted: () => void;
   resetAllFilters: () => void;
   priceRange: [number, number];
-  availablePriceRange: [number, number];
   setPriceRange: (range: [number, number]) => void;
-  setAvailablePriceRange: (range: [number, number]) => void;
-  isPriceRangeChanged: boolean;
-  markPriceRangeChanged: (changed: boolean) => void;
   isPriceFilterActive: boolean;
   applyPriceFilter: (isActive: boolean) => void;
 };
@@ -38,11 +34,7 @@ export const useFilterStore = create<FilterStore>((set) => ({
   onlyDiscounted: false,
   toggleDiscounted: () => set((state) => ({ onlyDiscounted: !state.onlyDiscounted })),
 
-  priceRange: [0, 50],
-  availablePriceRange: [0, 50],
-  setAvailablePriceRange: (range) => set({ availablePriceRange: range }),
-  isPriceRangeChanged: false,
-  markPriceRangeChanged: (changed) => set({ isPriceRangeChanged: changed }),
+  priceRange: [0, 30],
   isPriceFilterActive: false,
   applyPriceFilter: (isActive) => set({ isPriceFilterActive: isActive }),
 
@@ -52,7 +44,7 @@ export const useFilterStore = create<FilterStore>((set) => ({
     set({
       selectedTypes: [],
       onlyDiscounted: false,
-      priceRange: [0, 50],
+      priceRange: [0, 30],
       isPriceFilterActive: false,
     }),
 }));
