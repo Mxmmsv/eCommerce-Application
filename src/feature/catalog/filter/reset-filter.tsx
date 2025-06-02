@@ -23,7 +23,7 @@ export const ResetFiltersButton = () => {
       variant="ghost"
       onClick={handleReset}
       className={cn(
-        'm-0 rounded-full px-4',
+        'mb-4 rounded-full px-4',
         'text-muted-foreground bg-transparent shadow-sm',
         'transition-all duration-200 ease-in-out',
         'hover:bg-muted/80 hover:text-primary hover:shadow-md',

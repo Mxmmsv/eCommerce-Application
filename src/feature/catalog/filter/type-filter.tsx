@@ -37,7 +37,7 @@ export const TypeFilter = () => {
   }
 
   return (
-    <div className="mt-5 flex justify-end gap-2 space-y-2 px-4 lg:px-16">
+    <div className="mt-5 flex items-center justify-end gap-2 space-y-2 px-4 lg:px-16">
       {hasActiveFilters && <ResetFiltersButton />}
       <div className="mb-4 flex flex-wrap items-end gap-2">
         {availableTypes.map((type) => (

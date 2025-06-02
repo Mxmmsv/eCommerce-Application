@@ -16,14 +16,8 @@ export default function CatalogPage() {
   const { currentPath } = useCategoryStore();
   const lastCategoryId = currentPath[currentPath.length - 1]?.id;
   const { sortOption } = useSortStore();
-  const {
-    selectedTypes,
-    onlyDiscounted,
-    priceRange,
-    setAvailablePriceRange,
-    setPriceRange,
-    isPriceRangeChanged,
-  } = useFilterStore();
+  const { selectedTypes, onlyDiscounted, priceRange, setAvailablePriceRange, setPriceRange } =
+    useFilterStore();
 
   const {
     data: products,
@@ -37,17 +31,8 @@ export default function CatalogPage() {
       selectedTypes,
       onlyDiscounted,
       priceRange,
-      isPriceRangeChanged,
     ],
-    () =>
-      fetchProducts(
-        lastCategoryId,
-        sortOption,
-        selectedTypes,
-        onlyDiscounted,
-        priceRange,
-        isPriceRangeChanged,
-      ),
+    () => fetchProducts(lastCategoryId, sortOption, selectedTypes, onlyDiscounted, priceRange),
   );
 
   useEffect(() => {
