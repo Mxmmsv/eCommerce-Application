@@ -10,6 +10,7 @@ type FilterStore = {
   resetTypes: () => void;
   onlyDiscounted: boolean;
   toggleDiscounted: () => void;
+  resetAllFilters: () => void;
 };
 
 export const useFilterStore = create<FilterStore>((set) => ({
@@ -25,4 +26,9 @@ export const useFilterStore = create<FilterStore>((set) => ({
   resetTypes: () => set({ selectedTypes: [] }),
   onlyDiscounted: false,
   toggleDiscounted: () => set((state) => ({ onlyDiscounted: !state.onlyDiscounted })),
+  resetAllFilters: () =>
+    set({
+      selectedTypes: [],
+      onlyDiscounted: false,
+    }),
 }));

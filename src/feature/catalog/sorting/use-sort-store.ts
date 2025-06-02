@@ -11,3 +11,5 @@ export const useSortStore = create<SortStore>((set) => ({
     set({ sortOption: option });
   },
 }));
+
+export type SortStoreActions = Pick<SortStore, 'setSortOption'>;
