@@ -7,10 +7,15 @@ import { mapToPoster } from './map-products';
 export const fetchProducts = async (
   categoryId?: string,
   sortOption?: string,
+  selectedTypes?: string[],
 ): Promise<Poster[]> => {
   const baseQueryArgs = {
     limit: 100,
     ...(categoryId && { where: `categories(id="${categoryId}")` }),
+    ...(selectedTypes &&
+      selectedTypes.length > 0 && {
+        where: selectedTypes.map((typeId) => `productType(id="${typeId}")`).join(' or '),
+      }),
   };
 
   if (!sortOption) {

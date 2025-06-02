@@ -4,6 +4,8 @@ import { Spinner } from '@/components/ui/spiner';
 import { fetchProducts } from '@/feature/catalog/api/fetch-products';
 import { Breadcrumbs } from '@/feature/catalog/categories/breadcrumbs';
 import { CategoryNavigation } from '@/feature/catalog/categories/category-navigation';
+import { TypeFilter } from '@/feature/catalog/filter/type-filter';
+import { useFilterStore } from '@/feature/catalog/filter/use-filter-store';
 import { ProductList } from '@/feature/catalog/product-list';
 import { useSortStore } from '@/feature/catalog/sorting/use-sort-store';
 import type { Poster } from '@/feature/catalog/types';
@@ -13,12 +15,15 @@ export default function CatalogPage() {
   const { currentPath } = useCategoryStore();
   const lastCategoryId = currentPath[currentPath.length - 1]?.id;
   const { sortOption } = useSortStore();
+  const { selectedTypes } = useFilterStore();
+
   const {
     data: products,
     error,
     isLoading,
-  } = useSWR<Poster[], Error>(['commercetools/products', lastCategoryId, sortOption], () =>
-    fetchProducts(lastCategoryId, sortOption),
+  } = useSWR<Poster[], Error>(
+    ['commercetools/products', lastCategoryId, sortOption, selectedTypes],
+    () => fetchProducts(lastCategoryId, sortOption, selectedTypes),
   );
 
   if (isLoading) {
@@ -48,6 +53,7 @@ export default function CatalogPage() {
             <CategoryNavigation />
             <Breadcrumbs />
           </div>
+          <TypeFilter />
           <ProductList products={products || []} />
         </div>
       </div>

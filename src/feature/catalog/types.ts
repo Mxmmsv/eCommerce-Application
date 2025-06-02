@@ -37,3 +37,8 @@ export type CategoryPathItem = {
   id: string;
   name: string;
 };
+
+export type PosterType = {
+  id: string;
+  name: string;
+};
