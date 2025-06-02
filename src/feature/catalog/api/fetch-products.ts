@@ -8,8 +8,9 @@ export const fetchProducts = async (
   categoryId?: string,
   searchQuery?: string,
 ): Promise<Poster[]> => {
-  const queryArgs: Record<string, string | boolean> = {
+  const queryArgs: Record<string, string | boolean | number> = {
     fuzzy: true,
+    limit: 100,
   };
 
   if (searchQuery) {
