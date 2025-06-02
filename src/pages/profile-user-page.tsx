@@ -1,18 +1,8 @@
-import { MapPinCheck, Key, Lock, User } from 'lucide-react';
+import { MapPinCheck, Lock, User } from 'lucide-react';
 
-import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import AllCustomerAddress from '@/feature/user-profile/card-address-book';
+import PasswordCard from '@/feature/user-profile/card-password';
 import ProfileCard from '@/feature/user-profile/card-profile';
 import { useCustomerStore } from '@/service/store/use-user-store';
 
@@ -39,9 +29,9 @@ export default function UserProfilePage() {
                   <User size={16} strokeWidth={1.5} className="mr-2 max-[375px]:hidden" />
                   Profile
                 </TabsTrigger>
-                <TabsTrigger value="security" className="text-xs max-sm:px-1">
+                <TabsTrigger value="password" className="text-xs max-sm:px-1">
                   <Lock size={16} strokeWidth={1.5} className="mr-2 max-[375px]:hidden" />
-                  Security
+                  Password
                 </TabsTrigger>
                 <TabsTrigger value="addresses" className="text-xs max-sm:px-1">
                   <MapPinCheck size={16} strokeWidth={1.5} className="mr-2 max-[375px]:hidden" />
@@ -51,38 +41,9 @@ export default function UserProfilePage() {
               <TabsContent value="profile">
                 <ProfileCard />
               </TabsContent>
-
-              <TabsContent value="security">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Security</CardTitle>
-                    <CardDescription>
-                      Change your password here. After saving, you will be logged out.
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-2">
-                    <div className="space-y-1">
-                      <Label htmlFor="current">Current password</Label>
-                      <Input id="current" type="password" />
-                    </div>
-                    <div className="space-y-1">
-                      <Label htmlFor="new">New password</Label>
-                      <Input id="new" type="password" />
-                    </div>
-                    <div className="space-y-1">
-                      <Label htmlFor="confirm-new">Confirm new password</Label>
-                      <Input id="confirm-new" type="password" />
-                    </div>
-                  </CardContent>
-                  <CardFooter className="justify-end">
-                    <Button>
-                      <Key size={20} strokeWidth={1.25} />
-                      Change
-                    </Button>
-                  </CardFooter>
-                </Card>
+              <TabsContent value="password">
+                <PasswordCard />
               </TabsContent>
-
               <TabsContent value="addresses">
                 <AllCustomerAddress />
               </TabsContent>
