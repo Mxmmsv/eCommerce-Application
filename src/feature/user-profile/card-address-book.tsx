@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { DialogTrigger } from '@/components/ui/dialog';
 import { useCustomerStore } from '@/service/store/use-user-store';
 
-import AddAddressDialog from './add-address-dialog';
+import AddAddressDialog from './edit-address-form';
 import { DefaultAddressesDisplay, AllAddressesDisplay } from './utils/addresses-render';
 import CollapsibleSection from './utils/collapsible-section';
 import { getAddresses } from './utils/get-address';
