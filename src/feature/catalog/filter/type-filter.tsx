@@ -1,6 +1,9 @@
+import { useEffect } from 'react';
+
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
+import { fetchProductTypes } from '../api/fetch-product-types';
 import { useSortStore } from '../sorting/use-sort-store';
 
 import { DiscountFilter } from './discount-filter';
@@ -8,10 +11,23 @@ import { ResetFiltersButton } from './reset-filter';
 import { useFilterStore } from './use-filter-store';
 
 export const TypeFilter = () => {
-  const { availableTypes, selectedTypes, toggleType, onlyDiscounted } = useFilterStore();
+  const { availableTypes, selectedTypes, toggleType, onlyDiscounted, setAvailableTypes } =
+    useFilterStore();
   const { sortOption } = useSortStore();
 
+  useEffect(() => {
+    const loadTypes = async () => {
+      const types = await fetchProductTypes();
+      setAvailableTypes(types);
+    };
+    void loadTypes();
+  }, [setAvailableTypes]);
+
   const hasActiveFilters = selectedTypes.length > 0 || onlyDiscounted || sortOption;
+
+  if (availableTypes.length === 0) {
+    return <div className="text-muted-foreground mx-6 mt-8 text-sm">Loading filters...</div>;
+  }
 
   return (
     <div className="mx-6 mt-8 flex justify-end gap-2 space-y-2">
