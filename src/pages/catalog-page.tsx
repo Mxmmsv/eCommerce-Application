@@ -1,9 +1,11 @@
+import { useEffect } from 'react';
 import useSWR from 'swr';
 
 import { Spinner } from '@/components/ui/spiner';
 import { fetchProducts } from '@/feature/catalog/api/fetch-products';
 import { Breadcrumbs } from '@/feature/catalog/categories/breadcrumbs';
 import { CategoryNavigation } from '@/feature/catalog/categories/category-navigation';
+import { PriceRangeFilter } from '@/feature/catalog/filter/price-ranger-filter';
 import { TypeFilter } from '@/feature/catalog/filter/type-filter';
 import { useFilterStore } from '@/feature/catalog/filter/use-filter-store';
 import { ProductList } from '@/feature/catalog/product-list';
@@ -15,16 +17,51 @@ export default function CatalogPage() {
   const { currentPath } = useCategoryStore();
   const lastCategoryId = currentPath[currentPath.length - 1]?.id;
   const { sortOption } = useSortStore();
-  const { selectedTypes, onlyDiscounted } = useFilterStore();
+  const {
+    selectedTypes,
+    onlyDiscounted,
+    priceRange,
+    setAvailablePriceRange,
+    setPriceRange,
+    isPriceRangeChanged,
+  } = useFilterStore();
 
   const {
     data: products,
     error,
     isLoading,
   } = useSWR<Poster[], Error>(
-    ['commercetools/products', lastCategoryId, sortOption, selectedTypes, onlyDiscounted],
-    () => fetchProducts(lastCategoryId, sortOption, selectedTypes, onlyDiscounted),
+    [
+      'commercetools/products',
+      lastCategoryId,
+      sortOption,
+      selectedTypes,
+      onlyDiscounted,
+      priceRange,
+      isPriceRangeChanged,
+    ],
+    () =>
+      fetchProducts(
+        lastCategoryId,
+        sortOption,
+        selectedTypes,
+        onlyDiscounted,
+        priceRange,
+        isPriceRangeChanged,
+      ),
   );
+
+  useEffect(() => {
+    if (products && products.length > 0) {
+      const prices = products.map((p) =>
+        parseFloat(p.hasDiscount ? p.discount || p.price : p.price),
+      );
+      const min = Math.floor(Math.min(...prices));
+      const max = Math.ceil(Math.max(...prices));
+      setAvailablePriceRange([min, max]);
+      setPriceRange([min, max]);
+    }
+  }, [products, setAvailablePriceRange, setPriceRange]);
 
   if (isLoading) {
     return (
@@ -54,6 +91,7 @@ export default function CatalogPage() {
             <Breadcrumbs />
           </div>
           <TypeFilter />
+          <PriceRangeFilter />
           <ProductList products={products || []} />
         </div>
       </div>

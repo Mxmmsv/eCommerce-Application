@@ -11,8 +11,14 @@ import { ResetFiltersButton } from './reset-filter';
 import { useFilterStore } from './use-filter-store';
 
 export const TypeFilter = () => {
-  const { availableTypes, selectedTypes, toggleType, onlyDiscounted, setAvailableTypes } =
-    useFilterStore();
+  const {
+    availableTypes,
+    selectedTypes,
+    toggleType,
+    onlyDiscounted,
+    setAvailableTypes,
+    isPriceFilterActive,
+  } = useFilterStore();
   const { sortOption } = useSortStore();
 
   useEffect(() => {
@@ -23,14 +29,15 @@ export const TypeFilter = () => {
     void loadTypes();
   }, [setAvailableTypes]);
 
-  const hasActiveFilters = selectedTypes.length > 0 || onlyDiscounted || sortOption;
+  const hasActiveFilters =
+    selectedTypes.length > 0 || onlyDiscounted || sortOption || isPriceFilterActive;
 
   if (availableTypes.length === 0) {
     return <div className="text-muted-foreground mx-6 mt-8 text-sm">Loading filters...</div>;
   }
 
   return (
-    <div className="mx-6 mt-8 flex justify-end gap-2 space-y-2">
+    <div className="mt-8 flex justify-end gap-2 space-y-2 px-4 lg:px-16">
       {hasActiveFilters && <ResetFiltersButton />}
       <div className="flex flex-wrap gap-2">
         {availableTypes.map((type) => (

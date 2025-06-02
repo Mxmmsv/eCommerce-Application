@@ -9,6 +9,7 @@ export const fetchProducts = async (
   sortOption?: string,
   selectedTypes?: string[],
   onlyDiscounted?: boolean,
+  priceRange?: [number, number],
 ): Promise<Poster[]> => {
   const filters = [];
 
@@ -18,6 +19,11 @@ export const fetchProducts = async (
 
   if (selectedTypes && selectedTypes.length > 0) {
     filters.push(`productType.id:${selectedTypes.map((id) => `"${id}"`).join(',')}`);
+  }
+
+  if (priceRange && Array.isArray(priceRange) && priceRange.length === 2) {
+    const [min, max] = priceRange;
+    filters.push(`variants.price.centAmount:range (${min * 100} to ${max * 100})`);
   }
 
   const queryArgs = {
