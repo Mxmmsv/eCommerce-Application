@@ -4,15 +4,48 @@ import type { Poster } from '../types';
 
 import { mapToPoster } from './map-products';
 
-export const fetchProducts = async (categoryId?: string): Promise<Poster[]> => {
-  const response = await apiRoot
-    .productProjections()
-    .get({
-      queryArgs: {
-        where: categoryId ? `categories(id="${categoryId}")` : undefined,
-        limit: 100,
-      },
-    })
-    .execute();
-  return response.body.results.map(mapToPoster);
+export const fetchProducts = async (
+  categoryId?: string,
+  sortOption?: string,
+): Promise<Poster[]> => {
+  const baseQueryArgs = {
+    limit: 100,
+    ...(categoryId && { where: `categories(id="${categoryId}")` }),
+  };
+
+  if (!sortOption) {
+    const response = await apiRoot.productProjections().get({ queryArgs: baseQueryArgs }).execute();
+    return response.body.results.map(mapToPoster);
+  }
+
+  if (sortOption.startsWith('name.en-GB')) {
+    const response = await apiRoot
+      .productProjections()
+      .get({
+        queryArgs: {
+          ...baseQueryArgs,
+          sort: [sortOption],
+        },
+      })
+      .execute();
+    return response.body.results.map(mapToPoster);
+  }
+
+  if (sortOption.includes('price')) {
+    const response = await apiRoot
+      .productProjections()
+      .search()
+      .get({
+        queryArgs: {
+          filter: categoryId ? [`categories.id:"${categoryId}"`] : undefined,
+          sort: [sortOption],
+          limit: 100,
+          priceCurrency: 'EUR',
+        },
+      })
+      .execute();
+    return response.body.results.map(mapToPoster);
+  }
+
+  throw new Error(`Unsupported sort option: ${sortOption}`);
 };

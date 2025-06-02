@@ -5,19 +5,20 @@ import { fetchProducts } from '@/feature/catalog/api/fetch-products';
 import { Breadcrumbs } from '@/feature/catalog/categories/breadcrumbs';
 import { CategoryNavigation } from '@/feature/catalog/categories/category-navigation';
 import { ProductList } from '@/feature/catalog/product-list';
+import { useSortStore } from '@/feature/catalog/sorting/use-sort-store';
 import type { Poster } from '@/feature/catalog/types';
 import { useCategoryStore } from '@/service/store/use-category-store';
 
 export default function CatalogPage() {
   const { currentPath } = useCategoryStore();
   const lastCategoryId = currentPath[currentPath.length - 1]?.id;
-
+  const { sortOption } = useSortStore();
   const {
     data: products,
     error,
     isLoading,
-  } = useSWR<Poster[], Error>(['commercetools/products', lastCategoryId], () =>
-    fetchProducts(lastCategoryId),
+  } = useSWR<Poster[], Error>(['commercetools/products', lastCategoryId, sortOption], () =>
+    fetchProducts(lastCategoryId, sortOption),
   );
 
   if (isLoading) {
@@ -43,7 +44,7 @@ export default function CatalogPage() {
       <title>{'Catalog :: Poster store'}</title>
       <div className="bg-muted flex min-h-svh justify-center text-lg">
         <div className="container py-8">
-          <div className="mb-6 flex items-start gap-4 px-4">
+          <div className="flex items-start gap-4 px-4">
             <CategoryNavigation />
             <Breadcrumbs />
           </div>
