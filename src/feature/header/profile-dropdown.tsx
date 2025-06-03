@@ -1,4 +1,12 @@
-import { UserRound, UserRoundPen, UserRoundPlus, LogIn, LogOut } from 'lucide-react';
+import {
+  UserRound,
+  UserRoundPen,
+  UserRoundPlus,
+  LogIn,
+  LogOut,
+  UserRoundCheck,
+} from 'lucide-react';
+import { useContext } from 'react';
 import { NavLink } from 'react-router';
 
 import {
@@ -9,15 +17,21 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
-import { useLogout } from '@/feature/auth/login/use-logout';
+import { useLogout } from '@/feature/auth/login/api/use-logout';
+import AuthContext from '@/feature/auth/login/auth-provider';
 
 export function ProfileDropdownMenu() {
   const handleLogout = useLogout();
+  const { IS_AUTHORIZED } = useContext(AuthContext);
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="cursor-pointer">
-        <UserRound strokeWidth={1.5} size={32} />
+      <DropdownMenuTrigger className="hover:text-chart-3 cursor-pointer p-3 transition-colors duration-300 lg:p-2">
+        {IS_AUTHORIZED ? (
+          <UserRoundCheck strokeWidth={1.5} size={32} className="max-sm:size-6" />
+        ) : (
+          <UserRound strokeWidth={1.5} size={32} className="max-sm:size-6" />
+        )}
       </DropdownMenuTrigger>
       <DropdownMenuContent className="flex w-56 flex-col justify-start pr-4 pl-4">
         <DropdownMenuLabel className="flex justify-center">
@@ -26,43 +40,52 @@ export function ProfileDropdownMenu() {
 
         <DropdownMenuSeparator />
 
-        <div className="hover:bg-secondary flex items-center justify-start rounded-sm border-white shadow-none">
-          <LogIn strokeWidth={1.5} size={28} />
-          <DropdownMenuItem className="w-full cursor-pointer">
-            <NavLink to="/login" className="w-full justify-center text-xl whitespace-nowrap">
-              <span className="block">Log in</span>
-            </NavLink>
-          </DropdownMenuItem>
-        </div>
+        {!IS_AUTHORIZED && (
+          <>
+            <div className="hover:bg-secondary flex items-center justify-start rounded-sm border-white shadow-none">
+              <DropdownMenuItem asChild>
+                <NavLink to="/login" className="flex w-full cursor-pointer justify-start text-xl">
+                  <LogIn strokeWidth={1.5} className="text-foreground size-6" />
+                  Log in
+                </NavLink>
+              </DropdownMenuItem>
+            </div>
 
-        <div className="hover:bg-secondary flex items-center justify-start rounded-sm border-white shadow-none">
-          <UserRoundPlus strokeWidth={1.5} size={28} />
-          <DropdownMenuItem className="w-full cursor-pointer">
-            <NavLink to="/registration" className="w-full justify-center text-xl whitespace-nowrap">
-              <span>Registration</span>
-            </NavLink>
-          </DropdownMenuItem>
-        </div>
+            <div className="hover:bg-secondary flex items-center justify-start rounded-sm border-white shadow-none">
+              <DropdownMenuItem asChild>
+                <NavLink
+                  to="/registration"
+                  className="flex w-full cursor-pointer justify-start text-xl"
+                >
+                  <UserRoundPlus strokeWidth={1.5} className="text-foreground size-6" />
+                  Registration
+                </NavLink>
+              </DropdownMenuItem>
+            </div>
+          </>
+        )}
 
-        <DropdownMenuSeparator />
+        {IS_AUTHORIZED && (
+          <>
+            <div className="hover:bg-secondary flex items-center justify-start rounded-sm border-white shadow-none">
+              <DropdownMenuItem asChild>
+                <NavLink to="/profile" className="flex w-full cursor-pointer justify-start text-xl">
+                  <UserRoundPen strokeWidth={1.5} className="text-foreground size-6" />
+                  Profile
+                </NavLink>
+              </DropdownMenuItem>
+            </div>
 
-        <div className="hover:bg-secondary flex items-center justify-start rounded-sm border-white shadow-none">
-          <UserRoundPen strokeWidth={1.5} size={28} />
-          <DropdownMenuItem className="w-full cursor-pointer">
-            <NavLink to="/profile" className="w-full justify-center text-xl whitespace-nowrap">
-              <span className="block">Profile</span>
-            </NavLink>
-          </DropdownMenuItem>
-        </div>
+            <DropdownMenuSeparator />
 
-        <DropdownMenuSeparator />
-
-        <div className="hover:bg-secondary flex items-center justify-start rounded-sm border-white shadow-none">
-          <LogOut strokeWidth={1.5} size={28} />
-          <DropdownMenuItem className="w-full cursor-pointer" onClick={handleLogout}>
-            <span className="w-full text-start text-xl whitespace-nowrap">Log out</span>
-          </DropdownMenuItem>
-        </div>
+            <div className="flex w-full items-center justify-start rounded-sm border-white shadow-none">
+              <DropdownMenuItem className="w-full cursor-pointer" onClick={handleLogout}>
+                <LogOut strokeWidth={1.5} className="text-foreground size-6" />
+                <span className="text-xl">Log out</span>
+              </DropdownMenuItem>
+            </div>
+          </>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );
