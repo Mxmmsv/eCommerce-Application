@@ -10,6 +10,7 @@ export default function UserProfilePage() {
   const customer = useCustomerStore((state) => state.customer);
 
   return (
+<title>{'Profile :: Poster store'}</title>
     <main className="flex flex-col items-center justify-center text-lg">
       <div className="container mx-auto px-4 py-6 md:px-6">
         <div className="mx-auto max-w-3xl">

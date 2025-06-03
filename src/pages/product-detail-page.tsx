@@ -9,5 +9,10 @@ export default function ProductDetailPage() {
     return null;
   }
 
-  return <ProductOverview productId={id} />;
+  return (
+    <>
+      <title>{'Product overview :: Poster store'}</title>
+      <ProductOverview productId={id} />
+    </>
+  );
 }

@@ -3,7 +3,8 @@ import { Euro, RussianRuble } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spiner';
 
-import { useProductOverview } from './use-product-overview-component';
+import { ProductImages } from './product-images';
+import { useProductOverview } from './use-product-overview';
 
 export default function ProductOverview({ productId }: { productId: string }) {
   const { isLoading, error, ...product } = useProductOverview(productId);
@@ -27,23 +28,15 @@ export default function ProductOverview({ productId }: { productId: string }) {
   }
 
   const PriceIcon = product.currencyCode === 'EUR' ? Euro : RussianRuble;
-  const original = Number(product.price);
-  const discounted = Number(product.discount);
-  const discountPercent =
-    original > discounted ? Math.round(((original - discounted) / original) * 100) : 0;
 
   return (
     <div className="mx-auto w-full max-w-7xl p-6">
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-        <div className="bg-muted relative aspect-square overflow-hidden rounded-lg">
-          <img
-            src={product.image}
-            alt="Product"
-            width={700}
-            height={700}
-            className="h-full w-full rounded-2xl bg-white object-cover"
-          />
-        </div>
+        <ProductImages
+          images={product.images}
+          alt={product.alt}
+          description={product.description}
+        />
 
         <div className="flex flex-col">
           <h1 className="mb-2 text-3xl font-bold">{product.name}</h1>
@@ -59,7 +52,9 @@ export default function ProductOverview({ productId }: { productId: string }) {
                   <PriceIcon className="inline h-5 w-5" />
                   {product.price}
                 </span>
-                <span className="text-sm font-medium text-green-600">Save {discountPercent}%</span>
+                <span className="text-sm font-medium text-green-600">
+                  Save {product.discountPercent}%
+                </span>
               </>
             )}
           </div>
