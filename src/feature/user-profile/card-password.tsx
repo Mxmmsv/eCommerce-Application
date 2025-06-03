@@ -1,4 +1,4 @@
-import { Key } from 'lucide-react';
+import { EyeIcon, EyeOffIcon, Key } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
@@ -39,6 +39,7 @@ export default function PasswordCard() {
   const logout = useLogout();
 
   const [isEditing, setIsEditing] = useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const onSubmit = async (data: FormData) => {
     const { currentPassword, password, confirmPassword } = data;
@@ -65,6 +66,10 @@ export default function PasswordCard() {
     }
   };
 
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
+
   return (
     <Card>
       <CardHeader>
@@ -77,22 +82,39 @@ export default function PasswordCard() {
         <CardContent className="space-y-2">
           <div className="space-y-1">
             <Label htmlFor="current">Current password</Label>
-            <Input
-              id="current"
-              type="password"
-              disabled={!isEditing}
-              {...register('currentPassword', { required: 'Current password is required' })}
-            />
-            {errors.currentPassword && (
-              <p className="text-sm text-red-500">{errors.currentPassword.message}</p>
-            )}
+            <div className="relative flex items-center">
+              <Input
+                id="current"
+                placeholder="••••••••"
+                type={isPasswordVisible ? 'text' : 'password'}
+                disabled={!isEditing}
+                {...register('currentPassword', { required: 'Current password is required' })}
+              />
+              {errors.currentPassword && (
+                <p className="text-sm text-red-500">{errors.currentPassword.message}</p>
+              )}
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                className="absolute top-0 right-0 h-full px-3 py-2"
+                onClick={togglePasswordVisibility}
+              >
+                {isPasswordVisible ? (
+                  <EyeOffIcon className="h-4 w-4" />
+                ) : (
+                  <EyeIcon className="h-4 w-4" />
+                )}
+              </Button>
+            </div>
           </div>
 
           <div className="space-y-1">
             <Label htmlFor="new">New password</Label>
+            <div></div>
             <Input
               id="new"
-              type="password"
+              type={isPasswordVisible ? 'text' : 'password'}
               disabled={!isEditing}
               {...register('password', {
                 required: 'New password is required',
