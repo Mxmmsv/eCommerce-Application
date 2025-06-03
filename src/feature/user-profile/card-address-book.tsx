@@ -13,7 +13,6 @@ import { getAddresses } from './utils/get-address';
 export default function AllCustomerAddress() {
   const customer = useCustomerStore((state) => state.customer);
   const addressesData = getAddresses(customer ?? { addresses: [] });
-
   return (
     <Card>
       <CardHeader>

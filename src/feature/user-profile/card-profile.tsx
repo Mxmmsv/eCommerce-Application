@@ -1,13 +1,7 @@
-import type {
-  MyCustomerChangeEmailAction,
-  MyCustomerSetDateOfBirthAction,
-  MyCustomerSetFirstNameAction,
-  MyCustomerSetLastNameAction,
-  MyCustomerUpdateAction,
-} from '@commercetools/platform-sdk';
+
 import { SquarePen } from 'lucide-react';
 import { useRef, useState } from 'react';
-import { mutate } from 'swr';
+import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -20,78 +14,35 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { createApiClientWithToken } from '@/feature/api/api-client-token-flow';
 import { useCustomerStore } from '@/service/store/use-user-store';
+
+import { useUpdateCustomer } from './use-update-customer';
 
 export default function ProfileCard() {
   const customer = useCustomerStore((state) => state.customer);
-  const setCustomer = useCustomerStore((state) => state.setCustomer);
+
+  const [isEditing, setIsEditing] = useState(false);
 
   const firstNameRef = useRef<HTMLInputElement>(null);
   const lastNameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const dobRef = useRef<HTMLInputElement>(null);
 
-  const [isEditing, setIsEditing] = useState(false);
-
-  const handleCancel = () => {
-    if (!customer) return;
-    if (firstNameRef.current) firstNameRef.current.value = customer.firstName || '';
-    if (lastNameRef.current) lastNameRef.current.value = customer.lastName || '';
-    if (emailRef.current) emailRef.current.value = customer.email || '';
-    if (dobRef.current) dobRef.current.value = customer.dateOfBirth || '';
-    setIsEditing(false);
-  };
+  const { update } = useUpdateCustomer();
 
   const handleSave = async () => {
-    if (!customer) {
-      console.error('Customer is null');
-      return;
-    }
-
-    const accessToken = localStorage.getItem('ACCESS_TOKEN_KEY');
-    if (!accessToken) {
-      console.error('ACCESS_TOKEN_KEY not found');
-      return;
-    }
-
-    const apiRoot = createApiClientWithToken(accessToken);
-
-    const actions: MyCustomerUpdateAction[] = [
-      {
-        action: 'setFirstName',
-        firstName: firstNameRef.current?.value || '',
-      } as MyCustomerSetFirstNameAction,
-      {
-        action: 'setLastName',
-        lastName: lastNameRef.current?.value || '',
-      } as MyCustomerSetLastNameAction,
-      {
-        action: 'changeEmail',
-        email: emailRef.current?.value || '',
-      } as MyCustomerChangeEmailAction,
-      {
-        action: 'setDateOfBirth',
-        dateOfBirth: dobRef.current?.value || '',
-      } as MyCustomerSetDateOfBirthAction,
-    ];
-
     try {
-      const response = await apiRoot
-        .me()
-        .post({
-          body: {
-            version: customer.version,
-            actions,
-          },
-        })
-        .execute();
-
-      setCustomer(response.body);
-      await mutate('customer-profile', response.body, false);
+      await update({
+        firstName: firstNameRef.current?.value || '',
+        lastName: lastNameRef.current?.value || '',
+        email: emailRef.current?.value || '',
+        dateOfBirth: dobRef.current?.value || '',
+      });
+      toast.success('Profile updated successfully!');
       setIsEditing(false);
     } catch (error) {
-      console.error('Failed to update customer:', error);
+      toast.error('Failed to update profile');
+      console.error(error);
     }
   };
 
@@ -136,15 +87,10 @@ export default function ProfileCard() {
           />
         </div>
       </CardContent>
-      <CardFooter className="justify-end space-x-3">
-        {!isEditing ? (
-          <Button onClick={() => setIsEditing(true)}>
-            <SquarePen size={20} strokeWidth={1.25} />
-            Edit profile
-          </Button>
-        ) : (
-          <>
-            <Button variant="outline" onClick={handleCancel}>
+      <CardFooter className="justify-end">
+        {isEditing ? (
+          <div className="flex gap-4">
+            <Button variant="outline" onClick={() => setIsEditing(false)}>
               Cancel
             </Button>
             <Button
@@ -154,7 +100,12 @@ export default function ProfileCard() {
             >
               Save Changes
             </Button>
-          </>
+          </div>
+        ) : (
+          <Button onClick={() => setIsEditing(true)}>
+            <SquarePen size={20} strokeWidth={1.25} />
+            Edit profile
+          </Button>
         )}
       </CardFooter>
     </Card>

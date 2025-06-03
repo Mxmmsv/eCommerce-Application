@@ -13,16 +13,16 @@ export function ModeToggle() {
   return (
     <Toggle
       onClick={toggleTheme}
-      className="hover:bg-accent hover:text-chart-3 dark:hover:bg-accent/50 h-max w-full has-[>svg]:px-3 has-[>svg]:py-3 lg:p-3"
+      className="group hover:text-chart-3 relative h-max w-full has-[>svg]:px-3 has-[>svg]:py-3 lg:p-3 dark:hover:bg-transparent"
       aria-label="toggle-button"
     >
       <Sun
         strokeWidth={1.5}
-        className="scale-100 rotate-0 transition-all sm:size-8 dark:scale-0 dark:-rotate-90 [&_svg:not([class*='size-'])]:size-6"
+        className="group-hover:text-chart-3 scale-100 rotate-0 transition-all sm:size-8 dark:scale-0 dark:-rotate-90 [&_svg:not([class*='size-'])]:size-6"
       />
       <Moon
         strokeWidth={1.5}
-        className="absolute scale-0 rotate-90 transition-all sm:size-8 dark:scale-100 dark:rotate-0 [&_svg:not([class*='size-'])]:size-6"
+        className="group-hover:text-chart-3 absolute scale-0 rotate-90 transition-all sm:size-8 dark:scale-100 dark:rotate-0 [&_svg:not([class*='size-'])]:size-6"
       />
     </Toggle>
   );
