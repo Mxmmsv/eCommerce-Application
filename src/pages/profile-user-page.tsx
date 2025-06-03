@@ -1,3 +1,4 @@
+
 import { MapPinCheck, Lock, User } from 'lucide-react';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -22,7 +23,6 @@ export default function UserProfilePage() {
               Manage your account settings and preferences.
             </p>
           </div>
-
           <div className="flex flex-col gap-2 space-y-6">
             <Tabs defaultValue="profile" className="w-full">
               <TabsList className="grid w-full grid-cols-3">
