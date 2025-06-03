@@ -6,7 +6,11 @@ import { signInCustomer } from '@/feature/auth/login/api/sign-in-customer';
 
 import type { RegistrationFormData } from './types';
 
-export const handleRegister = async (data: RegistrationFormData, navigate: NavigateFunction) => {
+export const handleRegister = async (
+  data: RegistrationFormData,
+  navigate: NavigateFunction,
+  setIsAuthorized: (value: boolean) => void,
+) => {
   try {
     const anonymousApiRoot = AnonymousFlowApiClient();
     await anonymousApiRoot
@@ -15,6 +19,8 @@ export const handleRegister = async (data: RegistrationFormData, navigate: Navig
       .execute();
 
     await signInCustomer(data.email, data.password);
+
+    setIsAuthorized(true);
 
     toast.success('Success!', {
       description: 'Registration completed',
