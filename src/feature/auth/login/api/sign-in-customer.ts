@@ -50,10 +50,14 @@ export const signInCustomer = async (
     firstName: customer.firstName ?? '',
     lastName: customer.lastName ?? '',
     dateOfBirth: customer.dateOfBirth ?? '',
-    addresses: customer.addresses,
     isEmailVerified: customer.isEmailVerified,
     stores: customer.stores,
     authenticationMode: customer.authenticationMode,
+    addresses: customer.addresses,
+    defaultShippingAddressId: customer.defaultShippingAddressId,
+    defaultBillingAddressId: customer.defaultBillingAddressId,
+    shippingAddressIds: customer.shippingAddressIds ?? [],
+    billingAddressIds: customer.billingAddressIds ?? [],
   });
 
   return response;
