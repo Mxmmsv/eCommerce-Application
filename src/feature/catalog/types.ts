@@ -8,6 +8,7 @@ export type Poster = {
   discount?: string;
   discountPercent?: number;
   hasDiscount?: boolean;
+  productTypeName: string;
 };
 
 export type PosterCategory = {
@@ -34,6 +35,11 @@ export type CategoryDropdownProps = {
 };
 
 export type CategoryPathItem = {
+  id: string;
+  name: string;
+};
+
+export type PosterType = {
   id: string;
   name: string;
 };
