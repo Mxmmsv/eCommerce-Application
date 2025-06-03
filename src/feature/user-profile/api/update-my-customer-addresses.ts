@@ -4,7 +4,6 @@ import { createApiClientWithToken } from '@/feature/api/api-client-token-flow';
 import { useCustomerStore } from '@/service/store/use-user-store';
 
 export async function updateMyCustomerAddresses(
-  customer: Customer,
   token: string,
   actions: MyCustomerUpdateAction[],
 ): Promise<Customer> {
