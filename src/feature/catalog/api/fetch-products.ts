@@ -7,45 +7,39 @@ import { mapToPoster } from './map-products';
 export const fetchProducts = async (
   categoryId?: string,
   sortOption?: string,
+  selectedTypes?: string[],
+  onlyDiscounted?: boolean,
+  priceRange?: [number, number],
 ): Promise<Poster[]> => {
-  const baseQueryArgs = {
+  const filters = [];
+
+  if (categoryId) {
+    filters.push(`categories.id:"${categoryId}"`);
+  }
+
+  if (selectedTypes && selectedTypes.length > 0) {
+    filters.push(`productType.id:${selectedTypes.map((id) => `"${id}"`).join(',')}`);
+  }
+
+  if (priceRange && Array.isArray(priceRange) && priceRange.length === 2) {
+    const [min, max] = priceRange;
+    filters.push(`variants.price.centAmount:range (${min * 100} to ${max * 100})`);
+  }
+
+  const queryArgs = {
+    ...(filters.length > 0 && { filter: filters }),
+    ...(sortOption && { sort: [sortOption] }),
+    expand: ['productType'],
     limit: 100,
-    ...(categoryId && { where: `categories(id="${categoryId}")` }),
+    priceCurrency: 'EUR',
   };
 
-  if (!sortOption) {
-    const response = await apiRoot.productProjections().get({ queryArgs: baseQueryArgs }).execute();
-    return response.body.results.map(mapToPoster);
+  const response = await apiRoot.productProjections().search().get({ queryArgs }).execute();
+
+  let products = response.body.results.map(mapToPoster);
+  if (onlyDiscounted) {
+    products = products.filter((product) => product.hasDiscount);
   }
 
-  if (sortOption.startsWith('name.en-GB')) {
-    const response = await apiRoot
-      .productProjections()
-      .get({
-        queryArgs: {
-          ...baseQueryArgs,
-          sort: [sortOption],
-        },
-      })
-      .execute();
-    return response.body.results.map(mapToPoster);
-  }
-
-  if (sortOption.includes('price')) {
-    const response = await apiRoot
-      .productProjections()
-      .search()
-      .get({
-        queryArgs: {
-          filter: categoryId ? [`categories.id:"${categoryId}"`] : undefined,
-          sort: [sortOption],
-          limit: 100,
-          priceCurrency: 'EUR',
-        },
-      })
-      .execute();
-    return response.body.results.map(mapToPoster);
-  }
-
-  throw new Error(`Unsupported sort option: ${sortOption}`);
+  return products;
 };
