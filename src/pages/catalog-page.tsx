@@ -1,3 +1,4 @@
+import { useSearchParams } from 'react-router';
 import useSWR from 'swr';
 
 import { Spinner } from '@/components/ui/spiner';
@@ -13,6 +14,9 @@ import { useCategoryStore } from '@/service/store/use-category-store';
 
 export default function CatalogPage() {
   const { currentPath } = useCategoryStore();
+  const [searchParams] = useSearchParams();
+  const searchQuery = searchParams.get('search') || undefined;
+
   const lastCategoryId = currentPath[currentPath.length - 1]?.id;
   const { sortOption } = useSortStore();
   const { selectedTypes, onlyDiscounted, priceRange } = useFilterStore();
@@ -25,12 +29,21 @@ export default function CatalogPage() {
     [
       'commercetools/products',
       lastCategoryId,
+      searchQuery,
       sortOption,
       selectedTypes,
       onlyDiscounted,
       priceRange,
     ],
-    () => fetchProducts(lastCategoryId, sortOption, selectedTypes, onlyDiscounted, priceRange),
+    () =>
+      fetchProducts(
+        lastCategoryId,
+        searchQuery,
+        sortOption,
+        selectedTypes,
+        onlyDiscounted,
+        priceRange,
+      ),
   );
 
   if (isLoading) {
@@ -60,7 +73,23 @@ export default function CatalogPage() {
             <CategoryNavigation />
             <Breadcrumbs />
           </div>
+
           <TypeFilter />
+
+          {searchQuery && (
+            <div className="mb-4 px-4">
+              <h2 className="text-xl font-semibold">
+                Search results for: <span className="text-primary">{searchQuery}</span>
+              </h2>
+            </div>
+          )}
+
+          {products?.length === 0 && (
+            <div className="text-muted-foreground mt-4 text-center">
+              No products found {searchQuery ? `for "${searchQuery}"` : ''}.
+            </div>
+          )}
+
           <ProductList products={products || []} />
         </div>
       </div>
