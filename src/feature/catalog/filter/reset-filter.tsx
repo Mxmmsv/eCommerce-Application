@@ -9,11 +9,12 @@ import { useSortStore } from '../sorting/use-sort-store';
 import { useFilterStore } from './use-filter-store';
 
 export const ResetFiltersButton = () => {
-  const { resetAllFilters } = useFilterStore();
+  const { resetAllFilters, resetPriceRange } = useFilterStore();
   const { setSortOption }: SortStoreActions = useSortStore();
 
   const handleReset = () => {
     resetAllFilters();
+    resetPriceRange();
     setSortOption(undefined);
   };
 

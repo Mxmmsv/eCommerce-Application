@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Slider } from '@/components/ui/slider';
 import { cn } from '@/lib/utils';
@@ -6,16 +6,21 @@ import { cn } from '@/lib/utils';
 import { useFilterStore } from './use-filter-store';
 
 export const PriceRangeFilter = () => {
-  const { priceRange, setPriceRange, applyPriceFilter, isPriceFilterActive } = useFilterStore();
-  const [tempRange, setTempRange] = useState<[number, number]>(priceRange);
+  const { priceRange, defaultPriceRange, setPriceRange, isPriceFilterActive, applyPriceFilter } =
+    useFilterStore();
+  const [localRange, setLocalRange] = useState<PriceRange>(priceRange);
 
-  const handleValueChange = (value: number[]) => {
+  useEffect(() => {
+    setLocalRange(priceRange);
+  }, [priceRange]);
+
+  const handleChange = (value: number[]): void => {
     if (value.length === 2) {
-      setTempRange([value[0], value[1]]);
+      setLocalRange([value[0], value[1]]);
     }
   };
 
-  const handleValueCommit = (value: number[]) => {
+  const handleCommit = (value: number[]): void => {
     if (value.length === 2) {
       setPriceRange([value[0], value[1]]);
       applyPriceFilter(true);
@@ -26,7 +31,11 @@ export const PriceRangeFilter = () => {
     new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'EUR',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
     }).format(value);
+
+  type PriceRange = [number, number];
 
   return (
     <div>
@@ -36,7 +45,7 @@ export const PriceRangeFilter = () => {
           isPriceFilterActive ? 'text-primary' : 'text-muted-foreground',
         )}
       >
-        Price range: {formatPrice(tempRange[0])} - {formatPrice(tempRange[1])}
+        Price range: {formatPrice(localRange[0])} - {formatPrice(localRange[1])}
       </h3>
       <div
         className={cn(
@@ -51,12 +60,11 @@ export const PriceRangeFilter = () => {
         )}
       >
         <Slider
-          min={0}
-          max={30}
-          step={0.01}
-          value={tempRange}
-          onValueChange={handleValueChange}
-          onValueCommit={handleValueCommit}
+          min={defaultPriceRange[0]}
+          max={defaultPriceRange[1]}
+          value={localRange}
+          onValueChange={handleChange}
+          onValueCommit={handleCommit}
           className={cn('[&_.slider-thumb]:bg-primary', '[&_.slider-range]:bg-primary/50')}
         />
       </div>
