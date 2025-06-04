@@ -3,7 +3,10 @@ import { SquarePen, Trash } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
+import { tokenCache } from '@/feature/api/api-token-store';
+import { useCustomerStore } from '@/service/store/use-user-store';
 
+import { removeAddress } from './customer-address-actions';
 import { getAddresses } from './get-address';
 
 type DefaultProps = {
@@ -18,6 +21,24 @@ type AllProps = {
 };
 
 function renderAddressContent(address: Address, label: string) {
+  const customer = useCustomerStore.getState().customer;
+
+  const handleDelete = async () => {
+    if (!address.id || !customer) return;
+
+    const confirmed = window.confirm('Are you sure you want to delete this address?');
+    if (!confirmed) return;
+
+    try {
+      const token = tokenCache.get().token;
+      await removeAddress(customer, token, address.id);
+      alert('Address deleted');
+    } catch (err) {
+      console.error('Failed to delete address:', err);
+      alert('Could not delete address.');
+    }
+  };
+
   return (
     <div className="py-3 pb-2">
       <div>
@@ -53,7 +74,13 @@ function renderAddressContent(address: Address, label: string) {
         <Button variant="outline" size="icon">
           <SquarePen size={20} strokeWidth={1.25} />
         </Button>
-        <Button variant="outline" size="icon">
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={() => {
+            void handleDelete();
+          }}
+        >
           <Trash size={20} strokeWidth={1.25} />
         </Button>
       </div>

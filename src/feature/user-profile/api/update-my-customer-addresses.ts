@@ -34,3 +34,29 @@ export async function updateMyCustomerAddresses(
 
   return response.body;
 }
+
+export async function removeMyCustomerAddress(
+  customer: Customer,
+  token: string,
+  addressId: string,
+): Promise<Customer> {
+  const apiRoot = createApiClientWithToken(token);
+  const response = await apiRoot
+    .me()
+    .post({
+      body: {
+        version: customer.version,
+        actions: [
+          {
+            action: 'removeAddress',
+            addressId,
+          },
+        ],
+      },
+    })
+    .execute();
+
+  const updatedCustomer = response.body;
+  useCustomerStore.getState().setCustomer(updatedCustomer);
+  return updatedCustomer;
+}
