@@ -1,5 +1,4 @@
 import type { Customer } from '@commercetools/platform-sdk';
-import { useEffect } from 'react';
 import useSWR from 'swr';
 
 import { createApiClientWithToken } from '@/feature/api/api-client-token-flow';
@@ -21,9 +20,7 @@ export const useCustomerProfile = (accessToken: string | null) => {
     fetchCustomerWithToken(apiRoot!),
   );
 
-  useEffect(() => {
-    if (data) setCustomer(data);
-  }, [data, setCustomer]);
+  if (data) setCustomer(data);
 
   return { customer, error, isLoading };
 };

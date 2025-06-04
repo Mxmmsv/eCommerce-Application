@@ -1,5 +1,6 @@
 import type { Address } from '@commercetools/platform-sdk';
 import { SquarePen, Trash } from 'lucide-react';
+import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -26,16 +27,12 @@ function renderAddressContent(address: Address, label: string) {
   const handleDelete = async () => {
     if (!address.id || !customer) return;
 
-    const confirmed = window.confirm('Are you sure you want to delete this address?');
-    if (!confirmed) return;
-
     try {
       const token = tokenCache.get().token;
       await removeAddress(customer, token, address.id);
-      alert('Address deleted');
+      toast.info('Address deleted');
     } catch (err) {
       console.error('Failed to delete address:', err);
-      alert('Could not delete address.');
     }
   };
 
