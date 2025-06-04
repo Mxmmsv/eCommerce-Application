@@ -15,8 +15,12 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useLogout } from '@/feature/auth/login/api/use-logout';
+import { setAuthToLocalStorage } from '@/service/store/local-storage';
 import { useAuthStore } from '@/service/store/use-auth-store';
 import { useCustomerStore } from '@/service/store/use-user-store';
+
+import { tokenCache } from '../api/api-token-store';
+import { signInCustomer } from '../auth/login/api/sign-in-customer';
 
 import { changeCustomerPassword } from './api/update-my-customer';
 
@@ -52,7 +56,14 @@ export default function PasswordCard() {
     try {
       if (!token || !customer) throw new Error('Missing customer or token');
 
-      await changeCustomerPassword(customer.version, currentPassword, password, token);
+      await changeCustomerPassword(customer.version, currentPassword, password, customer.email);
+
+      const response = await signInCustomer(customer.email, password);
+      const newToken = response.body.customer?.id ? tokenCache.get().token : null;
+
+      if (newToken) {
+        setAuthToLocalStorage(newToken, true);
+      }
 
       toast.success('Password updated! Logging out...');
       logout();
@@ -136,7 +147,7 @@ export default function PasswordCard() {
             <Label htmlFor="confirm-new">Confirm new password</Label>
             <Input
               id="confirm-new"
-              type="password"
+              type={isPasswordVisible ? 'text' : 'password'}
               disabled={!isEditing}
               {...register('confirmPassword', {
                 required: 'Please confirm your new password',
