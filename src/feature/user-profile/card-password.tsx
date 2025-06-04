@@ -14,13 +14,8 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useLogout } from '@/feature/auth/login/api/use-logout';
-import { setAuthToLocalStorage } from '@/service/store/local-storage';
 import { useAuthStore } from '@/service/store/use-auth-store';
 import { useCustomerStore } from '@/service/store/use-user-store';
-
-import { tokenCache } from '../api/api-token-store';
-import { signInCustomer } from '../auth/login/api/sign-in-customer';
 
 import { changeCustomerPassword } from './api/update-my-customer';
 
@@ -40,7 +35,6 @@ export default function PasswordCard() {
 
   const customer = useCustomerStore((state) => state.customer);
   let token = useAuthStore((state) => state.token);
-  const logout = useLogout();
 
   const [isEditing, setIsEditing] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -60,17 +54,8 @@ export default function PasswordCard() {
       if (!token || !customer) {
         throw new Error(!token ? 'Missing token' : 'Customer not found');
       }
-
       await changeCustomerPassword(customer.version, currentPassword, password, customer.email);
-
-      const response = await signInCustomer(customer.email, password);
-      const newToken = response.body.customer?.id ? tokenCache.get().token : null;
-
-      if (newToken) {
-        setAuthToLocalStorage(newToken, true);
-      }
-      toast.success('Password updated! Logging out...');
-      logout();
+      toast.success('Password updated!');
     } catch (error) {
       toast.error('Failed to change password');
       console.error(error);
