@@ -1,8 +1,8 @@
 import type { AddressDraft } from '@commercetools/platform-sdk';
 import type { ReactNode } from 'react';
 import { useForm, type UseFormRegister } from 'react-hook-form';
-
 import '@/styles/index.css';
+import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -18,7 +18,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { useAuthStore } from '@/service/store/use-auth-store';
+import { getAuthFromLocalStorage } from '@/service/store/local-storage';
 import { useCustomerStore } from '@/service/store/use-user-store';
 
 import { addAddress } from './utils/customer-address-actions';
@@ -116,11 +116,10 @@ export default function AddAddressDialog({ trigger }: { trigger: ReactNode }) {
   } = useForm<AddressFormData>({ mode: 'onBlur', defaultValues: {}, criteriaMode: 'all' });
 
   const customer = useCustomerStore((state) => state.customer);
-  const token = useAuthStore((state) => state.token);
+  const token = getAuthFromLocalStorage().ACCESS_TOKEN_KEY;
 
   const onSubmit = async (data: AddressFormData) => {
     if (!customer || !token) {
-      alert('User is not authenticated');
       return;
     }
 
@@ -148,10 +147,9 @@ export default function AddAddressDialog({ trigger }: { trigger: ReactNode }) {
         return;
       }
       reset();
-      alert('Address added successfully!');
+      toast.info('Address added successfully!');
     } catch (error) {
       console.error('Add address error:', error);
-      alert(`Failed to add address: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   };
 
