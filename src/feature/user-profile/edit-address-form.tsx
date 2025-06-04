@@ -105,13 +105,15 @@ const CheckboxField = ({ id, label, register }: CheckboxFieldProps) => (
   </div>
 );
 
+const allowedCodes = ['RU', 'RS', 'UZ', 'KZ', 'BY', 'AM'];
+
 export default function AddAddressDialog({ trigger }: { trigger: ReactNode }) {
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<AddressFormData>({ mode: 'onBlur' });
+  } = useForm<AddressFormData>({ mode: 'onBlur', defaultValues: {}, criteriaMode: 'all' });
 
   const customer = useCustomerStore((state) => state.customer);
   const token = useAuthStore((state) => state.token);
@@ -231,10 +233,22 @@ export default function AddAddressDialog({ trigger }: { trigger: ReactNode }) {
               <InputField
                 id="country"
                 label="Country*"
+                type="text"
                 register={register}
-                required="Country is required"
+                required={false}
+                {...register('country', {
+                  required: 'Country is required.',
+                  validate: (value: unknown) => {
+                    if (typeof value !== 'string') return 'Invalid input type';
+                    if (value !== value.toUpperCase()) return 'Country code must be uppercase';
+                    return (
+                      allowedCodes.includes(value.toUpperCase()) ||
+                      'Invalid country code. Allowed country codes are: ' + allowedCodes.join(', ')
+                    );
+                  },
+                })}
                 error={errors.country?.message}
-                placeholder="Enter country"
+                placeholder="RU, RS, UZ, KZ, BY or AM"
               />
               <TextareaField
                 id="streetInfo"
