@@ -39,7 +39,7 @@ export default function PasswordCard() {
   } = useForm<FormData>();
 
   const customer = useCustomerStore((state) => state.customer);
-  const token = useAuthStore((state) => state.token);
+  let token = useAuthStore((state) => state.token);
   const logout = useLogout();
 
   const [isEditing, setIsEditing] = useState(false);
@@ -54,7 +54,12 @@ export default function PasswordCard() {
     }
 
     try {
-      if (!token || !customer) throw new Error('Missing customer or token');
+      if (!token) {
+        token = localStorage.getItem('ACCESS_TOKEN_KEY');
+      }
+      if (!token || !customer) {
+        throw new Error(!token ? 'Missing token' : 'Customer not found');
+      }
 
       await changeCustomerPassword(customer.version, currentPassword, password, customer.email);
 
@@ -64,13 +69,11 @@ export default function PasswordCard() {
       if (newToken) {
         setAuthToLocalStorage(newToken, true);
       }
-
       toast.success('Password updated! Logging out...');
       logout();
     } catch (error) {
       toast.error('Failed to change password');
       console.error(error);
-      reset();
       setIsEditing(false);
     } finally {
       reset();
@@ -93,10 +96,10 @@ export default function PasswordCard() {
         <CardContent className="space-y-2">
           <div className="space-y-1">
             <Label htmlFor="current">Current password</Label>
-            <div className="relative flex items-center">
+            <div className="flex items-center">
               <Input
                 id="current"
-                placeholder="••••••••"
+                placeholder="Enter your current password"
                 type={isPasswordVisible ? 'text' : 'password'}
                 disabled={!isEditing}
                 {...register('currentPassword', { required: 'Current password is required' })}
@@ -104,27 +107,14 @@ export default function PasswordCard() {
               {errors.currentPassword && (
                 <p className="text-sm text-red-500">{errors.currentPassword.message}</p>
               )}
-              <Button
-                type="button"
-                variant="ghost"
-                size="icon"
-                className="absolute top-0 right-0 h-full px-3 py-2"
-                onClick={togglePasswordVisibility}
-              >
-                {isPasswordVisible ? (
-                  <EyeOffIcon className="h-4 w-4" />
-                ) : (
-                  <EyeIcon className="h-4 w-4" />
-                )}
-              </Button>
             </div>
           </div>
 
           <div className="space-y-1">
             <Label htmlFor="new">New password</Label>
-            <div></div>
             <Input
               id="new"
+              placeholder="Enter your new password"
               type={isPasswordVisible ? 'text' : 'password'}
               disabled={!isEditing}
               {...register('password', {
@@ -147,6 +137,7 @@ export default function PasswordCard() {
             <Label htmlFor="confirm-new">Confirm new password</Label>
             <Input
               id="confirm-new"
+              placeholder="Confirm new password"
               type={isPasswordVisible ? 'text' : 'password'}
               disabled={!isEditing}
               {...register('confirmPassword', {
@@ -161,17 +152,26 @@ export default function PasswordCard() {
 
         <CardFooter className="mt-5 justify-end">
           {isEditing ? (
-            <div className="flex gap-4">
-              <Button
-                variant="outline"
-                onClick={() => {
-                  reset(undefined, { keepValues: true });
-                  setIsEditing(false);
-                }}
-              >
-                Cancel
+            <div className="flex w-full items-center justify-between">
+              <Button type="button" variant="ghost" size="icon" onClick={togglePasswordVisibility}>
+                {isPasswordVisible ? (
+                  <EyeOffIcon className="h-4 w-4" />
+                ) : (
+                  <EyeIcon className="h-4 w-4" />
+                )}
               </Button>
-              <Button type="submit">Save Changes</Button>
+              <div className="flex gap-4">
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    reset(undefined, { keepValues: true });
+                    setIsEditing(false);
+                  }}
+                >
+                  Cancel
+                </Button>
+                <Button type="submit">Save Changes</Button>
+              </div>
             </div>
           ) : (
             <Button onClick={() => setIsEditing(true)}>
