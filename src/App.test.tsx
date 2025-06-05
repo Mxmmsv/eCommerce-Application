@@ -11,7 +11,9 @@ describe('App', () => {
     expect(screen.getByRole('heading', { name: /home page/i })).toBeInTheDocument();
 
     await user.click(screen.getByRole('link', { name: /about us/i }));
-    expect(screen.getByRole('heading', { name: /meet our team/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: /Meet Our Yet Another Dream Team/i }),
+    ).toBeInTheDocument();
   });
 
   it('redirects on a not-found-page', () => {
