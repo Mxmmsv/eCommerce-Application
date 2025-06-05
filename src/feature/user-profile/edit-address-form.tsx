@@ -186,7 +186,6 @@ export default function AddAddressDialog({ trigger }: { trigger: ReactNode }) {
       await updateMyCustomerAddresses(customer, token, actions);
       setIsOpen(false);
       reset();
-      console.log('Address added and updated successfully!');
     } catch (error) {
       console.error('Error adding/updating address:', error);
     }
