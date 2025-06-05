@@ -3,7 +3,6 @@ import { SquarePen, Trash } from 'lucide-react';
 import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
 import { tokenCache } from '@/feature/api/api-token-store';
 import { useCustomerStore } from '@/service/store/use-user-store';
 
@@ -98,23 +97,8 @@ export function AllAddressesDisplay({ addresses, label }: AllProps) {
   return (
     <div className="px-5">
       {addresses.map((address, index) => (
-        <div key={address.id ?? index} className="mb-4">
+        <div key={address.id ?? index} className="mb-4 border-b">
           {renderAddressContent(address, `Address №${index + 1}`)}
-
-          <div className="mt-2 flex flex-col gap-2 border-b py-3 text-sm">
-            <label
-              htmlFor="billing"
-              className="flex items-center gap-2 text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            >
-              <Checkbox id="billing" /> Set as default billing address
-            </label>
-            <label
-              htmlFor="shipping"
-              className="flex items-center gap-2 text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            >
-              <Checkbox id="shipping" /> Set as default shipping address
-            </label>
-          </div>
         </div>
       ))}
     </div>
