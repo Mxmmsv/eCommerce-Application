@@ -1,6 +1,9 @@
 import type { Customer, MyCustomerUpdateAction } from '@commercetools/platform-sdk';
 
 import { createApiClientWithToken } from '@/feature/api/api-client-token-flow';
+import { tokenCache } from '@/feature/api/api-token-store';
+import { signInCustomer } from '@/feature/auth/login/api/sign-in-customer';
+import { setAuthToLocalStorage } from '@/service/store/local-storage';
 
 export async function updateMyCustomer(
   customer: Customer,
@@ -49,11 +52,12 @@ export async function changeCustomerPassword(
   version: number,
   currentPassword: string,
   newPassword: string,
-  token: string,
+  email: string,
 ): Promise<Customer> {
+  const token = tokenCache.get().token;
   const apiRoot = createApiClientWithToken(token);
 
-  const response = await apiRoot
+  await apiRoot
     .me()
     .password()
     .post({
@@ -65,5 +69,12 @@ export async function changeCustomerPassword(
     })
     .execute();
 
-  return response.body;
+  const response = await signInCustomer(email, newPassword);
+
+  const newToken = tokenCache.get().token;
+  if (newToken) {
+    setAuthToLocalStorage(newToken, true);
+  }
+
+  return response.body.customer;
 }

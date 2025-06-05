@@ -1,6 +1,15 @@
-import type { AddressDraft } from '@commercetools/platform-sdk';
+import type {
+  AddressDraft,
+  Customer,
+  MyCustomerAddShippingAddressIdAction,
+  MyCustomerAddBillingAddressIdAction,
+  MyCustomerSetDefaultShippingAddressAction,
+  MyCustomerSetDefaultBillingAddressAction,
+  MyCustomerUpdateAction,
+} from '@commercetools/platform-sdk';
 import type { ReactNode } from 'react';
-import { useForm, type UseFormRegister } from 'react-hook-form';
+import { useState } from 'react';
+import { useForm, Controller } from 'react-hook-form';
 
 import '@/styles/index.css';
 
@@ -18,9 +27,10 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { useAuthStore } from '@/service/store/use-auth-store';
+import { getAuthFromLocalStorage } from '@/service/store/local-storage';
 import { useCustomerStore } from '@/service/store/use-user-store';
 
+import { updateMyCustomerAddresses } from './api/update-my-customer-addresses';
 import { addAddress } from './utils/customer-address-actions';
 
 type AddressFormData = {
@@ -43,7 +53,7 @@ type AddressFormData = {
 };
 
 type FieldProps = {
-  register: UseFormRegister<AddressFormData>;
+  register: ReturnType<typeof useForm<AddressFormData>>['register'];
 };
 
 type InputFieldProps = FieldProps & {
@@ -78,13 +88,17 @@ const InputField = ({
   </div>
 );
 
-type TextareaFieldProps = FieldProps & {
+const TextareaField = ({
+  id,
+  label,
+  register,
+  placeholder,
+}: {
   id: keyof AddressFormData;
   label: string;
+  register: FieldProps['register'];
   placeholder?: string;
-};
-
-const TextareaField = ({ id, label, register, placeholder }: TextareaFieldProps) => (
+}) => (
   <div className="col-span-2">
     <Label className="pb-2" htmlFor={id}>
       {label}
@@ -93,38 +107,35 @@ const TextareaField = ({ id, label, register, placeholder }: TextareaFieldProps)
   </div>
 );
 
-type CheckboxFieldProps = FieldProps & {
-  id: keyof AddressFormData;
-  label: string;
-};
-
-const CheckboxField = ({ id, label, register }: CheckboxFieldProps) => (
-  <div className="flex items-center gap-3">
-    <Checkbox id={id} {...register(id)} />
-    <Label htmlFor={id}>{label}</Label>
-  </div>
-);
+const allowedCodes = ['RU', 'RS', 'UZ', 'KZ', 'BY', 'AM'];
 
 export default function AddAddressDialog({ trigger }: { trigger: ReactNode }) {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
     reset,
-  } = useForm<AddressFormData>({ mode: 'onBlur' });
+  } = useForm<AddressFormData>({
+    mode: 'onBlur',
+    defaultValues: {},
+    criteriaMode: 'all',
+  });
+
+  const [isOpen, setIsOpen] = useState(false);
 
   const customer = useCustomerStore((state) => state.customer);
-  const token = useAuthStore((state) => state.token);
+  const token = getAuthFromLocalStorage().ACCESS_TOKEN_KEY;
 
   const onSubmit = async (data: AddressFormData) => {
     if (!customer || !token) {
-      alert('User is not authenticated');
+      console.error('User is not authenticated');
       return;
     }
 
-    const newAddress: AddressDraft = {
-      streetNumber: data.streetNumber,
+    const addressDraft: AddressDraft = {
       streetName: data.streetName,
+      streetNumber: data.streetNumber,
       city: data.city,
       postalCode: data.postalCode,
       country: data.country,
@@ -138,23 +149,50 @@ export default function AddAddressDialog({ trigger }: { trigger: ReactNode }) {
     };
 
     try {
-      const addedCustomer = await addAddress(customer, token, newAddress);
-      const newAddressId = addedCustomer.addresses.at(-1)?.id;
+      const updatedCustomer: Customer = await addAddress(customer, token, addressDraft);
+      const newAddressId: string | undefined = updatedCustomer.addresses.at(-1)?.id;
 
       if (!newAddressId) {
-        console.error('New address ID is undefined, skipping status update.');
+        console.error('New address ID is undefined.');
         return;
       }
+
+      const actions: MyCustomerUpdateAction[] = [];
+
+      if (data.setAsShippingAddress) {
+        actions.push({
+          action: 'addShippingAddressId',
+          addressId: newAddressId,
+        } as MyCustomerAddShippingAddressIdAction);
+      }
+      if (data.setAsBillingAddress) {
+        actions.push({
+          action: 'addBillingAddressId',
+          addressId: newAddressId,
+        } as MyCustomerAddBillingAddressIdAction);
+      }
+      if (data.setAsDefaultShippingAddress) {
+        actions.push({
+          action: 'setDefaultShippingAddress',
+          addressId: newAddressId,
+        } as MyCustomerSetDefaultShippingAddressAction);
+      }
+      if (data.setAsDefaultBillingAddress) {
+        actions.push({
+          action: 'setDefaultBillingAddress',
+          addressId: newAddressId,
+        } as MyCustomerSetDefaultBillingAddressAction);
+      }
+      await updateMyCustomerAddresses(customer, token, actions);
+      setIsOpen(false);
       reset();
-      alert('Address added successfully!');
     } catch (error) {
-      console.error('Add address error:', error);
-      alert(`Failed to add address: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      console.error('Error adding/updating address:', error);
     }
   };
 
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       {trigger}
       <DialogContent className="flex max-h-[95vh] max-w-[70vw] flex-col overflow-y-auto">
         <DialogHeader>
@@ -231,10 +269,22 @@ export default function AddAddressDialog({ trigger }: { trigger: ReactNode }) {
               <InputField
                 id="country"
                 label="Country*"
+                type="text"
                 register={register}
-                required="Country is required"
+                required={false}
+                {...register('country', {
+                  required: 'Country is required.',
+                  validate: (value: unknown) => {
+                    if (typeof value !== 'string') return 'Invalid input type';
+                    if (value !== value.toUpperCase()) return 'Country code must be uppercase';
+                    return (
+                      allowedCodes.includes(value.toUpperCase()) ||
+                      'Invalid country code. Allowed country codes are: ' + allowedCodes.join(', ')
+                    );
+                  },
+                })}
                 error={errors.country?.message}
-                placeholder="Enter country"
+                placeholder="RU, RS, UZ, KZ, BY or AM"
               />
               <TextareaField
                 id="streetInfo"
@@ -252,25 +302,65 @@ export default function AddAddressDialog({ trigger }: { trigger: ReactNode }) {
 
             <div className="space-y-3 pt-4">
               <p className="italic">You can choose a type for your new address</p>
-              <CheckboxField
-                id="setAsShippingAddress"
-                label="Set as shipping address"
-                register={register}
+
+              <Controller
+                control={control}
+                name="setAsShippingAddress"
+                render={({ field }) => (
+                  <div className="flex items-center gap-3">
+                    <Checkbox
+                      id="shipping"
+                      checked={field.value}
+                      onCheckedChange={(val) => field.onChange(val)}
+                    />
+                    <Label htmlFor="shipping">Set as shipping address</Label>
+                  </div>
+                )}
               />
-              <CheckboxField
-                id="setAsBillingAddress"
-                label="Set as billing address"
-                register={register}
+
+              <Controller
+                control={control}
+                name="setAsBillingAddress"
+                render={({ field }) => (
+                  <div className="flex items-center gap-3">
+                    <Checkbox
+                      id="billing"
+                      checked={field.value}
+                      onCheckedChange={(val) => field.onChange(val)}
+                    />
+                    <Label htmlFor="billing">Set as billing address</Label>
+                  </div>
+                )}
               />
-              <CheckboxField
-                id="setAsDefaultShippingAddress"
-                label="Set as default shipping address"
-                register={register}
+
+              <Controller
+                control={control}
+                name="setAsDefaultShippingAddress"
+                render={({ field }) => (
+                  <div className="flex items-center gap-3">
+                    <Checkbox
+                      id="defaultShipping"
+                      checked={field.value}
+                      onCheckedChange={(val) => field.onChange(val)}
+                    />
+                    <Label htmlFor="defaultShipping">Set as default shipping address</Label>
+                  </div>
+                )}
               />
-              <CheckboxField
-                id="setAsDefaultBillingAddress"
-                label="Set as default billing address"
-                register={register}
+
+              <Controller
+                control={control}
+                name="setAsDefaultBillingAddress"
+                render={({ field }) => (
+                  <div className="flex items-center gap-3">
+                    <Checkbox
+                      id="defaultBilling"
+                      checked={field.value}
+                      onCheckedChange={(val) => field.onChange(val)}
+                    />
+                    <Label htmlFor="defaultBilling">Set as default billing address</Label>
+                  </div>
+                )}
               />
             </div>
           </div>

@@ -5,10 +5,15 @@ import { useCustomerStore } from '@/service/store/use-user-store';
 
 export async function updateMyCustomerAddresses(
   customer: Customer,
-  token: string,
+  token: string | null,
   actions: MyCustomerUpdateAction[],
 ): Promise<Customer> {
-  if (customer === undefined) throw new Error('Customer not defined');
+  if (!customer) throw new Error('Customer not defined');
+  if (!token) {
+    const cachedToken = localStorage.getItem('ACCESS_TOKEN_KEY');
+    if (!cachedToken) throw new Error('User token not found in cache');
+    token = cachedToken;
+  }
   if (actions.length === 0) throw new Error('No update actions provided');
 
   const apiRoot = createApiClientWithToken(token);
@@ -28,4 +33,30 @@ export async function updateMyCustomerAddresses(
   useCustomerStore.setState({ customer: response.body });
 
   return response.body;
+}
+
+export async function removeMyCustomerAddress(
+  customer: Customer,
+  token: string,
+  addressId: string,
+): Promise<Customer> {
+  const apiRoot = createApiClientWithToken(token);
+  const response = await apiRoot
+    .me()
+    .post({
+      body: {
+        version: customer.version,
+        actions: [
+          {
+            action: 'removeAddress',
+            addressId,
+          },
+        ],
+      },
+    })
+    .execute();
+
+  const updatedCustomer = response.body;
+  useCustomerStore.getState().setCustomer(updatedCustomer);
+  return updatedCustomer;
 }

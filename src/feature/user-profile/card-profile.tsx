@@ -40,7 +40,6 @@ export default function ProfileCard() {
       toast.success('Profile updated successfully!');
       setIsEditing(false);
     } catch (error) {
-      toast.error('Failed to update profile');
       console.error(error);
     }
   };

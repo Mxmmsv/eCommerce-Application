@@ -1,4 +1,4 @@
-import { Key } from 'lucide-react';
+import { EyeIcon, EyeOffIcon, Key } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
@@ -14,7 +14,6 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useLogout } from '@/feature/auth/login/api/use-logout';
 import { useAuthStore } from '@/service/store/use-auth-store';
 import { useCustomerStore } from '@/service/store/use-user-store';
 
@@ -35,10 +34,10 @@ export default function PasswordCard() {
   } = useForm<FormData>();
 
   const customer = useCustomerStore((state) => state.customer);
-  const token = useAuthStore((state) => state.token);
-  const logout = useLogout();
+  let token = useAuthStore((state) => state.token);
 
   const [isEditing, setIsEditing] = useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const onSubmit = async (data: FormData) => {
     const { currentPassword, password, confirmPassword } = data;
@@ -49,50 +48,57 @@ export default function PasswordCard() {
     }
 
     try {
-      if (!token || !customer) throw new Error('Missing customer or token');
-
-      await changeCustomerPassword(customer.version, currentPassword, password, token);
-
-      toast.success('Password updated! Logging out...');
-      logout();
+      if (!token) {
+        token = localStorage.getItem('ACCESS_TOKEN_KEY');
+      }
+      if (!token || !customer) {
+        throw new Error(!token ? 'Missing token' : 'Customer not found');
+      }
+      await changeCustomerPassword(customer.version, currentPassword, password, customer.email);
+      toast.success('Password updated!');
     } catch (error) {
       toast.error('Failed to change password');
       console.error(error);
-      reset();
       setIsEditing(false);
     } finally {
       reset();
     }
   };
 
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
+
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Security</CardTitle>
-        <CardDescription>
-          Change your password here. After saving, you will be logged out.
-        </CardDescription>
+        <CardTitle>Password</CardTitle>
+        <CardDescription>Change your password here.</CardDescription>
       </CardHeader>
       <form onSubmit={(e) => void handleSubmit(onSubmit)(e)}>
         <CardContent className="space-y-2">
           <div className="space-y-1">
             <Label htmlFor="current">Current password</Label>
-            <Input
-              id="current"
-              type="password"
-              disabled={!isEditing}
-              {...register('currentPassword', { required: 'Current password is required' })}
-            />
-            {errors.currentPassword && (
-              <p className="text-sm text-red-500">{errors.currentPassword.message}</p>
-            )}
+            <div className="flex items-center">
+              <Input
+                id="current"
+                placeholder="Enter your current password"
+                type={isPasswordVisible ? 'text' : 'password'}
+                disabled={!isEditing}
+                {...register('currentPassword', { required: 'Current password is required' })}
+              />
+              {errors.currentPassword && (
+                <p className="text-sm text-red-500">{errors.currentPassword.message}</p>
+              )}
+            </div>
           </div>
 
           <div className="space-y-1">
             <Label htmlFor="new">New password</Label>
             <Input
               id="new"
-              type="password"
+              placeholder="Enter your new password"
+              type={isPasswordVisible ? 'text' : 'password'}
               disabled={!isEditing}
               {...register('password', {
                 required: 'New password is required',
@@ -114,7 +120,8 @@ export default function PasswordCard() {
             <Label htmlFor="confirm-new">Confirm new password</Label>
             <Input
               id="confirm-new"
-              type="password"
+              placeholder="Confirm new password"
+              type={isPasswordVisible ? 'text' : 'password'}
               disabled={!isEditing}
               {...register('confirmPassword', {
                 required: 'Please confirm your new password',
@@ -128,17 +135,31 @@ export default function PasswordCard() {
 
         <CardFooter className="mt-5 justify-end">
           {isEditing ? (
-            <div className="flex gap-4">
+            <div className="flex w-full items-center justify-between">
               <Button
-                variant="outline"
-                onClick={() => {
-                  reset(undefined, { keepValues: true });
-                  setIsEditing(false);
-                }}
+                type="button"
+                variant="secondary"
+                size="icon"
+                onClick={togglePasswordVisibility}
               >
-                Cancel
+                {isPasswordVisible ? (
+                  <EyeOffIcon className="h-4 w-4" />
+                ) : (
+                  <EyeIcon className="h-4 w-4" />
+                )}
               </Button>
-              <Button type="submit">Save Changes</Button>
+              <div className="flex gap-4">
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    reset(undefined, { keepValues: true });
+                    setIsEditing(false);
+                  }}
+                >
+                  Cancel
+                </Button>
+                <Button type="submit">Save Changes</Button>
+              </div>
             </div>
           ) : (
             <Button onClick={() => setIsEditing(true)}>

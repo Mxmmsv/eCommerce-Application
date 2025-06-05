@@ -1,9 +1,12 @@
 import type { Address } from '@commercetools/platform-sdk';
 import { SquarePen, Trash } from 'lucide-react';
+import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
+import { tokenCache } from '@/feature/api/api-token-store';
+import { useCustomerStore } from '@/service/store/use-user-store';
 
+import { removeAddress } from './customer-address-actions';
 import { getAddresses } from './get-address';
 
 type DefaultProps = {
@@ -18,6 +21,20 @@ type AllProps = {
 };
 
 function renderAddressContent(address: Address, label: string) {
+  const customer = useCustomerStore.getState().customer;
+
+  const handleDelete = async () => {
+    if (!address.id || !customer) return;
+
+    try {
+      const token = tokenCache.get().token;
+      await removeAddress(customer, token, address.id);
+      toast.info('Address deleted');
+    } catch (err) {
+      console.error('Failed to delete address:', err);
+    }
+  };
+
   return (
     <div className="py-3 pb-2">
       <div>
@@ -53,7 +70,13 @@ function renderAddressContent(address: Address, label: string) {
         <Button variant="outline" size="icon">
           <SquarePen size={20} strokeWidth={1.25} />
         </Button>
-        <Button variant="outline" size="icon">
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={() => {
+            void handleDelete();
+          }}
+        >
           <Trash size={20} strokeWidth={1.25} />
         </Button>
       </div>
@@ -74,23 +97,8 @@ export function AllAddressesDisplay({ addresses, label }: AllProps) {
   return (
     <div className="px-5">
       {addresses.map((address, index) => (
-        <div key={address.id ?? index} className="mb-4">
+        <div key={address.id ?? index} className="mb-4 border-b">
           {renderAddressContent(address, `Address №${index + 1}`)}
-
-          <div className="mt-2 flex flex-col gap-2 border-b py-3 text-sm">
-            <label
-              htmlFor="billing"
-              className="flex items-center gap-2 text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            >
-              <Checkbox id="billing" /> Set as default billing address
-            </label>
-            <label
-              htmlFor="shipping"
-              className="flex items-center gap-2 text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            >
-              <Checkbox id="shipping" /> Set as default shipping address
-            </label>
-          </div>
         </div>
       ))}
     </div>
