@@ -72,10 +72,8 @@ export default function PasswordCard() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Security</CardTitle>
-        <CardDescription>
-          Change your password here. After saving, you will be logged out.
-        </CardDescription>
+        <CardTitle>Password</CardTitle>
+        <CardDescription>Change your password here.</CardDescription>
       </CardHeader>
       <form onSubmit={(e) => void handleSubmit(onSubmit)(e)}>
         <CardContent className="space-y-2">
@@ -138,7 +136,12 @@ export default function PasswordCard() {
         <CardFooter className="mt-5 justify-end">
           {isEditing ? (
             <div className="flex w-full items-center justify-between">
-              <Button type="button" variant="ghost" size="icon" onClick={togglePasswordVisibility}>
+              <Button
+                type="button"
+                variant="secondary"
+                size="icon"
+                onClick={togglePasswordVisibility}
+              >
                 {isPasswordVisible ? (
                   <EyeOffIcon className="h-4 w-4" />
                 ) : (
