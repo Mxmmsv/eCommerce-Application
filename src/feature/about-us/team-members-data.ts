@@ -1,4 +1,6 @@
-const teamMembersData = [
+import type { teamMembersDataProp } from './types';
+
+const teamMembersData: teamMembersDataProp[] = [
   {
     name: 'Maksim Moiseev',
     title: 'Teamlead, Frontend developer',
