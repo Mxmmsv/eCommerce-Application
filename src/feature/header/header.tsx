@@ -13,9 +13,10 @@ export function Header() {
       <header className="bg-background grid-cols-[1fr_125px_1fr] place-items-center py-4 max-lg:flex max-lg:items-center max-lg:justify-between max-lg:p-4 lg:grid">
         <CustomNavigationMenu />
 
-        <div className="flex w-24 cursor-pointer items-center justify-center">
+        <div className="flex w-24 cursor-pointer flex-col items-center justify-center">
           <NavLink to="/">
             <img src="/logo.svg" alt="logo" className="flex h-auto w-full rounded-2xl bg-white" />
+            <span className="text-lg">Poster store</span>
           </NavLink>
         </div>
 
