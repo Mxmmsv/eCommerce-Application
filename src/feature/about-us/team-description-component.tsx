@@ -22,7 +22,7 @@ const TeamDescription = () => {
         {teamMembers.map((member) => (
           <div key={member.name}>
             <img
-              src={member.imageUrl}
+              src={member.url.imageMember}
               alt={member.name}
               className="bg-secondary aspect-square w-full rounded-lg object-cover"
               width={600}

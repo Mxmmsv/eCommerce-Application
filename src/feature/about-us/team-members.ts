@@ -3,8 +3,8 @@ const teamMembers = [
     name: 'Maksim Moiseev',
     title: 'Teamlead, Frontend developer',
     bio: 'fixed bugs and implemented features',
-    imageUrl: '/member-photo/max.webp',
     url: {
+      imageMember: '/member-photo/max.webp',
       gitHub: 'https://github.com/Mxmmsv',
       linkedIn: 'https://www.linkedin.com/in/moiseevmaxim/',
     },
@@ -13,8 +13,8 @@ const teamMembers = [
     name: 'Ekaterina Dmitrenko',
     title: 'Frontend developer',
     bio: 'fixed bugs and implemented features',
-    imageUrl: '/member-photo/ekaterina.webp',
     url: {
+      imageMember: '/member-photo/ekaterina.webp',
       gitHub: 'https://github.com/ek-ole',
       linkedIn: '',
     },
@@ -23,8 +23,8 @@ const teamMembers = [
     name: 'Alla Tsaiukova',
     title: 'Frontend developer',
     bio: 'fixed bugs and implemented features',
-    imageUrl: '/member-photo/alya.webp',
     url: {
+      imageMember: '/member-photo/alya.webp',
       gitHub: 'https://github.com/AlyaEngineer',
       linkedIn: '',
     },
