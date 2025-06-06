@@ -14,7 +14,6 @@ import NotFound from '@/pages/not-found-page';
 import ProductDetail from '@/pages/product-detail-page';
 import UserProfile from '@/pages/profile-user-page';
 import Registration from '@/pages/registration-page';
-import Wishlist from '@/pages/wishlist-page';
 
 import { ScrollToTop } from './service/scroll-to-top';
 
@@ -33,7 +32,6 @@ function App() {
             <Route path="/catalog/product/:id" element={<ProductDetail />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/about_us" element={<AboutUs />} />
-            <Route path="/wishlist" element={<Wishlist />} />
             <Route path="/login" element={<Login />} />
             <Route path="/registration" element={<Registration />} />
             <Route

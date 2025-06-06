@@ -1,4 +1,4 @@
-import { Heart, ShoppingCart } from 'lucide-react';
+import { ShoppingCart } from 'lucide-react';
 import { NavLink } from 'react-router';
 
 import BurgerMenu from './burger-menu';
@@ -27,14 +27,6 @@ export function Header() {
           <ul className="flex flex-row items-center lg:mr-4">
             <li>
               <ModeToggle />
-            </li>
-            <li className="flex">
-              <NavLink
-                to="/wishlist"
-                className="hover:text-chart-3 p-3 transition-colors duration-300 lg:p-2"
-              >
-                <Heart strokeWidth={1.5} size={32} className="max-sm:size-6" />
-              </NavLink>
             </li>
             <li className="flex">
               <ProfileDropdownMenu />
