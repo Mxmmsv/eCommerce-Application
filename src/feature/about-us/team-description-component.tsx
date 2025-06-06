@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 
 import teamMembers from './team-members-data';
 
-const TeamDescription = () => {
+function TeamDescription() {
   return (
     <div className="mx-auto flex max-w-screen-xl flex-col justify-center gap-16 px-6 py-8 sm:py-12 lg:px-8">
       <div className="mx-auto max-w-2xl text-center">
@@ -80,6 +80,6 @@ const TeamDescription = () => {
       </div>
     </div>
   );
-};
+}
 
 export default TeamDescription;
