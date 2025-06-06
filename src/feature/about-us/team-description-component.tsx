@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 
 import { Button } from '@/components/ui/button';
 
-import teamMembers from './team-members-data';
+import teamMembersData from './team-members-data';
 
 function TeamDescription() {
   return (
@@ -43,7 +43,7 @@ function TeamDescription() {
       </div>
 
       <div className="grid w-full grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 md:grid-cols-3">
-        {teamMembers.map((member) => (
+        {teamMembersData.map((member) => (
           <div key={member.name}>
             <img
               src={member.url.imageMember}
