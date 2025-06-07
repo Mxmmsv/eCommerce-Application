@@ -2,17 +2,12 @@ import { Github, Linkedin } from 'lucide-react';
 import { Link } from 'react-router';
 
 import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
 
 import type { teamMembersDataProp } from './types';
 
-function TeamMember({ member, index }: { member: teamMembersDataProp; index: number }) {
-  const isEven = index % 2 === 0;
-
+function TeamMember({ member }: { member: teamMembersDataProp }) {
   return (
-    <div
-      className={cn('flex flex-col gap-8 md:flex-row md:gap-12', !isEven && 'md:flex-row-reverse')}
-    >
+    <div className={'flex flex-col gap-8 md:flex-row md:gap-12 odd:md:flex-row-reverse'}>
       <div className="w-full md:w-1/2">
         <img
           src={member.url.imageMember}
@@ -38,7 +33,7 @@ function TeamMember({ member, index }: { member: teamMembersDataProp; index: num
             size="icon"
             asChild
           >
-            <Link to={member.url.gitHub} target="_blank">
+            <Link to={member.url.gitHub} target="_blank" className="">
               <Github className="stroke-muted-foreground" />
             </Link>
           </Button>

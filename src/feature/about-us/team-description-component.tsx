@@ -43,8 +43,8 @@ function TeamDescription() {
       </div>
 
       <div className="grid w-full grid-cols-1 gap-y-12">
-        {teamMembersData.map((member, index) => (
-          <TeamMember key={member.name} member={member} index={index} />
+        {teamMembersData.map((member) => (
+          <TeamMember key={member.name} member={member} />
         ))}
       </div>
     </div>
