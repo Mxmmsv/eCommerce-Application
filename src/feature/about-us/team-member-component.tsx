@@ -2,24 +2,27 @@ import { Github, Linkedin } from 'lucide-react';
 import { Link } from 'react-router';
 
 import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 import type { teamMembersDataProp } from './types';
 
-function TeamMember({ member }: { member: teamMembersDataProp }) {
+function TeamMember({ member, index }: { member: teamMembersDataProp; index: number }) {
+  const isEven = index % 2 === 0;
+
   return (
-    <div key={member.name} className="grid grid-cols-1 gap-12 md:grid-cols-2">
-      <div>
+    <div
+      className={cn('flex flex-col gap-8 md:flex-row md:gap-12', !isEven && 'md:flex-row-reverse')}
+    >
+      <div className="w-full md:w-1/2">
         <img
           src={member.url.imageMember}
           alt={member.name}
-          className="bg-secondary aspect-square rounded-lg object-cover"
-          width={600}
-          height={600}
+          className="bg-secondary aspect-square h-full max-h-[600px] w-full rounded-lg object-cover"
           loading="lazy"
           decoding="async"
         />
       </div>
-      <div className="flex flex-col items-center justify-center">
+      <div className="flex w-full flex-col items-center justify-center text-center md:w-1/2 md:text-left">
         <h3 className="mt-4 text-lg font-semibold">{member.name}</h3>
         <p className="text-muted-foreground text-sm">{member.title}</p>
         <p className="mt-3">{member.bio}</p>
