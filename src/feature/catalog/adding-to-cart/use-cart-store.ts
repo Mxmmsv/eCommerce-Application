@@ -29,11 +29,6 @@ export const useCartStore = create<CartStore>()(
     }),
     {
       name: 'CART-STORAGE',
-      partialize: (state) => ({
-        cartId: state.cartId,
-        anonymousId: state.anonymousId,
-        totalQuantity: state.totalQuantity,
-      }),
     },
   ),
 );
