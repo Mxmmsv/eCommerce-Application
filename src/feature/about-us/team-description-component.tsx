@@ -15,7 +15,7 @@ function TeamDescription() {
 
       <div>
         <div className="grid grid-cols-1 items-center justify-items-center md:grid-cols-2">
-          <p>
+          <p className="text-balance">
             Welcome to our eCommerce application, created as part of the final project at RS School!
             Our team of three frontend developers worked closely together to build a modern,
             responsive, and performant web application using cutting-edge technologies. We used
@@ -42,7 +42,7 @@ function TeamDescription() {
         </div>
       </div>
 
-      <div className="grid w-full grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 md:grid-cols-3">
+      <div className="grid w-full grid-cols-1 gap-y-12">
         {teamMembersData.map((member) => (
           <TeamMember key={member.name} member={member} />
         ))}
