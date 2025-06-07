@@ -3,16 +3,16 @@ import type { teamMembersDataProp } from './types';
 const teamMembersData: teamMembersDataProp[] = [
   {
     name: 'Maksim Moiseev',
-    title: 'Project teamlead, Frontend developer',
-    bio: `A proactive developer with a strong technical background and organizational skills.
-          Acted as a team lead, responsible for the technical architecture and work processes of the team.
-          Feels comfortable both on the frontend and on the backend.`,
+    title: 'Project Team Lead, Frontend Developer',
+    bio: `A developer with a strong technical background and solid organizational skills.
+          Served as the team lead, responsible for the project's technical architecture and development processes.
+          Comfortable working on both frontend and backend.`,
     contribution: [
-      'Configured the Scrum process, sprints and Jira Task Board',
-      'Implemented authorization (login auth)',
-      'Developed a product preview module',
-      'Configured CI/CD, ensuring automatic build and deployment',
-      'Monitored the technical integrity of the project and helped the team solve complex problems',
+      'Configured the Scrum process, sprints, and Jira task board',
+      'Implemented login authentication',
+      'Developed the product preview module',
+      'Set up CI/CD pipelines for automatic builds and deployments',
+      'Ensured technical integrity across the project and helped solve complex team challenges',
     ],
     url: {
       imageMember: '/member-photo/max.webp',
@@ -22,15 +22,14 @@ const teamMembersData: teamMembersDataProp[] = [
   },
   {
     name: 'Ekaterina Dmitrenko',
-    title: 'Frontend developer, Responsible for project infrastructure and UX',
-    bio: `developer who is not afraid to take on important starting tasks.
-          It was she who laid the technical foundation of the project and provided a stable
-          environment for the entire team.`,
+    title: 'Frontend Developer, Project Infrastructure and UX',
+    bio: `A developer unafraid to tackle critical foundational tasks.
+          She established the project's technical foundation and ensured a stable environment for the entire team.`,
     contribution: [
       'Set up the project environment: Vite, React, TypeScript, Vitest, Valibot, ESLint',
       'Developed the catalog page',
-      'Provided a structured and scalable architecture of components',
-      'Worked on UX, making the interface convenient and intuitive for users',
+      'Provided a structured and scalable component architecture',
+      'Improved UX to make the interface clear and intuitive for users',
     ],
     url: {
       imageMember: '/member-photo/ekaterina.webp',
@@ -40,15 +39,14 @@ const teamMembersData: teamMembersDataProp[] = [
   },
   {
     name: 'Alla Tsaiukova',
-    title: 'Frontend developer, API Integration and UI Specialist',
-    bio: `developer with a focus on integrating external services and creating interfaces.
-          In the project, she was responsible for interacting with CommerceTools and developing key
-          interface elements.`,
+    title: 'Frontend Developer, API Integration and UI Specialist',
+    bio: `A developer focused on integrating external services and creating user interfaces.
+          In this project, she was responsible for working with the CommerceTools SDK and building key UI components.`,
     contribution: [
-      'Configured and integrated CommerceTools SDK',
-      'Implemented CommerceTools admin panel',
-      'Developed website header and profile page',
-      'Ensured correct data processing between front and backend',
+      'Configured and integrated the CommerceTools SDK',
+      'Implemented the CommerceTools admin panel',
+      'Developed the website header and profile page',
+      'Handled data processing between frontend and backend effectively',
     ],
     url: {
       imageMember: '/member-photo/alya.webp',
