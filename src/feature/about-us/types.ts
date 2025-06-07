@@ -1,4 +1,4 @@
-type teamMembersDataProp = {
+type TeamMembersDataProp = {
   name: string;
   title: string;
   bio: string;
@@ -10,4 +10,4 @@ type teamMembersDataProp = {
   };
 };
 
-export type { teamMembersDataProp };
+export type { TeamMembersDataProp };

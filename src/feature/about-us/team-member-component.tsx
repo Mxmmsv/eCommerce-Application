@@ -3,9 +3,9 @@ import { Link } from 'react-router';
 
 import { Button } from '@/components/ui/button';
 
-import type { teamMembersDataProp } from './types';
+import type { TeamMembersDataProp } from './types';
 
-function TeamMember({ member }: { member: teamMembersDataProp }) {
+function TeamMember({ member }: { member: TeamMembersDataProp }) {
   return (
     <div className={'flex flex-col gap-8 md:flex-row md:gap-12 odd:md:flex-row-reverse'}>
       <div className="w-full md:w-1/2">
