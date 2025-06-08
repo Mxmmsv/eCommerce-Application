@@ -142,6 +142,9 @@ export default function CartPage() {
                         src={item.image}
                         alt={item.name}
                         className="h-full w-full object-cover md:w-32"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = '/placeholder-product.webp';
+                        }}
                       />
                     </div>
 
@@ -157,8 +160,8 @@ export default function CartPage() {
                         <Button
                           variant="ghost"
                           size="icon"
-                          onClick={() =>
-                            removeItem()
+                          onClick={
+                            () => removeItem()
                             // item.id
                           }
                         >
@@ -171,8 +174,8 @@ export default function CartPage() {
                           <Button
                             variant="outline"
                             size="icon"
-                            onClick={() =>
-                              updateQuantity()
+                            onClick={
+                              () => updateQuantity()
                               // item.id, -1
                             }
                           >
@@ -182,8 +185,8 @@ export default function CartPage() {
                           <Button
                             variant="outline"
                             size="icon"
-                            onClick={() =>
-                              updateQuantity()
+                            onClick={
+                              () => updateQuantity()
                               // item.id, 1
                             }
                           >
