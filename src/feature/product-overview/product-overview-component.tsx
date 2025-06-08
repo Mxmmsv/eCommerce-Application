@@ -91,7 +91,7 @@ export default function ProductOverview({ productId }: { productId: string }) {
               onClick={() => {
                 void handleAddToCart();
               }}
-              disabled={isAdding}
+              disabled={isAdding || isInCart}
             >
               {isAdding ? 'Adding...' : isInCart ? 'In Cart' : 'Add to Cart'}
             </Button>
