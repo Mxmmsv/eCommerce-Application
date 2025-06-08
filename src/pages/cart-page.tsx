@@ -13,25 +13,8 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Spinner } from '@/components/ui/spiner';
+import type { CartItem, ShippingMethod } from '@/feature/cart/types';
 import { useCartStore } from '@/service/store/use-cart-store';
-
-type CartItem = {
-  id: string;
-  name: string;
-  price: number;
-  originalPrice?: number;
-  quantity: number;
-  stock: number;
-  image: string;
-};
-
-type ShippingMethod = {
-  id: string;
-  name: string;
-  price: number;
-  estimatedDays: string;
-  description: string;
-};
 
 export default function CartPage() {
   const { cart, isLoading, error, fetchCart } = useCartStore();
