@@ -35,15 +35,20 @@ export default function CartPage() {
   if (!cart?.lineItems.length) return <div>Empty cart</div>;
 
   const items: Cart[] =
-    cart.lineItems.map((item) => ({
-      id: item.id,
-      name: item.name['en-GB'] || 'No name',
-      price: item.price?.value?.centAmount ? item.price.value.centAmount / 100 : 0,
-      originalPrice: item.price?.discounted?.value ? item.price.value.centAmount / 100 : undefined,
-      quantity: item.quantity,
-      stock: item.variant?.availability?.availableQuantity || 0,
-      image: item.variant.images?.[0]?.url || '/placeholder-product.webp',
-    })) || [];
+    cart.lineItems.map((item) => {
+      const priceValue = item.price?.value?.centAmount || 0;
+      const discountedValue = item.price?.discounted?.value?.centAmount;
+
+      return {
+        id: item.id,
+        name: item.name['en-GB'] || 'No name',
+        price: discountedValue ? discountedValue / 100 : priceValue / 100,
+        originalPrice: discountedValue ? priceValue / 100 : undefined,
+        quantity: item.quantity,
+        stock: item.variant?.availability?.availableQuantity || 0,
+        image: item.variant.images?.[0]?.url || '/placeholder-product.webp',
+      };
+    }) || [];
 
   const shippingMethods: ShippingMethod[] = [
     {
