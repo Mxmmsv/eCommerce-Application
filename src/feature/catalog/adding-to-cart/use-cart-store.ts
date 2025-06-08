@@ -9,11 +9,12 @@ type CartStore = {
   totalQuantity: number;
   setCart: (cart: Cart) => void;
   clearCart: () => void;
+  isInCart: (productId: string) => boolean;
 };
 
 export const useCartStore = create<CartStore>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       cartId: null,
       anonymousId: null,
       cart: null,
@@ -26,6 +27,8 @@ export const useCartStore = create<CartStore>()(
           totalQuantity: cart.lineItems.reduce((sum, item) => sum + item.quantity, 0),
         }),
       clearCart: () => set({ cartId: null, cart: null, totalQuantity: 0 }),
+      isInCart: (productId: string) =>
+        get().cart?.lineItems?.some((item) => item.productId === productId) ?? false,
     }),
     {
       name: 'CART-STORAGE',
