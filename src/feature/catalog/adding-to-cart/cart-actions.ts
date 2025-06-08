@@ -14,43 +14,90 @@ export async function addToCart(productId: string, isAuthenticated: boolean, tok
   try {
     let cart = null;
 
-    if (!cartId) {
-      const response = await resolvedApiClient
+    if (isAuthenticated) {
+      const response = await resolvedApiClient.me().carts().get().execute();
+
+      const meCarts = response.body.results;
+
+      if (meCarts.length === 0) {
+        const createResponse = await resolvedApiClient
+          .me()
+          .carts()
+          .post({
+            body: {
+              currency: 'EUR',
+            },
+          })
+          .execute();
+        cart = createResponse.body;
+        setCart(cart);
+      } else {
+        cart = meCarts[0];
+        setCart(cart);
+      }
+
+      const updatedCartResponse = await resolvedApiClient
+        .me()
         .carts()
+        .withId({ ID: cart.id })
         .post({
           body: {
-            currency: 'EUR',
+            version: cart.version,
+            actions: [
+              {
+                action: 'addLineItem',
+                productId,
+                quantity: 1,
+              },
+            ],
           },
         })
         .execute();
-      cart = response.body;
-      setCart(cart);
+      setCart(updatedCartResponse.body);
+      toast.info('Product added to cart successfully!');
+
+      return updatedCartResponse.body;
     } else {
-      const response = await resolvedApiClient.carts().withId({ ID: cartId }).get().execute();
-      cart = response.body;
-    }
-
-    const updatedCartResponse = await resolvedApiClient
-      .carts()
-      .withId({ ID: cart.id })
-      .post({
-        body: {
-          version: cart.version,
-          actions: [
-            {
-              action: 'addLineItem',
-              productId,
-              quantity: 1,
+      if (!cartId) {
+        const response = await resolvedApiClient
+          .carts()
+          .post({
+            body: {
+              currency: 'EUR',
             },
-          ],
-        },
-      })
-      .execute();
+          })
+          .execute();
+        cart = response.body;
+        setCart(cart);
+      } else {
+        const response = await resolvedApiClient.carts().withId({ ID: cartId }).get().execute();
+        cart = response.body;
+      }
 
-    setCart(updatedCartResponse.body);
-    toast.info('Product added to cart successfully!');
-    return updatedCartResponse.body;
+      const updatedCartResponse = await resolvedApiClient
+        .carts()
+        .withId({ ID: cart.id })
+        .post({
+          body: {
+            version: cart.version,
+            actions: [
+              {
+                action: 'addLineItem',
+                productId,
+                quantity: 1,
+              },
+            ],
+          },
+        })
+        .execute();
+
+      setCart(updatedCartResponse.body);
+      toast.info('Product added to cart successfully!');
+
+      return updatedCartResponse.body;
+    }
   } catch (error) {
     console.error('Failed to add to cart', error);
+    toast.error('Failed to add product to cart.');
   }
 }
