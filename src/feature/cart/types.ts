@@ -1,4 +1,6 @@
-export type CartItem = {
+import type { LineItem } from '@commercetools/platform-sdk';
+
+export type Cart = {
   id: string;
   name: string;
   price: number;
@@ -8,6 +10,10 @@ export type CartItem = {
   image: string;
 };
 
+export type CartResponse = {
+  lineItems: LineItem[];
+};
+
 export type ShippingMethod = {
   id: string;
   name: string;
@@ -15,3 +21,5 @@ export type ShippingMethod = {
   estimatedDays: string;
   description: string;
 };
+
+export type ShippingMethodId = string;
