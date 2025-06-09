@@ -15,7 +15,6 @@ function TeamDescription() {
           meets personality — and every pixel was crafted with care.
         </p>
       </div>
-
       <div>
         <div className="grid grid-cols-1 items-center justify-items-center md:grid-cols-2">
           <div className="flex flex-col gap-4 text-justify text-balance md:text-left">
