@@ -7,7 +7,7 @@ import type { TeamMember } from './types';
 
 function TeamMember({ member }: { member: TeamMember }) {
   return (
-    <div className={'flex flex-col gap-8 md:flex-row md:gap-12 odd:md:flex-row-reverse'}>
+    <div className="imag flex flex-col gap-8 md:flex-row md:gap-12 odd:md:flex-row-reverse">
       <div className="w-full md:w-1/2">
         <img
           src={member.url.imageMember}
