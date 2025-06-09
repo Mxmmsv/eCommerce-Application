@@ -16,6 +16,11 @@ const teamMembersData: TeamMember[] = [
       'Developed the product preview module',
       'Set up CI/CD pipelines for automatic builds and deployments',
       'Ensured technical integrity across the project and helped solve complex team challenges',
+      'Developed the About Us page and Main page',
+      'Implemented product search functionality',
+      'Created dynamic URL slugs for products and categories',
+      'Implemented dynamic page titles for SEO',
+      'Developed the website footer',
     ],
     url: {
       imageMember: '/member-photo/max.webp',
@@ -37,6 +42,9 @@ const teamMembersData: TeamMember[] = [
       'Developed the catalog page',
       'Provided a structured and scalable component architecture',
       'Improved UX to make the interface clear and intuitive for users',
+      'Implemented the cart page functionality',
+      'Added support for product categories',
+      'Implemented product filtering and sorting mechanisms',
     ],
     url: {
       imageMember: '/member-photo/ekaterina.webp',
@@ -59,6 +67,10 @@ const teamMembersData: TeamMember[] = [
       'Implemented the CommerceTools admin panel',
       'Developed the website header and profile page',
       'Handled data processing between frontend and backend effectively',
+      'Implemented the 404 error page',
+      'Developed responsive, mobile-friendly layouts',
+      'Built centralized routing logic for page navigation',
+      'Implemented logout functionality',
     ],
     url: {
       imageMember: '/member-photo/alya.webp',
