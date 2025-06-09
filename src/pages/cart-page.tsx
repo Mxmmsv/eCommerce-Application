@@ -9,7 +9,7 @@ import { OrderSummary } from '@/feature/cart/order-summary';
 import type { CartItemUI, ShippingMethod } from '@/feature/cart/types';
 
 export default function CartPage() {
-  const { data: cart, error, isLoading } = useSWR<Cart, Error>(fetchCart);
+  const { data: cart, error, isLoading } = useSWR<Cart, Error>('cart', fetchCart);
 
   const [shippingMethod, setShippingMethod] = useState<string>('standard');
 
@@ -31,7 +31,7 @@ export default function CartPage() {
     );
   }
 
-  if (!cart?.lineItems.length) return <div>Empty cart</div>;
+  if (!cart || !cart.lineItems || cart.lineItems.length === 0) return <div>Empty cart</div>;
 
   const items: CartItemUI[] =
     cart.lineItems.map((item) => {
