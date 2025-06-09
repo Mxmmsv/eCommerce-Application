@@ -37,15 +37,17 @@ function TeamMember({ member }: { member: TeamMember }) {
                 <Github strokeWidth={1.5} size={32} className="max-sm:size-6" />
               </NavLink>
             </li>
-            <li className="flex">
-              <NavLink
-                to={member.url.linkedIn}
-                target="_blank"
-                className="hover:text-chart-3 p-3 transition-colors duration-300 lg:p-2"
-              >
-                <Linkedin strokeWidth={1.5} size={32} className="max-sm:size-6" />
-              </NavLink>
-            </li>
+            {member.url.linkedIn && (
+              <li className="flex">
+                <NavLink
+                  to={member.url.linkedIn}
+                  target="_blank"
+                  className="hover:text-chart-3 p-3 transition-colors duration-300 lg:p-2"
+                >
+                  <Linkedin strokeWidth={1.5} size={32} className="max-sm:size-6" />
+                </NavLink>
+              </li>
+            )}
           </ul>
         </div>
       </div>
