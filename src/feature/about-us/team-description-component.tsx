@@ -30,15 +30,18 @@ function TeamDescription() {
             strong collaboration, deep understanding of modern frontend tooling, and commitment to
             delivering a polished and user-centric product.
           </p>
-          <Link to={'https://rs.school/courses/javascript-ru'} target="_blank">
-            <img
-              src="/rss-welcome.webp"
-              alt="RSS welcome sticker"
-              loading="lazy"
-              decoding="async"
-              className="rounded-md [filter:drop-shadow(0_0_0_var(--color-chart-3))] transition duration-500 hover:[filter:drop-shadow(0_0_1rem_var(--color-chart-3))]"
-            />
-          </Link>
+          <div className="flex flex-col-reverse items-center">
+            RS School JS / Front-end RU Course
+            <Link to={'https://rs.school/courses/javascript-ru'} target="_blank">
+              <img
+                src="/rss-welcome.webp"
+                alt="RSS welcome sticker"
+                loading="lazy"
+                decoding="async"
+                className="rounded-md [filter:drop-shadow(0_0_0_var(--color-chart-3))] transition duration-500 hover:[filter:drop-shadow(0_0_1rem_var(--color-chart-3))]"
+              />
+            </Link>
+          </div>
         </div>
       </div>
 
