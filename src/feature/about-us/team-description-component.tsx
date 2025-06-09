@@ -15,21 +15,32 @@ function TeamDescription() {
 
       <div>
         <div className="grid grid-cols-1 items-center justify-items-center md:grid-cols-2">
-          <p className="text-balance">
-            Welcome to our eCommerce application, created as part of the final project at RS School!
-            Our team of three frontend developers worked closely together to build a modern,
-            responsive, and performant web application using cutting-edge technologies. We used
-            React.js as the core framework and enhanced development with TypeScript, Vite, and
-            Tailwind CSS for rapid styling. To ensure code quality and maintainability, we
-            incorporated Vitest for unit testing, Zustand for state management, and SWR for
-            efficient data fetching. We also utilized shadcn/ui for accessible, customizable UI
-            components and Valibot for form validation. The app is deployed via Netlify for seamless
-            CI/CD. Throughout the project, we followed Scrum methodology with regular sprints, daily
-            stand-ups, and review sessions. Our mentor provided continuous guidance and feedback,
-            helping us align our work with industry best practices. This project highlights our
-            strong collaboration, deep understanding of modern frontend tooling, and commitment to
-            delivering a polished and user-centric product.
-          </p>
+          <div className="flex flex-col gap-4 text-justify text-balance md:text-left">
+            <p>
+              Welcome to our eCommerce application, created as part of the final project at RS
+              School! Our team of three frontend developers worked closely together to build a
+              modern, responsive, and performant web application using cutting-edge technologies.
+            </p>
+            <p>
+              We used React.js as the core framework and enhanced development with TypeScript, Vite,
+              and Tailwind CSS for rapid styling. To ensure code quality and maintainability, we
+              incorporated Vitest for unit testing, Zustand for state management, and SWR for
+              efficient data fetching.
+            </p>
+            <p>
+              We also utilized shadcn/ui for accessible, customizable UI components and Valibot for
+              form validation. The app is deployed via Netlify for seamless CI/CD.
+            </p>
+            <p>
+              Throughout the project, we followed Scrum methodology with regular sprints, daily
+              stand-ups, and review sessions. Our mentor provided continuous guidance and feedback,
+              helping us align our work with industry best practices.
+            </p>
+            <p>
+              This project highlights our strong collaboration, deep understanding of modern
+              frontend tooling, and commitment to delivering a polished and user-centric product.
+            </p>
+          </div>
           <div className="flex flex-col-reverse items-center">
             RS School JS / Front-end RU Course
             <Link to={'https://rs.school/courses/javascript-ru'} target="_blank">
