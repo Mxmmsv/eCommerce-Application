@@ -2,10 +2,10 @@ import { Trash2, Plus, Minus } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { CardContent } from '@/components/ui/card';
-import type { Cart } from '@/feature/cart/types';
+import type { CartItemUI } from '@/feature/cart/types';
 
 type CartProps = {
-  item: Cart;
+  item: CartItemUI;
   removeItem: (id: string) => void;
   updateQuantity: (id: string, change: number) => void;
 };

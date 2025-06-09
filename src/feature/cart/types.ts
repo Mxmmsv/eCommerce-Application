@@ -1,6 +1,6 @@
 import type { LineItem } from '@commercetools/platform-sdk';
 
-export type Cart = {
+export type CartItemUI = {
   id: string;
   name: string;
   price: number;

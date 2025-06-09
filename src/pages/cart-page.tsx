@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Spinner } from '@/components/ui/spiner';
 import { CartList } from '@/feature/cart/cart-list';
 import { OrderSummary } from '@/feature/cart/order-summary';
-import type { Cart, ShippingMethod } from '@/feature/cart/types';
+import type { CartItemUI, ShippingMethod } from '@/feature/cart/types';
 import { useCartStore } from '@/service/store/use-cart-store';
 
 export default function CartPage() {
@@ -34,7 +34,7 @@ export default function CartPage() {
 
   if (!cart?.lineItems.length) return <div>Empty cart</div>;
 
-  const items: Cart[] =
+  const items: CartItemUI[] =
     cart.lineItems.map((item) => {
       const priceValue = item.price?.value?.centAmount || 0;
       const discountedValue = item.price?.discounted?.value?.centAmount;

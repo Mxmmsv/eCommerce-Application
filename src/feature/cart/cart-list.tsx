@@ -1,10 +1,10 @@
 import { Card } from '@/components/ui/card';
-import type { Cart } from '@/feature/cart/types';
+import type { CartItemUI } from '@/feature/cart/types';
 
 import { CartItem } from './cart-item';
 
 type CartListProps = {
-  items: Cart[];
+  items: CartItemUI[];
   removeItem: (id: string) => void;
   updateQuantity: (id: string, change: number) => void;
 };
