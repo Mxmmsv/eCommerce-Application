@@ -10,7 +10,10 @@ function TeamDescription() {
         <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">
           Meet Our Yet Another Dream Team
         </h1>
-        <p className="mt-6 text-base sm:text-lg">{/* здесь что-то будет */}</p>
+        <p className="text-muted-foreground mt-6 text-base sm:text-lg">
+          These are the people behind the posters. We’ve built a unique online store where design
+          meets personality — and every pixel was crafted with care.
+        </p>
       </div>
 
       <div>
