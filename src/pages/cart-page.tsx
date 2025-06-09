@@ -1,18 +1,17 @@
-import { useEffect, useState } from 'react';
+import type { Cart } from '@commercetools/platform-sdk';
+import { useState } from 'react';
+import useSWR from 'swr';
 
 import { Spinner } from '@/components/ui/spiner';
+import { fetchCart } from '@/feature/api/api-fetch-cart';
 import { CartList } from '@/feature/cart/cart-list';
 import { OrderSummary } from '@/feature/cart/order-summary';
 import type { CartItemUI, ShippingMethod } from '@/feature/cart/types';
-import { useCartStore } from '@/service/store/use-cart-store';
 
 export default function CartPage() {
-  const { cart, isLoading, error, fetchCart } = useCartStore();
-  const [shippingMethod, setShippingMethod] = useState<string>('standard');
+  const { data: cart, error, isLoading } = useSWR<Cart, Error>(fetchCart);
 
-  useEffect(() => {
-    void fetchCart();
-  }, [fetchCart]);
+  const [shippingMethod, setShippingMethod] = useState<string>('standard');
 
   if (isLoading) {
     return (
@@ -27,7 +26,7 @@ export default function CartPage() {
   if (error) {
     return (
       <div className="flex min-h-svh items-center justify-center">
-        <div className="text-center text-red-500">{error || 'Failed to load products'}</div>
+        <div className="text-center text-red-500">{error.message || 'Failed to load products'}</div>
       </div>
     );
   }
