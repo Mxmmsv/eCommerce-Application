@@ -4,6 +4,7 @@ import { useAuthStore } from '@/service/store/use-auth-store';
 
 import AnonymousFlowApiClient from './api-client-anonymous';
 import { createApiClientWithToken } from './api-client-token-flow';
+import { HttpStatusCode, isHttpError } from './errors';
 
 export const fetchCart = async (): Promise<Cart> => {
   const { isAuthenticated, token } = useAuthStore.getState();
@@ -16,24 +17,25 @@ export const fetchCart = async (): Promise<Cart> => {
 
     return response.body;
   } catch (error) {
-    if (typeof error === 'object' && error !== null && 'statusCode' in error) {
-      const statusCode = (error as { statusCode: number }).statusCode;
-
-      if (statusCode === 404) {
-        const newCart = await apiRoot
-          .me()
-          .carts()
-          .post({
-            body: {
-              currency: 'EUR',
-            },
-          })
-          .execute();
-        return newCart.body;
-      }
+    if (!isHttpError(error)) {
+      throw new Error('Unknown cart error');
     }
-    throw new Error(
-      'Failed to fetch cart: ' + (error instanceof Error ? error.message : String(error)),
-    );
+
+    if (error.statusCode === HttpStatusCode.NotFound) {
+      const newCart = await apiRoot
+        .me()
+        .carts()
+        .post({
+          body: {
+            currency: 'EUR',
+          },
+        })
+        .execute();
+      return newCart.body;
+    }
+    if (error.statusCode === HttpStatusCode.Unauthorized) {
+      throw new Error('Please log in to access your cart');
+    }
+    throw new Error(`Cart error: ${error.statusCode}`);
   }
 };
