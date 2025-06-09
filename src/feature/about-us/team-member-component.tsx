@@ -21,6 +21,7 @@ function TeamMember({ member }: { member: TeamMember }) {
         <h3 className="mt-4 text-lg font-semibold">{member.name}</h3>
         <p className="text-muted-foreground text-sm">{member.title}</p>
         <p className="mt-3">{member.bio}</p>
+        <p className="mt-3">{member.skills}</p>
         <ul className="text-muted-foreground mt-3 list-inside list-disc text-sm">
           <span>Contribution to the project:</span>
           {member.contributions.map((contribution, index) => (

@@ -4,7 +4,10 @@ const teamMembersData: TeamMember[] = [
   {
     name: 'Maksim Moiseev',
     title: 'Frontend and Backend Developer, Project Team Lead',
-    bio: `A developer with a strong technical background and solid organizational skills.
+    bio: `27 years old, Vorkuta, Russia. 
+          By profession, I am a civil lawyer, but since childhood I have been interested in computers and technology. 
+          The love of learning new things and the desire for development led me to IT - a field in which I feel truly in my place.`,
+    skills: `A developer with a strong technical background and solid organizational skills.
           Served as the team lead, responsible for the project's technical architecture and development processes.
           Comfortable working on both frontend and backend.`,
     contributions: [
@@ -23,7 +26,11 @@ const teamMembersData: TeamMember[] = [
   {
     name: 'Ekaterina Dmitrenko',
     title: 'Frontend and Backend Developer, Project Infrastructure and UX',
-    bio: `A developer unafraid to tackle critical foundational tasks.
+    bio: `30 years old, Saint-Petersburg, Russia.
+          I work as an environmental engineer in the construction industry. 
+          But one day I realized: I want more freedom - and surf the waves of Kamchatka 🌊🏄‍♀️🗻, and at the same time do something interesting and developing. 
+          This is how my path in IT began - a world where you can combine technology and dreams.`,
+    skills: `A developer unafraid to tackle critical foundational tasks.
           She established the project's technical foundation and ensured a stable environment for the entire team.`,
     contributions: [
       'Set up the project environment: Vite, React, TypeScript, Vitest, Valibot, ESLint',
@@ -42,6 +49,7 @@ const teamMembersData: TeamMember[] = [
     title: 'Frontend and Backend Developer, API Integration and UI Specialist',
     bio: `A developer focused on integrating external services and creating user interfaces.
           In this project, she was responsible for working with the CommerceTools SDK and building key UI components.`,
+    skills: '',
     contributions: [
       'Configured and integrated the CommerceTools SDK',
       'Implemented the CommerceTools admin panel',
