@@ -3,9 +3,9 @@ import { Link } from 'react-router';
 
 import { Button } from '@/components/ui/button';
 
-import type { TeamMembersDataProp } from './types';
+import type { TeamMember } from './types';
 
-function TeamMember({ member }: { member: TeamMembersDataProp }) {
+function TeamMember({ member }: { member: TeamMember }) {
   return (
     <div className={'flex flex-col gap-8 md:flex-row md:gap-12 odd:md:flex-row-reverse'}>
       <div className="w-full md:w-1/2">
@@ -23,7 +23,7 @@ function TeamMember({ member }: { member: TeamMembersDataProp }) {
         <p className="mt-3">{member.bio}</p>
         <ul className="text-muted-foreground mt-3 list-inside list-disc text-sm">
           <span>Contribution to the project:</span>
-          {member.contribution.map((contribution, index) => (
+          {member.contributions.map((contribution, index) => (
             <li key={index}>{contribution}</li>
           ))}
         </ul>

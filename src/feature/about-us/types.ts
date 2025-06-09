@@ -1,8 +1,8 @@
-type TeamMembersDataProp = {
+type TeamMember = {
   name: string;
   title: string;
   bio: string;
-  contribution: string[];
+  contributions: string[];
   url: {
     imageMember: string;
     gitHub: string;
@@ -10,4 +10,4 @@ type TeamMembersDataProp = {
   };
 };
 
-export type { TeamMembersDataProp };
+export type { TeamMember };
