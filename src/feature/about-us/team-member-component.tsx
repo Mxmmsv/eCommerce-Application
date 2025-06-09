@@ -1,7 +1,5 @@
 import { Github, Linkedin } from 'lucide-react';
-import { Link } from 'react-router';
-
-import { Button } from '@/components/ui/button';
+import { NavLink } from 'react-router';
 
 import type { TeamMember } from './types';
 
@@ -29,24 +27,26 @@ function TeamMember({ member }: { member: TeamMember }) {
           ))}
         </ul>
         <div className="mt-4 flex items-center gap-2.5">
-          <Button
-            className="bg-accent hover:bg-accent text-muted-foreground shadow-none"
-            size="icon"
-            asChild
-          >
-            <Link to={member.url.gitHub} target="_blank" className="">
-              <Github className="stroke-muted-foreground" />
-            </Link>
-          </Button>
-          <Button
-            className="bg-muted hover:bg-muted text-muted-foreground shadow-none"
-            size="icon"
-            asChild
-          >
-            <Link to={member.url.linkedIn} target="_blank">
-              <Linkedin className="stroke-muted-foreground" />
-            </Link>
-          </Button>
+          <ul className="flex flex-row items-center lg:mr-4">
+            <li className="flex">
+              <NavLink
+                to={member.url.gitHub}
+                target="_blank"
+                className="hover:text-chart-3 p-3 transition-colors duration-300 lg:p-2"
+              >
+                <Github strokeWidth={1.5} size={32} className="max-sm:size-6" />
+              </NavLink>
+            </li>
+            <li className="flex">
+              <NavLink
+                to={member.url.linkedIn}
+                target="_blank"
+                className="hover:text-chart-3 p-3 transition-colors duration-300 lg:p-2"
+              >
+                <Linkedin strokeWidth={1.5} size={32} className="max-sm:size-6" />
+              </NavLink>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
