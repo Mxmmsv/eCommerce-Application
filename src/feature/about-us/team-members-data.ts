@@ -63,7 +63,7 @@ const teamMembersData: TeamMember[] = [
     url: {
       imageMember: '/member-photo/alya.webp',
       gitHub: 'https://github.com/AlyaEngineer',
-      linkedIn: '',
+      linkedIn: 'https://www.linkedin.com/in/alla-tsaiukova-033ba92b8/',
     },
   },
 ];
