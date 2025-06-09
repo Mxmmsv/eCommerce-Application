@@ -3,7 +3,7 @@ import type { TeamMember } from './types';
 const teamMembersData: TeamMember[] = [
   {
     name: 'Maksim Moiseev',
-    title: 'Project Team Lead, Frontend Developer',
+    title: 'Frontend and Backend Developer, Project Team Lead',
     bio: `A developer with a strong technical background and solid organizational skills.
           Served as the team lead, responsible for the project's technical architecture and development processes.
           Comfortable working on both frontend and backend.`,
@@ -22,7 +22,7 @@ const teamMembersData: TeamMember[] = [
   },
   {
     name: 'Ekaterina Dmitrenko',
-    title: 'Frontend Developer, Project Infrastructure and UX',
+    title: 'Frontend and Backend Developer, Project Infrastructure and UX',
     bio: `A developer unafraid to tackle critical foundational tasks.
           She established the project's technical foundation and ensured a stable environment for the entire team.`,
     contributions: [
@@ -39,7 +39,7 @@ const teamMembersData: TeamMember[] = [
   },
   {
     name: 'Alla Tsaiukova',
-    title: 'Frontend Developer, API Integration and UI Specialist',
+    title: 'Frontend and Backend Developer, API Integration and UI Specialist',
     bio: `A developer focused on integrating external services and creating user interfaces.
           In this project, she was responsible for working with the CommerceTools SDK and building key UI components.`,
     contributions: [

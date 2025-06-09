@@ -7,8 +7,9 @@ function TeamDescription() {
   return (
     <div className="mx-auto flex max-w-screen-xl flex-col justify-center gap-16 px-6 py-8 sm:py-12 lg:px-8">
       <div className="mx-auto max-w-2xl text-center">
+        <h2 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">Meet Our</h2>
         <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">
-          Meet Our Yet Another Dream Team
+          Yet Another Dream Team
         </h1>
         <p className="text-muted-foreground mt-6 text-base sm:text-lg">
           These are the people behind the posters. We’ve built a unique online store where design
