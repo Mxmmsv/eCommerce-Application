@@ -4,12 +4,12 @@ const teamMembersData: TeamMember[] = [
   {
     name: 'Maksim Moiseev',
     title: 'Frontend and Backend Developer, Project Team Lead',
-    bio: `27 years old, Vorkuta, Russia. 
-          By profession, I am a civil lawyer, but since childhood I have been interested in computers and technology. 
-          The love of learning new things and the desire for development led me to IT - a field in which I feel truly in my place.`,
-    skills: `A developer with a strong technical background and solid organizational skills.
-          Served as the team lead, responsible for the project's technical architecture and development processes.
-          Comfortable working on both frontend and backend.`,
+    bio: `27 years old, from Vorkuta, Russia. 
+          Originally a civil lawyer by profession, but since childhood I’ve been passionate about computers and technology. 
+          Curiosity and a drive for self-development led me to the world of IT — a place where I feel truly at home.`,
+    skills: `Proactive developer with a solid technical background and strong organizational skills.
+             Led the team as project lead, responsible for technical architecture and workflow management.
+             Confident in both frontend and backend development.`,
     contributions: [
       'Configured the Scrum process, sprints, and Jira task board',
       'Implemented login authentication',
@@ -26,12 +26,12 @@ const teamMembersData: TeamMember[] = [
   {
     name: 'Ekaterina Dmitrenko',
     title: 'Frontend and Backend Developer, Project Infrastructure and UX',
-    bio: `30 years old, Saint-Petersburg, Russia.
-          I work as an environmental engineer in the construction industry. 
-          But one day I realized: I want more freedom - and surf the waves of Kamchatka 🌊🏄‍♀️🗻, and at the same time do something interesting and developing. 
-          This is how my path in IT began - a world where you can combine technology and dreams.`,
-    skills: `A developer unafraid to tackle critical foundational tasks.
-          She established the project's technical foundation and ensured a stable environment for the entire team.`,
+    bio: `30 years old, based in Saint Petersburg, Russia. 
+          Currently working as an environmental engineer in the construction industry. 
+          I turned to IT to explore a more flexible and creative career path — one that would allow me to chase both professional growth and personal dreams, like surfing the waves of Kamchatka 🌊🏄‍♀️🗻.`,
+    skills: `Detail-oriented developer with a passion for building robust infrastructure.
+             Established the technical foundation of the project and ensured a reliable and consistent development environment.
+             Focused on clean architecture and improving user experience.`,
     contributions: [
       'Set up the project environment: Vite, React, TypeScript, Vitest, Valibot, ESLint',
       'Developed the catalog page',
@@ -47,9 +47,10 @@ const teamMembersData: TeamMember[] = [
   {
     name: 'Alla Tsaiukova',
     title: 'Frontend and Backend Developer, API Integration and UI Specialist',
-    bio: `A developer focused on integrating external services and creating user interfaces.
-          In this project, she was responsible for working with the CommerceTools SDK and building key UI components.`,
-    skills: '',
+    bio: `Developer focused on external API integration and crafting user-centric interfaces. 
+          Enthusiastic about connecting services and creating smooth, functional user experiences.`,
+    skills: `Specialist in backend integration and UI component development.
+             Skilled at bridging data between systems and presenting it effectively through clean, reusable interface elements.`,
     contributions: [
       'Configured and integrated the CommerceTools SDK',
       'Implemented the CommerceTools admin panel',
