@@ -47,10 +47,13 @@ const teamMembersData: TeamMember[] = [
   {
     name: 'Alla Tsaiukova',
     title: 'Frontend and Backend Developer, API Integration and UI Specialist',
-    bio: `Developer focused on external API integration and crafting user-centric interfaces. 
-          Enthusiastic about connecting services and creating smooth, functional user experiences.`,
-    skills: `Specialist in backend integration and UI component development.
-             Skilled at bridging data between systems and presenting it effectively through clean, reusable interface elements.`,
+    bio: `34 years old, currently living in Novi Sad, Serbia. 
+          Previously lived in Irkutsk and Moscow. 
+          My background is in 3D modeling and production — I worked on technical documentation and created physical products based on it.
+          I chose frontend development to gain the freedom of remote work, explore a new creative field, and finally say goodbye to the daily office routine.`,
+    skills: `Developer with a background in design and manufacturing processes.
+            Strong analytical mindset and attention to detail, now applied to building user-friendly, technically sound web interfaces.
+            Brings structure and precision from engineering into frontend development.`,
     contributions: [
       'Configured and integrated the CommerceTools SDK',
       'Implemented the CommerceTools admin panel',
