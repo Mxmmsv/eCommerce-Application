@@ -26,8 +26,8 @@ function TeamMember({ member }: { member: TeamMember }) {
             <li key={index}>{contribution}</li>
           ))}
         </ul>
-        <div className="mt-4 flex items-center gap-2.5">
-          <ul className="flex flex-row items-center lg:mr-4">
+        <div className="mt-3 flex items-center gap-2.5">
+          <ul className="flex flex-row items-center">
             <li className="flex">
               <NavLink
                 to={member.url.gitHub}
