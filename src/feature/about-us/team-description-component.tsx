@@ -43,8 +43,11 @@ function TeamDescription() {
               feedback, helping us align our work with industry best practices.
             </p>
             <p>
-              This project highlights our strong collaboration, deep understanding of modern
-              frontend tooling, and commitment to delivering a polished and user-centric product.
+              This project is a testament to our strong collaboration and teamwork skills - we
+              stayed together as a cohesive unit from start to finish, successfully managing tasks
+              and time to deliver a polished product. It showcases our ability to work effectively
+              in a team, resolve challenges collectively, and maintain consistent progress
+              throughout the development cycle.
             </p>
           </div>
           <div className="flex flex-col-reverse items-center">
