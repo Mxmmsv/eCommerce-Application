@@ -13,12 +13,12 @@ type CartProps = {
 export function CartItem({ item, removeItem, updateQuantity }: CartProps) {
   return (
     <CardContent className="p-0">
-      <div className="flex h-full flex-col md:flex-row">
-        <div className="relative h-auto w-full md:w-32">
+      <div className="flex h-full flex-row">
+        <div className="relative h-auto w-32">
           <img
             src={item.image}
             alt={item.name}
-            className="h-full w-full object-cover md:w-32"
+            className="h-full w-full object-cover"
             onError={(e) => {
               (e.target as HTMLImageElement).src = '/placeholder-product.webp';
             }}
