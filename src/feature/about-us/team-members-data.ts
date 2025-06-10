@@ -57,13 +57,13 @@ const teamMembersData: TeamMember[] = [
     title: 'Frontend and Backend Developer, API Integration and UI Specialist',
     bio: `34 years old, currently living in Novi Sad, Serbia. 
           Previously lived in Irkutsk and Moscow. 
-          My background is in 3D modeling and production — I worked on technical documentation and created physical products based on it.
+          My background is in 3D modeling and production — I produced detailed construction documentation and created physical products based on it.
           I chose frontend development to gain the freedom of remote work, explore a new creative field, and finally say goodbye to the daily office routine.`,
     skills: `Developer with a background in design and manufacturing processes.
             Strong analytical mindset and attention to detail, now applied to building user-friendly, technically sound web interfaces.
             Brings structure and precision from engineering into frontend development.`,
     contributions: [
-      'Configured and integrated the CommerceTools SDK',
+      'Configured and integrated the Commercetools Merchant Center',
       'Implemented the CommerceTools admin panel',
       'Developed the website header and profile page',
       'Handled data processing between frontend and backend effectively',
