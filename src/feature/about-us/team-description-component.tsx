@@ -25,9 +25,9 @@ function TeamDescription() {
               modern, responsive, and performant web application using cutting-edge technologies.
             </p>
             <p>
-              We used React.js as the core framework and enhanced development with TypeScript, Vite,
-              and Tailwind CSS for rapid styling. To ensure code quality and maintainability, we
-              incorporated Vitest for unit testing, Zustand for state management, and SWR for
+              We build our project with React.js framework and enhanced development with TypeScript,
+              Vite, and Tailwind CSS for rapid styling. To ensure code quality and maintainability,
+              we incorporated Vitest for unit testing, Zustand for state management, and SWR for
               efficient data fetching.
             </p>
             <p>
