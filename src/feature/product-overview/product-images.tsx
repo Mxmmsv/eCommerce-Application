@@ -59,8 +59,11 @@ export function ProductImages({
     <div className="grid grid-cols-5 grid-rows-4">
       <Carousel className="col-span-3 col-start-2 row-span-4 row-start-1">
         <CarouselContent>
-          {images.map((image, index) => (
-            <CarouselItem key={index} className="flex aspect-square items-center justify-center">
+          {images.map((image) => (
+            <CarouselItem
+              key={image.url}
+              className="flex aspect-square items-center justify-center"
+            >
               <Dialog>
                 <DialogTrigger asChild>
                   <img
@@ -78,8 +81,8 @@ export function ProductImages({
 
                   <Carousel className="col-span-10 col-start-2 row-span-9 row-start-1">
                     <CarouselContent>
-                      {images.map((image, index) => (
-                        <CarouselItem key={index} className="flex items-center justify-center">
+                      {images.map((image) => (
+                        <CarouselItem key={image.url} className="flex items-center justify-center">
                           <img
                             src={image.url}
                             alt={alt}
