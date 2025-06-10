@@ -36,8 +36,11 @@ function TeamDescription() {
             </p>
             <p>
               Throughout the project, we followed Scrum methodology with regular sprints, daily
-              stand-ups, and review sessions. Our mentor provided continuous guidance and feedback,
-              helping us align our work with industry best practices.
+              stand-ups, and review sessions. We worked in Jira, where we implemented task board
+              automation to streamline transitions between workflow stages. Additionally, we set up
+              automatic pull request notifications to our Discord channel, keeping the whole team in
+              sync and improving collaboration. Our mentor provided continuous guidance and
+              feedback, helping us align our work with industry best practices.
             </p>
             <p>
               This project highlights our strong collaboration, deep understanding of modern
