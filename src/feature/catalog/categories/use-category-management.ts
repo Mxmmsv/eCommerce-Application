@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router';
 import useSWR from 'swr';
 
-import { useCategoryStore } from '@/service/store/use-category-store';
+import { useCategoryStore } from '@/feature/catalog/categories/use-category-store';
 
 import { fetchCategories } from '../api/fetch-categories';
 import type { PosterCategory } from '../types';
