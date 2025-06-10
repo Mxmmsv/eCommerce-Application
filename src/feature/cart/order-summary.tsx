@@ -4,18 +4,9 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import type { ShippingMethod, ShippingMethodId } from '@/feature/cart/types';
+import type { OrderSummaryProps } from '@/feature/cart/types';
 
 import { ShippingMethods } from './shipping-methods';
-
-type OrderSummaryProps = {
-  subtotal: number;
-  shipping: number;
-  total: number;
-  shippingMethod: ShippingMethodId;
-  shippingMethods: ShippingMethod[];
-  setShippingMethod: (methodId: ShippingMethodId) => void;
-};
 
 export function OrderSummary({
   subtotal,

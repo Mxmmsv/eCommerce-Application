@@ -1,13 +1,7 @@
 import { Card } from '@/components/ui/card';
-import type { CartItemUI } from '@/feature/cart/types';
 
 import { CartItem } from './cart-item';
-
-type CartListProps = {
-  items: CartItemUI[];
-  removeItem: (id: string) => void;
-  updateQuantity: (id: string, change: number) => void;
-};
+import type { CartListProps } from './types';
 
 export function CartList({ items, removeItem, updateQuantity }: CartListProps) {
   return (

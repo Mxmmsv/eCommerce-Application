@@ -7,13 +7,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
-import type { ShippingMethod, ShippingMethodId } from './types';
-
-type ShippingMethodsProps = {
-  shippingMethods: ShippingMethod[];
-  shippingMethod: ShippingMethodId;
-  setShippingMethod: (methodId: ShippingMethodId) => void;
-};
+import type { ShippingMethodsProps } from './types';
 
 export function ShippingMethods({
   shippingMethods,
