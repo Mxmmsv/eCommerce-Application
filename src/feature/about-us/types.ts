@@ -7,7 +7,7 @@ type TeamMember = {
   url: {
     imageMember: string;
     gitHub: string;
-    linkedIn: string;
+    linkedIn?: string;
   };
 };
 

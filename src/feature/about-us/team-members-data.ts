@@ -49,7 +49,6 @@ const teamMembersData: TeamMember[] = [
     url: {
       imageMember: '/member-photo/ekaterina.webp',
       gitHub: 'https://github.com/ek-ole',
-      linkedIn: '',
     },
   },
   {
