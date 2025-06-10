@@ -31,8 +31,8 @@ function TeamDescription() {
               efficient data fetching.
             </p>
             <p>
-              We also utilized shadcn/ui for accessible, customizable UI components and Valibot for
-              form validation. The app is deployed via Netlify for seamless CI/CD.
+              We also worked with shadcn/ui for accessible, customizable UI components and Valibot
+              for form validation. The app is deployed via Netlify for seamless CI/CD.
             </p>
             <p>
               Throughout the project, we followed Scrum methodology with regular sprints, daily
