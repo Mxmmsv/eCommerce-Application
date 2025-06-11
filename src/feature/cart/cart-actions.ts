@@ -1,4 +1,8 @@
-import { clearCart } from '../api/api-clear-cart';
+import { mutate } from 'swr';
+
+import { clearCart } from '@/feature/cart/api/api-clear-cart';
+
+import { removeItemFromCart } from './api/api-delete-item-cart';
 
 export const useCartActions = () => {
   const handleClearCart = async (): Promise<boolean> => {
@@ -12,6 +16,19 @@ export const useCartActions = () => {
       return false;
     }
   };
+
+  const handleRemove = async (lineItemId: string): Promise<boolean> => {
+    try {
+      await removeItemFromCart(lineItemId);
+      await mutate('cart');
+      console.log('Item removed successfully');
+      return true;
+    } catch (error) {
+      console.error('Remove item failed:', error);
+      return false;
+    }
+  };
+
   const handleUpdateQuantity = () => {
     // (id: string, change: number) => {
     // setItems((prev) =>
@@ -24,10 +41,5 @@ export const useCartActions = () => {
     //   }),
     // );
   };
-
-  const handleRemove = () => {
-    // (id: string) => {
-    // setItems((prev) => prev.filter((item) => item.id !== id));
-  };
-  return { handleClearCart, handleUpdateQuantity, handleRemove };
+  return { handleClearCart, handleRemove, handleUpdateQuantity };
 };
