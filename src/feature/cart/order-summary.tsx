@@ -4,9 +4,9 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import type { OrderSummaryProps } from '@/feature/cart/types';
 
 import { ShippingMethods } from './shipping-methods';
+import type { OrderSummaryProps } from './types';
 
 export function OrderSummary({
   subtotal,

@@ -2,7 +2,8 @@ import { Trash2, Plus, Minus } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { CardContent } from '@/components/ui/card';
-import type { CartItemUI } from '@/feature/cart/types';
+
+import type { CartItemUI } from './types';
 
 type CartProps = {
   item: CartItemUI;
