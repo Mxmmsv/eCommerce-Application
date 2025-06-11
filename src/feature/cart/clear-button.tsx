@@ -3,6 +3,17 @@ import { useState } from 'react';
 import { toast } from 'sonner';
 import { mutate } from 'swr';
 
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
 
 import { useCartActions } from './cart-actions';
@@ -12,8 +23,6 @@ export function ClearCartButton() {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleClear = async () => {
-    if (!window.confirm('Clear cart?')) return;
-
     setIsLoading(true);
     try {
       const success = await handleClearCart();
@@ -34,16 +43,35 @@ export function ClearCartButton() {
   };
 
   return (
-    <div className="mb-4 flex justify-end">
-      <Button
-        variant="outline"
-        onClick={() => void handleClear()}
-        disabled={isLoading}
-        className="ml-auto"
-      >
-        <Trash2 className="mr-2 h-4 w-4" />
-        {isLoading ? 'Clearing...' : 'Remove posters'}
-      </Button>
+    <div className="flex justify-end">
+      <AlertDialog>
+        <AlertDialogTrigger asChild>
+          <Button variant="outline" className="ml-auto flex justify-end">
+            <Trash2 className="mr-2 h-4 w-4" />
+            Remove posters
+          </Button>
+        </AlertDialogTrigger>
+
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action will completely remove all items from your cart. It cannot be undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={isLoading}>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => void handleClear()}
+              disabled={isLoading}
+              className="bg-chart-3 hover:bg-chart-3/90"
+            >
+              {isLoading ? 'Clearing...' : 'Remove posters'}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
