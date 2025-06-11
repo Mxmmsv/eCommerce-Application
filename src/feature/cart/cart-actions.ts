@@ -1,4 +1,4 @@
-import { clearCart } from '../api/api-fetch-cart';
+import { clearCart } from '../api/api-clear-cart';
 
 export const useCartActions = () => {
   const handleClearCart = async (): Promise<boolean> => {

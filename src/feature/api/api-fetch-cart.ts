@@ -39,39 +39,3 @@ export const fetchCart = async (): Promise<Cart> => {
     throw new Error(`Cart error: ${error.statusCode}`);
   }
 };
-
-export const clearCart = async (): Promise<Cart> => {
-  const { isAuthenticated, token } = useAuthStore.getState();
-
-  const apiRoot =
-    isAuthenticated && token ? createApiClientWithToken(token) : AnonymousFlowApiClient();
-
-  try {
-    const currentCart = await fetchCart();
-
-    await apiRoot
-      .me()
-      .carts()
-      .withId({ ID: currentCart.id })
-      .delete({
-        queryArgs: {
-          version: currentCart.version,
-        },
-      })
-      .execute();
-
-    const newCart = await apiRoot
-      .me()
-      .carts()
-      .post({
-        body: {
-          currency: 'EUR',
-        },
-      })
-      .execute();
-    return newCart.body;
-  } catch (error) {
-    console.error('Error emptying cart:', error);
-    throw error;
-  }
-};
