@@ -5,12 +5,12 @@ import { Spinner } from '@/components/ui/spiner';
 import { fetchProducts } from '@/feature/catalog/api/fetch-products';
 import { Breadcrumbs } from '@/feature/catalog/categories/breadcrumbs';
 import { CategoryNavigation } from '@/feature/catalog/categories/category-navigation';
+import { useCategoryStore } from '@/feature/catalog/categories/use-category-store';
 import { TypeFilter } from '@/feature/catalog/filter/type-filter';
 import { useFilterStore } from '@/feature/catalog/filter/use-filter-store';
 import { ProductList } from '@/feature/catalog/product-list';
 import { useSortStore } from '@/feature/catalog/sorting/use-sort-store';
 import type { Poster } from '@/feature/catalog/types';
-import { useCategoryStore } from '@/service/store/use-category-store';
 
 export default function CatalogPage() {
   const { currentPath } = useCategoryStore();
