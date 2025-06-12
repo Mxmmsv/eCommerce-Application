@@ -6,6 +6,7 @@ import type {
 
 import PasswordFlowApiClient from '@/feature/api/api-client-password-flow';
 import { tokenCache, clearTokenCache } from '@/feature/api/api-token-store';
+// import { useCartStore } from '@/feature/catalog/adding-to-cart/use-cart-store';
 import { setAuthToLocalStorage } from '@/service/store/local-storage';
 import { useCustomerStore } from '@/service/store/use-user-store';
 
@@ -14,11 +15,12 @@ export const signInCustomer = async (
   password: string,
 ): Promise<ClientResponse<CustomerSignInResult>> => {
   clearTokenCache();
+  // const { anonymousId } = useCartStore.getState().cart.createdBy.anonymousId;
   const customerLogin: CustomerSignin = {
     email,
     password,
-    anonymousCartSignInMode: 'MergeWithExistingCustomerCart',
-    updateProductData: true,
+    anonymousCartSignInMode: 'UseAsNewActiveCustomerCart',
+    // anonymousCartId: anonymousId,
   };
 
   const apiRoot = PasswordFlowApiClient(email, password);

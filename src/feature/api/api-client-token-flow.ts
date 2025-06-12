@@ -1,16 +1,15 @@
 import { createApiBuilderFromCtpClient } from '@commercetools/platform-sdk';
 import { ClientBuilder } from '@commercetools/ts-client';
 
-import { getAuthFromLocalStorage } from '@/service/store/local-storage';
-
 import {
   projectKey,
   correlationIdMiddlewareOptions,
   httpMiddlewareOptions,
 } from './api-client-builder';
+import { tokenCache } from './api-token-store';
 
 export const createApiClientWithToken = () => {
-  const accessToken = getAuthFromLocalStorage().ACCESS_TOKEN_KEY;
+  const accessToken = tokenCache.get().token;
   const httpClientWithToken = async (request: RequestInfo, options?: RequestInit) => {
     const headers = new Headers(options?.headers);
     headers.set('Authorization', `Bearer ${accessToken}`);

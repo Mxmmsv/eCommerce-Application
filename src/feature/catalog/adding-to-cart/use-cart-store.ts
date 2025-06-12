@@ -9,6 +9,7 @@ type CartStore = {
   totalQuantity: number;
   isAuthenticated: boolean;
   setCart: (cart: Cart) => void;
+  setCartId: (cartId: string) => void;
   clearCart: () => void;
   isInCart: (productId: string) => boolean;
   setAuthenticated: (value: boolean) => void;
@@ -29,6 +30,8 @@ export const useCartStore = create<CartStore>()(
           cart: cart,
           totalQuantity: cart.lineItems.reduce((sum, item) => sum + item.quantity, 0),
         }),
+
+      setCartId: (cartId: string) => set({ cartId }),
 
       clearCart: () =>
         set({
