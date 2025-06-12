@@ -11,8 +11,7 @@ import { HttpStatusCode, isHttpError } from './errors';
 export const fetchCart = async (): Promise<Cart> => {
   const { isAuthenticated, token } = useAuthStore.getState();
 
-  const apiRoot =
-    isAuthenticated && token ? createApiClientWithToken(token) : AnonymousFlowApiClient();
+  const apiRoot = isAuthenticated && token ? createApiClientWithToken() : AnonymousFlowApiClient();
 
   try {
     const response = await apiRoot.me().activeCart().get().execute();

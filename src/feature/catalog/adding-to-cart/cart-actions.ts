@@ -7,7 +7,7 @@ import { useCartStore } from '@/feature/catalog/adding-to-cart/use-cart-store';
 export async function addToCart(productId: string, isAuthenticated: boolean, token: string | null) {
   const { cartId, setCart } = useCartStore.getState();
 
-  const apiClient = isAuthenticated && token ? createApiClientWithToken(token) : apiClientAnonymous;
+  const apiClient = isAuthenticated && token ? createApiClientWithToken() : apiClientAnonymous;
 
   const resolvedApiClient = typeof apiClient === 'function' ? apiClient() : apiClient;
 
