@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router';
 
-import { useCategoryStore } from '@/service/store/use-category-store';
+import { useCategoryStore } from '@/feature/catalog/categories/use-category-store';
 
 import type { CategoryPathItem, PosterCategory } from '../types';
 

@@ -1,22 +1,18 @@
 import type { TokenStore, TokenCache } from '@commercetools/ts-client';
 
-let tokenCacheStore: TokenStore = {
+let initialValue: TokenStore = {
   token: '',
   expirationTime: 0,
   refreshToken: '',
 };
 
 export const tokenCache: TokenCache = {
-  get: () => tokenCacheStore,
+  get: () => initialValue,
   set: (cache) => {
-    tokenCacheStore = cache;
+    initialValue = cache;
   },
 };
 
 export const clearTokenCache = () => {
-  tokenCache.set({
-    token: '',
-    expirationTime: 0,
-    refreshToken: '',
-  });
+  tokenCache.set(initialValue);
 };

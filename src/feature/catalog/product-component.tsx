@@ -46,7 +46,6 @@ const ProductComponent = ({ poster }: { poster: Poster }) => {
                 className={cn(
                   'text-center text-lg font-semibold',
                   'mb-2 sm:text-xl',
-
                   'group-hover/texthover:text-chart-3 transition-colors duration-200',
                   'sm:mt-3 lg:mt-0',
                 )}

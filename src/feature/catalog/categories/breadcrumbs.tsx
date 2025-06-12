@@ -10,7 +10,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
-import { useCategoryStore } from '@/service/store/use-category-store';
+import { useCategoryStore } from '@/feature/catalog/categories/use-category-store';
 
 import { useCategoryNavigation } from './use-category-navigation';
 
