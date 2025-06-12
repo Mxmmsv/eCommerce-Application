@@ -1,3 +1,4 @@
+import EvolutionSection from '@/feature/main/evolution-section';
 import HeroSection from '@/feature/main/hero-section';
 
 export default function HomePage() {
@@ -5,6 +6,7 @@ export default function HomePage() {
     <>
       <title>{'Home :: Poster store'}</title>
       <HeroSection />
+      <EvolutionSection />
     </>
   );
 }
