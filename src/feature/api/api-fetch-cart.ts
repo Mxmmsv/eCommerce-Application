@@ -2,6 +2,8 @@ import type { Cart } from '@commercetools/platform-sdk';
 
 import { useAuthStore } from '@/service/store/use-auth-store';
 
+import { useCartStore } from '../catalog/adding-to-cart/use-cart-store';
+
 import AnonymousFlowApiClient from './api-client-anonymous';
 import { createApiClientWithToken } from './api-client-token-flow';
 import { HttpStatusCode, isHttpError } from './errors';
@@ -14,14 +16,20 @@ export const fetchCart = async (): Promise<Cart> => {
 
   try {
     const response = await apiRoot.me().activeCart().get().execute();
+    const cart = response.body;
 
-    return response.body;
+    if (cart.cartState !== 'Active') {
+      throw new Error('Cart is not active');
+    }
+
+    useCartStore.getState().setCart(cart);
+    return cart;
   } catch (error) {
     if (!isHttpError(error)) {
       throw new Error('Unknown cart error');
     }
 
-    if (error.statusCode === HttpStatusCode.NotFound) {
+    if (error.statusCode === HttpStatusCode.NotFound || error.message === 'Cart is not active') {
       const newCart = await apiRoot
         .me()
         .carts()
@@ -31,6 +39,8 @@ export const fetchCart = async (): Promise<Cart> => {
           },
         })
         .execute();
+
+      useCartStore.getState().setCart(newCart.body);
       return newCart.body;
     }
     if (error.statusCode === HttpStatusCode.Unauthorized) {
