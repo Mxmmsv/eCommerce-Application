@@ -5,9 +5,7 @@ import type {
 } from '@commercetools/platform-sdk';
 
 import PasswordFlowApiClient from '@/feature/api/api-client-password-flow';
-import { createApiClientWithToken } from '@/feature/api/api-client-token-flow';
 import { tokenCache, clearTokenCache } from '@/feature/api/api-token-store';
-import { useCartStore } from '@/feature/catalog/adding-to-cart/use-cart-store';
 import { setAuthToLocalStorage } from '@/service/store/local-storage';
 import { useCustomerStore } from '@/service/store/use-user-store';
 
@@ -61,16 +59,6 @@ export const signInCustomer = async (
     shippingAddressIds: customer.shippingAddressIds ?? [],
     billingAddressIds: customer.billingAddressIds ?? [],
   });
-
-  useCartStore.getState().setAuthenticated(true);
-
-  const apiClient = createApiClientWithToken(token);
-  const responseCart = await apiClient.me().carts().get().execute();
-  const carts = responseCart.body.results;
-
-  if (carts.length > 0) {
-    useCartStore.getState().setCart(carts[0]);
-  }
 
   return response;
 };
