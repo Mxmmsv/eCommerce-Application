@@ -16,12 +16,12 @@ function HeroSection() {
             Posters are a vibrant blend of art, design, and self-expression. They can instantly
             transform a space, set the mood, and tell a story without words.
           </p>
-          <p>
+          <p className="mt-6 max-w-[60ch] text-lg">
             Whether you prefer sleek minimalism, vintage classics, or bold pop art—posters suit any
             interior. Mix, match, and collect them to create a unique atmosphere at home, in the
             office, or even in a café.
           </p>
-          <div className="mt-12 flex items-center gap-4">
+          <div className="mt-6 flex items-center gap-4">
             <Link
               to="/catalog"
               className={cn(buttonVariants({ variant: 'default' }), 'rounded-full text-base')}
