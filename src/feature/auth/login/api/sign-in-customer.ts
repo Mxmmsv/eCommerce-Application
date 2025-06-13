@@ -5,8 +5,9 @@ import type {
 } from '@commercetools/platform-sdk';
 
 import PasswordFlowApiClient from '@/feature/api/api-client-password-flow';
-import { tokenCache, clearTokenCache } from '@/feature/api/api-token-store';
+import { tokenCache } from '@/feature/api/api-token-store';
 // import { useCartStore } from '@/feature/catalog/adding-to-cart/use-cart-store';
+import { useCartStore } from '@/feature/catalog/adding-to-cart/use-cart-store';
 import { setAuthToLocalStorage } from '@/service/store/local-storage';
 import { useCustomerStore } from '@/service/store/use-user-store';
 
@@ -14,17 +15,19 @@ export const signInCustomer = async (
   email: string,
   password: string,
 ): Promise<ClientResponse<CustomerSignInResult>> => {
-  clearTokenCache();
   // const { anonymousId } = useCartStore.getState().cart.createdBy.anonymousId;
+
+  const { anonymousId } = useCartStore.getState();
   const customerLogin: CustomerSignin = {
     email,
     password,
-    anonymousCartSignInMode: 'UseAsNewActiveCustomerCart',
+    anonymousCartSignInMode: 'MergeWithExistingCustomerCart',
     // anonymousCartId: anonymousId,
+    ...(anonymousId ? { anonymousId } : {}),
   };
+  console.log('Current anonymousId:', anonymousId);
 
   const apiRoot = PasswordFlowApiClient(email, password);
-
   const response = await apiRoot
     .me()
     .login()
@@ -32,7 +35,7 @@ export const signInCustomer = async (
       body: customerLogin,
     })
     .execute();
-
+  console.log('Токен после логина:', tokenCache.get().token);
   const token = tokenCache.get().token;
 
   if (!token) {
