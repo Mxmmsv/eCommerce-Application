@@ -9,12 +9,12 @@ import { fetchCart } from './api-fetch-cart';
 export const clearCart = async (): Promise<Cart> => {
   const { token } = useAuthStore.getState();
 
-  const apiRoot = token ? createApiClientWithToken(token) : AnonymousFlowApiClient();
+  const apiRoot = token ? createApiClientWithToken() : AnonymousFlowApiClient();
 
   try {
     const currentCart = await fetchCart();
 
-    await apiRoot
+    const response = await apiRoot
       .me()
       .carts()
       .withId({ ID: currentCart.id })
@@ -25,16 +25,7 @@ export const clearCart = async (): Promise<Cart> => {
       })
       .execute();
 
-    const newCart = await apiRoot
-      .me()
-      .carts()
-      .post({
-        body: {
-          currency: 'EUR',
-        },
-      })
-      .execute();
-    return newCart.body;
+    return response.body;
   } catch (error) {
     console.error('Error emptying cart:', error);
     throw error;
