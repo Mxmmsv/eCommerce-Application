@@ -7,57 +7,58 @@ import { useCartStore } from '@/feature/catalog/adding-to-cart/use-cart-store';
 import { getAuthFromLocalStorage } from '@/service/store/local-storage';
 
 export const fetchCart = async (): Promise<Cart> => {
-  const isAuthenticated = getAuthFromLocalStorage().IS_AUTHORIZED;
-  const token = getAuthFromLocalStorage().ACCESS_TOKEN_KEY;
-  const { cartId, setCartId } = useCartStore.getState();
+  const auth = getAuthFromLocalStorage();
+  const isAuthenticated = auth.IS_AUTHORIZED;
+  const token = auth.ACCESS_TOKEN_KEY;
+  const { cart, setCart } = useCartStore.getState();
 
-  const apiRoot = isAuthenticated && token ? createApiClientWithToken() : AnonymousFlowApiClient();
+  const apiClient =
+    isAuthenticated && token ? createApiClientWithToken() : AnonymousFlowApiClient();
 
   try {
-    if (isAuthenticated && token) {
-      const response = await apiRoot.me().carts().get().execute();
+    if (isAuthenticated) {
+      const response = await apiClient.me().carts().get().execute();
       const meCarts = response.body.results;
-      if (meCarts.length === 0) {
-        const newCart = await apiRoot
-          .me()
-          .carts()
-          .post({
-            body: {
-              currency: 'EUR',
-            },
-          })
-          .execute();
-        setCartId(newCart.body.id);
-        return newCart.body;
-      }
 
-      setCartId(meCarts[0].id);
-      return meCarts[0];
-    } else {
-      if (!cartId) {
-        const newCart = await apiRoot
-          .carts()
-          .post({
-            body: { currency: 'EUR' },
-          })
-          .execute();
+      if (meCarts.length > 0) {
+        setCart(meCarts[0]);
+        return meCarts[0];
+      }
+      const newCart = await apiClient
+        .me()
+        .carts()
+        .post({
+          body: { currency: 'EUR' },
+        })
+        .execute();
+      setCart(newCart.body);
+      return newCart.body;
+    }
 
-        setCartId(newCart.body.id);
-        return newCart.body;
-      }
-      try {
-        const response = await apiRoot.carts().withId({ ID: cartId }).get().execute();
-        return response.body;
-      } catch {
-        const newCart = await apiRoot
-          .carts()
-          .post({
-            body: { currency: 'EUR' },
-          })
-          .execute();
-        setCartId(newCart.body.id);
-        return newCart.body;
-      }
+    if (!cart) {
+      const newCart = await apiClient
+        .carts()
+        .post({
+          body: { currency: 'EUR' },
+        })
+        .execute();
+
+      setCart(newCart.body);
+      return newCart.body;
+    }
+
+    try {
+      const cartResponse = await apiClient.carts().withId({ ID: cart.id }).get().execute();
+      return cartResponse.body;
+    } catch {
+      const newCart = await apiClient
+        .carts()
+        .post({
+          body: { currency: 'EUR' },
+        })
+        .execute();
+      setCart(newCart.body);
+      return newCart.body;
     }
   } catch (error) {
     if (!isHttpError(error)) {
