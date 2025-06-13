@@ -49,6 +49,7 @@ const teamMembersData: TeamMember[] = [
     url: {
       imageMember: '/member-photo/ekaterina.webp',
       gitHub: 'https://github.com/ek-ole',
+      linkedIn: 'https://www.linkedin.com/in/ekaterina-dmitrenko-74531835a',
     },
   },
   {
