@@ -7,7 +7,6 @@ import { setAuthToLocalStorage } from '@/service/store/local-storage';
 
 export async function updateMyCustomer(
   customer: Customer,
-  token: string,
   updates: {
     firstName: string;
     lastName: string;
@@ -33,7 +32,7 @@ export async function updateMyCustomer(
     throw new Error('No update actions provided');
   }
 
-  const apiRoot = createApiClientWithToken(token);
+  const apiRoot = createApiClientWithToken();
 
   const response = await apiRoot
     .me()
@@ -54,8 +53,7 @@ export async function changeCustomerPassword(
   newPassword: string,
   email: string,
 ): Promise<Customer> {
-  const token = tokenCache.get().token;
-  const apiRoot = createApiClientWithToken(token);
+  const apiRoot = createApiClientWithToken();
 
   await apiRoot
     .me()

@@ -1,7 +1,7 @@
 import { Trash2 } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
-import { mutate } from 'swr';
+import { mutate as updateCart } from 'swr';
 
 import {
   AlertDialog,
@@ -27,7 +27,7 @@ export function ClearCartButton() {
     try {
       const success = await handleClearCart();
       if (success) {
-        await mutate('cart');
+        await updateCart('cart');
         toast.success('Cart cleared!', {
           description: 'All items successfully removed',
         });

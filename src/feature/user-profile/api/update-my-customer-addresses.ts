@@ -16,7 +16,7 @@ export async function updateMyCustomerAddresses(
   }
   if (actions.length === 0) throw new Error('No update actions provided');
 
-  const apiRoot = createApiClientWithToken(token);
+  const apiRoot = createApiClientWithToken();
   const latestCustomerResponse = await apiRoot.me().get().execute();
   const latestCustomer = latestCustomerResponse.body;
 
@@ -37,10 +37,9 @@ export async function updateMyCustomerAddresses(
 
 export async function removeMyCustomerAddress(
   customer: Customer,
-  token: string,
   addressId: string,
 ): Promise<Customer> {
-  const apiRoot = createApiClientWithToken(token);
+  const apiRoot = createApiClientWithToken();
   const response = await apiRoot
     .me()
     .post({

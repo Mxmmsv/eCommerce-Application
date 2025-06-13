@@ -13,7 +13,7 @@ const fetchCustomerWithToken =
 export const useCustomerProfile = (accessToken: string | null) => {
   const { customer, setCustomer } = useCustomerStore();
 
-  const apiRoot = accessToken ? createApiClientWithToken(accessToken) : null;
+  const apiRoot = accessToken ? createApiClientWithToken() : null;
 
   const { data, error, isLoading } = useSWR<Customer, Error>(
     apiRoot ? 'customer-profile' : null,

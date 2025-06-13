@@ -3,34 +3,71 @@ import type { Cart } from '@commercetools/platform-sdk';
 import AnonymousFlowApiClient from '@/feature/api/api-client-anonymous';
 import { createApiClientWithToken } from '@/feature/api/api-client-token-flow';
 import { HttpStatusCode, isHttpError } from '@/feature/api/errors';
-import { useAuthStore } from '@/service/store/use-auth-store';
+import { useCartStore } from '@/feature/catalog/adding-to-cart/use-cart-store';
+import { getAuthFromLocalStorage } from '@/service/store/local-storage';
 
 export const fetchCart = async (): Promise<Cart> => {
-  const { isAuthenticated, token } = useAuthStore.getState();
+  const auth = getAuthFromLocalStorage();
+  const isAuthenticated = auth.IS_AUTHORIZED;
+  const token = auth.ACCESS_TOKEN_KEY;
+  const { cart, setCart } = useCartStore.getState();
 
-  const apiRoot =
-    isAuthenticated && token ? createApiClientWithToken(token) : AnonymousFlowApiClient();
+  const apiClient =
+    isAuthenticated && token ? createApiClientWithToken() : AnonymousFlowApiClient();
 
   try {
-    const response = await apiRoot.me().activeCart().get().execute();
+    if (isAuthenticated) {
+      const response = await apiClient.me().carts().get().execute();
+      const meCarts = response.body.results;
 
-    return response.body;
+      if (meCarts.length > 0) {
+        setCart(meCarts[0]);
+        return meCarts[0];
+      }
+      const newCart = await apiClient
+        .me()
+        .carts()
+        .post({
+          body: { currency: 'EUR' },
+        })
+        .execute();
+      setCart(newCart.body);
+      return newCart.body;
+    }
+
+    if (!cart) {
+      const newCart = await apiClient
+        .carts()
+        .post({
+          body: { currency: 'EUR' },
+        })
+        .execute();
+
+      setCart(newCart.body);
+      return newCart.body;
+    }
+
+    try {
+      const cartResponse = await apiClient.carts().withId({ ID: cart.id }).get().execute();
+      return cartResponse.body;
+    } catch {
+      const newCart = await apiClient
+        .carts()
+        .post({
+          body: { currency: 'EUR' },
+        })
+        .execute();
+      setCart(newCart.body);
+      return newCart.body;
+    }
   } catch (error) {
     if (!isHttpError(error)) {
+      console.error(error);
       throw new Error('Unknown cart error');
     }
 
     if (error.statusCode === HttpStatusCode.NotFound) {
-      const cart = await apiRoot
-        .me()
-        .carts()
-        .post({
-          body: {
-            currency: 'EUR',
-          },
-        })
-        .execute();
-      return cart.body;
+      throw new Error('Cart not found');
     }
     if (error.statusCode === HttpStatusCode.Unauthorized) {
       throw new Error('Please log in to access your cart');
