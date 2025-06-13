@@ -13,6 +13,13 @@ export const ErrorSchema = object({
   message: optional(string()),
 });
 
-export function isHttpError(error: unknown): error is { statusCode: HttpStatusCode } {
+export function isHttpError(error: unknown): error is {
+  statusCode: HttpStatusCode;
+  message?: string;
+  errors?: {
+    code: string;
+    message: string;
+  }[];
+} {
   return is(ErrorSchema, error);
 }

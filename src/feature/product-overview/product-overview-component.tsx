@@ -4,7 +4,7 @@ import { useState, useContext } from 'react';
 import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spiner';
 import AuthContext from '@/feature/auth/login/auth-provider';
-import { addToCart } from '@/feature/catalog/adding-to-cart/cart-actions';
+import { addToCart } from '@/feature/catalog/adding-to-cart/add-to-cart';
 import { cn } from '@/lib/utils';
 
 import { useCartStore } from '../catalog/adding-to-cart/use-cart-store';
@@ -31,9 +31,10 @@ export default function ProductOverview({ productId }: { productId: string }) {
   }
 
   if (error) {
+    const message = error instanceof Error ? error.message : 'Failed to load products';
     return (
       <div className="flex min-h-svh items-center justify-center">
-        <div className="text-center text-red-500">{error.message || 'Failed to load products'}</div>
+        <div className="text-center text-red-500">{message}</div>
       </div>
     );
   }

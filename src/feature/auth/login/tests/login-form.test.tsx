@@ -19,7 +19,7 @@ describe('Login form', () => {
     expect(screen.getByText('Login')).toBeInTheDocument();
   });
 
-  it('should call onSubmit with valid data', async () => {
+  it('should not contain validation error after input valid data', async () => {
     render(
       <MemoryRouter>
         <LoginForm />
