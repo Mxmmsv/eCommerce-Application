@@ -17,7 +17,7 @@ function EvolutionSection() {
           </div>
           <div className="flex justify-center lg:w-1/2">
             <img
-              src="/posters/1800-poster.webp"
+              src="/posters/18th-poster.webp"
               alt="Poster from 1800s"
               className="w-full max-w-xs rounded-xl object-contain shadow-lg sm:max-w-sm md:max-w-md"
             />
@@ -27,7 +27,7 @@ function EvolutionSection() {
         <div className="flex flex-col-reverse items-center gap-8 lg:flex-row">
           <div className="flex justify-center lg:w-1/2">
             <img
-              src="/posters/20th-poster.jpg"
+              src="/posters/20th-poster.webp"
               alt="Poster from 20th century"
               className="w-full max-w-xs rounded-xl object-contain shadow-lg sm:max-w-sm md:max-w-md"
             />
