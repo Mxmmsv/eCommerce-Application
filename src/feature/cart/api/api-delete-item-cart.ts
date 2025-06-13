@@ -7,7 +7,7 @@ import { useAuthStore } from '@/service/store/use-auth-store';
 export const removeItemFromCart = async (lineItemId: string): Promise<Cart> => {
   const { token } = useAuthStore.getState();
 
-  const apiRoot = token ? createApiClientWithToken(token) : AnonymousFlowApiClient();
+  const apiRoot = token ? createApiClientWithToken() : AnonymousFlowApiClient();
 
   try {
     const { body: cart } = await apiRoot.me().activeCart().get().execute();
