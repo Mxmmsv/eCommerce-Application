@@ -5,8 +5,8 @@ import type {
 } from '@commercetools/platform-sdk';
 
 import PasswordFlowApiClient from '@/feature/api/api-client-password-flow';
+import { createApiClientWithToken } from '@/feature/api/api-client-token-flow';
 import { tokenCache } from '@/feature/api/api-token-store';
-// import { useCartStore } from '@/feature/catalog/adding-to-cart/use-cart-store';
 import { useCartStore } from '@/feature/catalog/adding-to-cart/use-cart-store';
 import { setAuthToLocalStorage } from '@/service/store/local-storage';
 import { useCustomerStore } from '@/service/store/use-user-store';
@@ -15,17 +15,13 @@ export const signInCustomer = async (
   email: string,
   password: string,
 ): Promise<ClientResponse<CustomerSignInResult>> => {
-  // const { anonymousId } = useCartStore.getState().cart.createdBy.anonymousId;
-
-  const { anonymousId } = useCartStore.getState();
+  const { cart } = useCartStore.getState();
   const customerLogin: CustomerSignin = {
     email,
     password,
     anonymousCartSignInMode: 'MergeWithExistingCustomerCart',
-    // anonymousCartId: anonymousId,
-    ...(anonymousId ? { anonymousId } : {}),
+    ...(cart?.id ? { anonymousCart: { id: cart.id, typeId: 'cart' } } : {}),
   };
-  console.log('Current anonymousId:', anonymousId);
 
   const apiRoot = PasswordFlowApiClient(email, password);
   const response = await apiRoot
@@ -35,7 +31,6 @@ export const signInCustomer = async (
       body: customerLogin,
     })
     .execute();
-  console.log('Токен после логина:', tokenCache.get().token);
   const token = tokenCache.get().token;
 
   if (!token) {
@@ -43,27 +38,18 @@ export const signInCustomer = async (
   }
 
   setAuthToLocalStorage(token, true);
+  useCustomerStore.getState().setCustomer(response.body.customer);
 
-  const { customer } = response.body;
-
-  useCustomerStore.getState().setCustomer({
-    id: customer.id,
-    version: customer.version,
-    createdAt: customer.createdAt,
-    lastModifiedAt: customer.lastModifiedAt,
-    email: customer.email,
-    firstName: customer.firstName ?? '',
-    lastName: customer.lastName ?? '',
-    dateOfBirth: customer.dateOfBirth ?? '',
-    isEmailVerified: customer.isEmailVerified,
-    stores: customer.stores,
-    authenticationMode: customer.authenticationMode,
-    addresses: customer.addresses,
-    defaultShippingAddressId: customer.defaultShippingAddressId,
-    defaultBillingAddressId: customer.defaultBillingAddressId,
-    shippingAddressIds: customer.shippingAddressIds ?? [],
-    billingAddressIds: customer.billingAddressIds ?? [],
-  });
+  if (response.body.cart) {
+    useCartStore.getState().setCart(response.body.cart);
+  } else {
+    const newCart = await createApiClientWithToken()
+      .me()
+      .carts()
+      .post({ body: { currency: 'EUR' } })
+      .execute();
+    useCartStore.getState().setCart(newCart.body);
+  }
 
   return response;
 };
