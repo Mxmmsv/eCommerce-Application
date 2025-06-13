@@ -16,11 +16,20 @@ export const signInCustomer = async (
   password: string,
 ): Promise<ClientResponse<CustomerSignInResult>> => {
   const { cart } = useCartStore.getState();
+
   const customerLogin: CustomerSignin = {
     email,
     password,
     anonymousCartSignInMode: 'MergeWithExistingCustomerCart',
-    ...(cart?.id ? { anonymousCart: { id: cart.id, typeId: 'cart' } } : {}),
+    ...(cart?.id
+      ? {
+          anonymousCart: {
+            id: cart.id,
+            typeId: 'cart',
+          },
+          anonymousId: cart.anonymousId,
+        }
+      : {}),
   };
 
   const apiRoot = PasswordFlowApiClient(email, password);
@@ -31,13 +40,13 @@ export const signInCustomer = async (
       body: customerLogin,
     })
     .execute();
-  const token = tokenCache.get().token;
 
+  const token = tokenCache.get().token;
   if (!token) {
     throw new Error('Authentication token not received');
   }
 
-  setAuthToLocalStorage(token, true);
+  setAuthToLocalStorage(token, true, response.body.customer.id);
   useCustomerStore.getState().setCustomer(response.body.customer);
 
   if (response.body.cart) {
