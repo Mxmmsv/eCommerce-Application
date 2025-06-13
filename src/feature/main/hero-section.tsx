@@ -31,7 +31,7 @@ function HeroSection() {
           </div>
         </div>
         <img
-          src="/hero-banner.jpg"
+          src="/posters/hero-banner.jpg"
           alt="banner for hero section"
           className="bg-accent aspect-video w-full rounded-xl object-cover lg:aspect-auto lg:h-[calc(100vh-4rem)] lg:w-[1000px]"
         />
