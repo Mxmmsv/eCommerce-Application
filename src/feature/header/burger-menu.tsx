@@ -3,7 +3,6 @@ import {
   ChevronDown,
   X,
   LayoutGrid,
-  Heart,
   UserRound,
   ShoppingCart,
   LogOut,
@@ -63,7 +62,7 @@ export default function BurgerMenu() {
           </SheetTitle>
           <SheetDescription className="sr-only">
             This menu allows you to choose one of the pages you want to navigate to: Home, Catalog,
-            About Us, Profile, Cart, Wishlist, or perform a site search.
+            About Us, Profile, Cart, or perform a site search.
           </SheetDescription>
           <div className="bg-background flex items-center justify-between gap-10 p-4">
             <div className="flex w-24 cursor-pointer items-center justify-center">
@@ -112,16 +111,6 @@ export default function BurgerMenu() {
               >
                 <Box size={28} className="mr-2" />
                 Catalog
-              </NavLink>
-            </SheetClose>
-
-            <SheetClose asChild>
-              <NavLink
-                to="/wishlist"
-                className="hover:text-chart-3 flex w-full cursor-pointer items-center py-5 transition-colors duration-300 hover:underline md:justify-center"
-              >
-                <Heart size={28} className="mr-2" />
-                Wishlist
               </NavLink>
             </SheetClose>
 
