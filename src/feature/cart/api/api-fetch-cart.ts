@@ -4,12 +4,10 @@ import AnonymousFlowApiClient from '@/feature/api/api-client-anonymous';
 import { createApiClientWithToken } from '@/feature/api/api-client-token-flow';
 import { HttpStatusCode, isHttpError } from '@/feature/api/errors';
 import { useCartStore } from '@/feature/catalog/adding-to-cart/use-cart-store';
-import { getAuthFromLocalStorage } from '@/service/store/local-storage';
+import { useAuthStore } from '@/service/store/use-auth-store';
 
 export const fetchCart = async (): Promise<Cart> => {
-  const auth = getAuthFromLocalStorage();
-  const isAuthenticated = auth.IS_AUTHORIZED;
-  const token = auth.ACCESS_TOKEN_KEY;
+  const { token, isAuthenticated } = useAuthStore.getState();
   const { cart, setCart } = useCartStore.getState();
 
   const apiClient =
