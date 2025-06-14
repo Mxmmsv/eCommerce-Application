@@ -68,7 +68,11 @@ export default function BurgerMenu() {
             <div className="flex w-24 cursor-pointer items-center justify-center">
               <SheetClose asChild>
                 <NavLink to="/">
-                  <img src="/logo.svg" alt="logo" className="rounded-2xl bg-white" />
+                  <img
+                    src="/logo.svg"
+                    alt="logo"
+                    className="h-auto w-full dark:brightness-0 dark:hue-rotate-180 dark:invert"
+                  />
                 </NavLink>
               </SheetClose>
             </div>
