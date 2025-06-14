@@ -18,9 +18,9 @@ export default function SearchBar() {
   };
 
   return (
-    <Command className="rounded-lg border shadow-md lg:flex">
+    <Command className="bg-muted rounded-lg lg:flex">
       <CommandInput
-        className="cursor-pointer outline-none"
+        className="cursor-pointer"
         placeholder="Search products..."
         value={searchQuery}
         onValueChange={handleSearch}

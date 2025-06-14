@@ -4,6 +4,7 @@ import { Toaster } from '@/components/ui/sonner';
 import { ThemeProvider } from '@/components/ui/theme-provider';
 import { AuthProvider } from '@/feature/auth/login/auth-provider';
 import ProtectedRoute from '@/feature/auth/login/protected-route';
+import Footer from '@/feature/footer/footer';
 import { Header } from '@/feature/header/header';
 import AboutUs from '@/pages/about-us-page';
 import Cart from '@/pages/cart-page';
@@ -14,7 +15,6 @@ import NotFound from '@/pages/not-found-page';
 import ProductDetail from '@/pages/product-detail-page';
 import UserProfile from '@/pages/profile-user-page';
 import Registration from '@/pages/registration-page';
-import Wishlist from '@/pages/wishlist-page';
 
 import { ScrollToTop } from './service/scroll-to-top';
 
@@ -33,7 +33,6 @@ function App() {
             <Route path="/catalog/product/:id" element={<ProductDetail />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/about_us" element={<AboutUs />} />
-            <Route path="/wishlist" element={<Wishlist />} />
             <Route path="/login" element={<Login />} />
             <Route path="/registration" element={<Registration />} />
             <Route
@@ -46,6 +45,7 @@ function App() {
             />
             <Route path="*" element={<NotFound />} />
           </Routes>
+          <Footer />
         </BrowserRouter>
       </ThemeProvider>
     </AuthProvider>

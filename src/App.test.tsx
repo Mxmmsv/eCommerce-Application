@@ -13,7 +13,7 @@ describe('App', () => {
     ).toBeInTheDocument();
 
     await user.click(screen.getByRole('link', { name: /about us/i }));
-    expect(screen.getByRole('heading', { name: /about us page/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /Meet Our/i })).toBeInTheDocument();
   });
 
   it('redirects on a not-found-page', () => {

@@ -6,8 +6,11 @@ import {
   correlationIdMiddlewareOptions,
   httpMiddlewareOptions,
 } from './api-client-builder';
+import { tokenCache } from './api-token-store';
 
-export const createApiClientWithToken = (accessToken: string) => {
+export const createApiClientWithToken = () => {
+  const accessToken = tokenCache.get().token;
+  if (!accessToken) throw new Error('Token is missing');
   const httpClientWithToken = async (request: RequestInfo, options?: RequestInit) => {
     const headers = new Headers(options?.headers);
     headers.set('Authorization', `Bearer ${accessToken}`);
