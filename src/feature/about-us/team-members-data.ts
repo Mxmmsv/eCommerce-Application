@@ -40,6 +40,7 @@ const teamMembersData: TeamMember[] = [
     contributions: [
       'Set up the project environment: Vite, React, TypeScript, Vitest, Valibot, ESLint',
       'Developed the catalog page',
+      'Developed a registration page',
       'Provided a structured and scalable component architecture',
       'Improved UX to make the interface clear and intuitive for users',
       'Implemented the cart page functionality',
