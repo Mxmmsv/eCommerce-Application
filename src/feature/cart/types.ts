@@ -42,7 +42,7 @@ export type CartContentProps = {
 
 export type CartListProps = {
   items: CartItemUI[];
-  removeItem: (id: string) => void;
+  removeItem: (id: string) => Promise<void>;
   updateQuantity: (id: string, change: number) => void;
 };
 
