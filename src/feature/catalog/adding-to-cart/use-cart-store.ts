@@ -20,18 +20,11 @@ export const useCartStore = create<CartStore>()(
       setCart: (cart) => set({ cart }),
       setAnonymousId: (id) => set({ anonymousId: id }),
       clearCart: () => set({ cart: null }),
-      getTotalQuantity: () => {
-        const { cart } = get();
-        return cart?.lineItems.reduce((sum, item) => sum + item.quantity, 0) || 0;
-      },
-
-      isInCart: (productId) => {
-        const { cart } = get();
-        return cart?.lineItems.some((item) => item.productId === productId) || false;
-      },
+      getTotalQuantity: () =>
+        get().cart?.lineItems.reduce((sum, item) => sum + item.quantity, 0) || 0,
+      isInCart: (productId) =>
+        get().cart?.lineItems.some((item) => item.productId === productId) || false,
     }),
-    {
-      name: 'CART-STORAGE',
-    },
+    { name: 'CART-STORAGE' },
   ),
 );
