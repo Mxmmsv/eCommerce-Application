@@ -1,6 +1,6 @@
 function RemainSection() {
   return (
-    <section>
+    <section className="bg-hero">
       <div className="mx-auto max-w-screen-xl space-y-16 px-4 sm:px-6 lg:px-8">
         <h2 className="text-center text-3xl leading-tight font-bold tracking-tight sm:text-4xl lg:text-5xl">
           Why Posters Remain Timeless

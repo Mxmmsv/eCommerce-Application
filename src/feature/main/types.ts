@@ -1,5 +1,7 @@
 type SeparatorWaveProp = {
-  className?: string | undefined;
+  className?: string;
+  bottom?: boolean;
+  color?: string;
 };
 
 export type { SeparatorWaveProp };
