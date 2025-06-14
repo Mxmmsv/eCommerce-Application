@@ -7,13 +7,13 @@ export default function HomePage() {
   return (
     <>
       <title>{'Home :: Poster store'}</title>
-      <SeparatorWave top={true} color="hero" />
+      <SeparatorWave top={true} color="fill-hero" />
       <HeroSection />
-      <SeparatorWave color="hero" />
+      <SeparatorWave color="fill-hero" />
       <EvolutionSection />
-      <SeparatorWave top={true} color="hero" />
+      <SeparatorWave top={true} color="fill-hero" />
       <RemainSection />
-      <SeparatorWave color="hero" />
+      <SeparatorWave color="fill-hero" />
     </>
   );
 }
