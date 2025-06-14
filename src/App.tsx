@@ -27,7 +27,7 @@ function App() {
             <ScrollToTop />
             <Header />
             <Toaster position="top-center" richColors closeButton />
-            <main className="flex-1">
+            <main className="flex w-full flex-1 flex-col justify-center">
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/catalog" element={<Catalog />} />
