@@ -23,29 +23,33 @@ function App() {
     <AuthProvider>
       <ThemeProvider defaultTheme="light" storageKey="UI-THEME">
         <BrowserRouter>
-          <ScrollToTop />
-          <Header />
-          <Toaster position="top-center" richColors closeButton />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/catalog" element={<Catalog />} />
-            <Route path="/catalog/category/:id" element={<Catalog />} />
-            <Route path="/catalog/product/:id" element={<ProductDetail />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/about_us" element={<AboutUs />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/registration" element={<Registration />} />
-            <Route
-              path="/profile"
-              element={
-                <ProtectedRoute>
-                  <UserProfile />
-                </ProtectedRoute>
-              }
-            />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          <Footer />
+          <div className="flex min-h-screen flex-col">
+            <ScrollToTop />
+            <Header />
+            <Toaster position="top-center" richColors closeButton />
+            <main className="flex-1">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/catalog" element={<Catalog />} />
+                <Route path="/catalog/category/:id" element={<Catalog />} />
+                <Route path="/catalog/product/:id" element={<ProductDetail />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/about_us" element={<AboutUs />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/registration" element={<Registration />} />
+                <Route
+                  path="/profile"
+                  element={
+                    <ProtectedRoute>
+                      <UserProfile />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </main>
+            <Footer />
+          </div>
         </BrowserRouter>
       </ThemeProvider>
     </AuthProvider>
