@@ -4,6 +4,7 @@ import { Toaster } from '@/components/ui/sonner';
 import { ThemeProvider } from '@/components/ui/theme-provider';
 import { AuthProvider } from '@/feature/auth/login/auth-provider';
 import ProtectedRoute from '@/feature/auth/login/protected-route';
+import Footer from '@/feature/footer/footer';
 import { Header } from '@/feature/header/header';
 import AboutUs from '@/pages/about-us-page';
 import Cart from '@/pages/cart-page';
@@ -44,6 +45,7 @@ function App() {
             />
             <Route path="*" element={<NotFound />} />
           </Routes>
+          <Footer />
         </BrowserRouter>
       </ThemeProvider>
     </AuthProvider>
