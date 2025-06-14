@@ -19,7 +19,7 @@ function EvolutionSection() {
             <img
               src="/posters/18th-poster.webp"
               alt="Poster from 1800s"
-              className="w-full max-w-xs rounded-xl object-contain shadow-lg sm:max-w-sm md:max-w-md"
+              className="shadow-chart-3/75 w-full max-w-xs rounded-xl object-contain shadow-lg sm:max-w-sm md:max-w-md"
             />
           </div>
         </div>
@@ -29,7 +29,7 @@ function EvolutionSection() {
             <img
               src="/posters/20th-poster.webp"
               alt="Poster from 20th century"
-              className="w-full max-w-xs rounded-xl object-contain shadow-lg sm:max-w-sm md:max-w-md"
+              className="shadow-chart-3/75 w-full max-w-xs rounded-xl object-contain shadow-lg sm:max-w-sm md:max-w-md"
             />
           </div>
           <div className="space-y-4 lg:w-1/2">
@@ -62,7 +62,7 @@ function EvolutionSection() {
             <img
               src="/posters/21th-poster.webp"
               alt="Poster from 21st century"
-              className="w-full max-w-xs rounded-xl object-contain shadow-lg sm:max-w-sm md:max-w-md"
+              className="shadow-chart-3/75 w-full max-w-xs rounded-xl object-contain shadow-lg sm:max-w-sm md:max-w-md"
             />
           </div>
         </div>
