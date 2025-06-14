@@ -7,7 +7,7 @@ function SeparatorWave({ className, top, color }: SeparatorWaveProp) {
     <div
       className={cn(
         'relative top-0 left-0 w-full overflow-hidden leading-[0]',
-        top && 'rotate-180',
+        top && '-mb-px rotate-180',
         className,
       )}
     >
