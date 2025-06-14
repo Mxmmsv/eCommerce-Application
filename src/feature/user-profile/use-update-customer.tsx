@@ -26,11 +26,9 @@ export function useUpdateCustomer() {
       throw new Error('No updated data provided');
     }
 
-    const token = localStorage.getItem('ACCESS_TOKEN_KEY');
-    if (!token) throw new Error('Access token not found');
     if (!customer) throw new Error('Customer not available');
 
-    const updatedCustomer = await updateMyCustomer(customer, token, updates);
+    const updatedCustomer = await updateMyCustomer(customer, updates);
     setCustomer(updatedCustomer);
   };
 
