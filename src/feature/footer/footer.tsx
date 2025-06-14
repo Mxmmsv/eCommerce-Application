@@ -14,7 +14,7 @@ function Footer() {
               </Link>
               .
             </p>
-            <p className="text-muted-foreground">All rights reserved.</p>
+            <p className="text-muted-foreground">All rights reserved</p>
           </div>
 
           <div className="flex flex-col items-center justify-center md:items-end">
