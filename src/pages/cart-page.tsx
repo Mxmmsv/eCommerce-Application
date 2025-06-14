@@ -1,6 +1,7 @@
 import { Spinner } from '@/components/ui/spiner';
 import { useCartActions } from '@/feature/cart/cart-actions';
 import { CartContent } from '@/feature/cart/cart-content';
+import { EmptyCart } from '@/feature/cart/empty-cart';
 import { mapLineItems } from '@/feature/cart/map-line-items';
 import { useCartPage } from '@/feature/cart/use-cart-page';
 import { useCartSummary } from '@/feature/cart/use-cart-summary';
@@ -29,7 +30,7 @@ export default function CartPage() {
     );
   }
 
-  if (items.length === 0) return <div>Empty cart</div>;
+  if (items.length === 0) return <EmptyCart />;
 
   return (
     <CartContent

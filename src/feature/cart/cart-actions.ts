@@ -1,4 +1,17 @@
+import { clearCart } from './api/api-clear-cart';
+
 export const useCartActions = () => {
+  const handleClearCart = async (): Promise<boolean> => {
+    try {
+      await clearCart();
+      return true;
+    } catch (error) {
+      console.error('Clearance failed:', {
+        error: error instanceof Error ? error.message : 'Unknown error',
+      });
+      return false;
+    }
+  };
   const handleUpdateQuantity = () => {
     // (id: string, change: number) => {
     // setItems((prev) =>
@@ -16,5 +29,5 @@ export const useCartActions = () => {
     // (id: string) => {
     // setItems((prev) => prev.filter((item) => item.id !== id));
   };
-  return { handleUpdateQuantity, handleRemove };
+  return { handleClearCart, handleUpdateQuantity, handleRemove };
 };

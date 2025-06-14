@@ -1,4 +1,5 @@
 import { CartList } from './cart-list';
+import { ClearCartButton } from './clear-button';
 import { OrderSummary } from './order-summary';
 import type { CartContentProps } from './types';
 
@@ -18,6 +19,7 @@ export function CartContent({
       <title>{'Cart :: Poster store'}</title>
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
         <div className="space-y-6 lg:col-span-2">
+          <ClearCartButton />
           <CartList items={items} removeItem={onRemove} updateQuantity={onUpdateQuantity} />
         </div>
         <div className="space-y-6">
