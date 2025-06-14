@@ -1,6 +1,6 @@
 import { Card } from '@/components/ui/card';
 
-import { CartItem } from './cart-item';
+import { CartItem } from './cart-item/cart-item';
 import type { CartListProps } from './types';
 
 export function CartList({ items, removeItem, updateQuantity }: CartListProps) {

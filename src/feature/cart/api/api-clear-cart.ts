@@ -1,5 +1,3 @@
-import type { Cart } from '@commercetools/platform-sdk';
-
 import AnonymousFlowApiClient from '@/feature/api/api-client-anonymous';
 import { createApiClientWithToken } from '@/feature/api/api-client-token-flow';
 import { useCartStore } from '@/feature/catalog/adding-to-cart/use-cart-store';
@@ -7,7 +5,7 @@ import { useAuthStore } from '@/service/store/use-auth-store';
 
 import { fetchCart } from './api-fetch-cart';
 
-export const clearCart = async (): Promise<Cart> => {
+export const clearCart = async () => {
   const { token, isAuthenticated } = useAuthStore.getState();
   const { setCart } = useCartStore.getState();
 
@@ -30,7 +28,7 @@ export const clearCart = async (): Promise<Cart> => {
 
       return response.body;
     } else {
-      const response = await apiRoot
+      await apiRoot
         .carts()
         .withId({ ID: currentCart.id })
         .delete({
@@ -46,9 +44,6 @@ export const clearCart = async (): Promise<Cart> => {
         .execute();
 
       setCart(newCart.body);
-      return newCart.body;
-
-      return response.body;
     }
   } catch (error) {
     console.error('Error emptying cart:', error);

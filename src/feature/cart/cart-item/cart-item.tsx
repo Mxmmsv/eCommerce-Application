@@ -1,10 +1,12 @@
-import { Trash2, Plus, Minus, Loader2 } from 'lucide-react';
+import { Plus, Minus } from 'lucide-react';
 import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { CardContent } from '@/components/ui/card';
 
-import type { CartItemUI } from './types';
+import type { CartItemUI } from '../types';
+
+import { RemoveItemButton } from './remove-item-button';
 
 type CartProps = {
   item: CartItemUI;
@@ -43,19 +45,7 @@ export function CartItem({ item, removeItem, updateQuantity }: CartProps) {
             <div>
               <h3 className="font-medium">{item.name}</h3>
             </div>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => void handleRemove()}
-              disabled={isRemoving}
-              aria-label="Remove item"
-            >
-              {isRemoving ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
-              ) : (
-                <Trash2 className="h-4 w-4" />
-              )}
-            </Button>
+            <RemoveItemButton onRemove={handleRemove} isRemoving={isRemoving} />
           </div>
 
           <div className="mt-4 flex items-center justify-between">
