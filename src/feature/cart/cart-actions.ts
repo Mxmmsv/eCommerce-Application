@@ -24,7 +24,7 @@ export const useCartActions = () => {
       await updateCart('cart');
     } catch (error) {
       toast.error('Failed to delete item. Try again later');
-      throw error;
+      console.error('Remove error:', error);
     }
   };
 

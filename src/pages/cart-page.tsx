@@ -41,7 +41,7 @@ export default function CartPage() {
       shipping={shipping}
       total={total}
       shippingMethods={shippingMethods}
-      onRemove={() => void handleRemove}
+      onRemove={handleRemove}
       onUpdateQuantity={handleUpdateQuantity}
     />
   );
