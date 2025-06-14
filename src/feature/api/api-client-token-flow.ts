@@ -1,6 +1,7 @@
 import { createApiBuilderFromCtpClient } from '@commercetools/platform-sdk';
 import { ClientBuilder } from '@commercetools/ts-client';
 
+import AnonymousFlowApiClient from './api-client-anonymous';
 import {
   projectKey,
   correlationIdMiddlewareOptions,
@@ -10,7 +11,7 @@ import { tokenCache } from './api-token-store';
 
 export const createApiClientWithToken = () => {
   const accessToken = tokenCache.get().token;
-  if (!accessToken) throw new Error('Token is missing');
+  if (!accessToken) return AnonymousFlowApiClient();
   const httpClientWithToken = async (request: RequestInfo, options?: RequestInit) => {
     const headers = new Headers(options?.headers);
     headers.set('Authorization', `Bearer ${accessToken}`);

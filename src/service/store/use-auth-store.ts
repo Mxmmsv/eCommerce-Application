@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 
+import { useCartStore } from '@/feature/catalog/adding-to-cart/use-cart-store';
 import { getAuthFromLocalStorage, setAuthToLocalStorage } from '@/service/store/local-storage';
 
 type AuthState = {
@@ -23,5 +24,6 @@ export const useAuthStore = create<AuthState>((set) => ({
     ['ACCESS_TOKEN_KEY', 'IS_AUTHORIZED', 'CUSTOMER_ID'].forEach((key) =>
       localStorage.removeItem(key),
     );
+    useCartStore.getState().clearCart();
   },
 }));

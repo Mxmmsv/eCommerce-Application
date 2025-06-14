@@ -1,17 +1,15 @@
 import type { Cart } from '@commercetools/platform-sdk';
 
-import AnonymousFlowApiClient from '@/feature/api/api-client-anonymous';
 import { createApiClientWithToken } from '@/feature/api/api-client-token-flow';
 import { HttpStatusCode, isHttpError } from '@/feature/api/errors';
 import { useCartStore } from '@/feature/catalog/adding-to-cart/use-cart-store';
 import { useAuthStore } from '@/service/store/use-auth-store';
 
 export const fetchCart = async (): Promise<Cart> => {
-  const { token, isAuthenticated } = useAuthStore.getState();
+  const { isAuthenticated } = useAuthStore.getState();
   const { cart, setCart } = useCartStore.getState();
 
-  const apiClient =
-    isAuthenticated && token ? createApiClientWithToken() : AnonymousFlowApiClient();
+  const apiClient = createApiClientWithToken();
 
   try {
     if (isAuthenticated) {
