@@ -22,6 +22,7 @@ export const fetchCart = async (): Promise<Cart> => {
         setCart(meCarts[0]);
         return meCarts[0];
       }
+
       const newCart = await apiClient
         .me()
         .carts()
@@ -33,14 +34,13 @@ export const fetchCart = async (): Promise<Cart> => {
       return newCart.body;
     }
 
-    if (!cart) {
+    if (!cart?.id) {
       const newCart = await apiClient
         .carts()
         .post({
           body: { currency: 'EUR' },
         })
         .execute();
-
       setCart(newCart.body);
       return newCart.body;
     }
