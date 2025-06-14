@@ -1,13 +1,10 @@
 import type { Cart } from '@commercetools/platform-sdk';
 
-import AnonymousFlowApiClient from '@/feature/api/api-client-anonymous';
-import { createApiClientWithToken } from '@/feature/api/api-client-token-flow';
+import { getApiClient } from '@/feature/api/api-client-utils';
 import { fetchCart } from '@/feature/cart/api/api-fetch-cart';
-import { useAuthStore } from '@/service/store/use-auth-store';
 
 export const clearCart = async (): Promise<Cart> => {
-  const { token } = useAuthStore.getState();
-  const apiRoot = token ? createApiClientWithToken() : AnonymousFlowApiClient();
+  const apiRoot = getApiClient();
 
   try {
     const currentCart = await fetchCart();

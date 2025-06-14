@@ -1,12 +1,9 @@
-import AnonymousFlowApiClient from '@/feature/api/api-client-anonymous';
-import { createApiClientWithToken } from '@/feature/api/api-client-token-flow';
-import { useAuthStore } from '@/service/store/use-auth-store';
+import { getApiClient } from '@/feature/api/api-client-utils';
 
 import { fetchCart } from './api-fetch-cart';
 
 export const removeItemFromCart = async (lineItemId: string): Promise<void> => {
-  const { token } = useAuthStore.getState();
-  const apiRoot = token ? createApiClientWithToken() : AnonymousFlowApiClient();
+  const apiRoot = getApiClient();
   const cart = await fetchCart();
 
   try {
