@@ -24,7 +24,7 @@ function Footer() {
                 <Link
                   to="https://rs.school"
                   target="_blank"
-                  className="hover:text-chart-3 p-2 transition-colors duration-300 lg:p-1"
+                  className="hover:text-chart-3 transition-colors duration-300"
                 >
                   <DribbbleIcon className="h-5 w-5" />
                 </Link>
@@ -33,7 +33,7 @@ function Footer() {
                 <Link
                   to="https://x.com/rollingscopes"
                   target="_blank"
-                  className="hover:text-chart-3 p-2 transition-colors duration-300 lg:p-1"
+                  className="hover:text-chart-3 transition-colors duration-300"
                 >
                   <TwitterIcon className="h-5 w-5" />
                 </Link>
@@ -42,7 +42,7 @@ function Footer() {
                 <Link
                   to="https://github.com/rolling-scopes-school"
                   target="_blank"
-                  className="hover:text-chart-3 p-2 transition-colors duration-300 lg:p-1"
+                  className="hover:text-chart-3 transition-colors duration-300"
                 >
                   <GithubIcon className="h-5 w-5" />
                 </Link>
