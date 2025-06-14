@@ -1,6 +1,6 @@
 function SeparatorWave() {
   return (
-    <div className="mt-12 h-3 w-full overflow-hidden bg-[url('/separator-wave.svg')] bg-[length:40px_10px] bg-center bg-repeat-x opacity-100" />
+    <div className="w-ful h-3 overflow-hidden bg-[url('/separator-wave.svg')] bg-[length:40px_10px] bg-center bg-repeat-x pt-12 opacity-100" />
   );
 }
 

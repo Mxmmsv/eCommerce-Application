@@ -10,6 +10,7 @@ export default function HomePage() {
       <HeroSection />
       <SeparatorWave />
       <EvolutionSection />
+      <SeparatorWave />
       <RemainSection />
     </>
   );

@@ -1,6 +1,6 @@
 function EvolutionSection() {
   return (
-    <section className="min-h-screen bg-white py-12 text-gray-900 dark:bg-gray-950 dark:text-gray-100">
+    <section className="min-h-screen">
       <div className="mx-auto max-w-screen-xl space-y-16 px-4 sm:px-6 lg:px-8">
         <h2 className="text-center text-3xl leading-tight font-bold tracking-tight sm:text-4xl lg:text-5xl">
           The Evolution of Posters: From Handbills to Modern Art
