@@ -1,6 +1,6 @@
 type SeparatorWaveProp = {
   className?: string;
-  bottom?: boolean;
+  top?: boolean;
   color?: string;
 };
 

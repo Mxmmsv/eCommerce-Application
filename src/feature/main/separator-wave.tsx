@@ -2,12 +2,12 @@ import { cn } from '@/lib/utils';
 
 import type { SeparatorWaveProp } from './types';
 
-function SeparatorWave({ className, bottom, color }: SeparatorWaveProp) {
+function SeparatorWave({ className, top, color }: SeparatorWaveProp) {
   return (
     <div
       className={cn(
         'relative top-0 left-0 w-full overflow-hidden leading-[0]',
-        bottom && 'rotate-180',
+        top && 'rotate-180',
         className,
       )}
     >
