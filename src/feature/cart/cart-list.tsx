@@ -1,9 +1,10 @@
 import { Card } from '@/components/ui/card';
 
-import { CartItem } from './cart-item';
+import { CartItem } from './cart-item/cart-item';
 import type { CartListProps } from './types';
 
 export function CartList({ items, removeItem, updateQuantity }: CartListProps) {
+  console.log('[UI] Rendering cart with items:', items.length);
   return (
     <div className="space-y-4">
       {items.map((item) => (

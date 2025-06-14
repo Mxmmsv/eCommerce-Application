@@ -1,19 +1,33 @@
-import { Trash2, Plus, Minus } from 'lucide-react';
+import { Plus, Minus } from 'lucide-react';
+import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { CardContent } from '@/components/ui/card';
 
-import type { CartItemUI } from './types';
+import type { CartItemUI } from '../types';
+
+import { RemoveItemButton } from './remove-item-button';
 
 type CartProps = {
   item: CartItemUI;
-  removeItem: (id: string) => void;
+  removeItem: (id: string) => Promise<void>;
   updateQuantity: (id: string, change: number) => void;
 };
 
 export function CartItem({ item, removeItem, updateQuantity }: CartProps) {
+  const [isRemoving, setIsRemoving] = useState(false);
+
+  const handleRemove = async () => {
+    setIsRemoving(true);
+    try {
+      await removeItem(item.id);
+    } finally {
+      setIsRemoving(false);
+    }
+  };
+
   return (
-    <CardContent className="p-0">
+    <CardContent className={`p-0 transition-opacity ${isRemoving ? 'opacity-50' : 'opacity-100'}`}>
       <div className="flex h-full flex-row">
         <div className="relative h-auto w-32">
           <img
@@ -31,9 +45,7 @@ export function CartItem({ item, removeItem, updateQuantity }: CartProps) {
             <div>
               <h3 className="font-medium">{item.name}</h3>
             </div>
-            <Button variant="ghost" size="icon" onClick={() => removeItem(item.id)}>
-              <Trash2 className="h-4 w-4" />
-            </Button>
+            <RemoveItemButton onRemove={handleRemove} isRemoving={isRemoving} />
           </div>
 
           <div className="mt-4 flex items-center justify-between">

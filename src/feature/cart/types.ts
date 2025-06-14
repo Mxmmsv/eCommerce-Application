@@ -36,13 +36,13 @@ export type CartContentProps = {
   shipping: number;
   total: number;
   shippingMethods: ShippingMethod[];
-  onRemove: (id: string) => void;
+  onRemove: (id: string) => Promise<void>;
   onUpdateQuantity: (id: string, change: number) => void;
 };
 
 export type CartListProps = {
   items: CartItemUI[];
-  removeItem: (id: string) => void;
+  removeItem: (id: string) => Promise<void>;
   updateQuantity: (id: string, change: number) => void;
 };
 
