@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useSearchParams } from 'react-router';
 import useSWR from 'swr';
 
@@ -21,11 +22,14 @@ export default function CatalogPage() {
   const { sortOption } = useSortStore();
   const { selectedTypes, onlyDiscounted, priceRange } = useFilterStore();
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPageDefault = Number(import.meta.env.VITE_PRODUCTS_PER_PAGE);
+
   const {
     data: products,
     error,
     isLoading,
-  } = useSWR<Poster[], Error>(
+  } = useSWR<{ products: Poster[]; total: number }, Error>(
     [
       'commercetools/products',
       lastCategoryId,
@@ -34,6 +38,8 @@ export default function CatalogPage() {
       selectedTypes,
       onlyDiscounted,
       priceRange,
+      currentPage,
+      productsPerPageDefault,
     ],
     () =>
       fetchProducts(
@@ -43,6 +49,8 @@ export default function CatalogPage() {
         selectedTypes,
         onlyDiscounted,
         priceRange,
+        currentPage,
+        productsPerPageDefault,
       ),
   );
 
@@ -84,13 +92,19 @@ export default function CatalogPage() {
             </div>
           )}
 
-          {products?.length === 0 && (
+          {products?.products?.length === 0 && (
             <div className="text-muted-foreground mt-4 text-center">
               No products found {searchQuery ? `for "${searchQuery}"` : ''}.
             </div>
           )}
 
-          <ProductList products={products || []} />
+          <ProductList
+            products={products?.products || []}
+            totalProducts={products?.total || 0}
+            currentPage={currentPage}
+            productsPerPageDefault={productsPerPageDefault}
+            onCurrentPageChange={setCurrentPage}
+          />
         </div>
       </div>
     </>
