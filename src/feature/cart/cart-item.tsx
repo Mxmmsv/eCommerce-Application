@@ -8,33 +8,24 @@ import type { CartItemUI } from './types';
 
 type CartProps = {
   item: CartItemUI;
-  removeItem: (id: string) => Promise<boolean>;
+  removeItem: (id: string) => Promise<void>;
   updateQuantity: (id: string, change: number) => void;
 };
 
 export function CartItem({ item, removeItem, updateQuantity }: CartProps) {
   const [isRemoving, setIsRemoving] = useState(false);
-  const [isRemoved, setIsRemoved] = useState(false);
 
   const handleRemove = async () => {
     setIsRemoving(true);
     try {
-      const success = await removeItem(item.id);
-      if (success) {
-        setIsRemoved(true);
-        setTimeout(() => setIsRemoving(false), 500);
-      }
+      await removeItem(item.id);
     } finally {
-      if (!isRemoved) setIsRemoving(false);
+      setIsRemoving(false);
     }
   };
 
-  if (isRemoved) return null;
-
   return (
-    <CardContent
-      className={`p-0 transition-opacity duration-300 ${isRemoving ? 'opacity-50' : 'opacity-100'}`}
-    >
+    <CardContent className={`p-0 transition-opacity ${isRemoving ? 'opacity-50' : 'opacity-100'}`}>
       <div className="flex h-full flex-row">
         <div className="relative h-auto w-32">
           <img

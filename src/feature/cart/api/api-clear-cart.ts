@@ -7,7 +7,6 @@ import { useAuthStore } from '@/service/store/use-auth-store';
 
 export const clearCart = async (): Promise<Cart> => {
   const { token } = useAuthStore.getState();
-
   const apiRoot = token ? createApiClientWithToken() : AnonymousFlowApiClient();
 
   try {

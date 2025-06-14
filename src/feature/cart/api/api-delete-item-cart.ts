@@ -1,18 +1,16 @@
-import type { Cart } from '@commercetools/platform-sdk';
-
 import AnonymousFlowApiClient from '@/feature/api/api-client-anonymous';
 import { createApiClientWithToken } from '@/feature/api/api-client-token-flow';
 import { useAuthStore } from '@/service/store/use-auth-store';
 
-export const removeItemFromCart = async (lineItemId: string): Promise<Cart> => {
-  const { token } = useAuthStore.getState();
+import { fetchCart } from './api-fetch-cart';
 
+export const removeItemFromCart = async (lineItemId: string): Promise<void> => {
+  const { token } = useAuthStore.getState();
   const apiRoot = token ? createApiClientWithToken() : AnonymousFlowApiClient();
+  const cart = await fetchCart();
 
   try {
-    const { body: cart } = await apiRoot.me().activeCart().get().execute();
-    const { body: updatedCart } = await apiRoot
-      .me()
+    await apiRoot
       .carts()
       .withId({ ID: cart.id })
       .post({
@@ -27,9 +25,8 @@ export const removeItemFromCart = async (lineItemId: string): Promise<Cart> => {
         },
       })
       .execute();
-    return updatedCart;
   } catch (error) {
-    console.error('Error remove item from cart:', error);
-    throw error;
+    console.error('Remove item error:', error);
+    throw new Error('Failed to remove item from cart');
   }
 };

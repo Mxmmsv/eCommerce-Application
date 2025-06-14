@@ -1,3 +1,4 @@
+import { toast } from 'sonner';
 import { mutate as updateCart } from 'swr';
 
 import { clearCart } from '@/feature/cart/api/api-clear-cart';
@@ -17,15 +18,13 @@ export const useCartActions = () => {
     }
   };
 
-  const handleRemove = async (lineItemId: string): Promise<boolean> => {
+  const handleRemove = async (lineItemId: string) => {
     try {
       await removeItemFromCart(lineItemId);
       await updateCart('cart');
-      console.log('Item removed successfully');
-      return true;
     } catch (error) {
-      console.error('Remove item failed:', error);
-      return false;
+      toast.error('Failed to delete item. Try again later');
+      throw error;
     }
   };
 
