@@ -1,4 +1,4 @@
-import { mutate } from 'swr';
+import { mutate as updateCart } from 'swr';
 
 import { clearCart } from '@/feature/cart/api/api-clear-cart';
 
@@ -20,7 +20,7 @@ export const useCartActions = () => {
   const handleRemove = async (lineItemId: string): Promise<boolean> => {
     try {
       await removeItemFromCart(lineItemId);
-      await mutate('cart');
+      await updateCart('cart');
       console.log('Item removed successfully');
       return true;
     } catch (error) {
