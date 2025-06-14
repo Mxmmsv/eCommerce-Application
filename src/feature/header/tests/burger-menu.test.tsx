@@ -42,7 +42,7 @@ describe('BurgerMenu', () => {
     const burgerMenu = screen.getByRole('dialog', { name: /burger menu/i });
     expect(burgerMenu).toBeInTheDocument();
 
-    const link = screen.getByRole('link', { name: /wishlist/i });
+    const link = screen.getByRole('link', { name: /home/i });
     await user.click(link);
 
     expect(screen.queryByRole('dialog', { name: /burger menu/i })).not.toBeInTheDocument();
