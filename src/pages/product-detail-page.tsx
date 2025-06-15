@@ -1,6 +1,18 @@
 import { useParams } from 'react-router';
 
+import ProductOverview from '@/feature/product-overview/product-overview-component';
+
 export default function ProductDetailPage() {
   const { id } = useParams();
-  return <h1>Product Detail Page — ID: {id}</h1>;
+
+  if (!id) {
+    return null;
+  }
+
+  return (
+    <>
+      <title>{'Product overview :: Poster store'}</title>
+      <ProductOverview productId={id} />
+    </>
+  );
 }
