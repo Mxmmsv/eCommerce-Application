@@ -3,14 +3,31 @@ import { useState } from 'react';
 import useSWR from 'swr';
 
 import { fetchCart } from '@/feature/cart/api/api-fetch-cart';
+import { useCartStore } from '@/feature/catalog/adding-to-cart/use-cart-store';
 
 export const useCartPage = () => {
-  const { data: cart, error, isLoading } = useSWR<Cart, Error>('cart', fetchCart);
-
+  const { setCart } = useCartStore();
   const [shippingMethod, setShippingMethod] = useState<string>('standard');
 
+  const {
+    data: cart,
+    error,
+    isLoading,
+  } = useSWR<Cart, Error>(
+    'cart',
+    async () => {
+      const cart = await fetchCart();
+      setCart(cart);
+      return cart;
+    },
+    {
+      revalidateOnFocus: false,
+      shouldRetryOnError: false,
+    },
+  );
+
   return {
-    cart,
+    cart: cart || null,
     error,
     isLoading,
     shippingMethod,

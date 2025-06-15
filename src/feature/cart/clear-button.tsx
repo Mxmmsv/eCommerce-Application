@@ -16,27 +16,25 @@ import {
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
 
-import { useCartActions } from './cart-actions';
+import { useCartStore } from '../catalog/adding-to-cart/use-cart-store';
+
+import { clearCart } from './api/api-clear-cart';
 
 export function ClearCartButton() {
-  const { handleClearCart } = useCartActions();
   const [isLoading, setIsLoading] = useState(false);
+  const { clearCart: clearStoreCart } = useCartStore();
 
   const handleClear = async () => {
     setIsLoading(true);
     try {
-      const success = await handleClearCart();
-      if (success) {
-        await updateCart('cart');
-        toast.success('Cart cleared!', {
-          description: 'All items successfully removed',
-        });
-      }
+      await clearCart();
+      clearStoreCart();
+      void updateCart('cart');
+
+      toast.success('Cart cleared successfully!');
     } catch (error) {
-      toast.error('Failed to clear cart', {
-        description: 'Try again later',
-      });
-      console.error('Error while cleaning:', error);
+      toast.error('Failed to clear cart');
+      console.error('Clear cart error:', error);
     } finally {
       setIsLoading(false);
     }

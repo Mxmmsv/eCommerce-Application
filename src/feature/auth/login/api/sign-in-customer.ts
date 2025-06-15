@@ -1,4 +1,5 @@
 import type {
+  Cart,
   ClientResponse,
   CustomerSignin,
   CustomerSignInResult,
@@ -15,21 +16,29 @@ export const signInCustomer = async (
   email: string,
   password: string,
 ): Promise<ClientResponse<CustomerSignInResult>> => {
-  const { cart } = useCartStore.getState();
+  const { cart: anonymousCart, anonymousId } = useCartStore.getState();
+  let existingUserCart: Cart | null = null;
+  try {
+    const apiClient = createApiClientWithToken();
+    const response = await apiClient.me().carts().get().execute();
+    existingUserCart = response.body.results[0] || null;
+  } catch (error) {
+    console.error('No existing user cart found:', error);
+  }
 
   const customerLogin: CustomerSignin = {
     email,
     password,
-    anonymousCartSignInMode: 'MergeWithExistingCustomerCart',
-    ...(cart?.id
-      ? {
-          anonymousCart: {
-            id: cart.id,
-            typeId: 'cart',
-          },
-          anonymousId: cart.anonymousId,
-        }
-      : {}),
+    anonymousCartSignInMode: existingUserCart?.lineItems.length
+      ? 'UseExistingCustomerCart'
+      : 'MergeWithExistingCustomerCart',
+    ...(anonymousCart?.id && {
+      anonymousCart: {
+        id: anonymousCart.id,
+        typeId: 'cart',
+      },
+      anonymousId: anonymousId || undefined,
+    }),
   };
 
   const apiRoot = PasswordFlowApiClient(email, password);
@@ -51,13 +60,6 @@ export const signInCustomer = async (
 
   if (response.body.cart) {
     useCartStore.getState().setCart(response.body.cart);
-  } else {
-    const newCart = await createApiClientWithToken()
-      .me()
-      .carts()
-      .post({ body: { currency: 'EUR' } })
-      .execute();
-    useCartStore.getState().setCart(newCart.body);
   }
 
   return response;
