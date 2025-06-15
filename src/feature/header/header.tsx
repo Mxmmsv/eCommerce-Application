@@ -1,7 +1,7 @@
-import { ShoppingCart } from 'lucide-react';
 import { NavLink } from 'react-router';
 
 import BurgerMenu from './burger-menu';
+import { CartIconWithBadge } from './cart-icon-with-badge';
 import { ModeToggle } from './mode-toggle';
 import { CustomNavigationMenu } from './nav-menu';
 import { ProfileDropdownMenu } from './profile-dropdown';
@@ -32,12 +32,7 @@ export function Header() {
               <ProfileDropdownMenu />
             </li>
             <li className="flex">
-              <NavLink
-                to="/cart"
-                className="hover:text-chart-3 p-3 transition-colors duration-300 lg:p-2"
-              >
-                <ShoppingCart strokeWidth={1.5} size={32} className="max-sm:size-6" />
-              </NavLink>
+              <CartIconWithBadge count={0} />
             </li>
             <li>
               <BurgerMenu />
