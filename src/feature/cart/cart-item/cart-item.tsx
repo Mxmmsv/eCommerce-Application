@@ -11,7 +11,7 @@ import { RemoveItemButton } from './remove-item-button';
 type CartProps = {
   item: CartItemUI;
   removeItem: (id: string) => Promise<void>;
-  updateQuantity: (id: string, change: number) => void;
+  updateQuantity: (id: string, change: number) => Promise<void>;
 };
 
 export function CartItem({ item, removeItem, updateQuantity }: CartProps) {
@@ -24,6 +24,14 @@ export function CartItem({ item, removeItem, updateQuantity }: CartProps) {
     } finally {
       setIsRemoving(false);
     }
+  };
+
+  const handleIncrease = () => {
+    updateQuantity(item.id, 1).catch(console.error);
+  };
+
+  const handleDecrease = () => {
+    updateQuantity(item.id, -1).catch(console.error);
   };
 
   return (
@@ -50,20 +58,21 @@ export function CartItem({ item, removeItem, updateQuantity }: CartProps) {
 
           <div className="mt-4 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Button variant="outline" size="icon" onClick={() => updateQuantity(item.id, -1)}>
+              <Button variant="outline" size="icon" onClick={handleDecrease} disabled={isRemoving}>
                 <Minus className="h-4 w-4" />
               </Button>
               <span className="w-8 text-center">{item.quantity}</span>
-              <Button variant="outline" size="icon" onClick={() => updateQuantity(item.id, 1)}>
+              <Button variant="outline" size="icon" onClick={handleIncrease} disabled={isRemoving}>
                 <Plus className="h-4 w-4" />
               </Button>
             </div>
 
             <div className="text-right">
-              <div className="font-medium">${(item.price * item.quantity).toFixed(2)}</div>
+              <div className="text-muted-foreground text-sm">each €{item.price.toFixed(2)}</div>
+              <div className="font-medium">€{(item.price * item.quantity).toFixed(2)}</div>
               {item.originalPrice && (
                 <div className="text-muted-foreground text-sm line-through">
-                  ${(item.originalPrice * item.quantity).toFixed(2)}
+                  €{(item.originalPrice * item.quantity).toFixed(2)}
                 </div>
               )}
             </div>

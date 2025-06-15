@@ -7,7 +7,7 @@ export const useCartSummary = (items: CartItemUI[], shippingMethod: string) => {
       name: 'Standard Shipping',
       price: 5.99,
       estimatedDays: '3-5 days',
-      description: 'Free shipping on orders over $200',
+      description: 'Free shipping on orders over €200',
     },
     {
       id: 'express',

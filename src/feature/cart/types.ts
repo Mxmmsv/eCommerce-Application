@@ -37,7 +37,7 @@ export type CartContentProps = {
   total: number;
   shippingMethods: ShippingMethod[];
   onRemove: (id: string) => Promise<void>;
-  onUpdateQuantity: (id: string, change: number) => void;
+  onUpdateQuantity: (id: string, change: number) => Promise<void>;
 };
 
 export type CartListProps = {
