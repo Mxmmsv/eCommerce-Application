@@ -30,12 +30,20 @@ export function CartItem({ item, removeItem, updateQuantity, updatingItemId }: C
     }
   };
 
-  const handleIncrease = () => {
-    updateQuantity(item.id, 1).catch(console.error);
+  const handleIncrease = async () => {
+    try {
+      await updateQuantity(item.id, 1);
+    } catch (error) {
+      console.error('Increase quantity error:', error);
+    }
   };
 
-  const handleDecrease = () => {
-    updateQuantity(item.id, -1).catch(console.error);
+  const handleDecrease = async () => {
+    try {
+      await updateQuantity(item.id, -1);
+    } catch (error) {
+      console.error('Decrease quantity error:', error);
+    }
   };
 
   return (
@@ -65,7 +73,7 @@ export function CartItem({ item, removeItem, updateQuantity, updatingItemId }: C
               <Button
                 variant="outline"
                 size="icon"
-                onClick={handleDecrease}
+                onClick={() => void handleDecrease()}
                 disabled={isUpdating || isMinQuantity}
               >
                 <Minus className="h-4 w-4" />
@@ -77,7 +85,12 @@ export function CartItem({ item, removeItem, updateQuantity, updatingItemId }: C
               ) : (
                 <span className="w-8 text-center">{item.quantity}</span>
               )}
-              <Button variant="outline" size="icon" onClick={handleIncrease} disabled={isUpdating}>
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() => void handleIncrease()}
+                disabled={isUpdating}
+              >
                 <Plus className="h-4 w-4" />
               </Button>
             </div>
