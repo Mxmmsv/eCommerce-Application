@@ -1,23 +1,14 @@
 import { ShoppingCart } from 'lucide-react';
 import { NavLink } from 'react-router';
 
-import { cn } from '@/lib/utils';
-
 import { useCartStore } from '../catalog/adding-to-cart/use-cart-store';
 
-type CartIconWithBadgeProps = {
-  className?: string;
-};
-
-export function CartIconWithBadge({ className }: CartIconWithBadgeProps) {
+export function CartIconWithBadge() {
   const productsCount = useCartStore((state) => state.cart?.totalLineItemQuantity) ?? 0;
   return (
     <NavLink
       to="/cart"
-      className={cn(
-        'hover:text-chart-3 relative p-3 transition-colors duration-300 lg:p-2',
-        className,
-      )}
+      className="hover:text-chart-3 relative p-3 transition-colors duration-300 lg:p-2"
     >
       <ShoppingCart strokeWidth={1.5} size={32} className="max-sm:size-6" />
 
