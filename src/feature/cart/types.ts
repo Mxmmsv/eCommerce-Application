@@ -38,12 +38,14 @@ export type CartContentProps = {
   shippingMethods: ShippingMethod[];
   onRemove: (id: string) => Promise<void>;
   onUpdateQuantity: (id: string, change: number) => Promise<void>;
+  updatingItemId: string | null;
 };
 
 export type CartListProps = {
   items: CartItemUI[];
   removeItem: (id: string) => Promise<void>;
   updateQuantity: (id: string, change: number) => Promise<void>;
+  updatingItemId: string | null;
 };
 
 export type OrderSummaryProps = {

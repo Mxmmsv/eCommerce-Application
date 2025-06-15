@@ -8,7 +8,7 @@ import { useCartSummary } from '@/feature/cart/use-cart-summary';
 
 export default function CartPage() {
   const { cart, error, isLoading, shippingMethod, setShippingMethod } = useCartPage();
-  const { handleUpdateQuantity, handleRemove } = useCartActions();
+  const { handleUpdateQuantity, handleRemove, updatingItemId } = useCartActions();
   const items = cart?.lineItems ? mapLineItems(cart.lineItems) : [];
   const { subtotal, shipping, total, shippingMethods } = useCartSummary(items, shippingMethod);
 
@@ -43,6 +43,7 @@ export default function CartPage() {
       shippingMethods={shippingMethods}
       onRemove={handleRemove}
       onUpdateQuantity={handleUpdateQuantity}
+      updatingItemId={updatingItemId}
     />
   );
 }

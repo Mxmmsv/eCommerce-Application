@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { CardContent } from '@/components/ui/card';
+import { Spinner } from '@/components/ui/spiner';
 
 import type { CartItemUI } from '../types';
 
@@ -12,11 +13,13 @@ type CartProps = {
   item: CartItemUI;
   removeItem: (id: string) => Promise<void>;
   updateQuantity: (id: string, change: number) => Promise<void>;
-  isUpdating?: boolean;
+  updatingItemId: string | null;
 };
 
-export function CartItem({ item, removeItem, updateQuantity, isUpdating }: CartProps) {
+export function CartItem({ item, removeItem, updateQuantity, updatingItemId }: CartProps) {
   const [isRemoving, setIsRemoving] = useState(false);
+  const isUpdating = updatingItemId === item.id;
+  const isMinQuantity = item.quantity <= 1;
 
   const handleRemove = async () => {
     setIsRemoving(true);
@@ -63,17 +66,18 @@ export function CartItem({ item, removeItem, updateQuantity, isUpdating }: CartP
                 variant="outline"
                 size="icon"
                 onClick={handleDecrease}
-                disabled={isUpdating || isRemoving}
+                disabled={isUpdating || isMinQuantity}
               >
                 <Minus className="h-4 w-4" />
               </Button>
-              <span className="w-8 text-center">{item.quantity}</span>
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={handleIncrease}
-                disabled={isUpdating || isRemoving}
-              >
+              {isUpdating ? (
+                <div className="flex w-8 justify-center">
+                  <Spinner className="h-4 w-4" />
+                </div>
+              ) : (
+                <span className="w-8 text-center">{item.quantity}</span>
+              )}
+              <Button variant="outline" size="icon" onClick={handleIncrease} disabled={isUpdating}>
                 <Plus className="h-4 w-4" />
               </Button>
             </div>

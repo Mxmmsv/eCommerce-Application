@@ -9,7 +9,7 @@ import { fetchCart } from './api/api-fetch-cart';
 import { updateItemQuantity } from './api/api-update-item-quantity';
 
 export const useCartActions = () => {
-  const [isUpdating, setIsUpdating] = useState(false);
+  const [updatingItemId, setUpdatingItemId] = useState<string | null>(null);
 
   const handleClearCart = async (): Promise<boolean> => {
     try {
@@ -34,20 +34,22 @@ export const useCartActions = () => {
   };
 
   const handleUpdateQuantity = async (lineItemId: string, change: number) => {
-    if (isUpdating) return;
-    setIsUpdating(true);
+    if (updatingItemId) return;
+    setUpdatingItemId(lineItemId);
+
     try {
       const cart = await fetchCart();
       const currentItem = cart.lineItems.find((item) => item.id === lineItemId);
       if (!currentItem) return;
+
       const newQuantity = currentItem.quantity + change;
       if (newQuantity < 1) return;
+
       await updateItemQuantity(lineItemId, newQuantity);
       await updateCart('cart');
-    } catch (error) {
-      toast.error('Failed to update quantity. Try again later');
-      console.error('Update quantity error:', error);
+    } finally {
+      setUpdatingItemId(null);
     }
   };
-  return { handleClearCart, handleRemove, handleUpdateQuantity };
+  return { handleClearCart, handleRemove, handleUpdateQuantity, updatingItemId };
 };

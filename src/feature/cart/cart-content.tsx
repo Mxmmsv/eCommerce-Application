@@ -17,6 +17,7 @@ export function CartContent({
   shippingMethods,
   onRemove,
   onUpdateQuantity,
+  updatingItemId,
 }: CartContentProps) {
   const [isClearing, setIsClearing] = useState(false);
 
@@ -36,7 +37,12 @@ export function CartContent({
       >
         <div className="space-y-6 lg:col-span-2">
           <ClearCartButton onStateChange={setIsClearing} />
-          <CartList items={items} removeItem={onRemove} updateQuantity={onUpdateQuantity} />
+          <CartList
+            items={items}
+            removeItem={onRemove}
+            updateQuantity={onUpdateQuantity}
+            updatingItemId={updatingItemId}
+          />
         </div>
         <div className="space-y-6">
           <OrderSummary
