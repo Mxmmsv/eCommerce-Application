@@ -4,6 +4,8 @@ import { mutate as updateCart } from 'swr';
 import { clearCart } from '@/feature/cart/api/api-clear-cart';
 
 import { removeItemFromCart } from './api/api-delete-item-cart';
+import { fetchCart } from './api/api-fetch-cart';
+import { updateItemQuantity } from './api/api-update-item-quantity';
 
 export const useCartActions = () => {
   const handleClearCart = async (): Promise<boolean> => {
@@ -28,17 +30,19 @@ export const useCartActions = () => {
     }
   };
 
-  const handleUpdateQuantity = () => {
-    // (id: string, change: number) => {
-    // setItems((prev) =>
-    //   prev.map((item) => {
-    //     if (item.id === id) {
-    //       const newQuantity = Math.max(1, Math.min(item.stock, item.quantity + change));
-    //       return { ...item, quantity: newQuantity };
-    //     }
-    //     return item;
-    //   }),
-    // );
+  const handleUpdateQuantity = async (lineItemId: string, change: number) => {
+    try {
+      const cart = await fetchCart();
+      const currentItem = cart.lineItems.find((item) => item.id === lineItemId);
+      if (!currentItem) return;
+      const newQuantity = currentItem.quantity + change;
+      if (newQuantity < 1) return;
+      await updateItemQuantity(lineItemId, newQuantity);
+      await updateCart('cart');
+    } catch (error) {
+      toast.error('Failed to update quantity. Try again later');
+      console.error('Update quantity error:', error);
+    }
   };
   return { handleClearCart, handleRemove, handleUpdateQuantity };
 };
