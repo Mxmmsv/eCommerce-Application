@@ -8,6 +8,7 @@ import { addToCart } from '@/feature/catalog/adding-to-cart/add-to-cart';
 import { cn } from '@/lib/utils';
 
 import { useCartStore } from '../catalog/adding-to-cart/use-cart-store';
+import { DeleteFromCartButton } from '../catalog/delete-from-cart-button/delete-from-cart-button';
 
 import { ProductImages } from './product-images';
 import { useProductOverview } from './use-product-overview';
@@ -96,9 +97,8 @@ export default function ProductOverview({ productId }: { productId: string }) {
             >
               {isAdding ? 'Adding...' : isInCart ? 'In Cart' : 'Add to Cart'}
             </Button>
-            <Button size="lg" variant="outline" className="flex-1">
-              Buy Now
-            </Button>
+
+            <DeleteFromCartButton productId={productId} variantId={product.masterVariant.id} />
           </div>
         </div>
       </div>
