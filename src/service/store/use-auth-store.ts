@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 
+import { fetchCart } from '@/feature/cart/api/api-fetch-cart';
 import { useCartStore } from '@/feature/catalog/adding-to-cart/use-cart-store';
 import { getAuthFromLocalStorage, setAuthToLocalStorage } from '@/service/store/local-storage';
 
@@ -18,6 +19,7 @@ export const useAuthStore = create<AuthState>((set) => ({
   login: (token: string, customerId?: string) => {
     set({ token, isAuthenticated: true });
     setAuthToLocalStorage(token, true, customerId);
+    void fetchCart();
   },
   logout: () => {
     set({ token: null, isAuthenticated: false });
