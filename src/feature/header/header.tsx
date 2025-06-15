@@ -13,7 +13,7 @@ export function Header() {
       <CustomNavigationMenu />
 
       <div className="flex w-24 cursor-pointer flex-col items-center justify-center">
-        <NavLink to="/">
+        <NavLink to="/" className="w-full">
           <img
             src="/logo.svg"
             alt="logo store"

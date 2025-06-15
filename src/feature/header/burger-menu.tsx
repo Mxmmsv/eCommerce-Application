@@ -67,7 +67,7 @@ export default function BurgerMenu() {
           <div className="bg-background flex items-center justify-between gap-10 p-4">
             <div className="flex w-24 cursor-pointer items-center justify-center">
               <SheetClose asChild>
-                <NavLink to="/">
+                <NavLink to="/" className="w-full">
                   <img
                     src="/logo.svg"
                     alt="logo"
