@@ -23,9 +23,7 @@ export const signInCustomer = async (
     const response = await apiClient.me().carts().get().execute();
     existingUserCart = response.body.results[0] || null;
   } catch (error) {
-    if (error instanceof Error) {
-      console.log('No existing user cart found:', error.message);
-    }
+    console.error('No existing user cart found:', error);
   }
 
   const customerLogin: CustomerSignin = {
