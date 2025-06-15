@@ -17,8 +17,9 @@ export const fetchCart = async (): Promise<Cart> => {
       const userCarts = response.body.results;
 
       if (userCarts.length > 0) {
-        setCart(userCarts[0]);
-        return userCarts[0];
+        const lastCart = userCarts[userCarts.length - 1];
+        setCart(lastCart);
+        return lastCart;
       }
 
       if (anonymousCart?.lineItems.length) {
