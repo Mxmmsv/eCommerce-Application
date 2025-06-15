@@ -12,9 +12,10 @@ type CartProps = {
   item: CartItemUI;
   removeItem: (id: string) => Promise<void>;
   updateQuantity: (id: string, change: number) => Promise<void>;
+  isUpdating?: boolean;
 };
 
-export function CartItem({ item, removeItem, updateQuantity }: CartProps) {
+export function CartItem({ item, removeItem, updateQuantity, isUpdating }: CartProps) {
   const [isRemoving, setIsRemoving] = useState(false);
 
   const handleRemove = async () => {
@@ -58,11 +59,21 @@ export function CartItem({ item, removeItem, updateQuantity }: CartProps) {
 
           <div className="mt-4 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Button variant="outline" size="icon" onClick={handleDecrease} disabled={isRemoving}>
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={handleDecrease}
+                disabled={isUpdating || isRemoving}
+              >
                 <Minus className="h-4 w-4" />
               </Button>
               <span className="w-8 text-center">{item.quantity}</span>
-              <Button variant="outline" size="icon" onClick={handleIncrease} disabled={isRemoving}>
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={handleIncrease}
+                disabled={isUpdating || isRemoving}
+              >
                 <Plus className="h-4 w-4" />
               </Button>
             </div>

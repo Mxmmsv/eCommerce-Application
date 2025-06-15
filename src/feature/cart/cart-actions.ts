@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { toast } from 'sonner';
 import { mutate as updateCart } from 'swr';
 
@@ -8,6 +9,8 @@ import { fetchCart } from './api/api-fetch-cart';
 import { updateItemQuantity } from './api/api-update-item-quantity';
 
 export const useCartActions = () => {
+  const [isUpdating, setIsUpdating] = useState(false);
+
   const handleClearCart = async (): Promise<boolean> => {
     try {
       await clearCart();
@@ -31,6 +34,8 @@ export const useCartActions = () => {
   };
 
   const handleUpdateQuantity = async (lineItemId: string, change: number) => {
+    if (isUpdating) return;
+    setIsUpdating(true);
     try {
       const cart = await fetchCart();
       const currentItem = cart.lineItems.find((item) => item.id === lineItemId);
