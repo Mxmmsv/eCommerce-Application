@@ -1,9 +1,6 @@
-import { createApiBuilderFromCtpClient } from '@commercetools/platform-sdk';
-import {
-  ClientBuilder,
-  type AuthMiddlewareOptions,
-  type HttpMiddlewareOptions,
-  type CorrelationIdMiddlewareOptions,
+import type {
+  CorrelationIdMiddlewareOptions,
+  HttpMiddlewareOptions,
 } from '@commercetools/ts-client';
 
 const projectKey: string = import.meta.env.VITE_PROJECT_KEY;
@@ -12,17 +9,6 @@ const clientSecret: string = import.meta.env.VITE_CLIENT_SECRET;
 const authUrl: string = import.meta.env.VITE_AUTH_URL;
 const apiUrl: string = import.meta.env.VITE_API_URL;
 const scopes: string[] = import.meta.env.VITE_SCOPES.split(' ');
-
-const authMiddlewareOptions: AuthMiddlewareOptions = {
-  host: authUrl,
-  projectKey,
-  credentials: {
-    clientId,
-    clientSecret,
-  },
-  scopes,
-  httpClient: fetch,
-};
 
 const httpMiddlewareOptions: HttpMiddlewareOptions = {
   host: apiUrl,
@@ -44,13 +30,13 @@ const correlationIdMiddlewareOptions: CorrelationIdMiddlewareOptions = {
   generate: (): string => crypto.randomUUID(),
 };
 
-const client = new ClientBuilder()
-  .withProjectKey(projectKey)
-  .withClientCredentialsFlow(authMiddlewareOptions)
-  .withCorrelationIdMiddleware(correlationIdMiddlewareOptions)
-  .withHttpMiddleware(httpMiddlewareOptions)
-  .build();
-
-const apiRoot = createApiBuilderFromCtpClient(client).withProjectKey({ projectKey });
-
-export default apiRoot;
+export {
+  projectKey,
+  clientId,
+  clientSecret,
+  authUrl,
+  apiUrl,
+  scopes,
+  httpMiddlewareOptions,
+  correlationIdMiddlewareOptions,
+};
