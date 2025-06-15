@@ -1,23 +1,16 @@
 import { ArrowLeft } from 'lucide-react';
-import { useNavigate } from 'react-router';
 
 import { Button } from '@/components/ui/button';
 
-const BackButton = () => {
-  const navigate = useNavigate();
+export default function BackButton() {
+  const goBack = () => {
+    window.history.back();
+  };
 
   return (
-    <Button
-      onClick={() => {
-        void navigate(-1);
-      }}
-      variant="outline"
-      className="m-7"
-    >
+    <Button onClick={goBack} variant="outline" className="m-7">
       <ArrowLeft size={36} />
       Back to Catalog
     </Button>
   );
-};
-
-export default BackButton;
+}
