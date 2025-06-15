@@ -32,7 +32,7 @@ export function Header() {
               <ProfileDropdownMenu />
             </li>
             <li className="flex">
-              <CartIconWithBadge count={0} />
+              <CartIconWithBadge />
             </li>
             <li>
               <BurgerMenu />
