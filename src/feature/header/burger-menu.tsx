@@ -67,12 +67,8 @@ export default function BurgerMenu() {
           <div className="bg-background flex items-center justify-between gap-10 p-4">
             <div className="flex w-24 cursor-pointer items-center justify-center">
               <SheetClose asChild>
-                <NavLink to="/" className="w-full">
-                  <img
-                    src="/logo.svg"
-                    alt="logo"
-                    className="h-auto w-full dark:brightness-0 dark:hue-rotate-180 dark:invert"
-                  />
+                <NavLink to="/" className="w-full text-center">
+                  <span className="logo text-5xl dark:text-white">Poster Store</span>
                 </NavLink>
               </SheetClose>
             </div>

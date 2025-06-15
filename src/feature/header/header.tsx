@@ -13,12 +13,8 @@ export function Header() {
       <CustomNavigationMenu />
 
       <div className="flex w-24 cursor-pointer flex-col items-center justify-center">
-        <NavLink to="/" className="w-full">
-          <img
-            src="/logo.svg"
-            alt="logo store"
-            className="h-auto w-full dark:brightness-0 dark:hue-rotate-180 dark:invert"
-          />
+        <NavLink to="/" className="w-full text-center">
+          <span className="logo text-5xl dark:text-white">Poster Store</span>
         </NavLink>
       </div>
 
