@@ -31,6 +31,8 @@ const ProductComponent = ({ poster, currentPage }: Props) => {
             <img
               src={poster.image}
               alt={poster.name}
+              loading="lazy"
+              decoding="async"
               className={cn(
                 'h-full w-full object-cover object-center px-0',
                 'rounded-t-sm transition-all duration-500',
