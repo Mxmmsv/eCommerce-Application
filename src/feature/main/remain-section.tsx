@@ -2,7 +2,7 @@ function RemainSection() {
   return (
     <section className="bg-hero">
       <div className="mx-auto max-w-screen-xl space-y-16 px-4 sm:px-6 lg:px-8">
-        <h2 className="text-center text-3xl leading-tight font-bold tracking-tight sm:text-4xl lg:text-5xl">
+        <h2 className="mb-5 text-center text-3xl leading-tight font-bold tracking-tight sm:text-4xl lg:mb-15 lg:text-5xl">
           Why Posters Remain Timeless
         </h2>
         <div className="grid grid-cols-1 gap-5 text-center md:grid-cols-2 lg:grid-cols-4 lg:text-balance">

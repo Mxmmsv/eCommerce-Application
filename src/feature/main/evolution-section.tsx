@@ -2,7 +2,7 @@ function EvolutionSection() {
   return (
     <section className="min-h-screen">
       <div className="mx-auto max-w-screen-xl space-y-16 px-4 sm:px-6 lg:px-8">
-        <h2 className="text-center text-3xl leading-tight font-bold tracking-tight sm:text-4xl lg:text-5xl">
+        <h2 className="mb-5 text-center text-3xl leading-tight font-bold tracking-tight sm:text-4xl lg:mb-15 lg:text-5xl">
           The Evolution of Posters: From Handbills to Modern Art
         </h2>
 
