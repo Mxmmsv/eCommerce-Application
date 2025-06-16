@@ -45,10 +45,6 @@ export function OrderSummary({ total }: OrderSummaryProps) {
                   void removeDiscountCode();
                   setPromoCode('');
                 }}
-                // onClick={async () => {
-                //   await removeDiscountCode();
-                //   setPromoCode('');
-                // }}
                 disabled={isApplying}
               >
                 Remove
