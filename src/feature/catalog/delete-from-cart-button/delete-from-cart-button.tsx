@@ -65,7 +65,7 @@ export const DeleteFromCartButton = ({ productId, variantId }: Props) => {
       : 'Delete from Cart';
 
   const buttonClass = cn(
-    'flex-1 hover:bg-[#ff676e]',
+    'flex-1 max-sm:py-2.5',
     !lineItem && 'cursor-not-allowed',
     isDeleting && 'opacity-75',
   );
@@ -73,7 +73,7 @@ export const DeleteFromCartButton = ({ productId, variantId }: Props) => {
   return (
     <Button
       size="lg"
-      variant="destructive"
+      variant="outline"
       disabled={!lineItem || isDeleting}
       onClick={() => {
         void handleDelete();

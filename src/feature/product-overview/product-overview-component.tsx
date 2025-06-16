@@ -41,7 +41,7 @@ export default function ProductOverview({ productId }: { productId: string }) {
           description={product.description}
         />
 
-        <div className="flex flex-col">
+        <div className="flex flex-col max-md:items-center max-md:text-center">
           <h1 className="mb-2 text-3xl font-bold">{product.name}</h1>
 
           <div className="mb-6 flex items-baseline gap-4">
@@ -64,7 +64,7 @@ export default function ProductOverview({ productId }: { productId: string }) {
 
           <p className="text-muted-foreground mb-6">{product.description}</p>
 
-          <div className="mt-8 flex gap-4">
+          <div className="mt-8 flex w-full gap-4 max-sm:flex-col">
             <AddToCartButton productId={productId} />
             <DeleteFromCartButton productId={productId} variantId={product.masterVariant.id} />
           </div>

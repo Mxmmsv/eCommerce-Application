@@ -30,8 +30,8 @@ export const AddToCartButton = ({ productId }: Props) => {
     <Button
       size="lg"
       className={cn(
-        'flex-1 transition-colors',
-        isInCart ? 'bg-chart-3 text-card hover:bg-chart-3/80' : '',
+        'bg-chart-3 text-primary-foreground hover:bg-chart-3/90 flex-1 transition-colors max-sm:py-2.5',
+        isInCart ? 'text-card' : '',
       )}
       onClick={() => void handleAddToCart()}
       disabled={isAdding || isInCart}
