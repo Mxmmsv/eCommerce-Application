@@ -9,9 +9,11 @@ import { useCartStore } from '../adding-to-cart/use-cart-store';
 
 type Props = {
   productId: string;
+  className?: string;
+  children?: React.ReactNode;
 };
 
-export const AddToCartButton = ({ productId }: Props) => {
+export const AddToCartButton = ({ productId, className, children }: Props) => {
   const [isAdding, setIsAdding] = useState(false);
   const isInCart = useCartStore((state) => state.isInCart(productId));
   const { IS_AUTHORIZED } = useContext(AuthContext);
@@ -30,13 +32,14 @@ export const AddToCartButton = ({ productId }: Props) => {
     <Button
       size="lg"
       className={cn(
-        'bg-chart-3 text-primary-foreground hover:bg-chart-3/90 flex-1 transition-colors max-sm:py-2.5',
+        'bg-chart-3 text-primary-foreground hover:bg-chart-3/90 flex-1 items-center justify-center transition-colors max-sm:py-2.5',
         isInCart ? 'text-card' : '',
+        className,
       )}
       onClick={() => void handleAddToCart()}
       disabled={isAdding || isInCart}
     >
-      {isAdding ? 'Adding...' : isInCart ? 'In Cart' : 'Add to Cart'}
+      {isAdding ? 'Adding...' : isInCart ? 'In Cart' : (children ?? 'Add to Cart')}
     </Button>
   );
 };
