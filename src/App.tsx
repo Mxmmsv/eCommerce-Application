@@ -26,7 +26,7 @@ function App() {
           <div className="flex min-h-screen flex-col">
             <ScrollToTop />
             <Header />
-            <Toaster position="top-center" richColors closeButton />
+            <Toaster position="bottom-right" richColors closeButton />
             <main className="flex w-full flex-1 flex-col justify-center">
               <Routes>
                 <Route path="/" element={<Home />} />
