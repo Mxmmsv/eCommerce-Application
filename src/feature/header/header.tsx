@@ -1,7 +1,6 @@
-import { NavLink } from 'react-router';
-
 import BurgerMenu from './burger-menu';
 import { CartIconWithBadge } from './cart-icon-with-badge';
+import Logo from './logo';
 import { ModeToggle } from './mode-toggle';
 import { CustomNavigationMenu } from './nav-menu';
 import { ProfileDropdownMenu } from './profile-dropdown';
@@ -14,10 +13,7 @@ export function Header() {
         <CustomNavigationMenu />
 
         <div className="flex w-24 cursor-pointer flex-col items-center justify-center">
-          <NavLink to="/">
-            <img src="/logo.svg" alt="logo" className="flex h-auto w-full rounded-2xl bg-white" />
-            <span className="text-lg">Poster store</span>
-          </NavLink>
+          <Logo />
         </div>
 
         <nav className="flex flex-nowrap items-center justify-end gap-6">

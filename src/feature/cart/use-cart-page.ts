@@ -7,7 +7,7 @@ import { useCartStore } from '@/feature/catalog/adding-to-cart/use-cart-store';
 
 export const useCartPage = () => {
   const { setCart } = useCartStore();
-  const [shippingMethod, setShippingMethod] = useState<string>('standard');
+  const [shippingMethod, setShippingMethod] = useState<string>('');
 
   const {
     data: cart,

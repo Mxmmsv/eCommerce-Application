@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { CardContent } from '@/components/ui/card';
+import { Spinner } from '@/components/ui/spiner';
 
 import type { CartItemUI } from '../types';
 
@@ -11,11 +12,14 @@ import { RemoveItemButton } from './remove-item-button';
 type CartProps = {
   item: CartItemUI;
   removeItem: (id: string) => Promise<void>;
-  updateQuantity: (id: string, change: number) => void;
+  updateQuantity: (id: string, change: number) => Promise<void>;
+  updatingItemId: string | null;
 };
 
-export function CartItem({ item, removeItem, updateQuantity }: CartProps) {
+export function CartItem({ item, removeItem, updateQuantity, updatingItemId }: CartProps) {
   const [isRemoving, setIsRemoving] = useState(false);
+  const isUpdating = updatingItemId === item.id;
+  const isMinQuantity = item.quantity <= 1;
 
   const handleRemove = async () => {
     setIsRemoving(true);
@@ -23,6 +27,22 @@ export function CartItem({ item, removeItem, updateQuantity }: CartProps) {
       await removeItem(item.id);
     } finally {
       setIsRemoving(false);
+    }
+  };
+
+  const handleIncrease = async () => {
+    try {
+      await updateQuantity(item.id, 1);
+    } catch (error) {
+      console.error('Increase quantity error:', error);
+    }
+  };
+
+  const handleDecrease = async () => {
+    try {
+      await updateQuantity(item.id, -1);
+    } catch (error) {
+      console.error('Decrease quantity error:', error);
     }
   };
 
@@ -50,20 +70,37 @@ export function CartItem({ item, removeItem, updateQuantity }: CartProps) {
 
           <div className="mt-4 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Button variant="outline" size="icon" onClick={() => updateQuantity(item.id, -1)}>
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() => void handleDecrease()}
+                disabled={isUpdating || isMinQuantity}
+              >
                 <Minus className="h-4 w-4" />
               </Button>
-              <span className="w-8 text-center">{item.quantity}</span>
-              <Button variant="outline" size="icon" onClick={() => updateQuantity(item.id, 1)}>
+              {isUpdating ? (
+                <div className="flex w-8 justify-center">
+                  <Spinner className="h-4 w-4" />
+                </div>
+              ) : (
+                <span className="w-8 text-center">{item.quantity}</span>
+              )}
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() => void handleIncrease()}
+                disabled={isUpdating}
+              >
                 <Plus className="h-4 w-4" />
               </Button>
             </div>
 
             <div className="text-right">
-              <div className="font-medium">${(item.price * item.quantity).toFixed(2)}</div>
+              <div className="text-muted-foreground text-sm">each €{item.price.toFixed(2)}</div>
+              <div className="font-medium">€{(item.price * item.quantity).toFixed(2)}</div>
               {item.originalPrice && (
                 <div className="text-muted-foreground text-sm line-through">
-                  ${(item.originalPrice * item.quantity).toFixed(2)}
+                  €{(item.originalPrice * item.quantity).toFixed(2)}
                 </div>
               )}
             </div>

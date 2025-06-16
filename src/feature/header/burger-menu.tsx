@@ -30,6 +30,7 @@ import { useLogout } from '@/feature/auth/login/api/use-logout';
 import AuthContext from '@/feature/auth/login/auth-provider';
 import { cn } from '@/lib/utils';
 
+import Logo from './logo';
 import { ModeToggle } from './mode-toggle';
 import SearchBar from './search';
 
@@ -67,9 +68,7 @@ export default function BurgerMenu() {
           <div className="bg-background flex items-center justify-between gap-10 p-4">
             <div className="flex w-24 cursor-pointer items-center justify-center">
               <SheetClose asChild>
-                <NavLink to="/">
-                  <img src="/logo.svg" alt="logo" className="rounded-2xl bg-white" />
-                </NavLink>
+                <Logo />
               </SheetClose>
             </div>
 

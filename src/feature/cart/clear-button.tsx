@@ -1,5 +1,4 @@
 import { Trash2 } from 'lucide-react';
-import { useState } from 'react';
 import { toast } from 'sonner';
 import { mutate as updateCart } from 'swr';
 
@@ -20,23 +19,25 @@ import { useCartStore } from '../catalog/adding-to-cart/use-cart-store';
 
 import { clearCart } from './api/api-clear-cart';
 
-export function ClearCartButton() {
-  const [isLoading, setIsLoading] = useState(false);
+export function ClearCartButton({
+  onStateChange,
+}: {
+  onStateChange: (isRemoving: boolean) => void;
+}) {
   const { clearCart: clearStoreCart } = useCartStore();
 
   const handleClear = async () => {
-    setIsLoading(true);
+    onStateChange(true);
     try {
       await clearCart();
       clearStoreCart();
       void updateCart('cart');
-
       toast.success('Cart cleared successfully!');
     } catch (error) {
       toast.error('Failed to clear cart');
       console.error('Clear cart error:', error);
     } finally {
-      setIsLoading(false);
+      onStateChange(false);
     }
   };
 
@@ -59,13 +60,12 @@ export function ClearCartButton() {
           </AlertDialogHeader>
 
           <AlertDialogFooter>
-            <AlertDialogCancel disabled={isLoading}>Cancel</AlertDialogCancel>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction
               onClick={() => void handleClear()}
-              disabled={isLoading}
               className="bg-chart-3 hover:bg-chart-3/90"
             >
-              {isLoading ? 'Clearing...' : 'Remove posters'}
+              Remove posters
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
