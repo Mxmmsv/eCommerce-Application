@@ -1,0 +1,43 @@
+import { ArrowUpRight } from 'lucide-react';
+import { Link } from 'react-router';
+
+import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+
+function HeroSection() {
+  return (
+    <section className="bg-hero flex min-h-screen items-center justify-center overflow-hidden">
+      <div className="mx-auto grid w-full max-w-screen-xl grid-cols-1 justify-items-center gap-12 px-6 py-12 lg:grid-cols-2 lg:py-0">
+        <div className="my-auto">
+          <h1 className="mt-6 text-center text-5xl font-bold tracking-tight lg:text-start lg:text-7xl">
+            Posters Are More Than Just Decor
+          </h1>
+          <p className="mt-6 max-w-[60ch] text-lg">
+            Posters are a vibrant blend of art, design, and self-expression. They can instantly
+            transform a space, set the mood, and tell a story without words.
+          </p>
+          <p className="mt-6 max-w-[60ch] text-lg">
+            Whether you prefer sleek minimalism, vintage classics, or bold pop art—posters suit any
+            interior. Mix, match, and collect them to create a unique atmosphere at home, in the
+            office, or even in a café.
+          </p>
+          <div className="mt-6 flex items-center gap-4">
+            <Link
+              to="/catalog"
+              className={cn(buttonVariants({ variant: 'default' }), 'rounded-full text-base')}
+            >
+              Explore <ArrowUpRight className="!h-5 !w-5" />
+            </Link>
+          </div>
+        </div>
+        <img
+          src="/posters/hero-banner.webp"
+          alt="banner for hero section"
+          className="bg-accent aspect-video w-full rounded-xl object-cover lg:aspect-auto lg:h-[calc(100vh-4rem)] lg:w-[1000px]"
+        />
+      </div>
+    </section>
+  );
+}
+
+export default HeroSection;
