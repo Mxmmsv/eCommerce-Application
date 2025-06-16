@@ -16,10 +16,13 @@ export const ErrorSchema = object({
 export function isHttpError(error: unknown): error is {
   statusCode: HttpStatusCode;
   message?: string;
-  errors?: {
-    code: string;
-    message: string;
-  }[];
+  body?: {
+    message?: string;
+    errors?: {
+      code: string;
+      message: string;
+    }[];
+  };
 } {
   return is(ErrorSchema, error);
 }
