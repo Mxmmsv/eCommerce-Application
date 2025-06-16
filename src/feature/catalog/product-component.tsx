@@ -6,7 +6,12 @@ import { cn } from '@/lib/utils';
 import { useSavePageOnClick } from './back-button/use-save-page-on-click';
 import type { Poster } from './types';
 
-const ProductComponent = ({ poster, currentPage }: { poster: Poster; currentPage: number }) => {
+type Props = {
+  poster: Poster;
+  currentPage: number;
+};
+
+const ProductComponent = ({ poster, currentPage }: Props) => {
   const PriceIcon = poster.currencyCode === 'EUR' ? Euro : RussianRuble;
 
   const handleClick = useSavePageOnClick(currentPage);

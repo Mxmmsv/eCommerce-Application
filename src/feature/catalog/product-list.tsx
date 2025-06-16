@@ -9,20 +9,20 @@ type ProductListProps = {
   products: Poster[];
   totalProducts: number;
   currentPage: number;
-  productsPerPageDefault: number;
-  onCurrentPageChange: (page: number) => void;
+  productsPerPage: number;
+  onPageChange: (page: number) => void;
 };
 
 const ProductList = ({
   products,
   totalProducts,
   currentPage,
-  productsPerPageDefault,
-  onCurrentPageChange,
+  productsPerPage,
+  onPageChange,
 }: ProductListProps) => {
-  const totalPages = Math.ceil(totalProducts / productsPerPageDefault);
+  const totalPages = Math.ceil(totalProducts / productsPerPage);
 
-  useReturnToLastPage(currentPage, onCurrentPageChange);
+  useReturnToLastPage(currentPage, onPageChange);
 
   return (
     <section className="py-2">
@@ -42,7 +42,7 @@ const ProductList = ({
         <PaginationControls
           currentPage={currentPage}
           totalPages={totalPages}
-          onCurrentPageChange={onCurrentPageChange}
+          onPageChange={onPageChange}
         />
       </div>
     </section>

@@ -12,13 +12,13 @@ import { cn } from '@/lib/utils';
 type PaginationControlsProps = {
   currentPage: number;
   totalPages: number;
-  onCurrentPageChange: (page: number) => void;
+  onPageChange: (page: number) => void;
 };
 
 export const PaginationControls = ({
   currentPage,
   totalPages,
-  onCurrentPageChange,
+  onPageChange,
 }: PaginationControlsProps) => {
   const createPageArray = () => {
     const pages: (number | string)[] = [];
@@ -57,7 +57,7 @@ export const PaginationControls = ({
             )}
             onClick={(e) => {
               e.preventDefault();
-              if (currentPage > 1) onCurrentPageChange(currentPage - 1);
+              if (currentPage > 1) onPageChange(currentPage - 1);
             }}
           />
         </PaginationItem>
@@ -83,7 +83,7 @@ export const PaginationControls = ({
                 isActive={currentPage === page}
                 onClick={(e) => {
                   e.preventDefault();
-                  onCurrentPageChange(page);
+                  onPageChange(page);
                 }}
               >
                 {page}
@@ -102,7 +102,7 @@ export const PaginationControls = ({
             )}
             onClick={(e) => {
               e.preventDefault();
-              if (currentPage < totalPages) onCurrentPageChange(currentPage + 1);
+              if (currentPage < totalPages) onPageChange(currentPage + 1);
             }}
           />
         </PaginationItem>
