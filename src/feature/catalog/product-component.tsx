@@ -3,18 +3,10 @@ import { Link } from 'react-router';
 
 import { cn } from '@/lib/utils';
 
-import { useSavePageOnClick } from './back-button/use-save-page-on-click';
 import type { Poster } from './types';
 
-type Props = {
-  poster: Poster;
-  currentPage: number;
-};
-
-const ProductComponent = ({ poster, currentPage }: Props) => {
+const ProductComponent = ({ poster }: { poster: Poster }) => {
   const PriceIcon = poster.currencyCode === 'EUR' ? Euro : RussianRuble;
-
-  const handleClick = useSavePageOnClick(currentPage);
 
   return (
     <div
@@ -25,7 +17,7 @@ const ProductComponent = ({ poster, currentPage }: Props) => {
         'shadow-chart-3/75 my-4 rounded-sm shadow-[-8px_8px_16px_-5px]',
       )}
     >
-      <Link to={`/catalog/product/${poster.id}`} onClick={handleClick}>
+      <Link to={`/catalog/product/${poster.id}`}>
         <div>
           <div className="aspect-[2/3] h-full overflow-hidden rounded-t-sm rounded-b-xs">
             <img

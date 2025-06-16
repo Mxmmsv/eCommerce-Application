@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useSearchParams } from 'react-router';
 import useSWR from 'swr';
 
@@ -16,15 +15,23 @@ import type { Poster } from '@/feature/catalog/types';
 
 export default function CatalogPage() {
   const { currentPath } = useCategoryStore();
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get('search') || undefined;
 
   const lastCategoryId = currentPath[currentPath.length - 1]?.id;
   const { sortOption } = useSortStore();
   const { selectedTypes, onlyDiscounted, priceRange } = useFilterStore();
 
-  const [currentPage, setCurrentPage] = useState(1);
+  const pageParam = searchParams.get('page');
+  const currentPage = pageParam ? Number(pageParam) : 1;
+
   const { productsPerPage } = config;
+
+  const onPageChange = (page: number) => {
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set('page', page.toString());
+    setSearchParams(newParams);
+  };
 
   const {
     data: products,
@@ -102,7 +109,7 @@ export default function CatalogPage() {
             totalProducts={products?.total || 0}
             currentPage={currentPage}
             productsPerPage={productsPerPage}
-            onPageChange={setCurrentPage}
+            onPageChange={onPageChange}
           />
         </div>
       </div>
