@@ -1,3 +1,9 @@
+import { ArrowUpRight } from 'lucide-react';
+import { Link } from 'react-router';
+
+import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+
 function EvolutionSection() {
   return (
     <section className="min-h-screen">
@@ -14,6 +20,14 @@ function EvolutionSection() {
               lithography (stone printing), they became mass-produced masterpieces. Visionary
               artists like Alphonse Mucha and Henri de Toulouse-Lautrec elevated them into high art.
             </p>
+            <div className="mt-6 flex items-center gap-4">
+              <Link
+                to="/catalog/category/cf506640-e300-4331-a1cf-4c85e5675e7e"
+                className={cn(buttonVariants({ variant: 'default' }), 'rounded-full text-base')}
+              >
+                Explore our black and white posters <ArrowUpRight className="!h-5 !w-5" />
+              </Link>
+            </div>
           </div>
           <div className="flex justify-center lg:w-1/2">
             <img
@@ -45,6 +59,14 @@ function EvolutionSection() {
               The 1960s pop art revolution (think Andy Warhol&apos;s iconic work) turned posters
               into youth culture staples.
             </p>
+            <div className="mt-6 flex items-center gap-4">
+              <Link
+                to="/catalog/category/5a436380-ce6c-4966-9fe6-d62e6b72eb8e"
+                className={cn(buttonVariants({ variant: 'default' }), 'rounded-full text-base')}
+              >
+                Explore our soviet posters <ArrowUpRight className="!h-5 !w-5" />
+              </Link>
+            </div>
           </div>
         </div>
 
@@ -57,6 +79,14 @@ function EvolutionSection() {
               AI-generated visuals, today&apos;s posters let you curate gallery-worthy walls without
               gallery prices.
             </p>
+            <div className="mt-6 flex items-center gap-4">
+              <Link
+                to="/catalog/category/e4201c47-6e27-4102-ad7a-865e4cc917fb"
+                className={cn(buttonVariants({ variant: 'default' }), 'rounded-full text-base')}
+              >
+                Explore our motivation posters <ArrowUpRight className="!h-5 !w-5" />
+              </Link>
+            </div>
           </div>
           <div className="flex justify-center lg:w-1/2">
             <img
