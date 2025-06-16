@@ -10,7 +10,7 @@ export default function BackButton() {
   return (
     <Button onClick={goBack} variant="outline" className="m-7">
       <ArrowLeft size={36} />
-      Back to Catalog
+      Go Back
     </Button>
   );
 }
