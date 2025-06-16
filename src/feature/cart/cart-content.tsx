@@ -9,12 +9,8 @@ import type { CartContentProps } from './types';
 
 export function CartContent({
   items,
-  shippingMethod,
-  setShippingMethod,
   subtotal,
-  shipping,
   total,
-  shippingMethods,
   onRemove,
   onUpdateQuantity,
   updatingItemId,
@@ -45,14 +41,7 @@ export function CartContent({
           />
         </div>
         <div className="space-y-6">
-          <OrderSummary
-            subtotal={subtotal}
-            shipping={shipping}
-            total={total}
-            shippingMethods={shippingMethods}
-            shippingMethod={shippingMethod}
-            setShippingMethod={setShippingMethod}
-          />
+          <OrderSummary subtotal={subtotal} total={total} />
         </div>
       </div>
     </div>

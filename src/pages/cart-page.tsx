@@ -1,25 +1,16 @@
-import useSWR from 'swr';
-
 import { Spinner } from '@/components/ui/spiner';
-import { fetchShippingMethods } from '@/feature/cart/api/api-fetch-shipping-methods';
 import { useCartActions } from '@/feature/cart/cart-actions';
 import { CartContent } from '@/feature/cart/cart-content';
 import { EmptyCart } from '@/feature/cart/empty-cart';
 import { mapLineItems } from '@/feature/cart/map-line-items';
-import type { ShippingMethod } from '@/feature/cart/types';
 import { useCartPage } from '@/feature/cart/use-cart-page';
 import { useCartSummary } from '@/feature/cart/use-cart-summary';
 
 export default function CartPage() {
-  const { cart, error, isLoading, shippingMethod, setShippingMethod } = useCartPage();
+  const { cart, error, isLoading } = useCartPage();
   const { handleUpdateQuantity, handleRemove, updatingItemId } = useCartActions();
   const items = cart?.lineItems ? mapLineItems(cart.lineItems) : [];
-  const { data: shippingMethods = [] } = useSWR<ShippingMethod[]>(
-    'shipping-methods',
-    fetchShippingMethods,
-    { revalidateOnFocus: false },
-  );
-  const { subtotal, total } = useCartSummary(items, cart);
+  const { subtotal, total } = useCartSummary(items);
 
   if (isLoading) {
     return (
