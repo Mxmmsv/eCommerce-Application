@@ -27,7 +27,7 @@ export function ShippingMethods({
               <div className="flex flex-col justify-between text-start">
                 <div className="font-medium">{method.name}</div>
                 <div className="text-muted-foreground text-sm">{method.estimatedDays}</div>
-                <div className="font-medium">${method.price.toFixed(2)}</div>
+                <div className="font-medium">€{method.price.toFixed(2)}</div>
               </div>
             </SelectItem>
           ))}

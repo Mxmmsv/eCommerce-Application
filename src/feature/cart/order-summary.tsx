@@ -39,6 +39,16 @@ export function OrderSummary({
 
         <div className="space-y-2">
           <div className="flex justify-between text-sm">
+            <span>Shipping</span>
+            <span>
+              {!shippingMethod
+                ? 'Not selected'
+                : shippingMethod === 'no-shipping'
+                  ? 'Free pickup'
+                  : `€${shipping.toFixed(2)}`}
+            </span>
+          </div>
+          <div className="flex justify-between text-sm">
             <span>Subtotal</span>
             <span>€{subtotal.toFixed(2)}</span>
           </div>

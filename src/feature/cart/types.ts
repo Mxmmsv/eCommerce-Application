@@ -18,8 +18,7 @@ export type ShippingMethod = {
   id: string;
   name: string;
   price: number;
-  estimatedDays: string;
-  description: string;
+  estimatedDays?: string;
 };
 
 export type ShippingMethodId = string;
