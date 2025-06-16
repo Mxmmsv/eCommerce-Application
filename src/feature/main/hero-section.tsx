@@ -7,9 +7,9 @@ import { cn } from '@/lib/utils';
 function HeroSection() {
   return (
     <section className="bg-hero flex min-h-screen items-center justify-center overflow-hidden">
-      <div className="mx-auto grid w-full max-w-screen-xl gap-12 px-6 py-12 lg:grid-cols-2 lg:py-0">
+      <div className="mx-auto grid w-full max-w-screen-xl grid-cols-1 justify-items-center gap-12 px-6 py-12 lg:grid-cols-2 lg:py-0">
         <div className="my-auto">
-          <h1 className="mt-6 max-w-[17ch] text-center text-5xl !leading-[1.2] font-bold tracking-tight md:text-6xl lg:text-start lg:text-[2.75rem] xl:text-7xl">
+          <h1 className="mt-6 text-center text-5xl font-bold tracking-tight lg:text-start lg:text-7xl">
             Posters Are More Than Just Decor
           </h1>
           <p className="mt-6 max-w-[60ch] text-lg">

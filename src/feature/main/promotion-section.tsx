@@ -2,12 +2,12 @@ import PromotionContent from './promotion-content';
 
 function PromotionSection() {
   return (
-    <section className="flex h-20 w-full flex-row items-center justify-center gap-20">
-      <span className="content w-full border-b-2 text-white" />
+    <section className="flex w-full flex-col items-center justify-center gap-20 md:flex-row">
+      <span className="hidden w-full border-b-2 text-white md:block" />
       <div>
         <PromotionContent />
       </div>
-      <span className="w-full border-b-2 text-white" />
+      <span className="hidden w-full border-b-2 text-white md:block" />
     </section>
   );
 }
