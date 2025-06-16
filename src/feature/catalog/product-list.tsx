@@ -1,13 +1,26 @@
 import { DiscountFilter } from './filter/discount-filter';
+import { PaginationControls } from './pagination/catalog-pagination';
 import { ProductComponent } from './product-component';
 import { SortSelect } from './sorting/sort-select';
 import type { Poster } from './types';
 
 type ProductListProps = {
   products: Poster[];
+  totalProducts: number;
+  currentPage: number;
+  productsPerPage: number;
+  onPageChange: (page: number) => void;
 };
 
-const ProductList = ({ products }: ProductListProps) => {
+const ProductList = ({
+  products,
+  totalProducts,
+  currentPage,
+  productsPerPage,
+  onPageChange,
+}: ProductListProps) => {
+  const totalPages = Math.ceil(totalProducts / productsPerPage);
+
   return (
     <section className="py-2">
       <div className="container flex flex-col gap-8 px-4 lg:px-16">
@@ -22,6 +35,12 @@ const ProductList = ({ products }: ProductListProps) => {
             <ProductComponent key={poster.id} poster={poster} />
           ))}
         </div>
+
+        <PaginationControls
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={onPageChange}
+        />
       </div>
     </section>
   );
