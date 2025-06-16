@@ -3,7 +3,11 @@ import { NavLink } from 'react-router';
 function Logo() {
   return (
     <NavLink to="/" className="w-full text-center">
-      <span className="logo text-5xl dark:text-white">Poster Store</span>
+      <img
+        src="/logo.webp"
+        alt="poster store logo"
+        className="h-auto w-full dark:brightness-0 dark:hue-rotate-180 dark:invert"
+      />
     </NavLink>
   );
 }
