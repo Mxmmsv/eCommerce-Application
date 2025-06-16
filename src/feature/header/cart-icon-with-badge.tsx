@@ -13,7 +13,7 @@ export function CartIconWithBadge() {
       <ShoppingCart strokeWidth={1.5} size={32} className="max-sm:size-6" />
 
       {productsCount > 0 && (
-        <span className="absolute top-1.5 right-1.5 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-xs leading-none font-bold text-white">
+        <span className="bg-chart-3 absolute top-1.5 right-1.5 inline-flex h-5 min-w-5 items-center justify-center rounded-full px-1 text-xs leading-none font-bold text-white">
           {productsCount > 99 ? '99+' : productsCount}
         </span>
       )}
