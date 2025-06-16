@@ -12,10 +12,10 @@ export default function HomePage() {
       <HeroSection />
       <SeparatorWave color="fill-hero" />
       <EvolutionSection />
+      <PromotionSection />
       <SeparatorWave top={true} color="fill-hero" />
       <RemainSection />
       <SeparatorWave color="fill-hero" />
-      <PromotionSection />
     </>
   );
 }
