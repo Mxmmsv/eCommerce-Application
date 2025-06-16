@@ -29,7 +29,6 @@ export const DeleteFromCartButton = ({ productId, variantId }: Props) => {
       const apiClient = createApiClientWithToken();
 
       const response = await apiClient
-        .me()
         .carts()
         .withId({ ID: cart.id })
         .post({
