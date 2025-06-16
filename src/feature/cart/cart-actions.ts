@@ -4,7 +4,9 @@ import { mutate as updateCart } from 'swr';
 
 import { clearCart } from '@/feature/cart/api/api-clear-cart';
 
+import apiRoot from '../api/api-client-credentials-flow';
 import { isHttpError } from '../api/errors';
+import { useCartStore } from '../catalog/adding-to-cart/use-cart-store';
 
 import { applyDiscountCode } from './api/api-apply-discount';
 import { removeItemFromCart } from './api/api-delete-item-cart';
@@ -58,12 +60,12 @@ export const useCartActions = () => {
   };
 
   const handleApplyPromo = async () => {
-    if (!promoCode.trim()) return;
+    const normalizedPromoCode = promoCode.trim().toUpperCase();
+
     setIsApplying(true);
     try {
-      await applyDiscountCode(promoCode.trim());
+      await applyDiscountCode(normalizedPromoCode);
       toast.success('Promo code applied successfully');
-      setPromoCode('');
     } catch (error) {
       let errorMessage = 'Failed to apply promo code';
       if (isHttpError(error)) {
@@ -77,6 +79,34 @@ export const useCartActions = () => {
       setIsApplying(false);
     }
   };
+
+  const removeDiscountCode = async () => {
+    try {
+      const { cart } = useCartStore.getState();
+      if (!cart?.id) return;
+
+      await apiRoot
+        .carts()
+        .withId({ ID: cart.id })
+        .post({
+          body: {
+            version: cart.version,
+            actions: [
+              {
+                action: 'removeDiscountCode',
+                discountCode: cart.discountCodes[0].discountCode,
+              },
+            ],
+          },
+        })
+        .execute();
+      const updatedCart = await fetchCart();
+      useCartStore.getState().setCart(updatedCart);
+    } catch (error) {
+      console.error('Remove discount error:', error);
+    }
+  };
+
   return {
     handleClearCart,
     handleRemove,
@@ -86,5 +116,6 @@ export const useCartActions = () => {
     promoCode,
     setPromoCode,
     isApplying,
+    removeDiscountCode,
   };
 };

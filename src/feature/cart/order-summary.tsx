@@ -10,12 +10,10 @@ import { useCartStore } from '../catalog/adding-to-cart/use-cart-store';
 import { useCartActions } from './cart-actions';
 import type { OrderSummaryProps } from './types';
 
-export function OrderSummary({ subtotal, total }: OrderSummaryProps) {
+export function OrderSummary({ total }: OrderSummaryProps) {
   const { cart } = useCartStore();
-  const { handleApplyPromo, promoCode, setPromoCode, isApplying } = useCartActions();
-
-  const originalTotal = cart?.totalPrice.centAmount || total * 100;
-  const discountedTotal = cart?.totalPrice.centAmount || total * 100;
+  const { handleApplyPromo, promoCode, setPromoCode, isApplying, removeDiscountCode } =
+    useCartActions();
 
   return (
     <Card>
@@ -30,34 +28,54 @@ export function OrderSummary({ subtotal, total }: OrderSummaryProps) {
               placeholder="Enter promo code"
               value={promoCode}
               onChange={(e) => setPromoCode(e.target.value)}
+              disabled={isApplying || !!cart?.discountCodes?.length}
             />
-            <Button variant="outline" onClick={() => void handleApplyPromo()} disabled={isApplying}>
-              {isApplying ? 'Applying...' : 'Apply'}
-            </Button>
+
+            {cart?.discountCodes?.length ? (
+              <Button
+                variant="outline"
+                onClick={() => {
+                  void removeDiscountCode();
+                  setPromoCode('');
+                }}
+                // onClick={async () => {
+                //   await removeDiscountCode();
+                //   setPromoCode('');
+                // }}
+                disabled={isApplying}
+              >
+                Remove
+              </Button>
+            ) : (
+              <Button
+                variant="outline"
+                onClick={() => void handleApplyPromo()}
+                disabled={isApplying || !promoCode.trim()}
+              >
+                {isApplying ? 'Applying...' : 'Apply'}
+              </Button>
+            )}
           </div>
         </div>
 
         <div className="space-y-2">
-          <div className="flex justify-between text-sm">
-            <span>Subtotal</span>
-            <span>€{subtotal.toFixed(2)}</span>
-          </div>
-          {cart?.discountCodes?.length && cart.discountCodes.length > 0 && (
-            <div className="flex justify-between text-sm text-gray-500 line-through">
-              <span>Original Price</span>
-              <span>€{(originalTotal / 100).toFixed(2)}</span>
+          {cart?.discountCodes?.length ? (
+            <>
+              <div className="text-muted-foreground flex justify-between line-through">
+                <span>Total before discount</span>
+                <span>€{total.toFixed(2)}</span>
+              </div>
+              <div className="flex justify-between font-medium text-green-600">
+                <span>Discounted Total</span>
+                <span>€{(cart.totalPrice.centAmount / 100).toFixed(2)}</span>
+              </div>
+            </>
+          ) : (
+            <div className="flex justify-between font-medium">
+              <span>Total</span>
+              <span>€{total.toFixed(2)}</span>
             </div>
           )}
-          <div className="flex justify-between font-medium">
-            <span>Total</span>
-            <span
-              className={
-                cart?.discountCodes?.length && cart.discountCodes.length > 0 ? 'text-green-600' : ''
-              }
-            >
-              €{(discountedTotal / 100).toFixed(2)}
-            </span>
-          </div>
         </div>
 
         <div className="space-y-4 border-t pt-4">
