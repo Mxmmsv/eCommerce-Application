@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils';
 import { fetchProductTypes } from '../api/fetch-product-types';
 import { useSortStore } from '../sorting/use-sort-store';
 
+import { MobileFilterButton } from './mobile-filter-button';
 import { PriceRangeFilter } from './price-ranger-filter';
 import { ResetFiltersButton } from './reset-filter';
 import { useFilterStore } from './use-filter-store';
@@ -62,6 +63,7 @@ export const TypeFilter = () => {
         ))}
         <div className="flex items-center justify-center">
           <PriceRangeFilter />
+          <MobileFilterButton />
         </div>
       </div>
     </div>
