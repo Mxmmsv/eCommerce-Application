@@ -28,13 +28,9 @@ describe('formSchema', () => {
         password: 'Password1',
       });
       expect(result.success).toBe(false);
-      if (result.issues && result.issues.length > 0) {
-        expect(result.issues[0].message).toBe(
-          'Please enter a valid email (e.g., user@example.com)',
-        );
-      } else {
-        throw new Error('Expected validation issues but got none');
-      }
+      expect(result.issues?.[0].message).toBe(
+        'Please enter a valid email (e.g., user@example.com)',
+      );
     });
   });
 
@@ -45,11 +41,7 @@ describe('formSchema', () => {
         password: 'password1',
       });
       expect(result.success).toBe(false);
-      if (result.issues && result.issues.length > 0) {
-        expect(result.issues[0].message).toBe('At least 1 uppercase letter');
-      } else {
-        throw new Error('Expected validation issues but got none');
-      }
+      expect(result.issues?.[0].message).toBe('At least 1 uppercase letter');
     });
 
     it('should fail if password has no lowercase letter', () => {
@@ -58,11 +50,7 @@ describe('formSchema', () => {
         password: 'PASSWORD1',
       });
       expect(result.success).toBe(false);
-      if (result.issues && result.issues.length > 0) {
-        expect(result.issues[0].message).toBe('At least 1 lowercase letter');
-      } else {
-        throw new Error('Expected validation issues but got none');
-      }
+      expect(result.issues?.[0].message).toBe('At least 1 lowercase letter');
     });
 
     it('should fail if password has no digit', () => {
@@ -71,11 +59,7 @@ describe('formSchema', () => {
         password: 'Password',
       });
       expect(result.success).toBe(false);
-      if (result.issues && result.issues.length > 0) {
-        expect(result.issues[0].message).toBe('At least 1 digit');
-      } else {
-        throw new Error('Expected validation issues but got none');
-      }
+      expect(result.issues?.[0].message).toBe('At least 1 digit');
     });
 
     it('should fail if password is too short', () => {
@@ -84,11 +68,7 @@ describe('formSchema', () => {
         password: 'Pass1',
       });
       expect(result.success).toBe(false);
-      if (result.issues && result.issues.length > 0) {
-        expect(result.issues[0].message).toBe('Minimum 8 characters');
-      } else {
-        throw new Error('Expected validation issues but got none');
-      }
+      expect(result.issues?.[0].message).toBe('Minimum 8 characters');
     });
 
     it('should fail if password has leading/trailing spaces', () => {
@@ -97,11 +77,7 @@ describe('formSchema', () => {
         password: ' Password1 ',
       });
       expect(result.success).toBe(false);
-      if (result.issues && result.issues.length > 0) {
-        expect(result.issues[0].message).toBe('Must not contain leading or trailing whitespace');
-      } else {
-        throw new Error('Expected validation issues but got none');
-      }
+      expect(result.issues?.[0].message).toBe('Must not contain leading or trailing whitespace');
     });
   });
 });

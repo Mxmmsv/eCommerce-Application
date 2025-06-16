@@ -1,11 +1,14 @@
 import type {
+  Cart,
   ClientResponse,
   CustomerSignin,
   CustomerSignInResult,
 } from '@commercetools/platform-sdk';
 
 import PasswordFlowApiClient from '@/feature/api/api-client-password-flow';
-import { tokenCache, clearTokenCache } from '@/feature/api/api-token-store';
+import { createApiClientWithToken } from '@/feature/api/api-client-token-flow';
+import { tokenCache } from '@/feature/api/api-token-store';
+import { useCartStore } from '@/feature/catalog/adding-to-cart/use-cart-store';
 import { setAuthToLocalStorage } from '@/service/store/local-storage';
 import { useCustomerStore } from '@/service/store/use-user-store';
 
@@ -13,16 +16,32 @@ export const signInCustomer = async (
   email: string,
   password: string,
 ): Promise<ClientResponse<CustomerSignInResult>> => {
-  clearTokenCache();
+  const { cart: anonymousCart, anonymousId } = useCartStore.getState();
+  let existingUserCart: Cart | null = null;
+  try {
+    const apiClient = createApiClientWithToken();
+    const response = await apiClient.me().carts().get().execute();
+    existingUserCart = response.body.results[0] || null;
+  } catch (error) {
+    console.error('No existing user cart found:', error);
+  }
+
   const customerLogin: CustomerSignin = {
     email,
     password,
-    anonymousCartSignInMode: 'MergeWithExistingCustomerCart',
-    updateProductData: true,
+    anonymousCartSignInMode: existingUserCart?.lineItems.length
+      ? 'UseExistingCustomerCart'
+      : 'MergeWithExistingCustomerCart',
+    ...(anonymousCart?.id && {
+      anonymousCart: {
+        id: anonymousCart.id,
+        typeId: 'cart',
+      },
+      anonymousId: anonymousId || undefined,
+    }),
   };
 
   const apiRoot = PasswordFlowApiClient(email, password);
-
   const response = await apiRoot
     .me()
     .login()
@@ -32,33 +51,16 @@ export const signInCustomer = async (
     .execute();
 
   const token = tokenCache.get().token;
-
   if (!token) {
     throw new Error('Authentication token not received');
   }
 
-  setAuthToLocalStorage(token, true);
+  setAuthToLocalStorage(token, true, response.body.customer.id);
+  useCustomerStore.getState().setCustomer(response.body.customer);
 
-  const { customer } = response.body;
-
-  useCustomerStore.getState().setCustomer({
-    id: customer.id,
-    version: customer.version,
-    createdAt: customer.createdAt,
-    lastModifiedAt: customer.lastModifiedAt,
-    email: customer.email,
-    firstName: customer.firstName ?? '',
-    lastName: customer.lastName ?? '',
-    dateOfBirth: customer.dateOfBirth ?? '',
-    isEmailVerified: customer.isEmailVerified,
-    stores: customer.stores,
-    authenticationMode: customer.authenticationMode,
-    addresses: customer.addresses,
-    defaultShippingAddressId: customer.defaultShippingAddressId,
-    defaultBillingAddressId: customer.defaultBillingAddressId,
-    shippingAddressIds: customer.shippingAddressIds ?? [],
-    billingAddressIds: customer.billingAddressIds ?? [],
-  });
+  if (response.body.cart) {
+    useCartStore.getState().setCart(response.body.cart);
+  }
 
   return response;
 };

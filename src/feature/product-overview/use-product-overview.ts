@@ -10,6 +10,9 @@ const defaultProduct: Omit<ProductData, 'isLoading' | 'error'> = {
   currencyCode: 'EUR',
   discount: '0.00',
   discountPercent: 0,
+  masterVariant: {
+    id: 0,
+  },
 };
 
 export function useProductOverview(productId: string): ProductData {
@@ -24,6 +27,9 @@ export function useProductOverview(productId: string): ProductData {
   const discounted = priceInfo?.discounted ? priceInfo.discounted.value.centAmount / 100 : original;
   const discountPercent =
     original > discounted ? Math.round(((original - discounted) / original) * 100) : 0;
+  const currency = priceInfo?.value.currencyCode;
+  const validCurrency =
+    currency === 'EUR' || currency === 'RUB' ? currency : defaultProduct.currencyCode;
 
   return {
     name: currentData.name['en-GB'] || defaultProduct.name,
@@ -35,8 +41,9 @@ export function useProductOverview(productId: string): ProductData {
     price: original.toFixed(2),
     discount: discounted.toFixed(2),
     discountPercent,
-    currencyCode: priceInfo?.value.currencyCode || defaultProduct.currencyCode,
+    currencyCode: validCurrency,
     isLoading,
     error: error || null,
+    masterVariant: currentData.masterVariant || undefined,
   };
 }

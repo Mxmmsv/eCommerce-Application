@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Cookie&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
@@ -39,9 +40,12 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-hero: var(--hero);
 }
 
 :root {
+  --font-josefin-sans: 'Josefin Sans', sans-serif;
+  --font-cookie: 'Cookie', cursive;
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -74,6 +78,7 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --hero: oklch(94.319% 0.11578 117.337);
 }
 
 .dark {
@@ -108,18 +113,25 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  --hero: oklch(62.898% 0.07239 117.598);
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
+    font-family: var(--font-josefin-sans);
     @apply bg-background text-foreground;
   }
 
   button:not([disabled]),
   [role='button']:not([disabled]) {
     cursor: pointer;
+  }
+
+  .logo {
+    font-family: var(--font-cookie);
   }
 }

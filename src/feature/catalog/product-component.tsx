@@ -1,8 +1,9 @@
-import { Euro, RussianRuble } from 'lucide-react';
+import { Euro, RussianRuble, ShoppingBasket } from 'lucide-react';
 import { Link } from 'react-router';
 
 import { cn } from '@/lib/utils';
 
+import { AddToCartButton } from './add-to-cart-button/add-to-cart-button';
 import type { Poster } from './types';
 
 const ProductComponent = ({ poster }: { poster: Poster }) => {
@@ -23,6 +24,8 @@ const ProductComponent = ({ poster }: { poster: Poster }) => {
             <img
               src={poster.image}
               alt={poster.name}
+              loading="lazy"
+              decoding="async"
               className={cn(
                 'h-full w-full object-cover object-center px-0',
                 'rounded-t-sm transition-all duration-500',
@@ -46,7 +49,6 @@ const ProductComponent = ({ poster }: { poster: Poster }) => {
                 className={cn(
                   'text-center text-lg font-semibold',
                   'mb-2 sm:text-xl',
-
                   'group-hover/texthover:text-chart-3 transition-colors duration-200',
                   'sm:mt-3 lg:mt-0',
                 )}
@@ -102,6 +104,13 @@ const ProductComponent = ({ poster }: { poster: Poster }) => {
           </div>
         </div>
       </Link>
+      <AddToCartButton
+        productId={poster.id}
+        className="shadow-chart-3/75 m-3 py-2.5 shadow-[-8px_8px_16px_-5px]"
+      >
+        <ShoppingBasket />
+        Add to Cart
+      </AddToCartButton>
     </div>
   );
 };
