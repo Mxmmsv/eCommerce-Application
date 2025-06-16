@@ -54,7 +54,9 @@ export function OrderSummary({
           </div>
           <div className="flex justify-between text-sm">
             <span>Shipping</span>
-            <span>€{shipping.toFixed(2)}</span>
+            <span>
+              {shippingMethod === 'no-shipping' ? 'Free pickup' : `€${shipping.toFixed(2)}`}
+            </span>
           </div>
           <div className="flex justify-between font-medium">
             <span>Total</span>

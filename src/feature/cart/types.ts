@@ -1,4 +1,4 @@
-import type { LineItem } from '@commercetools/platform-sdk';
+import type { LineItem, ShippingInfo, TypedMoney } from '@commercetools/platform-sdk';
 
 export type CartItemUI = {
   id: string;
@@ -10,9 +10,25 @@ export type CartItemUI = {
   image: string;
 };
 
+export type Cart = {
+  id: string;
+  version: number;
+  lineItems: LineItem[];
+  totalPrice: TypedMoney;
+  shippingInfo?: ShippingInfo;
+  shippingAddress?: {
+    country: string;
+    city?: string;
+  };
+  customerId?: string;
+  customer?: {
+    defaultShippingAddressId?: string;
+  };
+};
+
 export type CartResponse = {
   lineItems: LineItem[];
-};
+} & Cart;
 
 export type ShippingMethod = {
   id: string;

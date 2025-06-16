@@ -12,7 +12,6 @@ export const fetchShippingMethods = async () => {
     name: method.name,
     price: method.zoneRates?.[0]?.shippingRates?.[0]?.price?.centAmount / 100 || 0,
     estimatedDays: '3-5 days',
-    description: method.description,
   }));
 
   return [
@@ -21,7 +20,6 @@ export const fetchShippingMethods = async () => {
       name: 'No shipping (Pickup)',
       price: 0,
       estimatedDays: 'Pickup in store',
-      description: 'Self pickup from our location',
     },
     ...apiMethods,
   ];
