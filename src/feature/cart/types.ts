@@ -31,4 +31,8 @@ export type CartListProps = {
 export type OrderSummaryProps = {
   subtotal: number;
   total: number;
+  cart?: {
+    discountCodes?: { code: string }[];
+    totalPrice?: { centAmount: number };
+  };
 };

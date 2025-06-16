@@ -5,9 +5,18 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
+import { useCartStore } from '../catalog/adding-to-cart/use-cart-store';
+
+import { useCartActions } from './cart-actions';
 import type { OrderSummaryProps } from './types';
 
 export function OrderSummary({ subtotal, total }: OrderSummaryProps) {
+  const { cart } = useCartStore();
+  const { handleApplyPromo, promoCode, setPromoCode, isApplying } = useCartActions();
+
+  const originalTotal = cart?.totalPrice.centAmount || total * 100;
+  const discountedTotal = cart?.totalPrice.centAmount || total * 100;
+
   return (
     <Card>
       <CardHeader>
@@ -17,8 +26,14 @@ export function OrderSummary({ subtotal, total }: OrderSummaryProps) {
         <div className="space-y-2">
           <Label>Promo Code</Label>
           <div className="flex gap-2">
-            <Input placeholder="Enter promo code" />
-            <Button variant="outline">Apply</Button>
+            <Input
+              placeholder="Enter promo code"
+              value={promoCode}
+              onChange={(e) => setPromoCode(e.target.value)}
+            />
+            <Button variant="outline" onClick={() => void handleApplyPromo()} disabled={isApplying}>
+              {isApplying ? 'Applying...' : 'Apply'}
+            </Button>
           </div>
         </div>
 
@@ -27,9 +42,21 @@ export function OrderSummary({ subtotal, total }: OrderSummaryProps) {
             <span>Subtotal</span>
             <span>€{subtotal.toFixed(2)}</span>
           </div>
+          {cart?.discountCodes?.length && cart.discountCodes.length > 0 && (
+            <div className="flex justify-between text-sm text-gray-500 line-through">
+              <span>Original Price</span>
+              <span>€{(originalTotal / 100).toFixed(2)}</span>
+            </div>
+          )}
           <div className="flex justify-between font-medium">
             <span>Total</span>
-            <span>€{total.toFixed(2)}</span>
+            <span
+              className={
+                cart?.discountCodes?.length && cart.discountCodes.length > 0 ? 'text-green-600' : ''
+              }
+            >
+              €{(discountedTotal / 100).toFixed(2)}
+            </span>
           </div>
         </div>
 

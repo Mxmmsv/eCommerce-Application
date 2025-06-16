@@ -4,12 +4,17 @@ import { mutate as updateCart } from 'swr';
 
 import { clearCart } from '@/feature/cart/api/api-clear-cart';
 
+import { isHttpError } from '../api/errors';
+
+import { applyDiscountCode } from './api/api-apply-discount';
 import { removeItemFromCart } from './api/api-delete-item-cart';
 import { fetchCart } from './api/api-fetch-cart';
 import { updateItemQuantity } from './api/api-update-item-quantity';
 
 export const useCartActions = () => {
   const [updatingItemId, setUpdatingItemId] = useState<string | null>(null);
+  const [promoCode, setPromoCode] = useState('');
+  const [isApplying, setIsApplying] = useState(false);
 
   const handleClearCart = async (): Promise<boolean> => {
     try {
@@ -51,5 +56,35 @@ export const useCartActions = () => {
       setUpdatingItemId(null);
     }
   };
-  return { handleClearCart, handleRemove, handleUpdateQuantity, updatingItemId };
+
+  const handleApplyPromo = async () => {
+    if (!promoCode.trim()) return;
+    setIsApplying(true);
+    try {
+      await applyDiscountCode(promoCode.trim());
+      toast.success('Promo code applied successfully');
+      setPromoCode('');
+    } catch (error) {
+      let errorMessage = 'Failed to apply promo code';
+      if (isHttpError(error)) {
+        errorMessage = error.body?.message || error.message || errorMessage;
+      } else if (error instanceof Error) {
+        errorMessage = error.message;
+      }
+      toast.error('The promo code is incorrect');
+      console.error('Error adding promo code:', errorMessage);
+    } finally {
+      setIsApplying(false);
+    }
+  };
+  return {
+    handleClearCart,
+    handleRemove,
+    handleUpdateQuantity,
+    updatingItemId,
+    handleApplyPromo,
+    promoCode,
+    setPromoCode,
+    isApplying,
+  };
 };
