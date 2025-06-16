@@ -5,31 +5,31 @@ function RemainSection() {
         <h2 className="mb-5 text-center text-3xl leading-tight font-bold tracking-tight sm:text-4xl lg:mb-15 lg:text-5xl">
           Why Posters Remain Timeless
         </h2>
-        <div className="grid grid-cols-1 gap-5 text-center md:grid-cols-2 lg:grid-cols-4 lg:text-balance">
+        <div className="grid grid-cols-1 gap-5 text-center md:grid-cols-2 lg:grid-cols-4 lg:gap-10 lg:text-balance">
           <div>
             <h3 className="text-xl font-semibold">Affordable Art Revolution</h3>
-            <p className="mt-6 max-w-[60ch] text-lg">
+            <p className="mt-3 max-w-[60ch] text-justify text-lg lg:mt-6">
               While original masterpieces cost millions, posters bring iconic artworks within reach
               - letting you own a slice of cultural history without the auction-house price tag.
             </p>
           </div>
           <div>
             <h3 className="text-xl font-semibold">Personal Canvas</h3>
-            <p className="mt-6 max-w-[60ch] text-lg">
+            <p className="mt-3 max-w-[60ch] text-justify text-lg lg:mt-6">
               Your walls become a moodboard of life - music legends, travel dreams, or abstract
               visions tell your story better than words ever could.
             </p>
           </div>
           <div>
             <h3 className="text-xl font-semibold">Design Chameleons</h3>
-            <p className="mt-6 max-w-[60ch] text-lg">
+            <p className="mt-3 max-w-[60ch] text-justify text-lg lg:mt-6">
               They effortlessly adapt to your space - industrial loft one year, Scandinavian
               sanctuary the next. Mix, layer, and reimagine without commitment.
             </p>
           </div>
           <div>
             <h3 className="text-xl font-semibold">Instant Makeover Magic</h3>
-            <p className="mt-6 max-w-[60ch] text-lg">
+            <p className="mt-3 max-w-[60ch] text-justify text-lg lg:mt-6">
               No contractors needed. Just swap a poster to completely transform your vibe - the
               ultimate low-commitment high-impact decor hack.
             </p>
