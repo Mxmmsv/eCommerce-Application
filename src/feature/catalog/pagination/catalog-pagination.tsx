@@ -9,6 +9,8 @@ import {
 } from '@/components/ui/pagination';
 import { cn } from '@/lib/utils';
 
+import { createPageArray } from './pagination-utils';
+
 type PaginationControlsProps = {
   currentPage: number;
   totalPages: number;
@@ -20,29 +22,7 @@ export const PaginationControls = ({
   totalPages,
   onPageChange,
 }: PaginationControlsProps) => {
-  const createPageArray = () => {
-    const pages: (number | string)[] = [];
-
-    if (totalPages <= 5) {
-      const result: number[] = [];
-      for (let i = 1; i <= totalPages; i++) {
-        result.push(i);
-      }
-      return result;
-    }
-
-    if (currentPage <= 3) {
-      pages.push(1, 2, 3, '...', totalPages);
-    } else if (currentPage >= totalPages - 2) {
-      pages.push(1, '...', totalPages - 2, totalPages - 1, totalPages);
-    } else {
-      pages.push(1, '...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages);
-    }
-
-    return pages;
-  };
-
-  const pages = createPageArray();
+  const pages = createPageArray(currentPage, totalPages);
 
   return (
     <Pagination>
