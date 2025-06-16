@@ -7,10 +7,10 @@ import { useCartPage } from '@/feature/cart/use-cart-page';
 import { useCartSummary } from '@/feature/cart/use-cart-summary';
 
 export default function CartPage() {
-  const { cart, error, isLoading, shippingMethod, setShippingMethod } = useCartPage();
-  const { handleUpdateQuantity, handleRemove } = useCartActions();
+  const { cart, error, isLoading } = useCartPage();
+  const { handleUpdateQuantity, handleRemove, updatingItemId } = useCartActions();
   const items = cart?.lineItems ? mapLineItems(cart.lineItems) : [];
-  const { subtotal, shipping, total, shippingMethods } = useCartSummary(items, shippingMethod);
+  const { subtotal, total } = useCartSummary(items);
 
   if (isLoading) {
     return (
@@ -35,14 +35,11 @@ export default function CartPage() {
   return (
     <CartContent
       items={items}
-      shippingMethod={shippingMethod}
-      setShippingMethod={setShippingMethod}
       subtotal={subtotal}
-      shipping={shipping}
       total={total}
-      shippingMethods={shippingMethods}
       onRemove={handleRemove}
       onUpdateQuantity={handleUpdateQuantity}
+      updatingItemId={updatingItemId}
     />
   );
 }

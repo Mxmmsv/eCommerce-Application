@@ -1,34 +1,19 @@
 import { Package, CreditCard, Truck, Shield } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
-import { ShippingMethods } from './shipping-methods';
 import type { OrderSummaryProps } from './types';
 
-export function OrderSummary({
-  subtotal,
-  total,
-  shipping,
-  shippingMethod,
-  shippingMethods,
-  setShippingMethod,
-}: OrderSummaryProps) {
+export function OrderSummary({ subtotal, total }: OrderSummaryProps) {
   return (
     <Card>
       <CardHeader>
         <CardTitle>Order Summary</CardTitle>
-        <CardDescription>Review your order details and shipping information</CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
-        <ShippingMethods
-          shippingMethods={shippingMethods}
-          shippingMethod={shippingMethod}
-          setShippingMethod={setShippingMethod}
-        />
-
         <div className="space-y-2">
           <Label>Promo Code</Label>
           <div className="flex gap-2">
@@ -40,15 +25,11 @@ export function OrderSummary({
         <div className="space-y-2">
           <div className="flex justify-between text-sm">
             <span>Subtotal</span>
-            <span>${subtotal.toFixed(2)}</span>
-          </div>
-          <div className="flex justify-between text-sm">
-            <span>Shipping</span>
-            <span>${shipping.toFixed(2)}</span>
+            <span>€{subtotal.toFixed(2)}</span>
           </div>
           <div className="flex justify-between font-medium">
             <span>Total</span>
-            <span>${total.toFixed(2)}</span>
+            <span>€{total.toFixed(2)}</span>
           </div>
         </div>
 
