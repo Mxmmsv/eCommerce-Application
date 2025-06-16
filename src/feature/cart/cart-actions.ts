@@ -107,6 +107,12 @@ export const useCartActions = () => {
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && promoCode.trim() && !isApplying) {
+      void handleApplyPromo();
+    }
+  };
+
   return {
     handleClearCart,
     handleRemove,
@@ -117,5 +123,6 @@ export const useCartActions = () => {
     setPromoCode,
     isApplying,
     removeDiscountCode,
+    handleKeyDown,
   };
 };

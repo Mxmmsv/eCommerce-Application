@@ -12,8 +12,14 @@ import type { OrderSummaryProps } from './types';
 
 export function OrderSummary({ total }: OrderSummaryProps) {
   const { cart } = useCartStore();
-  const { handleApplyPromo, promoCode, setPromoCode, isApplying, removeDiscountCode } =
-    useCartActions();
+  const {
+    handleApplyPromo,
+    promoCode,
+    setPromoCode,
+    isApplying,
+    removeDiscountCode,
+    handleKeyDown,
+  } = useCartActions();
 
   return (
     <Card>
@@ -28,6 +34,7 @@ export function OrderSummary({ total }: OrderSummaryProps) {
               placeholder="Enter promo code"
               value={promoCode}
               onChange={(e) => setPromoCode(e.target.value)}
+              onKeyDown={handleKeyDown}
               disabled={isApplying || !!cart?.discountCodes?.length}
             />
 
