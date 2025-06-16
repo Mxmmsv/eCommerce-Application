@@ -2,6 +2,7 @@ import { ShoppingCart } from 'lucide-react';
 import { NavLink } from 'react-router';
 
 import BurgerMenu from './burger-menu';
+import Logo from './logo';
 import { ModeToggle } from './mode-toggle';
 import { CustomNavigationMenu } from './nav-menu';
 import { ProfileDropdownMenu } from './profile-dropdown';
@@ -13,9 +14,7 @@ export function Header() {
       <CustomNavigationMenu />
 
       <div className="flex w-24 cursor-pointer flex-col items-center justify-center">
-        <NavLink to="/" className="w-full text-center">
-          <span className="logo text-5xl dark:text-white">Poster Store</span>
-        </NavLink>
+        <Logo />
       </div>
 
       <nav className="flex flex-nowrap items-center justify-end gap-6">

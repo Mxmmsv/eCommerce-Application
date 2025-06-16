@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cookie&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
@@ -45,7 +45,6 @@
 
 :root {
   --font-josefin-sans: 'Josefin Sans', sans-serif;
-  --font-cookie: 'Cookie', cursive;
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -129,9 +128,5 @@
   button:not([disabled]),
   [role='button']:not([disabled]) {
     cursor: pointer;
-  }
-
-  .logo {
-    font-family: var(--font-cookie);
   }
 }
