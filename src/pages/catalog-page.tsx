@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router';
 import useSWR from 'swr';
 
 import { Spinner } from '@/components/ui/spiner';
+import { config } from '@/config';
 import { fetchProducts } from '@/feature/catalog/api/fetch-products';
 import { Breadcrumbs } from '@/feature/catalog/categories/breadcrumbs';
 import { CategoryNavigation } from '@/feature/catalog/categories/category-navigation';
@@ -23,7 +24,7 @@ export default function CatalogPage() {
   const { selectedTypes, onlyDiscounted, priceRange } = useFilterStore();
 
   const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPageDefault = Number(import.meta.env.VITE_PRODUCTS_PER_PAGE);
+  const { productsPerPage } = config;
 
   const {
     data: products,
@@ -39,7 +40,6 @@ export default function CatalogPage() {
       onlyDiscounted,
       priceRange,
       currentPage,
-      productsPerPageDefault,
     ],
     () =>
       fetchProducts(
@@ -50,7 +50,6 @@ export default function CatalogPage() {
         onlyDiscounted,
         priceRange,
         currentPage,
-        productsPerPageDefault,
       ),
   );
 
@@ -102,8 +101,8 @@ export default function CatalogPage() {
             products={products?.products || []}
             totalProducts={products?.total || 0}
             currentPage={currentPage}
-            productsPerPageDefault={productsPerPageDefault}
-            onCurrentPageChange={setCurrentPage}
+            productsPerPage={productsPerPage}
+            onPageChange={setCurrentPage}
           />
         </div>
       </div>

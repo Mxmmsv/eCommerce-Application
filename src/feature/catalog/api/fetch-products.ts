@@ -1,10 +1,11 @@
+import { config } from '@/config';
 import apiRoot from '@/feature/api/api-client-credentials-flow';
 
 import type { Poster } from '../types';
 
 import { mapToPoster } from './map-products';
 
-const productsPerPageDefault = Number(import.meta.env.VITE_PRODUCTS_PER_PAGE);
+const { productsPerPage } = config;
 
 export const fetchProducts = async (
   categoryId?: string,
@@ -14,7 +15,6 @@ export const fetchProducts = async (
   onlyDiscounted?: boolean,
   priceRange?: [number, number],
   currentPage = 1,
-  productsPerPage: number = productsPerPageDefault,
 ): Promise<{ products: Poster[]; total: number }> => {
   const filters: string[] = [];
 
