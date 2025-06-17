@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router';
 import useSWR from 'swr';
 
@@ -28,12 +29,7 @@ export default function CatalogPage() {
 
   const { productsPerPage } = config;
 
-  const onPageChange = (page: number) => {
-    const newParams = new URLSearchParams(searchParams);
-    newParams.set('page', page.toString());
-    setSearchParams(newParams);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  const [forcePage, setForcePage] = useState(1);
 
   const {
     data: products,
@@ -48,7 +44,7 @@ export default function CatalogPage() {
       selectedTypes,
       onlyDiscounted,
       priceRange,
-      currentPage,
+      forcePage,
     ],
     () =>
       fetchProducts(
@@ -58,9 +54,21 @@ export default function CatalogPage() {
         selectedTypes,
         onlyDiscounted,
         priceRange,
-        currentPage,
+        forcePage,
       ),
   );
+
+  useEffect(() => {
+    setForcePage(1);
+  }, [lastCategoryId, searchQuery, sortOption, selectedTypes, onlyDiscounted, priceRange]);
+
+  const onPageChange = (page: number) => {
+    setForcePage(page);
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set('page', page.toString());
+    setSearchParams(newParams);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <>
