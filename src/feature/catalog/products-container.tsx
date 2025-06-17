@@ -25,6 +25,7 @@ export const ProductsContainer = ({
   searchQuery,
 }: ProductsContainerProps) => {
   const deferredProducts = useDeferredValue(products);
+  const isStale = deferredProducts !== products;
 
   if (isLoading) {
     return (
@@ -59,7 +60,7 @@ export const ProductsContainer = ({
       currentPage={currentPage}
       productsPerPage={productsPerPage}
       onPageChange={onPageChange}
-      isLoading={isLoading}
+      isStale={isStale}
     />
   );
 };
