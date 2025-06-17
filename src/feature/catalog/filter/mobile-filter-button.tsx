@@ -30,7 +30,7 @@ export const MobileFilterButton = () => {
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button variant="outline" size="icon" className="shrink-0">
+        <Button variant="outline" size="icon" className="mx-5 shrink-0 rounded-full p-5">
           <Settings2 className="h-4 w-4" />
         </Button>
       </SheetTrigger>
