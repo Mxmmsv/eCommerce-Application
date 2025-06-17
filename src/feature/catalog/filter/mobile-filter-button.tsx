@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
 import { SortSelectPanel } from '../sorting/sort-select';
+import { useSortStore } from '../sorting/use-sort-store';
 
 import { DiscountFilterPanel } from './discount-filter';
 import { FilterHeader, ProductTypesFilter } from './product-filter';
@@ -13,6 +14,12 @@ import { useFilterStore } from './use-filter-store';
 export const MobileFilterButton = () => {
   const [open, setOpen] = useState(false);
   const { resetAllFilters } = useFilterStore();
+  const { setSortOption } = useSortStore();
+
+  const handleReset = () => {
+    resetAllFilters();
+    setSortOption(undefined);
+  };
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -27,22 +34,22 @@ export const MobileFilterButton = () => {
         className="w-[300px] p-4"
         onInteractOutside={(e) => {
           const target = e.target as HTMLElement;
-          if (!target.closest('[data-prevent-close]')) {
-            e.preventDefault();
+          if (!target.closest('[data-no-close]')) {
+            setOpen(false);
           }
         }}
       >
-        <div className="my-10 flex flex-col">
+        <div className="data-no-close my-10 flex flex-col">
           <FilterHeader onClose={() => setOpen(false)} />
 
-          <div className="flex-1 space-y-6" data-prevent-close>
+          <div className="flex-1 space-y-6" data-no-close>
             <SortSelectPanel />
             <ProductTypesFilter />
             <DiscountFilterPanel />
           </div>
 
-          <div className="mt-8 flex justify-end pt-4" data-prevent-close>
-            <Button variant="outline" className="rounded-full" onClick={() => resetAllFilters()}>
+          <div className="mt-8 flex justify-end pt-4" data-no-close>
+            <Button variant="outline" className="rounded-full" onClick={handleReset}>
               Reset filters
             </Button>
           </div>
