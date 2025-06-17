@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router';
 import useSWR from 'swr';
 
@@ -29,7 +28,12 @@ export default function CatalogPage() {
 
   const { productsPerPage } = config;
 
-  const [forcePage, setForcePage] = useState(1);
+  const onPageChange = (page: number) => {
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set('page', page.toString());
+    setSearchParams(newParams);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const {
     data: products,
@@ -44,7 +48,7 @@ export default function CatalogPage() {
       selectedTypes,
       onlyDiscounted,
       priceRange,
-      forcePage,
+      currentPage,
     ],
     () =>
       fetchProducts(
@@ -54,21 +58,9 @@ export default function CatalogPage() {
         selectedTypes,
         onlyDiscounted,
         priceRange,
-        forcePage,
+        currentPage,
       ),
   );
-
-  useEffect(() => {
-    setForcePage(1);
-  }, [lastCategoryId, searchQuery, sortOption, selectedTypes, onlyDiscounted, priceRange]);
-
-  const onPageChange = (page: number) => {
-    setForcePage(page);
-    const newParams = new URLSearchParams(searchParams);
-    newParams.set('page', page.toString());
-    setSearchParams(newParams);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
 
   return (
     <>
@@ -90,7 +82,7 @@ export default function CatalogPage() {
             </div>
           )}
 
-          <div className="flex justify-end">
+          <div className="flex justify-end gap-2 px-4 lg:flex lg:px-16">
             <div className="mx-4 flex items-center justify-center">
               <DiscountFilter />
             </div>

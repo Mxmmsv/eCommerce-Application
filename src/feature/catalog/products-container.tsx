@@ -1,4 +1,4 @@
-import { useDeferredValue } from 'react';
+import { useDeferredValue, useEffect, useState } from 'react';
 
 import { Spinner } from '@/components/ui/spinner';
 
@@ -24,10 +24,17 @@ export const ProductsContainer = ({
   onPageChange,
   searchQuery,
 }: ProductsContainerProps) => {
+  const [displayProducts, setDisplayProducts] = useState<{ products: Poster[]; total: number }>();
   const deferredProducts = useDeferredValue(products);
   const isStale = deferredProducts !== products;
 
-  if (isLoading) {
+  useEffect(() => {
+    if (products && !isLoading) {
+      setDisplayProducts(products);
+    }
+  }, [products, isLoading]);
+
+  if (isLoading && !displayProducts) {
     return (
       <div className="column flex min-h-svh items-center justify-center">
         <Spinner size="medium" className="text-primary">
@@ -45,7 +52,7 @@ export const ProductsContainer = ({
     );
   }
 
-  if (!deferredProducts || deferredProducts.products.length === 0) {
+  if (!displayProducts || displayProducts.products.length === 0) {
     return (
       <div className="text-muted-foreground mt-4 text-center">
         No products found {searchQuery ? `for "${searchQuery}"` : ''}.
@@ -54,13 +61,20 @@ export const ProductsContainer = ({
   }
 
   return (
-    <ProductList
-      products={deferredProducts?.products || []}
-      totalProducts={deferredProducts?.total || 0}
-      currentPage={currentPage}
-      productsPerPage={productsPerPage}
-      onPageChange={onPageChange}
-      isStale={isStale}
-    />
+    <div className="relative">
+      <ProductList
+        products={displayProducts.products}
+        totalProducts={displayProducts.total}
+        currentPage={currentPage}
+        productsPerPage={productsPerPage}
+        onPageChange={onPageChange}
+        isStale={isLoading || isStale}
+      />
+      {isLoading && (
+        <div className="absolute inset-0 flex items-center justify-center opacity-50">
+          <Spinner size="medium" className="text-primary" />
+        </div>
+      )}
+    </div>
   );
 };
