@@ -1,7 +1,7 @@
 import type { DiscountCode } from '@commercetools/platform-sdk';
 import useSWR from 'swr';
 
-import { Spinner } from '@/components/ui/spiner';
+import { Spinner } from '@/components/ui/spinner';
 
 import fetchPromoCode from './api/fetch-promo-code';
 import handleCopyPromotionContent from './use-promotion-content';

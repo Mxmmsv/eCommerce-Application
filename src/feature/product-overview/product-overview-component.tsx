@@ -1,6 +1,6 @@
 import { Euro, RussianRuble } from 'lucide-react';
 
-import { Spinner } from '@/components/ui/spiner';
+import { Spinner } from '@/components/ui/spinner';
 
 import { AddToCartButton } from '../catalog/add-to-cart-button/add-to-cart-button';
 import { DeleteFromCartButton } from '../catalog/delete-from-cart-button/delete-from-cart-button';
