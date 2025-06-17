@@ -39,28 +39,49 @@ This application provides the following features:
 - Using terminal to go to the directory in which you want to install the application, for example:
 
   ```bash
-  $ cd C/Users/yourname/apps
+  cd C/Users/yourname/apps
   ```
 
 - Clone the repository from GitHub:
+
   ```bash
-  $ git clone https://github.com/Mxmmsv/eCommerce-Application.git
+  git clone https://github.com/Mxmmsv/eCommerce-Application.git
   ```
+
 - Go to the project directory:
 
   ```bash
-  $ cd eCommerce-Application
+  cd eCommerce-Application
   ```
 
-- install the dependencies with `npm i`:
+- Install the dependencies with `npm i`:
 
   ```bash
-  $ npm i
+  npm i
+  ```
+
+- Create a .env file in the root directory of the project. You can use the provided .env.example as a template:
+
+  ```bash
+  cp .env.example .env
+  ```
+
+- Open the .env file and fill in the required environment variables:
+
+  ```bash
+  VITE_PROJECT_KEY=<your_project_key>
+  VITE_CLIENT_ID=<your_client_id>
+  VITE_CLIENT_SECRET=<your_client_secret>
+  VITE_AUTH_URL=<your_auth_url>
+  VITE_API_URL=<your_api_url>
+  VITE_PRODUCTS_PER_PAGE=<your_products_per_page>
+  VITE_SCOPES=<your_scopes_string>
   ```
 
 - start the local server using `npm run dev`:
+
   ```bash
-  $ npm run dev
+  npm run dev
   ```
 
 The server runs on port `5173`. If it is not possible to run the server using port `5173`, you can use another port by modifying the `vite.config.ts` configuration file.
@@ -74,54 +95,55 @@ In the project directory, you can:
 - Run the app in development mode, opening `port 5173` (<http://localhost:5173>) to view the app in the browser:
 
   ```bash
-  $ npm run dev
+  npm run dev
   ```
 
 - Build the project for production to the `dist/` folder:
 
   ```bash
-  $ npm run build
+  npm run build
   ```
 
 - Fix linting and formatting issues, running `ESLint` and `Prettier` simultaneously:
 
   ```bash
-  $ npm run fix
+  npm run fix
   ```
 
 - Format all the files according to the defined style rules running `Prettier`:
 
   ```bash
-  $ npm run format
+  npm run format
   ```
 
 - Lint the codebase using `ESLint`, analyzing code for errors and violations of standards:
 
   ```bash
-  $ npm run lint
+  npm run lint
   ```
 
 - Automatically fix any linting issues found in the codebase, using `ESLint`:
 
   ```bash
-  $ npm run lint:fix
+  npm run lint:fix
   ```
 
 - Preview the production build created by the `npm run build` command:
 
   ```bash
-  $ npm run preview
+  npm run preview
   ```
 
 - Initialize `Husky` hooks for Git pre-commit, pre-push, and other hooks:
 
   ```bash
-  $ npm run prepare
+  npm run prepare
   ```
 
 - Run TypeScript's type-checking to check for type errors without generating any output files:
+
   ```bash
-  $ npm run typecheck
+  npm run typecheck
   ```
 
 ## 👥 Authors
