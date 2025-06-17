@@ -69,7 +69,7 @@ export default function CatalogPage() {
       <title>{'Catalog :: Poster store'}</title>
       <div className="bg-muted flex min-h-svh justify-center text-lg">
         <div className="container py-8">
-          <div className="flex items-start gap-4 px-4">
+          <div className="flex items-start gap-0 px-4 lg:gap-4">
             <CategoryNavigation />
             <Breadcrumbs />
           </div>
