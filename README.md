@@ -4,23 +4,21 @@
 
 **PosterShop** is a single-page e-commerce application for selling designer posters, powered by [Commercetools](https://commercetools.com) and developed as a final project for the RS School online educational platform (course JS/Front-end 2024Q4).
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/06fffc02-3668-42fb-b60c-8284e8516c98/deploy-status)](https://app.netlify.com/sites/poster-store/deploys)
+
 [![React](https://img.shields.io/badge/React-20232A?logo=react)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-953DD6?logo=vite&logoColor=white)](https://vite.dev/)
-
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-white?logo=tailwindcss)](https://tailwindcss.com/)
 [![shadcn/ui](https://img.shields.io/badge/shadcn%2Fui-white?style=flat&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2Ij48bGluZSB4MT0iMjA4IiB5MT0iMTI4IiB4Mj0iMTI4IiB5Mj0iMjA4IiBzdHJva2U9ImJsYWNrIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iMzIiLz48bGluZSB4MT0iMTkyIiB5MT0iNDAiIHgyPSI0MCIgeTI9IjE5MiIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2Utd2lkdGg9IjMyIi8+PC9zdmc+)](https://ui.shadcn.com/)
-[![Zustand](https://img.shields.io/badge/Zustand-443E38?logo=react&label=Zustand)](https://zustand-demo.pmnd.rs/)
+[![Zustand](https://img.shields.io/badge/Zustand-443E38?logo=react)](https://zustand-demo.pmnd.rs/)
 
 [![Prettier](https://img.shields.io/badge/Prettier-BD89C0?logo=prettier&logoColor=white)](https://prettier.io/)
 [![ESLint](https://img.shields.io/badge/ESLint-4B32C3?logo=eslint&logoColor=white)](https://eslint.org/)
-[![Husky](https://img.shields.io/badge/Husky-000000?logo=github&label=Git%20Hooks)](https://www.npmjs.com/package/husky)
-
+[![Husky](https://img.shields.io/badge/Husky-000000?logo=github)](https://www.npmjs.com/package/husky)
 [![SWR](https://img.shields.io/badge/SWR-000000?logo=swr&logoWidth=40&label)](https://swr.vercel.app/ru)
 [![Valibot](https://img.shields.io/badge/Valibot-111827?logoColor=white)](https://valibot.dev/)
 [![Vitest](https://img.shields.io/badge/Vitest-white?logo=vitest)](https://vitest.dev/)
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/06fffc02-3668-42fb-b60c-8284e8516c98/deploy-status)](https://app.netlify.com/sites/poster-store/deploys)
 
 This application provides the following features:
 
@@ -128,6 +126,12 @@ In the project directory, you can:
   npm run lint:fix
   ```
 
+- Inspect and debug ESLint configuration with a visual overview:
+
+  ```bash
+  npm run lint:inspect
+  ```
+
 - Preview the production build created by the `npm run build` command:
 
   ```bash
@@ -144,6 +148,24 @@ In the project directory, you can:
 
   ```bash
   npm run typecheck
+  ```
+
+- Run all unit and integration tests with Vitest:
+
+  ```bash
+  npm run test
+  ```
+
+- Launch the Vitest UI interface and generate test coverage reports:
+
+  ```bash
+  npm run test:ui
+  ```
+
+- Run all tests in headless mode with coverage report generation:
+
+  ```bash
+  npm run test:coverage
   ```
 
 ## 👥 Authors
