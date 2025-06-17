@@ -152,7 +152,7 @@ In the project directory, you can:
 
 ## 🙏 Acknowledgments
 
-Thanks a lot to our mentors @gentoosiast, @lenayork, and @existanz for helping with the project.
+Thanks a lot to our mentors [@gentoosiast](https://github.com/gentoosiast), [@lenayork](https://github.com/LenaYork), and [@existanz](https://github.com/existanz) for helping with the project.
 
 Thanks to the [Figma](https://figma.com/community) community for the free and accessible e-commerce website layouts that inspired us during the development of the project.
 
