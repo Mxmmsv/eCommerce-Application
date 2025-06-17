@@ -9,6 +9,9 @@ type ProductData = {
   discountPercent: number;
   isLoading: boolean;
   error: Error | null;
+  masterVariant: {
+    id: number;
+  };
 };
 
 export type { ProductData };

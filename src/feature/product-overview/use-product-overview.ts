@@ -10,6 +10,9 @@ const defaultProduct: Omit<ProductData, 'isLoading' | 'error'> = {
   currencyCode: 'EUR',
   discount: '0.00',
   discountPercent: 0,
+  masterVariant: {
+    id: 0,
+  },
 };
 
 export function useProductOverview(productId: string): ProductData {
@@ -41,5 +44,6 @@ export function useProductOverview(productId: string): ProductData {
     currencyCode: validCurrency,
     isLoading,
     error: error || null,
+    masterVariant: currentData.masterVariant || undefined,
   };
 }

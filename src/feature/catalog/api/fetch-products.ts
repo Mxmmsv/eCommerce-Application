@@ -1,8 +1,11 @@
+import { config } from '@/config';
 import apiRoot from '@/feature/api/api-client-credentials-flow';
 
 import type { Poster } from '../types';
 
 import { mapToPoster } from './map-products';
+
+const { productsPerPage } = config;
 
 export const fetchProducts = async (
   categoryId?: string,
@@ -11,7 +14,8 @@ export const fetchProducts = async (
   selectedTypes?: string[],
   onlyDiscounted?: boolean,
   priceRange?: [number, number],
-): Promise<Poster[]> => {
+  currentPage = 1,
+): Promise<{ products: Poster[]; total: number }> => {
   const filters: string[] = [];
 
   if (categoryId) {
@@ -27,9 +31,12 @@ export const fetchProducts = async (
     filters.push(`variants.price.centAmount:range (${min * 100} to ${max * 100})`);
   }
 
+  const offset = (currentPage - 1) * productsPerPage;
+
   const queryArgs: Record<string, number | boolean | string | string[]> = {
     fuzzy: true,
-    limit: 100,
+    limit: productsPerPage,
+    offset: offset,
     priceCurrency: 'EUR',
     expand: ['productType'],
     ...(filters.length > 0 && { filter: filters }),
@@ -48,5 +55,8 @@ export const fetchProducts = async (
     products = products.filter((product) => product.hasDiscount);
   }
 
-  return products;
+  return {
+    products,
+    total: response.body.total ?? 0,
+  };
 };
