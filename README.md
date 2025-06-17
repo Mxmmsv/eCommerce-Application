@@ -60,13 +60,13 @@ This application provides the following features:
   npm i
   ```
 
-- Create a .env file in the root directory of the project. You can use the provided .env.example as a template:
+- Create a `.env` file in the root directory of the project. You can use the provided `.env.example` as a template:
 
   ```bash
   cp .env.example .env
   ```
 
-- Open the .env file and fill in the required environment variables:
+- Open the `.env` file and fill in the required environment variables:
 
   ```bash
   VITE_PROJECT_KEY=<your_project_key>
