@@ -1,9 +1,9 @@
-import { Settings2 } from 'lucide-react';
+import { Settings2, X } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { cn } from '@/lib/utils';
 
 import { SortSelect } from '../sorting/sort-select';
 
@@ -12,25 +12,44 @@ import { ResetFiltersButton } from './reset-filter';
 import { useFilterStore } from './use-filter-store';
 
 export const MobileFilterButton = () => {
+  const [open, setOpen] = useState(false);
+  const sheetRef = useRef<HTMLDivElement>(null);
   const { availableTypes, selectedTypes, toggleType } = useFilterStore();
 
+  const handleClickOutside = (event: MouseEvent) => {
+    if (sheetRef.current && !sheetRef.current.contains(event.target as Node)) {
+      setOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button
-          variant="outline"
-          size="icon"
-          className={cn('md:hidden', 'shrink-0 rounded-full')}
-          aria-label="Open filters"
-        >
+        <Button variant="outline" size="icon" className="shrink-0">
           <Settings2 className="h-4 w-4" />
         </Button>
       </SheetTrigger>
 
-      <SheetContent side="right" className="w-[300px] p-4">
-        <div className="h-full space-y-6">
-          <h3 className="pt-2 text-lg font-bold">Filters</h3>
-          <div className="space-y-4">
+      <SheetContent
+        ref={sheetRef}
+        side="right"
+        className="w-[300px] p-4"
+        onInteractOutside={(e) => e.preventDefault()}
+      >
+        <div className="flex h-full flex-col">
+          <div className="mb-4 flex items-center justify-between">
+            <h3 className="text-lg font-bold">Filters</h3>
+            <Button variant="ghost" size="icon" onClick={() => setOpen(false)} className="h-8 w-8">
+              <X className="h-4 w-4" />
+            </Button>
+          </div>
+
+          <div className="flex-1 space-y-6">
             <div className="space-y-2">
               <h4 className="font-medium">Sort by</h4>
               <SortSelect />
@@ -54,13 +73,10 @@ export const MobileFilterButton = () => {
               </div>
             </div>
 
-            <div className="space-y-2">
-              <h4 className="font-medium">Discount</h4>
-              <DiscountFilter />
-            </div>
+            <DiscountFilter />
           </div>
 
-          <div className="absolute right-4 bottom-4 left-4">
+          <div className="mt-auto pt-4">
             <ResetFiltersButton />
           </div>
         </div>
