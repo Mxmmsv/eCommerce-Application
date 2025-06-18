@@ -70,7 +70,7 @@ export default function ProductOverview({ productId }: { productId: string }) {
                 )}
               </div>
 
-              <p className="text-muted-foreground mb-6">{product.description}</p>
+              <p className="mb-6">{product.description}</p>
 
               <div className="mt-8 flex w-full gap-4 max-sm:flex-col">
                 <AddToCartButton productId={productId} />

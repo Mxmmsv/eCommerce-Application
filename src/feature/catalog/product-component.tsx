@@ -106,7 +106,7 @@ const ProductComponent = ({ poster }: { poster: Poster }) => {
       </Link>
       <AddToCartButton
         productId={poster.id}
-        className="shadow-chart-3/75 m-3 py-2.5 shadow-[-8px_8px_16px_-5px]"
+        className="shadow-chart-3/75 m-3 rounded-md py-2.5 shadow-[-8px_8px_16px_-5px]"
       >
         <ShoppingBasket />
         Add to Cart
