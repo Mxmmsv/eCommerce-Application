@@ -14,7 +14,7 @@ function PromotionContent() {
 
   const { code, name } = data[0];
   return (
-    <div className="flex w-full flex-col items-center gap-5 text-nowrap md:flex-row md:gap-10">
+    <div className="flex w-full flex-col items-center gap-5 text-2xl text-nowrap md:flex-row md:gap-10">
       <h2>Click and get promocode! </h2>
       <button
         className="hover:text-chart-3 cursor-pointer font-bold"
