@@ -9,6 +9,7 @@ export const mapLineItems = (items: LineItem[]): CartItemUI[] => {
 
     return {
       id: item.id,
+      productId: item.productId,
       name: item.name['en-GB'] || 'No name',
       price: discountedValue ? discountedValue / 100 : priceValue / 100,
       originalPrice: discountedValue ? priceValue / 100 : undefined,

@@ -1,4 +1,4 @@
-import { Spinner } from '@/components/ui/spiner';
+import { Spinner } from '@/components/ui/spinner';
 
 import { CategoryDropdown } from './category-dropdown';
 import { useCategoryManagement } from './use-category-management';

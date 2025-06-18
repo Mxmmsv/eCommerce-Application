@@ -32,7 +32,8 @@ export const AddToCartButton = ({ productId, className, children }: Props) => {
     <Button
       size="lg"
       className={cn(
-        'bg-chart-3 text-primary-foreground hover:bg-chart-3/90 flex-1 items-center justify-center transition-colors max-sm:py-2.5',
+        'bg-chart-3 text-primary-foreground hover:bg-chart-3/90 min-w-40',
+        'items-center justify-center rounded-full transition-colors max-sm:py-2.5',
         isInCart ? 'text-card' : '',
         className,
       )}

@@ -8,7 +8,7 @@ export default function HomePage() {
   return (
     <>
       <title>{'Home :: Poster store'}</title>
-      <PromotionSection />
+
       <SeparatorWave top={true} color="fill-hero" />
       <HeroSection />
       <SeparatorWave color="fill-hero" />
@@ -16,6 +16,7 @@ export default function HomePage() {
       <SeparatorWave top={true} color="fill-hero" />
       <RemainSection />
       <SeparatorWave color="fill-hero" />
+      <PromotionSection />
     </>
   );
 }

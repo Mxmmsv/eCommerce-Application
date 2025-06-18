@@ -1,4 +1,4 @@
-import { Spinner } from '@/components/ui/spiner';
+import { Spinner } from '@/components/ui/spinner';
 import { useCartActions } from '@/feature/cart/cart-actions';
 import { CartContent } from '@/feature/cart/cart-content';
 import { EmptyCart } from '@/feature/cart/empty-cart';

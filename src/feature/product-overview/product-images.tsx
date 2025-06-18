@@ -71,7 +71,7 @@ export function ProductImages({
                     alt={alt}
                     loading="lazy"
                     decoding="async"
-                    className="bg-muted-foreground h-full w-full cursor-zoom-in rounded-2xl object-contain"
+                    className="bg-muted-hero/25 h-full w-full cursor-zoom-in rounded-2xl object-contain"
                   />
                 </DialogTrigger>
 

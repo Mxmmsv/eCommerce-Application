@@ -1,7 +1,7 @@
 import type { DiscountCode } from '@commercetools/platform-sdk';
 import useSWR from 'swr';
 
-import { Spinner } from '@/components/ui/spiner';
+import { Spinner } from '@/components/ui/spinner';
 
 import fetchPromoCode from './api/fetch-promo-code';
 import handleCopyPromotionContent from './use-promotion-content';
@@ -14,7 +14,7 @@ function PromotionContent() {
 
   const { code, name } = data[0];
   return (
-    <div className="flex w-full flex-col items-center gap-5 text-nowrap md:flex-row md:gap-10">
+    <div className="flex w-full flex-col items-center gap-5 text-2xl text-nowrap md:flex-row md:gap-10">
       <h2>Click and get promocode! </h2>
       <button
         className="hover:text-chart-3 cursor-pointer font-bold"

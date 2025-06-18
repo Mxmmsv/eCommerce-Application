@@ -21,6 +21,7 @@
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
+  --color-muted-hero: var(--muted-hero);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
@@ -79,6 +80,7 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
   --hero: oklch(94.319% 0.11578 117.337);
+  --muted-hero: oklch(60% 0.11578 117.337);
 }
 
 .dark {
@@ -114,6 +116,7 @@
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
   --hero: oklch(62.898% 0.07239 117.598);
+  --muted-hero: oklch(10% 0.07239 117.598);
 }
 
 @layer base {
