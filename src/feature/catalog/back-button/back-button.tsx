@@ -12,7 +12,12 @@ export default function BackButton() {
 
   return (
     <div className="flex justify-end px-6 py-4">
-      <Button onClick={goBack} variant="outline" className="w-auto gap-2 px-10" size="lg">
+      <Button
+        onClick={goBack}
+        variant="outline"
+        className="w-auto gap-2 rounded-full px-10"
+        size="lg"
+      >
         <div>
           <ArrowLeft size={36} />
         </div>

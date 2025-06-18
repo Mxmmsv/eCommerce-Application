@@ -64,7 +64,7 @@ export const DeleteFromCartButton = ({ productId, variantId }: Props) => {
       : 'Delete from Cart';
 
   const buttonClass = cn(
-    'flex-1 max-sm:py-2.5',
+    'rounded-full max-sm:py-2.5 min-w-40',
     !lineItem && 'cursor-not-allowed',
     isDeleting && 'opacity-75',
   );
