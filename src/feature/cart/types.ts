@@ -1,5 +1,6 @@
 export type CartItemUI = {
   id: string;
+  productId: string;
   name: string;
   price: number;
   originalPrice?: number;

@@ -11,9 +11,18 @@ export default function BackButton() {
   };
 
   return (
-    <Button onClick={goBack} variant="outline" className="m-7">
-      <ArrowLeft size={36} />
-      Go Back
-    </Button>
+    <div className="flex justify-end px-6 py-4">
+      <Button
+        onClick={goBack}
+        variant="outline"
+        className="w-auto gap-2 rounded-full px-10"
+        size="lg"
+      >
+        <div>
+          <ArrowLeft size={36} />
+        </div>
+        Go Back
+      </Button>
+    </div>
   );
 }

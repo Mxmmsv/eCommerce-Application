@@ -10,7 +10,7 @@ export const DiscountFilter = () => {
   return (
     <div
       className={cn(
-        'flex items-center space-x-2',
+        'hidden items-center space-x-2 lg:flex',
         'transition-all duration-200 ease-in-out',
         onlyDiscounted ? 'text-primary font-medium' : 'text-muted-foreground bg-transparent',
       )}
@@ -27,6 +27,38 @@ export const DiscountFilter = () => {
         onCheckedChange={toggleDiscounted}
         className="data-[state=checked]:bg-primary"
       />
+    </div>
+  );
+};
+
+export const DiscountFilterPanel = () => {
+  const { onlyDiscounted, toggleDiscounted } = useFilterStore();
+
+  return (
+    <div className="flex items-center space-x-2">
+      <div
+        className={cn(
+          'flex items-center space-x-2',
+          'transition-all duration-200 ease-in-out',
+          onlyDiscounted ? 'text-primary font-medium' : 'text-muted-foreground bg-transparent',
+        )}
+      >
+        <Label
+          htmlFor="discount-filter"
+          className={cn(
+            'cursor-pointer',
+            onlyDiscounted ? 'text-primary' : 'text-muted-foreground',
+          )}
+        >
+          Discount
+        </Label>
+        <Switch
+          id="discount-filter"
+          checked={onlyDiscounted}
+          onCheckedChange={toggleDiscounted}
+          className="data-[state=checked]:bg-primary"
+        />
+      </div>
     </div>
   );
 };

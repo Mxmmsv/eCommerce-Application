@@ -1,16 +1,17 @@
 import { useSearchParams } from 'react-router';
 import useSWR from 'swr';
 
-import { Spinner } from '@/components/ui/spiner';
 import { config } from '@/config';
 import { fetchProducts } from '@/feature/catalog/api/fetch-products';
 import { Breadcrumbs } from '@/feature/catalog/categories/breadcrumbs';
 import { CategoryNavigation } from '@/feature/catalog/categories/category-navigation';
 import { useCategoryStore } from '@/feature/catalog/categories/use-category-store';
+import { DiscountFilter } from '@/feature/catalog/filter/discount-filter';
 import { TypeFilter } from '@/feature/catalog/filter/type-filter';
 import { useFilterStore } from '@/feature/catalog/filter/use-filter-store';
 import { useResetPage } from '@/feature/catalog/pagination/use-reset-page';
-import { ProductList } from '@/feature/catalog/product-list';
+import { ProductsContainer } from '@/feature/catalog/products-container';
+import { SortSelect } from '@/feature/catalog/sorting/sort-select';
 import { useSortStore } from '@/feature/catalog/sorting/use-sort-store';
 import type { Poster } from '@/feature/catalog/types';
 
@@ -70,30 +71,12 @@ export default function CatalogPage() {
       ),
   );
 
-  if (isLoading) {
-    return (
-      <div className="column flex min-h-svh items-center justify-center">
-        <Spinner size="medium" className="text-primary">
-          <span className="text-center">Loading products...</span>
-        </Spinner>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="flex min-h-svh items-center justify-center">
-        <div className="text-center text-red-500">{error.message || 'Failed to load products'}</div>
-      </div>
-    );
-  }
-
   return (
     <>
       <title>{'Catalog :: Poster store'}</title>
       <div className="bg-muted flex min-h-svh justify-center text-lg">
         <div className="container py-8">
-          <div className="flex items-start gap-4 px-4">
+          <div className="flex items-start gap-0 px-4 lg:gap-4">
             <CategoryNavigation />
             <Breadcrumbs />
           </div>
@@ -108,15 +91,17 @@ export default function CatalogPage() {
             </div>
           )}
 
-          {products?.products?.length === 0 && (
-            <div className="text-muted-foreground mt-4 text-center">
-              No products found {searchQuery ? `for "${searchQuery}"` : ''}.
+          <div className="flex justify-end gap-2 px-4 lg:flex lg:px-16">
+            <div className="mx-4 flex items-center justify-center">
+              <DiscountFilter />
             </div>
-          )}
+            <SortSelect />
+          </div>
 
-          <ProductList
-            products={products?.products || []}
-            totalProducts={products?.total || 0}
+          <ProductsContainer
+            products={products}
+            isLoading={isLoading}
+            error={error}
             currentPage={currentPage}
             productsPerPage={productsPerPage}
             onPageChange={onPageChange}

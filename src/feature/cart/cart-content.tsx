@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Spinner } from '@/components/ui/spiner';
+import { Spinner } from '@/components/ui/spinner';
 
 import { CartList } from './cart-list';
 import { ClearCartButton } from './clear-button';

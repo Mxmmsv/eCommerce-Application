@@ -14,7 +14,7 @@ export const SortSelect = () => {
   const { sortOption, setSortOption } = useSortStore();
 
   return (
-    <>
+    <div className="hidden lg:block">
       <Select
         value={sortOption || DEFAULT_SORT}
         onValueChange={(value) => setSortOption(value === DEFAULT_SORT ? undefined : value)}
@@ -41,6 +41,43 @@ export const SortSelect = () => {
           ))}
         </SelectContent>
       </Select>
-    </>
+    </div>
+  );
+};
+
+export const SortSelectPanel = () => {
+  const { sortOption, setSortOption } = useSortStore();
+
+  return (
+    <div className="flex items-center space-x-2">
+      <div className="block">
+        <Select
+          value={sortOption || DEFAULT_SORT}
+          onValueChange={(value) => setSortOption(value === DEFAULT_SORT ? undefined : value)}
+        >
+          <SelectTrigger
+            className={cn(
+              'hover:text-primary w-[200px] rounded-full pl-4',
+              sortOption ? 'bg-background' : 'bg-transparent',
+              sortOption ? 'text-primary font-medium' : 'text-muted-foreground',
+              'transition-all duration-200 ease-in-out',
+              'hover:bg-muted/80 shadow-sm hover:shadow-md',
+              'border-border/50 hover:border-primary/60',
+              '[&:hover_svg]:text-primary [&_svg]:transition-colors [&_svg]:duration-200',
+            )}
+          >
+            <SelectValue placeholder="Sort by" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value={DEFAULT_SORT}>Not sorted</SelectItem>
+            {SORT_OPTIONS.map((option) => (
+              <SelectItem key={option.value} value={option.value}>
+                {option.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+    </div>
   );
 };
