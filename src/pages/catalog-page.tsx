@@ -9,6 +9,7 @@ import { CategoryNavigation } from '@/feature/catalog/categories/category-naviga
 import { useCategoryStore } from '@/feature/catalog/categories/use-category-store';
 import { TypeFilter } from '@/feature/catalog/filter/type-filter';
 import { useFilterStore } from '@/feature/catalog/filter/use-filter-store';
+import { useResetPage } from '@/feature/catalog/pagination/use-reset-page';
 import { ProductList } from '@/feature/catalog/product-list';
 import { useSortStore } from '@/feature/catalog/sorting/use-sort-store';
 import type { Poster } from '@/feature/catalog/types';
@@ -26,6 +27,14 @@ export default function CatalogPage() {
   const currentPage = pageParam ? Number(pageParam) : 1;
 
   const { productsPerPage } = config;
+
+  useResetPage({
+    selectedTypes,
+    onlyDiscounted,
+    priceRange,
+    sortOption,
+    lastCategoryId,
+  });
 
   const onPageChange = (page: number) => {
     const newParams = new URLSearchParams(searchParams);
