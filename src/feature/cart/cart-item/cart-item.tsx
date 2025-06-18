@@ -1,5 +1,6 @@
 import { Plus, Minus } from 'lucide-react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 
 import { Button } from '@/components/ui/button';
 import { CardContent } from '@/components/ui/card';
@@ -20,6 +21,14 @@ export function CartItem({ item, removeItem, updateQuantity, updatingItemId }: C
   const [isRemoving, setIsRemoving] = useState(false);
   const isUpdating = updatingItemId === item.id;
   const isMinQuantity = item.quantity <= 1;
+  const navigate = useNavigate();
+
+  const handleContainerClick = (e: React.MouseEvent) => {
+    const target = e.target as HTMLElement;
+    if (!target.closest('button')) {
+      void navigate(`/catalog/product/${item.productId}`);
+    }
+  };
 
   const handleRemove = async () => {
     setIsRemoving(true);
@@ -47,8 +56,11 @@ export function CartItem({ item, removeItem, updateQuantity, updatingItemId }: C
   };
 
   return (
-    <CardContent className={`p-0 transition-opacity ${isRemoving ? 'opacity-50' : 'opacity-100'}`}>
-      <div className="flex h-full flex-row">
+    <CardContent
+      className={`p-0 transition-opacity ${isRemoving ? 'opacity-50' : 'opacity-100'}`}
+      onClick={handleContainerClick}
+    >
+      <div className="hover:bg-muted/50 flex h-full cursor-pointer flex-row transition-colors">
         <div className="relative h-auto w-32">
           <img
             src={item.image}
@@ -73,7 +85,10 @@ export function CartItem({ item, removeItem, updateQuantity, updatingItemId }: C
               <Button
                 variant="outline"
                 size="icon"
-                onClick={() => void handleDecrease()}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  void handleDecrease();
+                }}
                 disabled={isUpdating || isMinQuantity}
               >
                 <Minus className="h-4 w-4" />
