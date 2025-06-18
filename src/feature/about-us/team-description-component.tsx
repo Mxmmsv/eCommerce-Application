@@ -51,7 +51,12 @@ function TeamDescription() {
             </p>
           </div>
           <div className="flex flex-col-reverse items-center">
-            RS School JS / Front-end RU Course
+            <div className="flex flex-row items-center gap-5">
+              <span>RS School JS / Front-end RU Course</span>
+              <Link to={'https://rs.school/courses/javascript-ru'} target="_blank">
+                <img src="/rs-logo.svg" alt="rs-logo" width={32} height={32} />
+              </Link>
+            </div>
             <Link to={'https://rs.school/courses/javascript-ru'} target="_blank">
               <img
                 src="/rss-welcome.webp"
