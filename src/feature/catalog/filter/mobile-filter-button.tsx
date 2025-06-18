@@ -2,7 +2,13 @@ import { Settings2 } from 'lucide-react';
 import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
 
 import { SortSelectPanel } from '../sorting/sort-select';
 import { useSortStore } from '../sorting/use-sort-store';
@@ -39,6 +45,10 @@ export const MobileFilterButton = () => {
           }
         }}
       >
+        <SheetTitle className="sr-only">Filters Panel</SheetTitle>
+        <SheetDescription className="sr-only">
+          Panel for filtering and sorting products
+        </SheetDescription>
         <div className="data-no-close my-10 flex flex-col">
           <FilterHeader onClose={() => setOpen(false)} />
 

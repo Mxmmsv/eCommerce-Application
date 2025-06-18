@@ -1,7 +1,7 @@
 import { Settings2 } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 
 import { DiscountFilter } from './filter/discount-filter';
 import { ResetFiltersButton } from './filter/reset-filter';
@@ -15,7 +15,8 @@ export const FilterButton = () => {
           <Settings2 className="h-4 w-4" />
         </Button>
       </SheetTrigger>
-      <SheetContent side="right" className="w-[300px]">
+      <SheetContent side="right" className="w-[300px]" aria-describedby="filter-panel-description">
+        <SheetTitle className="sr-only">Filters & Sort</SheetTitle>
         <div className="space-y-6 pt-6">
           <h3 className="text-lg font-bold">Filters & Sort</h3>
           <SortSelect />
