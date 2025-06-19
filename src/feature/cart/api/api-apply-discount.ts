@@ -10,27 +10,22 @@ export const applyDiscountCode = async (code: string) => {
 
   if (!cart) throw new Error('Cart not found');
 
-  try {
-    const response = await apiRoot
-      .carts()
-      .withId({ ID: cart.id })
-      .post({
-        body: {
-          version: cart.version,
-          actions: [
-            {
-              action: 'addDiscountCode',
-              code,
-            },
-          ],
-        },
-      })
-      .execute();
+  const response = await apiRoot
+    .carts()
+    .withId({ ID: cart.id })
+    .post({
+      body: {
+        version: cart.version,
+        actions: [
+          {
+            action: 'addDiscountCode',
+            code,
+          },
+        ],
+      },
+    })
+    .execute();
 
-    setCart(response.body);
-    return response.body;
-  } catch (error) {
-    console.error('Failed to apply discount code:', error);
-    throw error;
-  }
+  setCart(response.body);
+  return response.body;
 };
