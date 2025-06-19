@@ -1,0 +1,35 @@
+import type { DiscountCode } from '@commercetools/platform-sdk';
+import useSWR from 'swr';
+
+import { Spinner } from '@/components/ui/spinner';
+
+import fetchPromoCode from './api/fetch-promo-code';
+import handleCopyPromotionContent from './use-promotion-content';
+
+function PromotionContent() {
+  const { data, error, isLoading } = useSWR<DiscountCode[], Error>('promo-codes', fetchPromoCode);
+
+  if (isLoading) return <Spinner className="mx-auto" />;
+  if (error) return <p>Error loading promo code.</p>;
+  if (!data || data.length === 0) return 'Promocode not available';
+
+  return (
+    <div className="flex w-full flex-col items-center gap-5 text-2xl text-nowrap md:gap-10">
+      <h2>Click and get promocode!</h2>
+      {data.map(({ code, name }) => (
+        <div key={code} className="flex flex-col items-center md:flex-row md:gap-5">
+          <button
+            className="hover:text-chart-3 cursor-pointer font-bold"
+            onClick={() => void handleCopyPromotionContent(code)}
+            title="Click to copy"
+          >
+            {code}
+          </button>
+          <p>Promotion: {name?.['en-GB'] ?? ''}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export default PromotionContent;

@@ -4,6 +4,7 @@ import { Toaster } from '@/components/ui/sonner';
 import { ThemeProvider } from '@/components/ui/theme-provider';
 import { AuthProvider } from '@/feature/auth/login/auth-provider';
 import ProtectedRoute from '@/feature/auth/login/protected-route';
+import Footer from '@/feature/footer/footer';
 import { Header } from '@/feature/header/header';
 import AboutUs from '@/pages/about-us-page';
 import Cart from '@/pages/cart-page';
@@ -14,7 +15,6 @@ import NotFound from '@/pages/not-found-page';
 import ProductDetail from '@/pages/product-detail-page';
 import UserProfile from '@/pages/profile-user-page';
 import Registration from '@/pages/registration-page';
-import Wishlist from '@/pages/wishlist-page';
 
 import { ScrollToTop } from './service/scroll-to-top';
 
@@ -23,29 +23,33 @@ function App() {
     <AuthProvider>
       <ThemeProvider defaultTheme="light" storageKey="UI-THEME">
         <BrowserRouter>
-          <ScrollToTop />
-          <Header />
-          <Toaster position="top-center" richColors closeButton />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/catalog" element={<Catalog />} />
-            <Route path="/catalog/category/:id" element={<Catalog />} />
-            <Route path="/catalog/product/:id" element={<ProductDetail />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/about_us" element={<AboutUs />} />
-            <Route path="/wishlist" element={<Wishlist />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/registration" element={<Registration />} />
-            <Route
-              path="/profile"
-              element={
-                <ProtectedRoute>
-                  <UserProfile />
-                </ProtectedRoute>
-              }
-            />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <div className="flex min-h-screen flex-col">
+            <ScrollToTop />
+            <Header />
+            <Toaster position="bottom-right" richColors closeButton />
+            <main className="flex w-full flex-1 flex-col justify-center">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/catalog" element={<Catalog />} />
+                <Route path="/catalog/category/:id" element={<Catalog />} />
+                <Route path="/catalog/product/:id" element={<ProductDetail />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/about_us" element={<AboutUs />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/registration" element={<Registration />} />
+                <Route
+                  path="/profile"
+                  element={
+                    <ProtectedRoute>
+                      <UserProfile />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </main>
+            <Footer />
+          </div>
         </BrowserRouter>
       </ThemeProvider>
     </AuthProvider>

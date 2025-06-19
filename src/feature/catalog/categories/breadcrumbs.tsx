@@ -10,7 +10,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
-import { useCategoryStore } from '@/service/store/use-category-store';
+import { useCategoryStore } from '@/feature/catalog/categories/use-category-store';
 
 import { useCategoryNavigation } from './use-category-navigation';
 
@@ -21,7 +21,7 @@ export const Breadcrumbs = () => {
   if (currentPath.length === 0) return null;
 
   return (
-    <Breadcrumb className="bg-muted rounded-lg px-4 py-2">
+    <Breadcrumb className="bg-muted rounded-lg p-0 py-2 lg:px-4">
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink asChild>

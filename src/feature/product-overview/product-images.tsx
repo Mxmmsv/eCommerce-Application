@@ -20,7 +20,6 @@ export function ProductImages({
   alt,
   description,
 }: Pick<ProductData, 'images' | 'alt' | 'description'>) {
-  const imageArr = images;
   if (images.length === 1) {
     return (
       <div className="grid grid-cols-5 grid-rows-4">
@@ -60,8 +59,11 @@ export function ProductImages({
     <div className="grid grid-cols-5 grid-rows-4">
       <Carousel className="col-span-3 col-start-2 row-span-4 row-start-1">
         <CarouselContent>
-          {imageArr.map((image, index) => (
-            <CarouselItem key={index} className="flex aspect-square items-center justify-center">
+          {images.map((image) => (
+            <CarouselItem
+              key={image.url}
+              className="flex aspect-square items-center justify-center"
+            >
               <Dialog>
                 <DialogTrigger asChild>
                   <img
@@ -69,7 +71,7 @@ export function ProductImages({
                     alt={alt}
                     loading="lazy"
                     decoding="async"
-                    className="bg-muted-foreground h-full w-full cursor-zoom-in rounded-2xl object-contain"
+                    className="bg-muted-hero/25 h-full w-full cursor-zoom-in rounded-2xl object-contain"
                   />
                 </DialogTrigger>
 
@@ -79,8 +81,8 @@ export function ProductImages({
 
                   <Carousel className="col-span-10 col-start-2 row-span-9 row-start-1">
                     <CarouselContent>
-                      {imageArr.map((image, index) => (
-                        <CarouselItem key={index} className="flex items-center justify-center">
+                      {images.map((image) => (
+                        <CarouselItem key={image.url} className="flex items-center justify-center">
                           <img
                             src={image.url}
                             alt={alt}

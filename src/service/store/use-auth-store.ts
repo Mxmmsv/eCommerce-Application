@@ -1,6 +1,8 @@
 import { create } from 'zustand';
 
-import { getAuthFromLocalStorage } from '@/service/store/local-storage';
+import { fetchCart } from '@/feature/cart/api/api-fetch-cart';
+import { useCartStore } from '@/feature/catalog/adding-to-cart/use-cart-store';
+import { getAuthFromLocalStorage, setAuthToLocalStorage } from '@/service/store/local-storage';
 
 type AuthState = {
   token: string | null;
@@ -14,14 +16,16 @@ const { ACCESS_TOKEN_KEY, IS_AUTHORIZED } = getAuthFromLocalStorage();
 export const useAuthStore = create<AuthState>((set) => ({
   token: ACCESS_TOKEN_KEY,
   isAuthenticated: IS_AUTHORIZED,
-  login: (token) => {
+  login: (token: string, customerId?: string) => {
     set({ token, isAuthenticated: true });
-    localStorage.setItem('ACCESS_TOKEN_KEY', token);
-    localStorage.setItem('IS_AUTHORIZED', 'true');
+    setAuthToLocalStorage(token, true, customerId);
+    void fetchCart();
   },
   logout: () => {
     set({ token: null, isAuthenticated: false });
-    localStorage.removeItem('ACCESS_TOKEN_KEY');
-    localStorage.removeItem('IS_AUTHORIZED');
+    ['ACCESS_TOKEN_KEY', 'IS_AUTHORIZED', 'CUSTOMER_ID'].forEach((key) =>
+      localStorage.removeItem(key),
+    );
+    useCartStore.getState().clearCart();
   },
 }));
