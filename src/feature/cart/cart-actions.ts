@@ -5,7 +5,6 @@ import { mutate as updateCart } from 'swr';
 import { clearCart } from '@/feature/cart/api/api-clear-cart';
 
 import apiRoot from '../api/api-client-credentials-flow';
-import { isHttpError } from '../api/errors';
 import { useCartStore } from '../catalog/adding-to-cart/use-cart-store';
 
 import { applyDiscountCode } from './api/api-apply-discount';
@@ -34,9 +33,8 @@ export const useCartActions = () => {
     try {
       await removeItemFromCart(lineItemId);
       await updateCart('cart');
-    } catch (error) {
+    } catch {
       toast.error('Failed to delete item. Try again later');
-      console.error('Remove error:', error);
     }
   };
 
@@ -66,15 +64,8 @@ export const useCartActions = () => {
     try {
       await applyDiscountCode(normalizedPromoCode);
       toast.success('Promo code applied successfully');
-    } catch (error) {
-      let errorMessage = 'Failed to apply promo code';
-      if (isHttpError(error)) {
-        errorMessage = error.body?.message || error.message || errorMessage;
-      } else if (error instanceof Error) {
-        errorMessage = error.message;
-      }
+    } catch {
       toast.error('The promo code is incorrect');
-      console.error('Error adding promo code:', errorMessage);
     } finally {
       setIsApplying(false);
     }
