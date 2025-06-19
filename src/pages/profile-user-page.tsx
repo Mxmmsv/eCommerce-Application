@@ -22,9 +22,7 @@ export default function UserProfilePage() {
                 <h1 className="text-center text-2xl font-semibold uppercase">
                   Welcome back, {customer?.firstName}!
                 </h1>
-                <p className="text-muted-foreground text-center text-sm">
-                  Manage your account settings and preferences.
-                </p>
+                <p className="text-center text-sm">Manage your account settings and preferences.</p>
               </div>
               <div className="flex flex-col gap-2 space-y-6">
                 <Tabs defaultValue="profile" className="w-full">
